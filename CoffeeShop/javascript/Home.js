@@ -15,10 +15,11 @@ function showContentSlide(index) {
     content.classList.remove("Active");
   });
 
+
+
   // Add active class to current slide
   if (contents[index]) {
     contents[index].classList.add("Active");
-    content.style.transform = `translateX(${( index) * 100}%)`;
   }
 }
 
@@ -37,12 +38,32 @@ function autoContentSlide() {
 // Run every 5 seconds
 setInterval(autoContentSlide, 5000);
 
+//BTNS
+const nextcontent = document.getElementById('nextcontent')
+const prevcontent = document.getElementById('prevcontent')
+nextcontent.addEventListener("click", function () {
+  sliderIndex++// Reset if exceeds length
+  if (sliderIndex >= contents.length) {
+    sliderIndex = 0;
+  }
+  showContentSlide(sliderIndex);
+})
+prevcontent.addEventListener("click", function () {
+  sliderIndex--
+  if (sliderIndex <= 0) {
+    sliderIndex = contents.length - 1;
+  }
+  showContentSlide(sliderIndex);
+})
+
 // SLIDER TWO 
 // Current comment index
 let currentIndex = 0;
 
 // Select comment slides
 const comments = document.querySelectorAll(".Comment");
+
+const dots = document.querySelectorAll(".dot")
 
 // Function to show comment
 function showCommentSlide(index) {
@@ -53,9 +74,14 @@ function showCommentSlide(index) {
     // Remove active class
     slide.classList.remove("Active");
   });
-
+  dots.forEach((dot, i) => {
+    // Remove active class
+    dot.classList.remove("ActiveDot");
+  });
   // Activate current
-  if (comments[index]) {
+  if (comments[index] && dots[index]) {
+
+    dots[index].classList.add("ActiveDot");
     comments[index].classList.add("Active");
     comments[index].style.transform = `translateX(${-(index) * 100}%)`;
   }
@@ -74,9 +100,9 @@ setInterval(() => {
 
 
 //MENU ICON
-const menuIcon =document.getElementById('menuIconBtn')
-menuIcon.addEventListener("click", function() {
+const menuIcon = document.getElementById('menuIconBtn')
+menuIcon.addEventListener("click", function () {
   console.log('clike');
-  const menus=document.getElementById('NAVBARMENUICON')
-    menus.classList.toggle("activebtn");
+  const menus = document.getElementById('NAVBARMENUICON')
+  menus.classList.toggle("activebtn");
 });
