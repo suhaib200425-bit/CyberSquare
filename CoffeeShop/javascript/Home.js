@@ -41,20 +41,24 @@ setInterval(autoContentSlide, 5000);
 //BTNS
 const nextcontent = document.getElementById('nextcontent')
 const prevcontent = document.getElementById('prevcontent')
-nextcontent.addEventListener("click", function () {
-  sliderIndex++// Reset if exceeds length
-  if (sliderIndex >= contents.length) {
-    sliderIndex = 0;
-  }
-  showContentSlide(sliderIndex);
-})
-prevcontent.addEventListener("click", function () {
-  sliderIndex--
-  if (sliderIndex <= 0) {
-    sliderIndex = contents.length - 1;
-  }
-  showContentSlide(sliderIndex);
-})
+if (nextcontent) {
+  nextcontent.addEventListener("click", function () {
+    sliderIndex++// Reset if exceeds length
+    if (sliderIndex >= contents.length) {
+      sliderIndex = 0;
+    }
+    showContentSlide(sliderIndex);
+  })
+}
+if (prevcontent) {
+  prevcontent.addEventListener("click", function () {
+    sliderIndex--
+    if (sliderIndex <= 0) {
+      sliderIndex = contents.length - 1;
+    }
+    showContentSlide(sliderIndex);
+  })
+}
 
 // SLIDER TWO 
 // Current comment index
