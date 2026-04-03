@@ -1,0 +1,141 @@
+@media (max-width: 600px) {
+
+    /* NAVBAR */
+    .Navbar {
+        padding: 5px 10px;
+    }
+
+    .Navbar .Menus {
+        display: none;
+    }
+    .Navbar .menuIcons {
+        width: 50px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: white;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB2aWV3Qm94PScwIDAgMzAgMzAnIHhtbG5zPSdodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2Zyc+PHBhdGggc3Ryb2tlPSdyZ2JhKDAsIDAsIDAsIDAuNSknIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbWl0ZXJsaW1pdD0nMTAnIGQ9J000IDdoMjJNNCAxNWgyMk00IDIzaDIyJy8+PC9zdmc+);
+    }
+
+    /* NAVBAR END */
+    /* MAIN */
+    .main {
+        position: relative;
+        max-height: 70vh;
+    }
+
+    .content .mainHed {
+        font-size: 30px;
+    }
+
+    .content .subHed {
+        font-size: 40px;
+    }
+
+    .content .description {
+        width: 80%;
+    }
+
+    /* MAIN END*/
+    /* ABOUT US  */
+    .about-us {
+        display: block;
+    }
+
+    .about-us .content h1 {
+        font-size: 25px;
+    }
+
+    .about-us .content p {
+        max-width: 100%;
+    }
+
+    .about-us .content {
+        width: 100%;
+    }
+
+    .about-us div {
+        width: 100%;
+    }
+
+    .about-image img {
+        height: 200px;
+    }
+
+    .about-us .about-image {
+        margin-top: 10px;
+        padding: 0;
+    }
+
+    .OurGallery .container {
+        grid-template-columns: 1fr;
+    }
+
+    .services .ServiceCards {
+        padding: 0;
+        height: max-content;
+        display: block;
+    }
+
+    /* ABOUT US END  */
+    /* SERVICES  */
+    .services {
+        align-items: start;
+    }
+
+    .ServiceCards .Card {
+        height: max-content;
+    }
+
+    .ServiceCards .Card:hover {
+        height: max-content;
+    }
+
+
+    /* SERVICES END  */
+    .Testimonial .Content .Comments {
+        padding: 0;
+    }
+
+    .Testimonial .Content .Comment {
+        border: none;
+    }
+
+    .ContactUS {
+        align-items: start;
+        height: max-content;
+    }
+
+    .ContactUS .Content h1 {
+        font-size: 25px;
+    }
+
+    .ContactUS .ContactUS-Two {
+        display: block;
+    }
+
+    .ContactUS .FormContact {
+        width: 100%;
+    }
+
+    .ContactUS .FormContact {
+        padding: 0;
+        padding-top: 20px;
+    }
+.ContactUS .MapContact{
+    height: 300px;
+    margin-top: 10px;
+    width: 100%;
+} 
+    .ContactUS .Content h1 {
+        margin-top: 30px;
+    }
+    .footer-container{
+        display: block;
+    }
+    .ContactUS .ContactUS-Two{
+        height: max-content;
+    }
+}
