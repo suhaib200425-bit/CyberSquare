@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Slab:wght@100..900&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap');
+.Indro {
+    overflow: hidden;
+    min-height: 100vh;
+    max-height: 100vh;
+    background: radial-gradient(circle at bottom right,
+            var(--primary-color) 15%,
+            #1a1a1a 35%,
+            var(--secondary-color) 90%);
+}
+
+.NavBar-Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Content .PrfileImage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:80vh;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    overflow: hidden;
+    /* background-color: blueviolet; */
+}
+.Content .PrfileImage img{
+    height: 100%;
+}
+.Content .ProfileInfo {
+    max-height: 220px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* height: 300px; */
+    background: transparent;
+    justify-content: center;
+    background: linear-gradient(to right,
+    transparent 10%,
+            var(--primary-color) 80%);
+    /* background-color: aqua; */
+    margin-top: 150px;
+    border-radius: 20px;
+    /* color: white; */
+}
+.ProfileInfo h2{
+    margin: 0;
+  font-family: "Saira Stencil", sans-serif;
+    font-size: 55px;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.ProfileInfo p{
+    color: var(--subtext-color);
+    font-size: 20px;
+    margin: 0;
+}
+
+.ProfileInfo button{
+    padding: 10px 16px;
+    background-color: var(--secondary-color) ;
+    color: white;
+    border-radius: 30px;
+    font-size: 16px;
+
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .Content .ProfileInfo{
+    margin-top: 100px; background: linear-gradient(to right,
+    transparent 10%,
+            var(--primary-color) 45%)
+            transparent 100%;
+  }
+  .Content .PrfileImage{
+   
+  }
+}
