@@ -1,60 +1,10 @@
 .About {
     position: relative;
     min-height: 100vh;
-    padding: 10px 100px;
+    padding: 10px 150px;
 }
 
-.About-Info h2 {
-    color: rgb(207, 199, 199);
-    font-size: 30px;
-    font-weight: 700;
-}
-
-.About-Info p {
-    font-size: 18px;
-    color: rgba(214, 207, 207, 0.877);
-}
-.About-image img{
-    width: 100%;
-}
-
-.About-image-gradient1 {
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    z-index: -10;
-    background: transparent;
-    border-radius: 50%;
-    background: radial-gradient(circle, brown 10%, transparent 100%);
-}
-
-.About-image-gradient2 {
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    z-index: -10;
-    left: 25%;
-    top: 15%;
-    background: transparent;
-    border-radius: 50%;
-    background: radial-gradient(circle, brown 10%, transparent 100%);
-}
 
 /* Mobile view */
 @media (max-width: 768px) {
-    .About {
-        margin-top: -100px;
-        padding: 10px 10px;
-    }
-    
-    .About-image-gradient1{
-        left: 30px;
-    }
-    .About-image-gradient2{
-        left: 55%;
-    }
-    .About-Info{
-        margin-top: 10px;
-        text-align: center;
-    }
 }

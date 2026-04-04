@@ -1,0 +1,21 @@
+.InfoCard{
+    padding: 30px 40px;
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    
+}
+.InfoCard svg{
+    width: 65px;
+    height: 65px;
+    fill: var(--primary-color);
+}
+
+.InfoCard h4{
+    margin-top: 10px;
+}
+
+.InfoCard p{
+    font-size: 16px;
+    color: var(--subtext-color);
+}
