@@ -5,18 +5,12 @@ import { ProfileImage } from '../assets/assets'
 function Indro() {
     return (
         <div className='Indro'>
-                    <NavBar />
-                
-            <div className="Content row">
-                
-                <div className="col-12 col-md-6 ProfileInfo">
-                    <h2>SUHAIB-K</h2>
-                    <p>WEB DEVELOPER</p>
-                    <button>DOWNLOAD CV</button>
-                </div>
-                <div className="col-12 col-md-6 PrfileImage">
-                    <img src={ProfileImage} alt="suhaib" srcset="" />
-                </div>
+            <div className="ProfileImage">
+                <img src={"https://i.pinimg.com/736x/62/16/9f/62169fb4f961f71ff689f1d6a215dc6f.jpg"} alt="" />
+            </div>
+            <div className="ProfileInfo">
+                <h1>SUHAIB-K</h1>
+                <p>Web Develeper</p>
             </div>
         </div>
     )
