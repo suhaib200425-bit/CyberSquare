@@ -1,26 +1,29 @@
-.Indro{
-    padding-top:30vh;
+.Indro {
+    padding-top: 30vh;
     /* height: 100vh; */
     transform: translateY(-25%);
     display: flex;
     gap: 20px;
 }
-.ProfileImage{
+
+.ProfileImage {
     width: 400px;
     height: 200px;
     background-color: var(--primary-color);
-    border-top-right-radius:100px;
-    border-bottom-right-radius:100px ;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
     overflow: hidden;
     display: flex;
     justify-content: end;
 }
-.ProfileImage img{
+
+.ProfileImage img {
     width: 200px;
     height: 200px;
     border-radius: 50%;
 }
-.ProfileInfo{
+
+.ProfileInfo {
     /* width: 100%; */
     display: flex;
     flex-direction: column;
@@ -29,33 +32,50 @@
     color: var(--text-color);
     height: 200px;
 }
-.ProfileInfo h1{
+
+.ProfileInfo h1 {
     margin: 0;
-  font-family: "Changa One", sans-serif;
-font-size: 65px;
-font-weight: 800;
+    font-family: "Changa One", sans-serif;
+    font-size: 65px;
+    font-weight: 800;
 }
-.ProfileInfo p{
+
+.ProfileInfo p {
     text-align: start;
     font-size: 16px;
 }
-.OtherContent{
+
+.OtherContent {
     padding: 0px 150px;
 }
+
 /* Mobile view */
 @media (max-width: 768px) {
- .Indro{
-    display: block;
- }
- .ProfileInfo{
-    margin-left: 40px;
- }
- .OtherContent{
-    margin-top: -20vh;
-    padding: 0px 30px;
- }
- .OtherContent .col-12{
-    margin-top: 10px;
- }
+    .Indro {
+        display: block;
+    }
+
+    .ProfileInfo {
+        margin-left: 40px;
+    }
+    .ProfileImage{
+        width: 350px;
+        height: 150px;
+    }
+    .ProfileImage img{
+        height: 150px;
+        width: 150px;
+    }
+.ProfileInfo h1{
+    font-size: 45px;
+}
+    .OtherContent {
+        margin-top: -20vh;
+        padding: 0px 30px;
+    }
+
+    .OtherContent .col-12 {
+        margin-top: 10px;
+    }
 
 }
