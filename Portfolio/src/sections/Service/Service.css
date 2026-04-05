@@ -5,6 +5,7 @@
     align-items: center;
     color: var(--text-color);
     min-height: 100vh;
+    margin-bottom: 50px;
 }
 .Service span{
     color: var(--primary-color);

@@ -37,10 +37,10 @@ function About() {
                             
                             <h6 className="mt-2 text-start">Address</h6>
                             <p className='p-0 m-0'>koppath</p>
+                            <h6 className="mt-2 text-start d-none">asa</h6>
+                            <p className='p-0 m-0 d-none'>+91 </p>
                             <h6 className="mt-2 text-start">BOD</h6>
                             <p className='p-0 m-0'>25/09/2004</p>
-                            <h6 className="mt-2 text-start">Phone no</h6>
-                            <p className='p-0 m-0'>+91 9895064141</p>
                         </div>
 
                     </div>
