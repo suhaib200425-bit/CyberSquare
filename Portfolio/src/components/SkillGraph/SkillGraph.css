@@ -20,7 +20,7 @@ justify-content: space-between;
 .fullBar .perBar{
     position: absolute;
     top: 0;
-    /* z-index: 10; */
+    border-radius: 10px;
     left: 0;
     height: 100%;
     width: 30%;

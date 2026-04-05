@@ -1,7 +1,5 @@
 import React from 'react'
 import './Indro.css'
-import NavBar from '../components/NavBar/NavBar'
-import { ProfileImage } from '../assets/assets'
 import InfoCard from '../components/InfoCard/InfoCard'
 function Indro() {
     return (

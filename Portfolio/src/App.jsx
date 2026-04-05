@@ -1,6 +1,7 @@
 
 import About from './sections/About/About'
 import Indro from './sections/Indro'
+import Service from './sections/Service/Service'
 import Skills from './sections/Skills/Skills'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <Indro />
     <About />
     <Skills />
+    <Service />
     </>
   )
 }
