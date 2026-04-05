@@ -3,7 +3,7 @@
     border-radius: 15px;
     min-height: 100px;
 /* background-color: aqua; */
-    background-color: var(--primary-op-color);
+    background-color: var(--primary-color);
 }
 .ServiceCard .icon{
     width: 55px;
