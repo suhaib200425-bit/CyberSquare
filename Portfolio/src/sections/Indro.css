@@ -46,8 +46,9 @@
 }
 
 .OtherContent {
-    padding: 0px 150px;
-    margin-bottom: 50px;
+        /* margin-top: -20vh; */
+        margin-bottom: 50px;
+        padding: 0px 150px;
 }
 
 /* Mobile view */

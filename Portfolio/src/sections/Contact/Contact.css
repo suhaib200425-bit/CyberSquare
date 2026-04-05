@@ -44,4 +44,8 @@ align-items: center;
     .Contact{
         padding: 0px 30px;
     }
+    .Contact form{
+        width: 300px;
+        font-size: 17px;
+    }
 }
