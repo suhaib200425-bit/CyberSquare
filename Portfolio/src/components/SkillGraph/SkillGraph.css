@@ -1,0 +1,28 @@
+.SkillGraph .topbar{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.topbar .lang{
+    color: var(--text-color);
+
+}
+.topbar .per{
+    color: var(--subtext-color);
+}
+.SkillGraph .fullBar{
+    height: 10px;
+    background-color: var(--subtext-color);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.fullBar .perBar{
+    position: absolute;
+    top: 0;
+    /* z-index: 10; */
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background-color: var( --primary-color);
+}

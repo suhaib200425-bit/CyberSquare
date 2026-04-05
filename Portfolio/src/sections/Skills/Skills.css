@@ -1,0 +1,21 @@
+.Skills{
+    padding: 10px 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.Skills h6{
+    color: var(--subtext-color);
+}
+.Skills h3{
+    color: var(--text-color);
+}
+
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .Skills{
+        padding: 0px 30px;
+    }
+}

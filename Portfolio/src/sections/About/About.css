@@ -5,7 +5,7 @@
     align-items: center;
     min-height: 100vh;
     padding: 10px 150px;
-    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .About h6{
     text-align: center;
@@ -57,5 +57,6 @@
 }
     .About{
         padding: 0px 30px;
+        min-height: max-content;
     }
 }
