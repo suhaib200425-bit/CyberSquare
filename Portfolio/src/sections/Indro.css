@@ -1,6 +1,8 @@
+
 .Indro {
-    padding-top: 30vh;
+    margin-top: 30vh;
     /* height: 100vh; */
+    overflow: hidden;
     transform: translateY(-25%);
     display: flex;
     gap: 20px;
@@ -33,6 +35,7 @@
     height: 200px;
 }
 
+
 .ProfileInfo h1 {
     margin: 0;
     font-family: "Changa One", sans-serif;
@@ -46,9 +49,10 @@
 }
 
 .OtherContent {
-        /* margin-top: -20vh; */
-        margin-bottom: 50px;
-        padding: 0px 150px;
+    /* margin-top: -20vh; */
+    margin-bottom: 50px;
+    padding: 0px 150px;
+    overflow: hidden;
 }
 
 /* Mobile view */
@@ -60,17 +64,21 @@
     .ProfileInfo {
         margin-left: 40px;
     }
-    .ProfileImage{
+
+    .ProfileImage {
         width: 350px;
         height: 150px;
     }
-    .ProfileImage img{
+
+    .ProfileImage img {
         height: 150px;
         width: 150px;
     }
-.ProfileInfo h1{
-    font-size: 45px;
-}
+
+    .ProfileInfo h1 {
+        font-size: 45px;
+    }
+
     .OtherContent {
         margin-top: -20vh;
         padding: 0px 30px;

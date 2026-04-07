@@ -3,7 +3,7 @@ import './About.css'
 import { ProfileImage } from '../../assets/assets'
 function About() {
     return (
-        <div className='About'>
+        <div className='About col-12'>
             <h6>About Me</h6>
             <h3>A passinate developer <br /> who loves to code </h3>
             <div className="row mt-2">

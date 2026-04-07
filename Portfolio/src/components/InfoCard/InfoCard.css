@@ -3,6 +3,7 @@
     border: 1px solid var(--primary-color);
     border-radius: 10px;
     color: var(--text-color);
+    cursor: pointer;
     
 }
 .InfoCard svg{
@@ -18,4 +19,11 @@
 .InfoCard p{
     font-size: 16px;
     color: var(--subtext-color);
+}
+
+.truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

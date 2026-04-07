@@ -20,11 +20,11 @@ function Service() {
           title={"Email Marketing"}
           content={"Strategic email campaigns designed to engage your audience and drive conversions."} />
         <ServiceCard
-          title={"Email Marketing"}
-          content={"Strategic email campaigns designed to engage your audience and drive conversions."} />
+          title={"UI/UX Design"}
+          content={"Intuitive and visually appealing designs that enhance user satisfaction and engagement."} />
         <ServiceCard
-          title={"Email Marketing"}
-          content={"Strategic email campaigns designed to engage your audience and drive conversions."} />
+          title={"Web Design"}
+          content={"Modern and responsive website designs tailored to reflect your brand identity."} />
 
       </div>
     </div>

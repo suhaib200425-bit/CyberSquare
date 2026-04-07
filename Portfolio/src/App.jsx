@@ -10,7 +10,7 @@ import Skills from './sections/Skills/Skills'
 function App() {
 
   return (
-    <>
+    <div className='App'>
     <Indro />
     <About />
     <Skills />
@@ -18,7 +18,7 @@ function App() {
     <Project />
     <Contact />
     <Footer />
-    </>
+    </div>
   )
 }
 
