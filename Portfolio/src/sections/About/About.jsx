@@ -28,10 +28,10 @@ function About() {
                         <div className="col-6">
                             <h6 className="mt-2 text-start">Name</h6>
                             <p className='p-0 m-0'>Suhaib</p>
-                            <h6 className="mt-2 text-start">Email</h6>
-                            <p className='p-0 m-0'>suhaib200425@gmail.com</p>
                             <h6 className="mt-2 text-start">Phone no</h6>
                             <p className='p-0 m-0'>+91 9895064141</p>
+                            <h6 className="mt-2 text-start">Email</h6>
+                            <p className='p-0 m-0'>suhaib200425@gmail.com</p>
                         </div>
                         <div className="col-6">
                             

@@ -10,11 +10,11 @@ function Indro() {
                 </div>
                 <div className="ProfileInfo">
                     <h1>SUHAIB-K</h1>
-                    <p>Web Develeper</p>
+                    <p className='mb-5'>Web Develeper</p>
                 </div>
 
             </div>
-            <div className="row OtherContent col-12">
+            <div className="row OtherContent col-12 ">
                 <div className="col-12 col-md-4">
                     <InfoCard title={'Deeper Skillset'} des={" A deeper skillset enables solving complex problems and adapting to evolving challenges.Continuously "} />
                 </div>
