@@ -1,0 +1,17 @@
+.DashboardPage{  
+    height: 100vh;
+    overflow: hidden;
+    
+}
+.DashboardPage .content{
+    padding: 0px 100px;
+    height: 100%;
+}
+.DashboardPage .leftDashboardIcons{
+    border-right: 2px solid var(--secondery-color);
+    border-radius: 2px solid var(--secondery-color);
+}
+.DashboardPage .rightDashboardContents{
+    overflow-y: scroll;
+    height: 90%;
+}

@@ -1,0 +1,80 @@
+.NavBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* height: 45px; */
+    position: sticky;
+    background-color: white;
+    top: 0px;
+    padding: 10px 100px;
+    width: 100%;
+    z-index: 10;
+}
+
+.NavBar .left,
+.NavBar .center,
+.NavBar .right {
+    margin-top: 4px;
+}
+
+.NavBar .left h3 i,
+.NavBar .left h3 span {
+    color: var(--primary-color);
+}
+
+.NavBar .left {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.NavBar .left img {
+    width: 30px;
+}
+
+.NavBar .center {
+    display: flex;
+    gap: 10px;
+}
+
+.NavBar .center div {
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+
+.NavBar .center .Active{
+    color: var(--primary-color);
+    background-color: var(--secondery-color);
+}
+
+.NavBar .center div:hover {
+    background-color: var(--secondery-color);
+    transition: 0.5s;
+}
+
+.NavBar .right {
+    display: flex;
+    gap: 10px;
+}
+
+.NavBar .right div {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    transition: 0.4s;
+}
+
+.right .login:hover {
+    background-color: rgba(240, 232, 232, 0.603);
+    transition: 0.5s;
+}
+
+.right .signUp {
+    background-color: var(--primary-color);
+    ;
+    color: white;
+}

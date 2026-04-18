@@ -1,0 +1,27 @@
+.DashboardWishlistItam{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border: 1px solid rgba(179, 177, 174, 0.664);
+    border-radius: 10px;
+}
+.DashboardWishlistItam .leftBox{
+    font-size: 15px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.DashboardWishlistItam .leftBox img{
+width: 90px;
+border-radius: 10px;
+}
+.DashboardWishlistItam .rightBox{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}

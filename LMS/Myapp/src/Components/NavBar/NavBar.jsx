@@ -1,0 +1,88 @@
+import React, { useState } from 'react'
+import './NavBar.css'
+import { CapIcon } from '../../assets/assets'
+import { Link, useNavigate } from 'react-router-dom'
+import { useLMS } from '../../Context/LmsContext'
+function NavBar() {
+    const Navigate = useNavigate()
+    const { User,setUser } = useLMS()
+    const [Active, setActive] = useState('Home')
+    return (
+        <div className='NavBar'>
+            <div className="left">
+
+                <h3><i class="bi bi-mortarboard"></i>Learn<span>Hub</span></h3>
+            </div>
+            <div className="center">
+
+
+                <Link onClick={() => setActive('Home')} to={'/home'}>
+                    <div className={Active == 'Home' ? 'Active' : ''}>
+                        Home
+                    </div>
+                </Link>
+
+                <Link onClick={() => setActive('Course')} to={'/courses'}>
+                    <div className={Active == 'Course' ? 'Active' : ''}>
+                        Course
+                    </div>
+                </Link>
+
+                <Link onClick={() => setActive('About')} to={'/about'}>
+                    <div className={Active == 'About' ? 'Active' : ''}>
+                        About
+                    </div>
+                </Link>
+
+                <Link onClick={() => setActive('Contact')} to={'/contact'}>
+                    <div className={Active == 'Contact' ? 'Active' : ''}>
+                        Contact
+                    </div>
+                </Link>
+
+            </div>
+            <div className="right">
+                {
+                    User == null ? <>
+                        <div className="login" onClick={() => {
+                            Navigate('/login')
+                        }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+                                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                            </svg>
+                            <p className='m-0'>Login</p>
+                        </div>
+                        <div className="signUp" onClick={() => {
+                            Navigate('/register')
+                        }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
+                                <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5" />
+                            </svg>
+                            <p className='m-0'>Sign Up</p>
+                        </div>
+                    </> : <>
+                        <div className="login"  onClick={() => {
+                            Navigate('/dashboard')
+                        }}>
+                            <p className='m-0'>Dashboard</p>
+                        </div>
+                        <div className=" signUp" onClick={()=>{
+                            localStorage.setItem('token','')
+                            setUser(null)
+                        }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z" />
+                                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                            </svg>
+                            <p className='m-0'>LogOut</p>
+                        </div>
+                    </>
+                }
+            </div>
+        </div>
+    )
+}
+
+export default NavBar

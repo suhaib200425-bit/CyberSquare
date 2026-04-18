@@ -1,0 +1,113 @@
+.RegisterPage {
+    padding: 20px 100px;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #f8fafc;
+}
+
+.RegisterPage h4 i,
+.RegisterPage h4 span {
+    color: var(--primary-color);
+}
+
+
+.register-card {
+    width: 100%;
+    max-width: 450px;
+    background: #ffffff;
+    border: 1px solid #dbe3ef;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+}
+
+.custom-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+.custom-input {
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid #dbe3ef;
+    font-size: 15px;
+    color: #334155;
+    box-shadow: none !important;
+}
+
+.custom-input:focus {
+    border-color: #5b6dfb;
+    box-shadow: 0 0 0 0.15rem rgba(91, 109, 251, 0.12) !important;
+}
+
+.custom-input::placeholder {
+    color: #94a3b8;
+}
+
+.password-toggle {
+    background: #ffffff;
+    border: 1px solid #dbe3ef;
+    border-left: 0;
+    border-radius: 0 12px 12px 0 !important;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.password-toggle i {
+    font-size: 16px;
+}
+
+.custom-select {
+    cursor: pointer;
+}
+
+.register-btn {
+    height: 48px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(90deg, #2563eb, #5b3df5);
+    transition: 0.3s ease;
+}
+
+.register-btn:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+
+.signin-text {
+    font-size: 15px;
+    color: #64748b;
+}
+
+.signin-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signin-link:hover {
+    text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .register-card {
+        padding: 24px 18px;
+        border-radius: 14px;
+    }
+
+    .custom-input,
+    .register-btn {
+        height: 46px;
+    }
+}

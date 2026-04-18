@@ -1,0 +1,87 @@
+.CourseCard{
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(202, 193, 193, 0.466);
+    transition: 0.4s;
+}
+.CourseCard:hover{
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(65, 64, 64, 0.452);
+    transform: 0.4s;
+
+}
+.CourseCard .CourseImage{
+    height: 150px;
+    width: 100%;
+}
+.CourseCard .content{
+    padding: 5px 10px;
+}
+.CourseCard .CategoryTitle{
+    width: max-content;
+    font-size: 10px;
+    background-color: var(--secondery-color);
+    border-radius: 15px;
+    padding: 5px 10px;
+    color: var(--primary-color);
+}
+.CourseCard .content .description{
+    font-size: 13px;
+    line-height: 1.5;
+}
+.CourseCard .otherDetails{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.CourseCard .otherDetails i{
+    color: var(--primary-color);
+}
+.CourseCard .instructor{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.CourseCard .auther img{
+    max-width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.CourseCard .auther span{
+    margin: 0;
+    font-size: 15px;
+}
+.CourseCard .rating i{
+    color: orange;
+}
+.CourseCard .rating{
+    font-size: 15px;
+}
+.CourseCard .otherInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 200;
+}
+
+.CourseCard .otherInfo div{
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 400;
+}
+.CourseCard .otherInfo div i{
+    color: var(--primary-color);
+}
+
+.CourseCard .otherInfo div .rate{
+    text-decoration: line-through;
+}
+.CourseCard .otherInfo div .offerrate{
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-color);
+}

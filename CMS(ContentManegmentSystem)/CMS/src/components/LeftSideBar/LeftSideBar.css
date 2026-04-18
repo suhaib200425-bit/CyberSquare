@@ -1,0 +1,50 @@
+.LeftSideBar {
+    position: sticky;
+    left: 0;
+    top: 0;
+    width: 60px;
+    padding: 10px;
+    background-color: rgb(2, 3, 12);
+    height: 100vh;
+    color: var(--desable-text);
+    font-size: 17px;
+    transition: 0.6s;
+}
+
+.LeftSideBar h6 {
+    margin-top: 15px;
+}
+.LeftSideBar .Opacity{
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.MenuIcon {
+    margin-top: 5px;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    padding: 5px 10px;
+    transition: 0.4s;
+}
+.ActiveMenuIcon{
+    margin-top: 5px;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    padding: 5px 10px;
+    transition: 0.4s;
+    background-color: var(--back-color);
+    color: white;
+}
+
+.MenuIcon:hover {
+    background-color: var(--hover-color);
+    color: white;
+    transition: 0.4s;
+}
+.MenuIcon .Display,
+.ActiveMenuIcon .Display{
+    transition: 0.4s;
+    display: none;
+}

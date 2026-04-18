@@ -1,0 +1,20 @@
+.FeatureSection{
+    padding: 0px 100px;
+    margin-bottom: 50px;
+}
+.FeaturHed{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.FeaturHed .ViewCourses{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border:  1px solid black ;
+    height: 40px;
+    cursor: pointer;
+}

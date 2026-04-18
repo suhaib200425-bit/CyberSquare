@@ -1,0 +1,32 @@
+Start Strapi in watch mode. (Changes in Strapi project files will trigger a server restart)
+          npm run develop
+
+          Start Strapi without watch mode.
+          npm run start
+
+          Build Strapi admin panel.
+          npm run build
+
+          Deploy Strapi project.
+          npm run deploy
+
+          Seed your database with sample data.
+          npm run seed:example
+
+          Display all available commands.
+          npm run strapi
+
+          To get started run
+
+          cd C:\Users\HY\Desktop\cybersquer\LMS\strapi
+          npm run develop 
+
+
+
+          defalut register 
+          http://localhost:1337/api/auth/local/register
+          {
+  "username": "test",
+  "email": "test@gmail.com",
+  "password": "123456"
+}

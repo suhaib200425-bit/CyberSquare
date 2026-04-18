@@ -1,0 +1,9 @@
+.DashBoardOrders{
+    height: 100%;
+    padding: 15px;
+}
+.DashBoardOrders table{
+    padding: 20px;
+    border-radius: 10px;
+    border:  1px solid grey;
+}

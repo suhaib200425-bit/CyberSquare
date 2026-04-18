@@ -1,0 +1,19 @@
+.DashBoardMain{
+    height: 100%;
+    padding: 15px;
+}
+.DashBoardMain .learningcard{
+    padding: 10px;
+    border: 2px solid rgba(233, 227, 227, 0.623);
+    border-radius: 10px;
+}.learningcard .hed{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.learningcard .hed button{
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: var(--secondery-color);
+    border: none;
+}

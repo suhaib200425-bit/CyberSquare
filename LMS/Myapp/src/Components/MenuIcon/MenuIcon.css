@@ -1,0 +1,36 @@
+.MenuIcon{
+    width: 90%;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 8px 15px;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: 0.4s;
+    cursor: pointer;
+    color: gray;
+}
+.MenuIcon label{
+    cursor: pointer;
+}
+.MenuIcon:hover{
+    background-color: var(--secondery-color);
+    color: black;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.ActiveBox{ 
+    cursor: pointer;
+    align-items: center;
+    width: 90%;
+    margin-top: 2px;
+    display: flex;
+    gap: 15px;
+    padding: 8px 15px;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: 0.4s;
+    background-color: var(--primary-color);
+    color: white;
+}

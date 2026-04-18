@@ -1,0 +1,35 @@
+.Banner{
+    background-color: var(--secondery-color);
+    padding: 70px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.Banner h1{
+    font-size: 40px;
+    font-weight: 900;
+}
+.Banner .search{
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 40%;
+}
+.search .icon i{
+    font-size: 25px;
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+.search input{
+    font-size: 17px;
+    font-weight: 200;
+    border: none;
+}
+
+.search input:focus{
+    outline: none;
+    border:none;
+}

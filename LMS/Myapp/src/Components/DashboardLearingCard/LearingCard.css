@@ -1,0 +1,12 @@
+.LearingCard img{
+height: 150px;
+}
+.LearingCard .progress .progress-bar{
+    background-color: var(--primary-color);
+}
+.LearingCard .card-body .btn{
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+}

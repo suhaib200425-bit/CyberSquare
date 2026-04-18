@@ -1,0 +1,52 @@
+.CreateCourse {
+
+    height: 100%;
+    padding: 15px;
+}
+
+.CreateCourse .indicators {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.CreateCourse .indicators .Active {
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+}
+
+.CreateCourse .indicators .UnActive {
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    background-color: var(--secondery-color);
+}
+.CreateCourse .fileselecter{
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    height: 150px;
+}
+
+.CreateCourse .fileselecter div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.CreateCourse .videofileselection{
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+.CreateCourse .pdffileselection{
+    width: 200px;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid gray;
+}

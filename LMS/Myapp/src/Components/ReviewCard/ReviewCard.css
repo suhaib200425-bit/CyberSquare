@@ -1,0 +1,28 @@
+.ReviewCard{
+    background-color: var(--secondery-color);
+    border-radius: 10px;
+    padding: 10px;
+}
+.ReviewCard .stars{
+    display: flex;
+    gap: 5px;
+}
+.ReviewCard p{
+    font-size: 14px;
+}
+.ReviewCard .student{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ReviewCard .student img{
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.ReviewCard .student div{
+    line-height: 1;
+}

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_role_dashbords",
+  "info": {
+    "displayName": "Dashbord",
+    "icon": "filePdf"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
