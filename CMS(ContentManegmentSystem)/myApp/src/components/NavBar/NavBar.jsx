@@ -15,7 +15,7 @@ const NavBar = ({ Menus }) => {
     return (
         <nav className="w-full sticky  top-0 bg-black z-50 bg-white backdrop-blur-lg border-b border-white/10">
 
-            <div className="NavBar max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+            <div className="NavBar max-w-7xl mx-auto flex items-center justify-between px-[10px] md:px-6 py-4">
 
                 {/* Logo */}
                 <div className="text-2xl font-bold  tracking-wider">

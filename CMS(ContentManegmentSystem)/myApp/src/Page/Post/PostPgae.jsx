@@ -29,7 +29,7 @@ function PostPgae() {
     return (
         <div className='PostPgae'>
             <div className="w-full ">
-                <div className="w-[85%] mx-auto rounded-xl ">
+                <div className="w-[85%]  rounded-xl ">
 
                     {/* Category */}
                     <span className="text-xs bg-gray-200 px-3 py-1 rounded-full text-gray-600">
