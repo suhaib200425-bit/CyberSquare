@@ -11,3 +11,10 @@ body{
   padding: 0px 100px;
 /* background-color: black; */
 }
+
+@media (max-width: 768px) {
+  body {
+    
+  padding: 0px 10px;
+  }
+}

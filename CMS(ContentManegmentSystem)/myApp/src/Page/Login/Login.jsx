@@ -1,30 +1,34 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { USERAPI } from "../../assets/assets";
+import useStore from "../../context/Zustand";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
     const [form, setForm] = useState({ email: "", password: "" });
-    
-
-    const handleSubmit = async(e) => {
+    const { user, SetUser } = useStore()
+const Navigate= useNavigate()
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-        const response = await axios.post(USERAPI,form)
-        console.log(response.data);
-        localStorage.setItem('token',response?.data?.token)
-        }catch(error){
-            console.log(error.response.data || error.message);
+        try {
+            const response = await axios.post(USERAPI, form)
+            console.log(response?.data);
+            localStorage.setItem('token', response?.data?.token)
+            SetUser(response?.data?.user)
+            Navigate('/')
+        } catch (error) {
+            console.log(error.response?.data || error.message);
         }
         // API call here
     };
 
     return (<form onSubmit={handleSubmit} className="w-80 mx-auto mt-10 space-y-4"> <h2 className="text-xl font-bold">Login</h2>
 
-        
+
         <input
             type="email"
             placeholder="Email"
-                    className="w-full border p-2 rounded-[5px]"
+            className="w-full border p-2 rounded-[5px]"
             required
             onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
@@ -32,7 +36,7 @@ function Login() {
         <input
             type="password"
             placeholder="Password"
-                    className="w-full border p-2 rounded-[5px]"
+            className="w-full border p-2 rounded-[5px]"
             required
             onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
@@ -44,7 +48,7 @@ function Login() {
     </form>
 
 
-);
+    );
 }
 
 export default Login

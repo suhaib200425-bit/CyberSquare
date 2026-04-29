@@ -12,30 +12,30 @@ import Register from './Page/Register/Register';
 import Splash from './Page/Splash/Splash';
 import useStore from './context/Zustand';
 function App() {
-  const {SetUser}=useStore()
-    const checkLoged = async () => {
-      try {
-        const token = localStorage.getItem('token')
-        console.log(token);
+  const { SetUser } = useStore()
+  const checkLoged = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      console.log(token);
 
-        const response = await axios.get(`${USERAPI}`, {
-          headers: {
-            Authorization: `_ ${token}`
-          }
-        })
-        console.log(response.data);
-        SetUser(response?.data?.user)
-      } catch (error) {
-        console.log(error.response?.data || error.message);
-      }
-
+      const response = await axios.get(`${USERAPI}`, {
+        headers: {
+          Authorization: `_ ${token}`
+        }
+      })
+      console.log(response.data);
+      SetUser(response?.data?.user)
+    } catch (error) {
+      console.log(error.response?.data || error.message);
     }
+
+  }
 
   const { isPending, error, data: Menus } = useQuery({
     queryKey: ['repoData1'],
     queryFn: () =>
       axios.get(MENUAPI).then((res) => {
-    checkLoged()
+        checkLoged()
         console.log(res.data?.data)
         return res.data?.data
       }).catch(error => {
@@ -46,11 +46,11 @@ function App() {
 
   // if (isPending) return 'Loading...'
 
-  if (error) return 'An error has occurred: ' + error.message
+  // if (error) return 'An error has occurred: ' + error.message
 
   return (
     <>
-      <NavBar Menus={Menus} />
+      {Menus&&<NavBar Menus={Menus} />}
 
       <Routes>
 

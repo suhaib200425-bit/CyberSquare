@@ -20,7 +20,7 @@ function PageRoute({ title }) {
 
   if (isPending) return 'Loading...'
 
-  if (error) return <NotFound error={`An error has occurred: + ${error.message}`} />
+  // if (error) return <NotFound error={`An error has occurred: + ${error.message}`} />
 
   function renderTemplate(html, values) {
     let output = html;

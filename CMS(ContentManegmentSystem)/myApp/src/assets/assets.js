@@ -1,7 +1,8 @@
 import {QueryClient} from '@tanstack/react-query'
 export const queryClient = new QueryClient()
 
-export const BASEURL='http://localhost:5000'
+// export const BASEURL='http://localhost:5000'
+export const BASEURL='http://192.168.0.159:5000'
 
 export const PAGEAPI=`${BASEURL}/api/page`
 export const CATEGORYAPI=`${BASEURL}/api/category`

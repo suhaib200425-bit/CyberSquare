@@ -22,7 +22,7 @@ function PostRow() {
     return (
 
         <>
-            <div className='PostRow grid grid-cols-4 gap-2'>
+            <div className='PostRow grid grid-cols-1 lg:grid-cols-4 gap-2'>
                 {
                     Post && Post?.data?.map(elem => {
                         console.log(elem);
@@ -58,7 +58,7 @@ function PostRow() {
 
                         {/* Page Numbers */}
                         <div className="rounded-sm flex items-center justify-center text-white w-[35px] h-[35px] bg-blue-500">{Post?.currentPage}</div>
-                        <div className="rounded-sm flex items-center justify-center text-white w-[35px] h-[35px] bg-gray-500">{Post?.currentPage+1}</div>
+                        <div className="rounded-sm flex items-center justify-center text-white w-[35px] h-[35px] bg-gray-500">{Post?.currentPage + 1}</div>
                         {/* <div className="rounded-sm flex items-center justify-center text-white w-[35px] h-[35px] bg-gray-500">3</div> */}
 
                         {/* Next Button */}

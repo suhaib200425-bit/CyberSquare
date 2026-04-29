@@ -10,10 +10,10 @@ const NavBar = ({ Menus }) => {
 
     const Navigate = useNavigate()
 
-    const { user } = useStore()
+    const { user,SetUser } = useStore()
 
     return (
-        <nav className="w-full bg-black z-50 bg-white backdrop-blur-lg border-b border-white/10">
+        <nav className="w-full sticky  top-0 bg-black z-50 bg-white backdrop-blur-lg border-b border-white/10">
 
             <div className="NavBar max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
@@ -47,9 +47,11 @@ const NavBar = ({ Menus }) => {
                             {user.username}
                         </button>
                             <button onClick={() => {
-                                console.log('log');
+                                console.log('logOut');
+                                localStorage.setItem('token',null)
+                                SetUser(null)
+                                Navigate('/')
 
-                                Navigate('/login')
                             }} className="py-2 px-3 bg-yellow-500 text-black rounded-full font-semibold">
                                 Logout
                             </button> </>
@@ -66,7 +68,7 @@ const NavBar = ({ Menus }) => {
                 {/* Mobile Toggle */}
                 <button
                     onClick={() => setOpen(!open)}
-                    className="md:hidden text-white text-2xl"
+                    className="md:hidden text-black text-2xl"
                 >
                     {open ? "✕" : "☰"}
                 </button>
@@ -74,23 +76,32 @@ const NavBar = ({ Menus }) => {
 
             {/* Mobile Menu (Full Screen Overlay) */}
             {open && (
-                <div className="fixed h-max top-[60px] inset-0 bg-black flex flex-col items-center justify-center gap-2 pt-3 pb-3 text-white text-xl tracking-widest">
+                <div className="fixed h-max top-[60px] inset-0 bg-white flex flex-col items-center justify-center gap-2 pt-3 pb-3 text-white text-xl tracking-widest">
 
                     {Menus?.map((menu, i) => (
-                        <a key={i} href={`/page/${menu.page?.title}`} onClick={() => setOpen(false)}>
+                        <a key={i} className="text-black" href={`/page/${menu.page?.title}`} onClick={() => setOpen(false)}>
                             {menu.title}
                         </a>
                     ))}
 
                     <div className="flex flex-col gap-4 mt-6 mb-5 w-max">
                         {
-                            user != null ? <button onClick={() => {
-                                console.log('log');
+                            user != null ? <> <button onClick={() => {
+                            console.log('log');
 
-                                // Navigate('/login')
+                            // Navigate('/login')
+                        }} className="py-2 text-black px-3 rounded-full font-semibold">
+                            {user.username}
+                        </button>
+                            <button onClick={() => {
+                                console.log('logOut');
+                                localStorage.setItem('token',null)
+                                SetUser(null)
+                                Navigate('/')
+
                             }} className="py-2 px-3 bg-yellow-500 text-black rounded-full font-semibold">
-                                {user.username}
-                            </button>
+                                Logout
+                            </button> </>
                                 : <button onClick={() => {
                                     console.log('log');
 
