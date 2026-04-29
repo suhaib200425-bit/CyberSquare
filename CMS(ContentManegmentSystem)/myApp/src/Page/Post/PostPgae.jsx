@@ -70,7 +70,7 @@ function PostPgae() {
                         More in Technology
                     </h3>
 
-                    <div className="'PostRow grid grid-cols-4 gap-2'">
+                    <div className="'PostRow grid grid-cols-1 lg:grid-cols-4 gap-2'">
                         {
                             data?.otherpost.map(elem => {
                                 console.log(elem);
