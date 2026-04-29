@@ -1,0 +1,35 @@
+.Post {
+    width: 100%;
+    height: 100vh;
+    transition: 0.6s;
+    background-color: var(--hover-color);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.Post .Content {
+    padding: 10px 15px;
+}
+
+.Post .Content .hed {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.navigateBtn button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.ContentHedpost{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ContentHedpost button{
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--back-color);
+}

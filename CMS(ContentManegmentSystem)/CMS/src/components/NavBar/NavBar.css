@@ -12,6 +12,7 @@
     background-color: var(--hover-color);
     backdrop-filter: blur(50px);
     z-index: 99;
+    height: 50px;
 }
 .Navbar .leftSide,
 .Navbar .rightSide{

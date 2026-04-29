@@ -1,0 +1,24 @@
+.Menu{
+    width: 100%;
+    max-height: 100vh;
+    transition: 0.6s;
+    background-color: var(--hover-color);
+}
+.Menu .Content{
+    padding: 10px 15px;
+}
+.Menu .Content .hed{
+    font-size: 20px;
+    font-weight: 700;
+}
+.ContentHed{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ContentHed button{
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--back-color);
+}

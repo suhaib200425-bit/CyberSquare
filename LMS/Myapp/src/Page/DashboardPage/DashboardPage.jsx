@@ -32,7 +32,7 @@ function DashboardPage() {
       { Icon: <i class="bi bi-graph-up-arrow"></i>, Title: "Analytics" }
     ]
   };
-  const [DashboardMenus, setDashboardMenus] = useState(menuItems["staff"])
+  const [DashboardMenus, setDashboardMenus] = useState(menuItems["student"])
   const [Menu, setMenu] = useState('')
 
 

@@ -18,7 +18,3 @@ body{
   --back-color:rgb(68, 68, 207);
   
 }
-.App{
-  display: flex;
-  align-items: start;
-}

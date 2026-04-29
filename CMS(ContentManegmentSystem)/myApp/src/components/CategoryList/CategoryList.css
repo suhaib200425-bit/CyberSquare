@@ -1,0 +1,19 @@
+.CategoryList{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0px;
+
+}
+.CategoryList div{
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: rgba(127, 133, 133, 0.158);
+    /* color: white; */
+    transition: 0.4s ease-out;
+}
+.CategoryList div:hover{
+    background-color: black;
+    color: white;
+    transition: 0.4s ease-in;
+}

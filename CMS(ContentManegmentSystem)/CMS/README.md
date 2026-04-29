@@ -18,3 +18,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 npm install recharts
 npm install Zustand
+npm install @dnd-kit/react
