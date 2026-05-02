@@ -21,7 +21,7 @@ function PageRoute({ slug }) {
     if (error) return 'An error has occurred: ' + error.message
 
     return (
-        <div>
+        <div className='w-full'>
             {
                 data && data?.sections?.map((elem, i) => {
                     return < DynamicRenderer code={elem.template} props={elem.props} />
