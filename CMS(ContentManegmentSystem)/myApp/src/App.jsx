@@ -37,12 +37,12 @@ function App() {
 
           <Route path={`/`} element={<Demo />} />
 
-        {/* {
+        {
           data && data?.pages?.map(page => {
             const slug = page?.slug
             return <Route key={page._id} path={`/page/${slug}`} element={<PageRoute slug={slug} />} />
           })
-        } */}
+        }
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </div>
