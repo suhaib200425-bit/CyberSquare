@@ -18,7 +18,7 @@ router.post("/", createPage);
 router.get("/",getPages)
 router.get("/builder",BuildingPages)
 router.get("/:PageId",getPage)
-router.get("/title/:title",getPageBySlug)
+router.get("/slug/:slug",getPageBySlug)
 router.get("/title/:PageTitle",getPage)
 router.patch("/:PageId",updatePage)
 router.delete("/:PageId",deletePage)

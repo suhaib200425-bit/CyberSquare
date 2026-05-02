@@ -1,0 +1,114 @@
+/* Wrapper */
+.nav-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 0;
+  margin-top: 10px;
+  /* background-color: rgba(21, 7, 24, 0.788); */
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  /* max-width: 1100px; */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: orange;
+}
+
+/* Right side */
+.right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.right .searchBox{
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+.contact-btn {
+  background: black;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background: #ddd;
+}
+
+/* Mobile toggle */
+.mobile-toggle {
+  display: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: absolute;
+  top: 70px;
+  width: 90%;
+  max-width: 1100px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 10px;
+  color: black;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+
+  .right {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+}

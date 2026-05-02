@@ -5,7 +5,7 @@ function TemplateValue({ target, label, type, value, refKey, setPageSections }) 
     console.log(refKey);
     setPageSections(prev => {
       const updated = { ...prev };
-      updated.sections.map((elem, i) => {
+      updated?.sections.map((elem, i) => {
         
         if (i === target.index) {
           console.log(target);

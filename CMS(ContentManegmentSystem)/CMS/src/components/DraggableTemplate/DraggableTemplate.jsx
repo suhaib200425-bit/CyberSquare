@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDraggable } from '@dnd-kit/react';
+import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer';
 
 
 function DraggableTemplate({ TemplateObject }) {
@@ -7,37 +8,25 @@ function DraggableTemplate({ TemplateObject }) {
     const [Template, setTemplate] = useState(null)
 
     const { ref } = useDraggable({
-        id: TemplateObject.name,   // MUST
+        id: TemplateObject._id,   // MUST
         data: TemplateObject
-        
-
     });
 
-    function renderTemplate(html, values) {
-        let output = html;
-
-        for (let key in values) {
-            const regex = new RegExp(`{{${key}}}`, "g");
-            output = output.replace(regex, values[key].value);
-        }
-
-        return output;
-    }
-
-    useEffect(() => {
-        const ParseCode = renderTemplate(TemplateObject.template, TemplateObject.values)
-        setTemplate(ParseCode)
-
-    }, [])
+    useEffect(()=>{
+        console.log('DraggableTemplate');
+        console.log({
+        id: TemplateObject._id,  
+        data: TemplateObject
+    });
+        
+    },[])
 
     return (
-        <div ref={ref} >
+        <div ref={ref} key={TemplateObject._id} onClick={()=>{
+            console.log(TemplateObject);
+        }}>
             {
-                Template ?
-                    <div
-                        dangerouslySetInnerHTML={{ __html: Template }}
-                    >
-                    </div> : <h2>Error</h2>
+                <DynamicRenderer key={TemplateObject._id} code={TemplateObject.template}  props={TemplateObject?.props} />
             }
         </div>
     )

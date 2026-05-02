@@ -2,9 +2,9 @@ const Page = require("../../models/Page");
 
 const getPageBySlug = async (req, res) => {
   try {
-    const { title } = req.params;
+    const { slug } = req.params;
 
-    const page = await Page.findOne({ title })
+    const page = await Page.findOne({ slug })
 
     if (!page) {
       return res.status(404).json({

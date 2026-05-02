@@ -11,6 +11,8 @@ import FormPage from './Page/FormPage/FormPage';
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './Context/Tanstack';
 import Menu from './Page/Menu/Menu';
+import DesignPage from './Page/DesignPage/DesignPage';
+import NotFound from './Page/NotFound/NotFound';
 function App() {
 
   // Create a client
@@ -24,9 +26,10 @@ function App() {
           <Route path="/pages" element={<Pages />} />
           <Route path="/post" element={<Post />} />
           <Route path="/menu" element={<Menu />} />
-          <Route path="/pagebuilder" element={<PageBuilder />} />
+          <Route path="/pagebuilder/:PageId" element={<DesignPage />} />
           <Route path="/category" element={<Category />} />
           <Route path="/form/:formname" element={<FormPage />} />
+        <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </QueryClientProvider>

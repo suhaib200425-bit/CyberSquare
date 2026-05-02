@@ -1,73 +1,51 @@
 import react from 'react'
-import NavBar from './components/NavBar/NavBar'
-import { Routes, Route } from "react-router-dom";
-import NotFound from './Page/NotFound/NotFound';
-import axios from "axios";
-import { useQuery } from '@tanstack/react-query'
-import { MENUAPI, USERAPI } from './assets/assets';
+import { NAVBARTEMPLATEAPI, PAGEAPI } from '../../CMS/src/assets/assets'
+import { DynamicRenderer } from './ComponentConvertFunction/DynamicRenderer'
+import { useQuery } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from 'axios';
 import PageRoute from './Page/PageRoute/PageRoute';
-import PostPgae from './Page/Post/PostPgae';
-import Login from './Page/Login/Login';
-import Register from './Page/Register/Register';
-import Splash from './Page/Splash/Splash';
-import useStore from './context/Zustand';
+import NotFound from './Page/NotFound/NotFound';
+import Demo from './templateComp/demo/demo';
 function App() {
-  const { SetUser } = useStore()
-  const checkLoged = async () => {
-    try {
-      const token = localStorage.getItem('token')
-      console.log(token);
 
-      const response = await axios.get(`${USERAPI}`, {
-        headers: {
-          Authorization: `_ ${token}`
-        }
-      })
-      console.log(response.data);
-      SetUser(response?.data?.user)
-    } catch (error) {
-      console.log(error.response?.data || error.message);
+  const { data, isPending, error } = useQuery({
+    queryKey: ["MULTI_API"],
+    queryFn: () => {
+      return Promise.all([
+        axios.get(`${NAVBARTEMPLATEAPI}/checked`),
+        axios.get(`${PAGEAPI}`)
+      ]).then(([navbar, pages]) => {
+        return {
+          navbar: navbar.data?.data,
+          pages: pages.data?.data
+        };
+      });
     }
+  });
 
-  }
-
-  const { isPending, error, data: Menus } = useQuery({
-    queryKey: ['repoData1'],
-    queryFn: () =>
-      axios.get(MENUAPI).then((res) => {
-        checkLoged()
-        console.log(res.data?.data)
-        return res.data?.data
-      }).catch(error => {
-        console.log(error);
-
-      })
-  })
-
-  // if (isPending) return 'Loading...'
+  if (isPending) return 'Loading...'
 
   // if (error) return 'An error has occurred: ' + error.message
 
   return (
-    <>
-      {Menus&&<NavBar Menus={Menus} />}
+    <div className='w-full'>
+      {data && <DynamicRenderer code={data.navbar?.navbar} />}
+
 
       <Routes>
 
+            return <Route path={`/`} element={<Demo />} />
 
-        <Route path="/" element={<Splash />} />
-        <Route path="/post/:postId" element={<PostPgae />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
         {
-          Menus?.map(menu => {
-            const title = menu.page?.title
-            return <Route key={menu._id} path={`/page/${title}`} element={<PageRoute title={title} />} />
+          data && data?.pages?.map(page => {
+            const slug = page?.slug
+            return <Route key={page._id} path={`/page/${slug}`} element={<PageRoute slug={slug} />} />
           })
         }
-        <Route path="*" element={<NotFound />} />
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
-    </>
+    </div>
   )
 }
 

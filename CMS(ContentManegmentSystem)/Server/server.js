@@ -25,7 +25,8 @@ app.use("/api/category", require('./routes/categoryRoutes'));
 app.use("/api/post", require('./routes/postRouter'));
 app.use("/api/menu", require('./routes/menuRoutes'));
 app.use("/api/user", require('./routes/userRouter'));
-
+app.use("/api/react/template", require('./routes/reactTemplateRoutes'));
+app.use("/api/navbar/template", require('./routes/navbarTemplateRoutes'));
 // Default route
 app.get("/", (req, res) => {
   res.send("API is running 🚀");

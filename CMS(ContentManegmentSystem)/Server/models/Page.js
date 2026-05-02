@@ -1,17 +1,18 @@
 const mongoose = require("mongoose");
 
-const ValueSchema = new mongoose.Schema({
-  label: String,
-  type: String,
-  value: mongoose.Schema.Types.Mixed
+
+const propseSchema = new mongoose.Schema({
+    label: { type: String, require: true },
+    type: { type: String, require: true },
+    value: { type: String, require: true },
 }, { _id: false });
 
 const SectionSchema = new mongoose.Schema({
   name: String,
   template: String,
-  values: {
+  props: {
     type: Map,
-    of: ValueSchema
+    of: propseSchema
   }
 }, { _id: false });
 

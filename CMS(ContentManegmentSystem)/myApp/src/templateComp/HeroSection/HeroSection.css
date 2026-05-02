@@ -1,0 +1,24 @@
+.HeroSection{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    /* background-position: end; */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.HeroSection h1{
+    color: white;
+    font-size: 45px;
+    text-align: center;
+    line-height: 0.8;
+    font-weight: 700;
+}
+.HeroSection p{
+    width: 500px;
+    text-align: center;
+    color: grey;
+    font-size: 20px;
+}

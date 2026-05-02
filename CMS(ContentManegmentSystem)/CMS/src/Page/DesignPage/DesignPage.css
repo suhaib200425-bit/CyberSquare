@@ -1,0 +1,95 @@
+.DesignPage{
+    display: flex;
+    gap: 5px;
+    width: 100%;
+    height: calc(100vh - 50px);
+    overflow: hidden;
+}
+.DesignPage .leftBar{
+    position: relative;
+    min-width: 300px;
+    max-width: 300px;
+    height: 100%;
+    /* background-color: black; */
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* background-color:gray;  */
+    padding: 10px;
+}
+.leftBar .sections{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.sections .sectiondiv{
+    width: 50%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+.DesignPage .center{
+    transition: 0.5s;
+    width: 100%;
+    overflow-y: scroll;
+}
+.ReactTemplate:hover{
+    position: relative;
+    border: 3px dotted black;
+}
+.ActiveReactTemplate{
+    position: relative;
+    border: 3px double red;
+}
+.templateManeger{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    gap: 5px;
+}
+.templateManeger .icon{
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(190, 185, 185, 0.199);
+    border-radius: 10px;
+}
+.templateManeger .icon i{
+    font-size: 21px;
+
+}
+.DesignPage .right{
+    transition: 0.5s;
+    width: 0px;
+    opacity: 0;
+}
+.DesignPage .rightBox{
+    transition: 0.5s;
+    min-width: 300px ;
+    opacity: 1;
+}
+
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* class apply cheyyan */
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out ;
+}

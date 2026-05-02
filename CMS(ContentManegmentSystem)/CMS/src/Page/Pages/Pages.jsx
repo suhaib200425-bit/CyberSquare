@@ -111,7 +111,7 @@ function Pages() {
                                         </button>
                                         <button className="hover:text-green-500" onClick={() => {
                                             SetBuilderPage(page.title)
-                                            Navigate('/pagebuilder')
+                                            Navigate(`/pagebuilder/${page._id}`)
                                         }}>
                                             <i class="fa-solid fa-file-lines"></i>
                                         </button>
