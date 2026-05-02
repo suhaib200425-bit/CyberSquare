@@ -24,13 +24,13 @@ function App() {
     }
   });
 
-  // if (isPending) return 'Loading...'
+  if (isPending) return 'Loading...'
 
-  // if (error) return 'An error has occurred: ' + error.message
+  if (error) return 'An error has occurred: ' + error.message
 
   return (
     <div className='w-full'>
-      {/* {data && <DynamicRenderer code={data.navbar?.navbar} />} */}
+      {data && <DynamicRenderer code={data.navbar?.navbar} />}
 
 
       <Routes>
