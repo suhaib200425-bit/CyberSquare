@@ -24,25 +24,25 @@ function App() {
     }
   });
 
-  if (isPending) return 'Loading...'
+  // if (isPending) return 'Loading...'
 
-  if (error) return 'An error has occurred: ' + error.message
+  // if (error) return 'An error has occurred: ' + error.message
 
   return (
     <div className='w-full'>
-      {data && <DynamicRenderer code={data.navbar?.navbar} />}
+      {/* {data && <DynamicRenderer code={data.navbar?.navbar} />} */}
 
 
       <Routes>
 
-            return <Route path={`/`} element={<Demo />} />
+          <Route path={`/`} element={<Demo />} />
 
-        {
+        {/* {
           data && data?.pages?.map(page => {
             const slug = page?.slug
             return <Route key={page._id} path={`/page/${slug}`} element={<PageRoute slug={slug} />} />
           })
-        }
+        } */}
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </div>
