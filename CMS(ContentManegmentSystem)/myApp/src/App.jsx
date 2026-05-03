@@ -13,8 +13,16 @@ function App() {
     queryKey: ["MULTI_API"],
     queryFn: () => {
       return Promise.all([
-        axios.get(`${NAVBARTEMPLATEAPI}/checked`),
-        axios.get(`${PAGEAPI}`)
+        axios.get(`${NAVBARTEMPLATEAPI}/checked`, {
+          headers: {
+            "ngrok-skip-browser-warning": true
+          }
+        }),
+        axios.get(`${PAGEAPI}`, {
+          headers: {
+            "ngrok-skip-browser-warning": true
+          }
+        })
       ]).then(([navbar, pages]) => {
         return {
           navbar: navbar.data?.data,
@@ -35,7 +43,7 @@ function App() {
 
       <Routes>
 
-          <Route path={`/`} element={<Demo />} />
+        <Route path={`/`} element={<Demo />} />
 
         {
           data && data?.pages?.map(page => {
