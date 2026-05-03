@@ -29,7 +29,7 @@ function TargetValueChange({ TargetValue, setPage }) {
                         props: {
                             ...section.props,
                             [Keyname]: {
-                                ...section.props.title,
+                                ...section.props[Keyname],
                                 value: changedValue,
                             },
                         },

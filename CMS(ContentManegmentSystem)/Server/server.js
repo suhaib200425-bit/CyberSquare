@@ -11,12 +11,27 @@ dotenv.config();
 const app = express();
 
 // Middleware
+// app.use(cors({
+//   origin:"*",
+//   methods: ["GET","POST","PUT","PATCH","DELETE"],
+//   allowedHeaders: ["Content-Type","Authorization"]
+// }));
 
-app.use(cors({
-  origin:"*",
-  methods: ["GET","POST","PUT","PATCH","DELETE"],
-  allowedHeaders: ["Content-Type","Authorization"]
-}));
+const corsOptions = {
+  origin: [
+    "http://localhost:5174",
+    "http://localhost:5173",
+    "https://thee-slightly-dowry.ngrok-free.dev"
+  ],
+  credentials: true
+};
+
+// app.use(cors({
+//   origin: "http://localhost:5174",
+//   credentials: true
+// }));
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

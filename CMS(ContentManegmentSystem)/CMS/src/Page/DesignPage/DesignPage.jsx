@@ -70,9 +70,9 @@ function DesignPage() {
 
     const deleteSectionTemplate = (deleteindex) => {
         setPage((prev) => ({
-  ...prev,
-  sections: prev.sections.filter((_, index) => index !== deleteindex),
-}));
+            ...prev,
+            sections: prev.sections.filter((_, index) => index !== deleteindex),
+        }));
     }
 
 
@@ -124,9 +124,11 @@ function DesignPage() {
                             {
                                 // ReactAllTemplate.map(elem => <DraggableTemplate TemplateObject={elem} />)
                                 ReactTemplate?.data?.map(elem => <div className="">
+                                    <hr className='mt-1' />
                                     <div className="templatename">Name : {elem.name}</div>
+                                    <hr className='mb-1' />
                                     <DraggableTemplate TemplateObject={elem} />
-                                </div> )
+                                </div>)
                             }
                         </div>
                     </div>

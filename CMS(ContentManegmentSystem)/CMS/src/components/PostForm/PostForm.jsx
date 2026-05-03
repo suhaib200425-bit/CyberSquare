@@ -12,6 +12,7 @@ export default function PostForm({ setFormClose, update }) {
         category: null,
         status: "Draft",
         excerpt: "",
+        banner: "",
         content: ""
     });
     const { isPending, error, data } = useQuery({
@@ -22,13 +23,14 @@ export default function PostForm({ setFormClose, update }) {
 
             if (update !== null) {
                 const postRes = await axios.get(`${POSTAPI}/postid/${update}`)
-                    setForm({
-                        title: postRes.data?.data.title,
-                        category: postRes.data?.data.category?._id,
-                        status: postRes.data?.data.status,
-                        excerpt: postRes.data?.data.excerpt,
-                        content: postRes.data?.data.content
-                    })
+                setForm({
+                    title: postRes.data?.data.title,
+                    category: postRes.data?.data.category?._id,
+                    status: postRes.data?.data.status,
+                    excerpt: postRes.data?.data.excerpt,
+                    content: postRes.data?.data.content,
+                    banner: postRes.data?.data?.banner
+                })
             }
 
             return catRes.data.data
@@ -73,7 +75,7 @@ export default function PostForm({ setFormClose, update }) {
             console.log(form);
             const response = await axios.patch(`${POSTAPI}/${update}`, form)
             console.log(response.data);
-            
+
             setFormClose(false)
         } catch (error) {
             console.log(error.response.data || error.message);
@@ -84,7 +86,7 @@ export default function PostForm({ setFormClose, update }) {
 
     return (
         <div className=" overflow-y-auto fixed inset-0 bg-black flex justify-center ">
-            <form className="bg-white w-full h-max  rounded-lg p-6 shadow-lg"  onSubmit={update?handleUpdate:handleSubmit}>
+            <form className="bg-white w-full h-max  rounded-lg p-6 shadow-lg" onSubmit={update ? handleUpdate : handleSubmit}>
 
                 <h2 className="text-xl font-semibold mb-4">New post</h2>
 
@@ -95,6 +97,17 @@ export default function PostForm({ setFormClose, update }) {
                         type="text"
                         name="title"
                         value={form.title}
+                        onChange={handleChange}
+                        className="w-full border p-2 rounded focus:outline-blue-500"
+                    />
+                </div>
+                {/* Banner */}
+                <div className="mb-4">
+                    <label className="block mb-1 font-medium">Banner</label>
+                    <input
+                        type="text"
+                        name="banner"
+                        value={form.banner}
                         onChange={handleChange}
                         className="w-full border p-2 rounded focus:outline-blue-500"
                     />
@@ -166,10 +179,10 @@ export default function PostForm({ setFormClose, update }) {
                         Cancel
                     </button>
                     <button
-                        onClick={update?handleUpdate:handleSubmit}
+                        onClick={update ? handleUpdate : handleSubmit}
                         className="px-4 py-2 bg-blue-600 text-white rounded"
                     >
-                        {update?"Update":"Save"}
+                        {update ? "Update" : "Save"}
                     </button>
                 </div>
 

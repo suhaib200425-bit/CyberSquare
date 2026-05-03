@@ -13,6 +13,12 @@ const PostSchema = new mongoose.Schema({
     lowercase: true
   },
 
+  banner:{
+    type: String,
+    required: true,
+    default:null
+  },
+
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category", // 👈 reference

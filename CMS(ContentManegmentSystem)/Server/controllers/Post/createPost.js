@@ -3,7 +3,7 @@ const slugify = require("slugify");
 
 const createPost = async (req, res) => {
   try {
-    const { title, category, content, excerpt, status } = req.body;
+    const { title, category, content, excerpt, status,banner } = req.body;
 
     // validation
     if (!title || !category || !content) {
@@ -20,6 +20,7 @@ const createPost = async (req, res) => {
     const post = await Post.create({
       title,
       slug,
+      banner,
       category,
       content,
       excerpt,

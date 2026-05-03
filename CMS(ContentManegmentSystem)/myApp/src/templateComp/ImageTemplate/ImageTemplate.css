@@ -1,0 +1,9 @@
+.ImageTemplate{
+    display: flex;
+    align-items: center;
+}
+.ImageContainer img{
+    width: 100%;
+    height: 100%;
+
+}
