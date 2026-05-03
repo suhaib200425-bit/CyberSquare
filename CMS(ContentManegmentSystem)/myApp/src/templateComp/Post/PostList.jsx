@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { POSTAPI } from '../../assets/assets';
 function PostList({
     title = { value: "Explore" },
     subTitle = { value: "Let's go on an Article" },
-    api = { value: "http://172.23.112.119:5000/api/post" },
+    api = { value: POSTAPI },
     getLimit = { value: 0 }
 }) {
 

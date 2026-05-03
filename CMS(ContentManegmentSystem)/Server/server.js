@@ -21,7 +21,8 @@ const corsOptions = {
   origin: [
     "http://localhost:5174",
     "http://localhost:5173",
-    "https://cyber-square-3f3k.vercel.app"
+    "https://cyber-square-3f3k.vercel.app",
+    "https://thee-slightly-dowry.ngrok-free.dev"
   ],
   credentials: true
 };

@@ -2,7 +2,7 @@ import React from 'react'
 import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer';
 import axios from 'axios';
 import { useQuery } from "@tanstack/react-query";
-import { PAGEAPI } from '../../../../CMS/src/assets/assets';
+import { PAGEAPI } from '../../assets/assets';
 
 function PageRoute({ slug }) {
 
