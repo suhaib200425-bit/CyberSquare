@@ -26,7 +26,7 @@ function App() {
 
   if (isPending) return 'Loading...'
 
-  if (error) return 'An error has occurred: ' + error.message
+  // if (error) return 'An error has occurred: ' + error.message
 
   return (
     <div className='w-full'>
