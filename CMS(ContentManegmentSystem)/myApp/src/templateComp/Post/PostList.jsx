@@ -15,9 +15,9 @@ function PostList({
             try {
 
                 const response = await axios.get(
-                    `${api.value}?${getLimit.value
-                        ? `limit=${getLimit.value}`
-                        : "limit=1"
+                    `${api.value}?limit=${getLimit.value
+                        ? `${getLimit.value}`
+                        : 1
                     }`
                 );
 

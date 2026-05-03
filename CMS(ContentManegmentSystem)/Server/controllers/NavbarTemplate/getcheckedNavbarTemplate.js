@@ -2,7 +2,6 @@ const NavbarTemplate = require("../../models/NavbarTemplate");
 
 const getCheckedNavbarTemplate = async (req, res) => {
   try {
-    console.log('phoine');
     
     const navbar = await NavbarTemplate.findOne({checked:true});
 

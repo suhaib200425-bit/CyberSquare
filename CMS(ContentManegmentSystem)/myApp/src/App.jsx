@@ -1,5 +1,4 @@
 import react from 'react'
-import { NAVBARTEMPLATEAPI, PAGEAPI } from '../../CMS/src/assets/assets'
 import { DynamicRenderer } from './ComponentConvertFunction/DynamicRenderer'
 import { useQuery } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -7,11 +6,15 @@ import axios from 'axios';
 import PageRoute from './Page/PageRoute/PageRoute';
 import NotFound from './Page/NotFound/NotFound';
 import Demo from './templateComp/demo/demo';
+import { NAVBARTEMPLATEAPI, PAGEAPI } from './assets/assets';
 function App() {
 
   const { data, isPending, error } = useQuery({
     queryKey: ["MULTI_API"],
     queryFn: () => {
+      console.log("NAVBARTEMPLATEAPI");
+      console.log(NAVBARTEMPLATEAPI);
+      
       return Promise.all([
         axios.get(`${NAVBARTEMPLATEAPI}/checked`),
         axios.get(`${PAGEAPI}`)
