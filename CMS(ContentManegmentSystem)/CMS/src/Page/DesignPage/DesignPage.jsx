@@ -75,6 +75,33 @@ function DesignPage() {
         }));
     }
 
+    const moveUp = (index) => {
+
+        if (index === 0) return;
+
+        const updated = [...Page?.sections];
+
+        [updated[index - 1], updated[index]] = [updated[index], updated[index - 1]];
+
+        setPage(prev=>{
+            return {...prev,sections:updated}
+        });
+    };
+
+    const moveDown = (index) => {
+
+        const updated = [...Page?.sections];
+
+        if (index+1 === updated.length) return;
+
+
+        [updated[index + 1], updated[index]] =
+            [updated[index], updated[index + 1]];
+
+        setPage(prev=>{
+            return {...prev,sections:updated}
+        });
+    };
 
     return (
         <div style={{ width: '100%' }}>
@@ -143,10 +170,18 @@ function DesignPage() {
                                 }}>
                                     <DynamicRenderer key={elem._id} code={elem?.template} props={elem?.props} />
                                     <div className="templateManeger">
-                                        {!Target && Target?.index != i && <div className="icon"><i class="fa-solid fa-angle-up" style={{ color: 'green' }}></i></div>}
-                                        {!Target && Target?.index != i && <div className="icon"><i class="fa-solid fa-angle-down" style={{ color: 'orange' }}></i></div>}
+                                        {!Target && Target?.index != i && <div className="icon"><i class="fa-solid fa-angle-up" style={{ color: 'green' }}
+                                        onClick={(e)=>{
+                                            e.stopPropagation()
+                                            moveUp(i)
+                                        }}></i></div>}
+                                        {!Target && Target?.index != i && <div className="icon"onClick={(e)=>{
+                                            e.stopPropagation()
+                                            moveDown(i)
+                                        }}><i class="fa-solid fa-angle-down" style={{ color: 'orange' }}></i></div>}
                                         <div className="icon" onClick={() => {
                                             deleteSectionTemplate(i)
+                                            setTarget(null)
                                         }}><i class="fa-solid fa-trash-can" style={{ color: 'red' }}></i></div>
                                     </div>
                                 </div>
