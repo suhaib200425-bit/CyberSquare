@@ -27,7 +27,7 @@ const PostSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ["Draft", "Published"],
+    enum: ["Draft", "Published","Default"],
     default: "draft"
   },
 

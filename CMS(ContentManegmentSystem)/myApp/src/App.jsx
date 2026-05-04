@@ -7,6 +7,7 @@ import PageRoute from './Page/PageRoute/PageRoute';
 import NotFound from './Page/NotFound/NotFound';
 import Demo from './templateComp/demo/demo';
 import { NAVBARTEMPLATEAPI, PAGEAPI } from './assets/assets';
+import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePage';
 function App() {
 
   const { data, isPending, error } = useQuery({
@@ -39,6 +40,7 @@ function App() {
       <Routes>
 
         <Route path={`/`} element={<Demo />} />
+        <Route path={`/post/:id`} element={<SingleArticlePage />} />
 
         {
           data && data?.pages?.map(page => {

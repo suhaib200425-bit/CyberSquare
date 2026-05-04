@@ -7,12 +7,14 @@ const getPostBySlug = require("../controllers/Post/getpostBySlug");
 const deletePost = require("../controllers/Post/deletePost");
 const getPostById = require("../controllers/Post/getPostById");
 const updatePost = require("../controllers/Post/updatePost");
+const getPostDefault = require("../controllers/Post/getPostDefault");
 
 const router = express.Router();
 
 router.post("/", createPost);
 router.get("/", getPosts);
 router.get("/:slug", getPostBySlug);
+router.get("/get/default", getPostDefault);
 router.get("/postid/:PostId", getPostById);
 router.delete("/:PostId", deletePost);
 router.patch("/:PostId", updatePost);

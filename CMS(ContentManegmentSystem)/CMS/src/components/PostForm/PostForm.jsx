@@ -143,6 +143,7 @@ export default function PostForm({ setFormClose, update }) {
                         >
                             <option>Draft</option>
                             <option>Published</option>
+                            <option>Default</option>
                         </select>
                     </div>
                 </div>
