@@ -4,12 +4,11 @@ import axios from 'axios';
 import { useQuery } from "@tanstack/react-query";
 import { PAGEAPI } from '../../assets/assets';
 
-function PageRoute({ slug }) {
-
+function PageRoute({ slug ,pageId }) {
     const { data, isPending, error } = useQuery({
-        queryKey: ["PageBySLug"],
+        queryKey: ["PageBySLug",pageId],
         queryFn: async () => {
-                const res = await axios.get(`${PAGEAPI}/slug/${slug}`);
+                const res = await axios.get(`${PAGEAPI}/${pageId}`);
                 console.log(res.data.data);
                 return res.data?.data;
             

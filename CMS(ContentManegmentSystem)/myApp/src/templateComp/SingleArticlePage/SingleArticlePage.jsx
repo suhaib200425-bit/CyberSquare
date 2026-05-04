@@ -26,6 +26,8 @@ function SingleArticlePage({
             try {
                 const response = await axios.get(APIREST)
                 setpost(response.data?.data)
+                
+
             } catch (error) {
                 console.log(error.response?.data || error.message);
 

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 // import './LatestPost.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 function LatestPost({
   title = { value: "Latest Articles" },
   spantitle = { value: "Explore Our " },
   api = { value: "http://localhost:5000/api/post" },
 }) {
   const [posts, setPosts] = React.useState([]);
+
+const Navigate=useNavigate()
 
   React.useEffect(() => {
     const getapiPost = async () => {
@@ -33,7 +36,9 @@ function LatestPost({
         <div className="flex flex-col md:flex-row gap-3 w-full">
 
           {/* LEFT SIDE */}
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2" onClick={()=>{
+            Navigate(`/post/${posts[0]?._id}`)
+          }}>
             <div
               className="w-full min-h-[220px] md:min-h-[350px] rounded-lg bg-cover bg-center flex items-end shadow-[0_10px_20px_rgba(0,0,0,0.5)] overflow-hidden"
               style={{
@@ -43,10 +48,10 @@ function LatestPost({
             >
               <div className="w-full p-3 md:p-5">
                 <h2 className="text-white font-semibold text-[16px] md:text-[24px] line-clamp-2">
-                  {posts[1]?.title}
+                  {posts[0]?.title}
                 </h2>
                 <p className="text-gray-200 text-[13px] md:text-[14px] leading-tight line-clamp-3">
-                  {posts[1]?.excerpt}
+                  {posts[0]?.excerpt}
                 </p>
               </div>
             </div>
@@ -56,6 +61,9 @@ function LatestPost({
           <div className="w-full md:w-1/2">
             {posts.slice(1, 4).map((elem) => (
               <div
+              onClick={()=>{
+                Navigate(`/post/${elem?._id}`)
+              }}
                 key={elem._id}
                 className="flex gap-3 py-2 md:py-3 items-center min-h-[100px]"
               >

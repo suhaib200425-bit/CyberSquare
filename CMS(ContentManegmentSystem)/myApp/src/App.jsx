@@ -40,12 +40,13 @@ function App() {
       <Routes>
 
         <Route path={`/`} element={<Demo />} />
-        <Route path={`/post/:id`} element={<SingleArticlePage />} />
+        {/* <Route path={`/post/:id`} element={<SingleArticlePage />} /> */}
 
         {
           data && data?.pages?.map(page => {
+            const pageId = page?._id
             const slug = page?.slug
-            return <Route key={page._id} path={`/page/${slug}`} element={<PageRoute slug={slug} />} />
+            return <Route key={pageId} path={`/${slug}`} element={<PageRoute slug={slug} pageId={pageId} />} />
           })
         }
         {/* <Route path="*" element={<NotFound />} /> */}
