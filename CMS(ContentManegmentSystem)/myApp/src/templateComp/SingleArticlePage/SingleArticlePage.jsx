@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import './SingleArticlePage.css'
 function SingleArticlePage({
     titleSize = { value: '30px' },
-    api={value:"http://172.23.112.119:5000/api/post/postid/"},
+    api={value:"http://192.168.31.24:5000/api/post/postid/69e8fde5f0f3720a9b2e6cb1"},
     titleWeight = { value: 600 },
-    imageWeidth = { value: '' },
-    imageHeight = { value: '' },
+    imageWeidth = { value: '100%' },
+    imageHeight = { value: '300px' },
     imageRadius = { value: '5px' }
 }) {
     const htmlString = `
