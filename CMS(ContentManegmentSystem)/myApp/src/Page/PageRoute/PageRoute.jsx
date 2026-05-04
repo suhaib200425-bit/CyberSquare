@@ -6,8 +6,11 @@ import { PAGEAPI } from '../../assets/assets';
 
 function PageRoute({ slug ,pageId }) {
     const { data, isPending, error } = useQuery({
+        
         queryKey: ["PageBySLug",pageId],
         queryFn: async () => {
+            window.scrollTo(0,0)
+            
                 const res = await axios.get(`${PAGEAPI}/${pageId}`);
                 console.log(res.data.data);
                 return res.data?.data;
