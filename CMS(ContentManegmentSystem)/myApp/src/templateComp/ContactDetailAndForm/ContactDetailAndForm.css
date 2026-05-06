@@ -1,0 +1,89 @@
+.ContactDetailAndForm {
+    display: flex;
+    gap: 10px;
+    min-height: 100vh;
+}
+
+.ContactDetailAndForm .ContactDetails,
+.ContactDetailAndForm .ContactForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+
+.ContactDetails .topPera {
+    font-size: 15px;
+    color: rgba(88, 85, 85, 0.918);
+}
+
+.ContactDetails .heading {
+    line-height: 1;
+    width: 70%;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.ContactDetails .OtherContact {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.ContactDetails .OtherContact i {
+    font-size: 25px;
+}
+
+.ContactForm form {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.ContactForm form input {
+    height: 40px;
+}
+
+.ContactForm form input,
+.ContactForm form textarea {
+    width: 100%;
+    font-size: 18px;
+    outline: 1px solid black;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.ContactForm form p {
+    margin-top: 10px;
+}
+
+.ContactForm form button {
+    padding: 10px 50px;
+    border: 10px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .ContactDetailAndForm {
+        display: block;
+    }
+
+    .ContactDetails .heading {
+        font-size: 30px;
+        width: 100%;
+    }
+    .ContactDetails .OtherContact i{
+        font-size: 19px;
+    }
+    
+.ContactDetailAndForm .ContactDetails,
+.ContactDetailAndForm .ContactForm {
+    width: 100%;
+}
+
+.ContactForm form{
+    padding: 0px;
+}
+}

@@ -9,6 +9,7 @@ function LeftSideBar() {
 
     return (
         <div className='LeftSideBar' style={{ width: ActiveLeftMenu ? '200px' : '60px' }}>
+            
             <h6 className={!ActiveLeftMenu ? 'Opacity' : ''}>Content</h6>
             <MenuIcon to={'/'} Title={'Dashboard'} Icon={<i class="fa-solid fa-table-cells-large"></i>} />
             <MenuIcon to={'/post'} Title={'Posts'} Icon={<i class="fa-regular fa-note-sticky"></i>} />

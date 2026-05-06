@@ -6,15 +6,23 @@ import Heading from '../Heading/Heading'
 import ImageTemplate from '../ImageTemplate/ImageTemplate'
 import PostList from '../Post/PostList'
 import SingleArticlePage from '../SingleArticlePage/SingleArticlePage'
+import ImageAndContent from '../ImageAndContent/ImageAndContent'
+import ContactDetailAndForm from '../ContactDetailAndForm/ContactDetailAndForm'
+import ContactSection from '../ContectSection/ContactSection'
+import ContactTree from '../ContactTree/ContactTree'
 function Demo() {
   return (
     <div className='Demo'>
+      <ContactTree />
+      <ContactSection />
+      <ContactDetailAndForm />
+      <ImageAndContent />
       <SingleArticlePage />
-    <PostList/>
-    <HeroSection/>
-    <Heading />
-    <LatestPost />
-    <ImageTemplate />
+      <PostList />
+      <HeroSection />
+      <Heading />
+      <LatestPost />
+      <ImageTemplate />
 
     </div>
   )
