@@ -15,6 +15,8 @@ function ContactSection() {
           
         <iframe
           title="Google Map"
+          width="100%"
+          height="100%"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19800.80140969103!2d-0.141588!3d51.503324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876052d1c5f9fcb%3A0x3a3c0f0e7d56da58!2sLondon%20Eye!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin"
           loading="lazy"
           allowFullScreen
