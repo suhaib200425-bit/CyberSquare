@@ -131,20 +131,33 @@ function DesignPage() {
             }}>
                 <div className='DesignPage'>
                     <div className="leftBar">
+                        <div className="flex gap-2">
+                            <button className="w-full py-2 rounded-[5px] bg-[#f5f5f5]">Prev</button>
+                            <button onClick={()=>{
+                                 handleSavepage()
+                            }} className="w-full py-2 rounded-[5px] bg-black text-white">Save</button>
+                        </div>
                         <p>Sections</p>
                         <div className="sections mt-1">
                             <div className="sectiondiv" onClick={() => {
                                 setNavBar(true)
                             }}>
-                                <i class="fa-regular fa-paper-plane"></i>
+                                <i class="fa-solid fa-arrow-pointer"></i>   
                                 <p>NavBar</p>
                             </div>
                             <div className="sectiondiv" onClick={() => {
-                                handleSavepage()
+                               alert('footer soon...')
                             }}>
-                                <i class="fa-regular fa-paper-plane"></i>
+                               <i class="fa-solid fa-shoe-prints"></i>
                                 <p>Footer</p>
                             </div>
+                            <div className="sectiondiv" onClick={() => {
+                               alert('footer soon...')
+                            }}>
+                                <i class="fa-solid fa-unlock-keyhole"></i>
+                                <p>Authetication</p>
+                            </div>
+                            
                         </div>
                         <p className='mt-1'>Components</p>
                         <div className="template">

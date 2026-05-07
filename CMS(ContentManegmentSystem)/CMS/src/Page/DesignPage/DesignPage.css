@@ -18,11 +18,15 @@
 }
 .leftBar .sections{
     display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    scrollbar-width: thin;
     gap: 5px;
     align-items: center;
 }
 .sections .sectiondiv{
     width: 50%;
+    cursor: pointer;
     padding: 15px;
     display: flex;
     flex-direction: column;

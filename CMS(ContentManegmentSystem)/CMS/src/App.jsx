@@ -13,6 +13,7 @@ import { queryClient } from './Context/Tanstack';
 import Menu from './Page/Menu/Menu';
 import DesignPage from './Page/DesignPage/DesignPage';
 import NotFound from './Page/NotFound/NotFound';
+import Auth from './Page/Auth/Auth';
 function App() {
 
   // Create a client
@@ -23,6 +24,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<Auth />} />
           <Route path="/pages" element={<Pages />} />
           <Route path="/post" element={<Post />} />
           <Route path="/menu" element={<Menu />} />
