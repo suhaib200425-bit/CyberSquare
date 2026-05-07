@@ -11,9 +11,11 @@ import ContactDetailAndForm from '../ContactDetailAndForm/ContactDetailAndForm'
 import ContactSection from '../ContectSection/ContactSection'
 import ContactTree from '../ContactTree/ContactTree'
 import Auth from '../Auth/Auth'
+import AuthOne from '../AuthOne/AuthOne'
 function Demo() {
   return (
     <div className='Demo'>
+      <AuthOne/>
       <Auth />
       <ContactTree />
       <ContactSection />

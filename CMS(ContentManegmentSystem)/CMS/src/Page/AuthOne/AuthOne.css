@@ -1,0 +1,231 @@
+
+/* MAIN */
+
+.gaming-container{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+}
+
+/* CARD */
+
+.gaming-card{
+    width:1100px;
+    background:#050505;
+    border-radius:35px;
+    overflow:hidden;
+    display:flex;
+    padding:40px;
+    gap:40px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* LEFT */
+
+.gaming-left{
+    width:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.video-box{
+    width:100%;
+    height:650px;
+    border-radius:30px;
+    overflow:hidden;
+    position:relative;
+    background:black;
+}
+
+.video-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(0.8);
+}
+
+/* RIGHT */
+
+.gaming-right{
+    width:50%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    color:white;
+}
+
+.gaming-right h1{
+    font-size:30px;
+    margin-bottom:40px;
+}
+
+/* FORM */
+
+form{
+    width:100%;
+}
+
+.input-box{
+    width:100%;
+    height:65px;
+    background:#111;
+    border:1px solid #1d1d1d;
+    border-radius:18px;
+    margin-bottom:22px;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+}
+
+.icon{
+    color:#666;
+    font-size:18px;
+    margin-right:15px;
+}
+
+.input-box input{
+    width:100%;
+    background:transparent;
+    border:none;
+    outline:none;
+    color:white;
+    font-size:16px;
+}
+
+.input-box input::placeholder{
+    color:#666;
+}
+
+/* BUTTONS */
+
+.email-btn{
+    width:100%;
+    height:65px;
+    border:none;
+    border-radius:18px;
+    background:linear-gradient(to right,#ff416c,#ff4b2b);
+    color:white;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    margin-top:10px;
+    margin-bottom:18px;
+}
+
+.google-btn{
+    width:100%;
+    height:65px;
+    border-radius:18px;
+    background:black;
+    border:2px solid #222;
+    color:white;
+    font-size:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+}
+
+/* SIGNIN */
+
+.signin-text{
+    margin-top:35px;
+    text-align:center;
+    color:#777;
+    font-size:15px;
+}
+
+.signin-text span{
+    color:#ff416c;
+    cursor:pointer;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:992px){
+
+    .gaming-card{
+        flex-direction:column;
+        padding:25px;
+    }
+
+    .gaming-left,
+    .gaming-right{
+        width:100%;
+    }
+
+    .video-box{
+        height:500px;
+    }
+}
+
+@media (max-width:768px){
+
+    .gaming-container{
+        padding:15px;
+    }
+
+    .gaming-card{
+        border-radius:25px;
+        gap:25px;
+    }
+
+    .video-box{
+        height:380px;
+    }
+
+    .gaming-right h1{
+        font-size:34px;
+        margin-bottom:30px;
+    }
+
+    .input-box,
+    .email-btn,
+    .google-btn{
+        height:58px;
+    }
+}
+
+@media (max-width:480px){
+
+    .gaming-card{
+        padding:18px;
+    }
+
+    .video-box{
+        height:300px;
+        border-radius:20px;
+    }
+
+    .play-btn{
+        width:70px;
+        height:70px;
+        font-size:30px;
+    }
+
+    .gaming-right h1{
+        font-size:28px;
+    }
+
+    .input-box{
+        padding:0 15px;
+    }
+
+    .input-box input{
+        font-size:14px;
+    }
+
+    .email-btn,
+    .google-btn{
+        font-size:14px;
+    }
+
+    .signin-text{
+        font-size:13px;
+    }
+}

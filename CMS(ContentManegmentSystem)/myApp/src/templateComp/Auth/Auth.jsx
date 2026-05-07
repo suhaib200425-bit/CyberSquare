@@ -68,7 +68,7 @@ setState(prev=>!prev)
 
                                 <button
                                     type="button"
-                                    className="gray-btn"
+                                    className="SUBMIT gray-btn"
                                 >
                                     Submit
                                 </button>
