@@ -39,11 +39,13 @@ setState(prev=>!prev)
                             {
                                 state && <div className="double-input">
                                     <input
+                                    className='inputfield'
                                         type="text"
                                         placeholder="First name"
                                     />
 
                                     <input
+                                    className='inputfield'
                                         type="text"
                                         placeholder="Last name"
                                     />
@@ -51,11 +53,13 @@ setState(prev=>!prev)
                             }
 
                             <input
+                            className='inputfield'
                                 type="email"
                                 placeholder="Email"
                             />
 
                             <input
+                            className='inputfield'
                                 type="password"
                                 placeholder="Password"
                             />
