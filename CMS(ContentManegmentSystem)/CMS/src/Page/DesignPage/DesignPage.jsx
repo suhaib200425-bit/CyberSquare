@@ -14,6 +14,7 @@ import { DragDropProvider } from '@dnd-kit/react';
 import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer';
 import TargetValueChange from '../../components/TargetValueChange/TargetValueChange';
 
+import { useNavigate } from 'react-router-dom';
 function DesignPage() {
     const [Page, setPage] = useState()
     const [ReactTemplate, setReactTemplate] = useState({})
@@ -21,7 +22,7 @@ function DesignPage() {
     const [Target, setTarget] = useState(null)
     const { PageId } = useParams()
 
-
+const Navigate=useNavigate()
     function renderTemplate(html, values) {
         let output = html;
 
@@ -152,7 +153,7 @@ function DesignPage() {
                                 <p>Footer</p>
                             </div>
                             <div className="sectiondiv" onClick={() => {
-                               alert('footer soon...')
+                               Navigate('/auth')
                             }}>
                                 <i class="fa-solid fa-unlock-keyhole"></i>
                                 <p>Authetication</p>

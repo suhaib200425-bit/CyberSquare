@@ -48,6 +48,7 @@ app.use("/api/menu", require('./routes/menuRoutes'));
 app.use("/api/user", require('./routes/userRouter'));
 app.use("/api/react/template", require('./routes/reactTemplateRoutes'));
 app.use("/api/navbar/template", require('./routes/navbarTemplateRoutes'));
+app.use("/api/auth/template", require('./routes/authRouters'));
 // Default route
 app.get("/", (req, res) => {
   res.send("API is running 🚀");

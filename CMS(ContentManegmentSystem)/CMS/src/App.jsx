@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useLocation } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
 import Home from './Page/Home/Home';
 import LeftSideBar from './components/LeftSideBar/LeftSideBar';
@@ -14,18 +14,22 @@ import Menu from './Page/Menu/Menu';
 import DesignPage from './Page/DesignPage/DesignPage';
 import NotFound from './Page/NotFound/NotFound';
 // import Auth from './Page/Auth/Auth';
-import AuthOne from './Page/AuthOne/AuthOne';
+import AuthPages from './Page/AuthPages/AuthPages';
 function App() {
 
+  const location = useLocation();
   // Create a client
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex App">
-        <LeftSideBar />
-
+       
+{
+        // location.pathname !== "/auth" &&
+         <LeftSideBar />
+      }
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/auth" element={<AuthOne />} />
+          <Route path="/auth" element={<AuthPages />} />
           <Route path="/pages" element={<Pages />} />
           <Route path="/post" element={<Post />} />
           <Route path="/menu" element={<Menu />} />
