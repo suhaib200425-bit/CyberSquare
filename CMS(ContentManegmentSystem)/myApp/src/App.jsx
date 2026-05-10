@@ -11,7 +11,7 @@ import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePag
 import AuthOne from './templateComp/AuthOne/AuthOne';
 import Auth from './templateComp/Auth/Auth';
 function App() {
-
+const hideNavbarRoutes = ["/auth", "/"];
   const location = useLocation();
   const { data, isPending, error } = useQuery({
     queryKey: ["MULTI_API"],
@@ -42,11 +42,12 @@ function App() {
   return (
     <div className='w-full'>
       
-      {
-        location.pathname !== "/auth" &&
-        data && <DynamicRenderer code={data.navbar?.navbar} />
-      }
 
+{
+  !hideNavbarRoutes.includes(location.pathname) &&
+  data &&  <DynamicRenderer code={data.navbar?.navbar} />
+  
+}
       <Routes>
 
         {/* <Route path={`/`} element={<Demo />} /> */}
