@@ -3,18 +3,32 @@ import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer'
 import axios from 'axios';
 import { useQuery } from "@tanstack/react-query";
 import { PAGEAPI } from '../../assets/assets';
+import { useNavigate } from 'react-router-dom';
 
-function PageRoute({ slug ,pageId }) {
+function PageRoute({ slug, pageId }) {
+    const Navigate = useNavigate()
     const { data, isPending, error } = useQuery({
-        
-        queryKey: ["PageBySLug",pageId],
+
+        queryKey: ["PageBySLug", pageId],
         queryFn: async () => {
-            window.scrollTo(0,0)
-            
+            window.scrollTo(0, 0)
+            try {
+
+                // if (slug == '/') Navigate('/home')
                 const res = await axios.get(`${PAGEAPI}/${pageId}`);
                 console.log(res.data.data);
+
+                
+
                 return res.data?.data;
-            
+
+
+            } catch (err) {
+
+                console.log(err.response?.data || err.message);
+
+            }
+
         }
     });
 

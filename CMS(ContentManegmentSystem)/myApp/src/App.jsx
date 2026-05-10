@@ -1,23 +1,47 @@
 import react from 'react'
 import { DynamicRenderer } from './ComponentConvertFunction/DynamicRenderer'
 import { useQuery } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import PageRoute from './Page/PageRoute/PageRoute';
 import NotFound from './Page/NotFound/NotFound';
 import Demo from './templateComp/demo/demo';
-import { AUTHTEMPLATEAPI, NAVBARTEMPLATEAPI, PAGEAPI } from './assets/assets';
+import { AUTHTEMPLATEAPI, NAVBARTEMPLATEAPI, PAGEAPI, USERAPI } from './assets/assets';
 import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePage';
 import AuthOne from './templateComp/AuthOne/AuthOne';
 import Auth from './templateComp/Auth/Auth';
 function App() {
-const hideNavbarRoutes = ["/auth", "/"];
+  const hideNavbarRoutes = ["/auth", "/"];
   const location = useLocation();
+  const Navigate = useNavigate()
   const { data, isPending, error } = useQuery({
     queryKey: ["MULTI_API"],
-    queryFn: () => {
+    queryFn: async () => {
+
       console.log("NAVBARTEMPLATEAPI");
       console.log(NAVBARTEMPLATEAPI);
+      setTimeout(async () => {
+
+        try {
+
+          const token = localStorage.getItem("token");
+
+          const LogedeResponse = await axios.get(USERAPI, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+          Navigate('/home')
+
+        } catch (err) {
+
+          Navigate('/auth')
+          console.log(
+            err.response?.data || err.message
+          );
+        }
+
+      }, 4000);
 
       return Promise.all([
         axios.get(`${NAVBARTEMPLATEAPI}/checked`),
@@ -27,7 +51,7 @@ const hideNavbarRoutes = ["/auth", "/"];
         return {
           navbar: navbar.data?.data,
           pages: pages.data?.data,
-          auth:auth.data?.data
+          auth: auth.data?.data
         };
       });
     }
@@ -41,24 +65,24 @@ const hideNavbarRoutes = ["/auth", "/"];
 
   return (
     <div className='w-full'>
-      
 
-{
-  !hideNavbarRoutes.includes(location.pathname) &&
-  data &&  <DynamicRenderer code={data.navbar?.navbar} />
-  
-}
+
+      {
+        !hideNavbarRoutes.includes(location.pathname) &&
+        data && <DynamicRenderer code={data.navbar?.navbar} />
+
+      }
       <Routes>
 
         {/* <Route path={`/`} element={<Demo />} /> */}
         {
           data && data?.auth && <Route path={`/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
         }
-       
+
 
         {
           data && data?.pages?.map(page => {
-            
+
             const pageId = page?._id
             const slug = page?.slug
             console.log(`${slug}`);
