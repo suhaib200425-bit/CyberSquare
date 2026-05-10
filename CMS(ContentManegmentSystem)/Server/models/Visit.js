@@ -1,0 +1,20 @@
+const mongoose = require("mongoose");
+
+const visitSchema = new mongoose.Schema({
+  ip: {
+    type: String,
+    required: true
+  },
+
+  page: {
+    type: String,
+    default: "/"
+  },
+
+  visitedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+module.exports = mongoose.model("Visit", visitSchema);

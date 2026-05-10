@@ -1,4 +1,5 @@
 const Page = require("../../models/Page");
+const Visit = require("../../models/Visit");
 
 const getPages = async (req, res) => {
   try {
@@ -12,10 +13,29 @@ const getPages = async (req, res) => {
     const total = await Page.countDocuments();
 
     const pages = await Page.find()
-    .select("-sections")
+      .select("-sections")
       .sort({ createdAt: -1 }) // latest first
       .skip(skip)
       .limit(limit);
+
+    //visits
+    const oneHourAgo = new Date(
+      Date.now() - 60 * 60 * 1000
+    );
+
+    const existingVisit = await Visit.findOne({
+      ip: req.ip,
+      visitedAt: { $gte: oneHourAgo }
+    });
+
+    if (!existingVisit) {
+
+      await Visit.create({
+        ip: req.ip,
+        page: req.body.page
+      });
+
+    }
 
     res.status(200).json({
       success: true,
@@ -28,9 +48,10 @@ const getPages = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: err.message
+      message: "server Error",
+      error:err.message
     });
   }
 };
 
-module.exports=getPages
+module.exports = getPages

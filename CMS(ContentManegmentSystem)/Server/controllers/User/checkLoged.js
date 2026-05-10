@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../../models/User"); // adjust path
+const Visit = require("../../models/Visit");
 
 exports.checkLoged = async (req, res) => {
     try {
         const { id, email } = req.user;
-
+        
         // 🔍 Check user exists
         const user = await User.findById(id);
         if (!user) {
