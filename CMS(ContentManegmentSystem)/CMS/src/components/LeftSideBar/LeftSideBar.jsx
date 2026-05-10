@@ -19,7 +19,7 @@ function LeftSideBar() {
             <MenuIcon to={'pagebuilder'} Title={'Page Builder'} Icon={<i class="fa-solid fa-paintbrush"></i>} />
             <MenuIcon to={'/menu'} Title={'Menus'} Icon={<i class="fa-solid fa-table-list"></i>} />
             <h6 className={!ActiveLeftMenu ? 'Opacity' : ''} >System</h6>
-            <MenuIcon Title={'User'} Icon={<i class="fa-solid fa-user"></i>} />
+            <MenuIcon to={'/users'} Title={'User'} Icon={<i class="fa-solid fa-user"></i>} />
             <MenuIcon Title={'Settings'} Icon={<i class="fa-solid fa-gear"></i>} />
         </div>
     )

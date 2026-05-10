@@ -1,5 +1,5 @@
 // export const BASEURL = 'http://localhost:5000'
-export const BASEURL ='http://10.204.32.119:5000'
+export const BASEURL ='http://10.17.117.119:5000'
 // export const BASEURL ='https://thee-slightly-dowry.ngrok-free.dev'
 import authone from '../assets/auth1.jpg' 
 import authtwo from '../assets/auth2.jpg' 
@@ -13,6 +13,7 @@ export const ALLAUTHPAGES = [
     ]
 
 export const PAGEAPI = `${BASEURL}/api/page`
+export const USERAPI = `${BASEURL}/api/user`
 export const CATEGORYAPI = `${BASEURL}/api/category`
 export const POSTAPI = `${BASEURL}/api/post`
 export const MENUAPI = `${BASEURL}/api/menu`

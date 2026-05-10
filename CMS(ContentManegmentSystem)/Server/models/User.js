@@ -25,9 +25,10 @@ const userSchema = new mongoose.Schema({
         default: false
     },
 
-    forgotPassword: {
-        type: String,
-        minlength: 6
+    role: {
+      type: String,
+      enum: ["user", "admin", "editor"],
+      default: "user",
     },
 
     createdAt: {
