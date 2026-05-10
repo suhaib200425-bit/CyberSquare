@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import * as Icons from "react-icons/fa";
+import useStore from "../context/Zustand";
 
 function getFunctionName(code) {
 
@@ -52,38 +53,39 @@ export const DynamicRenderer = ({ code, props }) => {
             const compiled = Babel.transform(fixedCode, {
                 presets: ["react"],
             }).code;
-
+            
             return new Function(
                 "React",
                 "axios",
                 "router",
                 "Icons",
+                "useStore",
                 `
-                const {
-                    useState,
-                    useEffect,
-                    useRef,
-                    useMemo,
-                    useCallback
-                } = React;
+    const {
+        useState,
+        useEffect,
+        useRef,
+        useMemo,
+        useCallback
+    } = React;
 
-                const {
-                    useParams,
-                    useNavigate,
-                    useLocation
-                } = router;
+    const {
+        useParams,
+        useNavigate,
+        useLocation
+    } = router;
 
-                const {
-                    FaUser,
-                    FaGoogle,
-                    FaLock,
-                    FaEnvelope
-                } = Icons;
+    const {
+        FaUser,
+        FaGoogle,
+        FaLock,
+        FaEnvelope
+    } = Icons;
 
-                ${compiled}
+    ${compiled}
 
-                return ${componentName};
-                `
+    return ${componentName};
+    `
             )(
                 React,
                 axios,
@@ -92,7 +94,8 @@ export const DynamicRenderer = ({ code, props }) => {
                     useNavigate,
                     useLocation
                 },
-                Icons
+                Icons,
+                useStore
             );
 
         } catch (err) {
