@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/DB");
+const { dashboard } = require("./controllers/dashboard");
 
 // Routes import
 // const userRoutes = require("./routes/userRoutes");
@@ -38,6 +39,8 @@ app.use(express.json());
 
 //DB CONNECTION 
 connectDB()
+
+app.get("/api/dashboard",dashboard)
 
 //end points
 app.use("/api/template", require('./routes/templateRoutes'));

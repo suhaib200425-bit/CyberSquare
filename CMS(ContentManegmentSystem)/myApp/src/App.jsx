@@ -10,10 +10,12 @@ import { AUTHTEMPLATEAPI, NAVBARTEMPLATEAPI, PAGEAPI, USERAPI } from './assets/a
 import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePage';
 import AuthOne from './templateComp/AuthOne/AuthOne';
 import Auth from './templateComp/Auth/Auth';
+import useStore from './context/Zustand';
 function App() {
   const hideNavbarRoutes = ["/auth", "/"];
   const location = useLocation();
   const Navigate = useNavigate()
+  const {SetUser}=useStore()
   const { data, isPending, error } = useQuery({
     queryKey: ["MULTI_API"],
     queryFn: async () => {
@@ -31,6 +33,7 @@ function App() {
               Authorization: `Bearer ${token}`
             }
           });
+          SetUser(LogedeResponse.data?.user)
           Navigate('/home')
 
         } catch (err) {
@@ -74,7 +77,7 @@ function App() {
       }
       <Routes>
 
-        {/* <Route path={`/`} element={<Demo />} /> */}
+        <Route path={`/demo`} element={<Demo />} />
         {
           data && data?.auth && <Route path={`/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
         }

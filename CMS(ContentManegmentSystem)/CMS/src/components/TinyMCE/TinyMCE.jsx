@@ -5,12 +5,12 @@ export default function EditorContainer({ EditorContainerValue,content }) {
   return (
     <Editor
       onEditorChange={EditorContainerValue }
-      initialValue={content}
-      apiKey='9tp2or5slqs9r0ijya34s3r3h7cc32ik8fi7ohem8q993sfz'
+      value={content}
+      apiKey='693r6zybzk9jtueznh5o45r0uegaae1qv8j2zj9ycqlidd7s'
       init={{
 
         height: 500,
-        menubar: false,
+        menubar: true,
         plugins: [
           // Core editing features
           'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
@@ -26,10 +26,10 @@ export default function EditorContainer({ EditorContainerValue,content }) {
           { value: 'Email', title: 'Email' },
         ],
         tinymceai_token_provider: async () => {
-          await fetch(`https://demo.api.tiny.cloud/1/9tp2or5slqs9r0ijya34s3r3h7cc32ik8fi7ohem8q993sfz/auth/random`, { method: "POST", credentials: "include" });
-          return { token: await fetch(`https://demo.api.tiny.cloud/1/9tp2or5slqs9r0ijya34s3r3h7cc32ik8fi7ohem8q993sfz/jwt/tinymceai`, { credentials: "include" }).then(r => r.text()) };
+          await fetch(`https://demo.api.tiny.cloud/1/693r6zybzk9jtueznh5o45r0uegaae1qv8j2zj9ycqlidd7s/auth/random`, { method: "POST", credentials: "include" });
+          return { token: await fetch(`https://demo.api.tiny.cloud/1/693r6zybzk9jtueznh5o45r0uegaae1qv8j2zj9ycqlidd7s/jwt/tinymceai`, { credentials: "include" }).then(r => r.text()) };
         },
-        uploadcare_public_key: 'e0d4c9da1df004507fd8',
+        uploadcare_public_key: '584543250ea76c3d4e00',
       }}
     />
   );

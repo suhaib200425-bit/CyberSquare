@@ -7,69 +7,64 @@ const router = express.Router();
 
 
 router.get("/hourly-visits", async (req, res) => {
-    const data = await Visit.aggregate([
-        {
-            $group: {
-                _id: {
-                    hour: { $hour: "$visitedAt" }
-                },
-                users: { $sum: 1 }
-            }
-        },
 
-        {
-            $project: {
-                _id: 0,
+  try {
 
-                hour: {
-                    $let: {
-                        vars: {
-                            h: "$_id.hour"
-                        },
-                        in: {
-                            $concat: [
-                                {
-                                    $toString: {
-                                        $cond: [
-                                            { $gt: ["$$h", 12] },
-                                            { $subtract: ["$$h", 12] },
-                                            {
-                                                $cond: [
-                                                    { $eq: ["$$h", 0] },
-                                                    12,
-                                                    "$$h"
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                },
+    // Today start & end
+    const startOfDay = new Date();
+    startOfDay.setHours(0, 0, 0, 0);
 
-                                " ",
+    const endOfDay = new Date();
+    endOfDay.setHours(23, 59, 59, 999);
 
-                                {
-                                    $cond: [
-                                        { $gte: ["$$h", 12] },
-                                        "PM",
-                                        "AM"
-                                    ]
-                                }
-                            ]
-                        }
-                    }
-                },
+    // Get today's visits
+    const visits = await Visit.find({
+      visitedAt: {
+        $gte: startOfDay,
+        $lte: endOfDay
+      }
+    });
 
-                users: 1
-            }
-        },
+    // Default 24 hours data
+    const hourlyData = Array.from(
+      { length: 24 },
+      (_, hour) => {
 
-        {
-            $sort: {
-                hour: 1
-            }
-        }
-    ]);
+        const hour12 =
+          hour % 12 === 0 ? 12 : hour % 12;
 
-    res.json(data);
+        const ampm =
+          hour < 12 ? "AM" : "PM";
+
+        return {
+          time: `${hour12} ${ampm}`,
+          users: 0
+        };
+      }
+    );
+
+    // Count visits
+    visits.forEach((visit) => {
+
+      const hour =
+        new Date(visit.visitedAt).getHours();
+
+      hourlyData[hour].users += 1;
+    });
+
+    res.status(200).json({
+      success: true,
+      data: hourlyData
+    });
+
+  } catch (err) {
+
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      error: err.message
+    });
+  }
 });
 
 // });

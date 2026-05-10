@@ -11,7 +11,7 @@ const AuthVerify = (token) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_TOKEN || "your_secret_key");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_secret_key");
 
     return {
       success: true,

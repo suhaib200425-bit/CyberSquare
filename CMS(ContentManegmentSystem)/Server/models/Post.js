@@ -28,12 +28,12 @@ const PostSchema = new mongoose.Schema({
   status: {
     type: String,
     enum: ["Draft", "Published","Default"],
-    default: "draft"
+    default: "Draft"
   },
 
   views: {
     type: Number,
-    default: 190
+    default: 0
   },
 
   excerpt: {

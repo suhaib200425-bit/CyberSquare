@@ -32,7 +32,7 @@ const getPages = async (req, res) => {
 
       await Visit.create({
         ip: req.ip,
-        page: req.body.page
+        page: "/"
       });
 
     }

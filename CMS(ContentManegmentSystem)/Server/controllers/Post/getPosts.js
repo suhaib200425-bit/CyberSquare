@@ -9,7 +9,7 @@ const getPosts = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const posts = await Post.find({
-      status:"Published"
+      // status:"Published"
     })
       .populate("category", "title")
       .sort({ createdAt: -1 })
