@@ -11,6 +11,8 @@ import {
 import * as Icons from "react-icons/fa";
 import useStore from "../context/Zustand";
 
+import { BASEURL } from "../assets/assets";
+
 function getFunctionName(code) {
 
     // function Test() {}
@@ -53,13 +55,14 @@ export const DynamicRenderer = ({ code, props }) => {
             const compiled = Babel.transform(fixedCode, {
                 presets: ["react"],
             }).code;
-            
+
             return new Function(
                 "React",
                 "axios",
                 "router",
                 "Icons",
                 "useStore",
+                "BASEURL",
                 `
     const {
         useState,
@@ -95,7 +98,8 @@ export const DynamicRenderer = ({ code, props }) => {
                     useLocation
                 },
                 Icons,
-                useStore
+                useStore,
+                BASEURL
             );
 
         } catch (err) {

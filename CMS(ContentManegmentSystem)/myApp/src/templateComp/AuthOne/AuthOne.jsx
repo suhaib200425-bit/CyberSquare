@@ -1,8 +1,12 @@
 // AuthOne.jsx
 
+import axios from "axios";
 import { useState } from "react";
 // import "./AuthOne.css";
 import { FaUser, FaGoogle, FaLock, FaEnvelope } from "react-icons/fa";
+import { BASEURL } from "../../assets/assets";
+import useStore from "../../context/Zustand";
+import { useNavigate } from "react-router-dom";
 
 function AuthOne(
     {
@@ -14,8 +18,73 @@ function AuthOne(
         inputTextColor = { value: "black" },
         image = { value: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop" } }
 ) {
-
+const Navigate = useNavigate()
     const [state, setState] = useState(true);
+    const {SetUser} = useStore()
+    const [form, setForm] = useState({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    });
+
+    const handleChange = (e) => {
+        setForm(prev => {
+            return { ...prev, [e.target.name]: e.target.value }
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(form);
+
+        if (!state) {
+            try {
+                if(form.password!==form.confirmPassword){
+                    alert("Password Is Not Match")
+                    return 
+                }
+                const response = await axios.post(`${BASEURL}/api/user/register`, {
+                    username: form.username,
+                    email: form.email,
+                    password: form.password
+                })
+                console.log(response.data);
+                setState(true)
+                setForm({
+                    username: "",
+                    email: "",
+                    password: ""
+                })
+
+            } catch (err) {
+                console.log(err.response?.data);
+
+                alert(err.response?.data?.message || "server error")
+            }
+        } else {
+            try {
+                const response = await axios.post(`${BASEURL}/api/user/login`, {
+                    email: form.email,
+                    password: form.password
+                })
+                console.log(response.data);
+                localStorage.setItem('token', response.data?.token)
+                SetUser(response.data?.user)
+                Navigate('/home')
+                setForm({
+                    lname: "",
+                    fname: "",
+                    email: "",
+                    password: ""
+                })
+
+            } catch (err) {
+                console.log(err.response?.data);
+                 alert(err.response?.data?.message || err?.message)
+            }
+        }
+    }
 
     return (
 
@@ -64,7 +133,7 @@ function AuthOne(
                         }
                     </h1>
 
-                    <form className="w-full">
+                    <form className="w-full" onSubmit={handleSubmit}>
 
                         {/* USERNAME */}
                         {
@@ -75,9 +144,12 @@ function AuthOne(
                                 <FaUser className="text-[#666] text-[18px] mr-4" />
 
                                 <input
+                                    onChange={handleChange}
                                     style={{ color: inputTextColor.value }}
                                     type="text"
                                     placeholder="User Name"
+                                    name="username"
+                                    value={form.username}
                                     className="h-full w-full bg-transparent outline-none text-white placeholder:text-[#666]"
                                 />
 
@@ -90,6 +162,9 @@ function AuthOne(
                             <FaEnvelope className="text-[#666] text-[18px] mr-4" />
 
                             <input
+                                onChange={handleChange}
+                                name='email'
+                                value={form.email}
                                 style={{ color: inputTextColor.value }}
                                 type="email"
                                 placeholder="Email address"
@@ -104,8 +179,11 @@ function AuthOne(
                             <FaLock className="text-[#666] text-[18px] mr-4" />
 
                             <input
+                                onChange={handleChange}
                                 style={{ color: inputTextColor.value }}
                                 type="password"
+                                name="password"
+                                value={form.password}
                                 placeholder="Password"
                                 className="h-full w-full bg-transparent outline-none text-white placeholder:text-[#666]"
                             />
@@ -121,17 +199,20 @@ function AuthOne(
                                 <FaLock className="text-[#666] text-[18px] mr-4" />
 
                                 <input
+                                    onChange={handleChange}
+                                    name="confirmPassword"
+                                    value={form.confirmPassword}
                                     style={{ color: inputTextColor.value }}
                                     type="password"
                                     placeholder="Confirm password"
                                     className="h-full w-full bg-transparent outline-none text-white placeholder:text-[#666]"
                                 />
-
                             </div>
                         }
 
                         {/* SUBMIT BUTTON */}
                         <button
+                            onClick={handleSubmit}
                             style={{ backgroundColor: btnColor.value, color: btnTextColor.value }}
                             className="
                                 w-full h-[50px]
