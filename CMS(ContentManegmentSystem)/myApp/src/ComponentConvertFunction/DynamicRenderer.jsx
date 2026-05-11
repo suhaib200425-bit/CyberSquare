@@ -5,7 +5,8 @@ import * as Babel from "@babel/standalone";
 import {
     useParams,
     useNavigate,
-    useLocation
+    useLocation,
+    Link
 } from "react-router-dom";
 
 import * as Icons from "react-icons/fa";
@@ -75,7 +76,8 @@ export const DynamicRenderer = ({ code, props }) => {
     const {
         useParams,
         useNavigate,
-        useLocation
+        useLocation,
+        Link
     } = router;
 
     const {
@@ -95,7 +97,8 @@ export const DynamicRenderer = ({ code, props }) => {
                 {
                     useParams,
                     useNavigate,
-                    useLocation
+                    useLocation,
+                    Link
                 },
                 Icons,
                 useStore,
