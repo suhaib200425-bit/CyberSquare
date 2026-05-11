@@ -12,9 +12,11 @@ import ContactSection from '../ContectSection/ContactSection'
 import ContactTree from '../ContactTree/ContactTree'
 import Auth from '../Auth/Auth'
 import AuthOne from '../AuthOne/AuthOne'
+import NavBarOne from '../NavBarOne'
 function Demo() {
   return (
     <div className='Demo'>
+      <NavBarOne />
       <AuthOne/>
       <Auth />
       <ContactTree />

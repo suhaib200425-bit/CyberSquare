@@ -11,8 +11,9 @@ import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePag
 import AuthOne from './templateComp/AuthOne/AuthOne';
 import Auth from './templateComp/Auth/Auth';
 import useStore from './context/Zustand';
+import NavBarOne from './templateComp/NavBarOne';
 function App() {
-  const hideNavbarRoutes = ["/auth", "/"];
+  const hideNavbarRoutes = ["/auth", "/","/demo"];
   const location = useLocation();
   const Navigate = useNavigate()
   const {SetUser}=useStore()
@@ -34,7 +35,7 @@ function App() {
             }
           });
           SetUser(LogedeResponse.data?.user)
-          // Navigate('/home')
+          Navigate('/home')
 
         } catch (err) {
 
@@ -44,7 +45,7 @@ function App() {
           );
         }
 
-      }, 4000);
+      }, 0);
 
       return Promise.all([
         axios.get(`${NAVBARTEMPLATEAPI}/checked`),
@@ -72,9 +73,10 @@ function App() {
 
       {
         !hideNavbarRoutes.includes(location.pathname) &&
-        data && <DynamicRenderer code={data.navbar?.navbar} />
+        data &&  <DynamicRenderer code={data.navbar?.navbar} />
 
       }
+      
       <Routes>
 
         <Route path={`/demo`} element={<Demo />} />
