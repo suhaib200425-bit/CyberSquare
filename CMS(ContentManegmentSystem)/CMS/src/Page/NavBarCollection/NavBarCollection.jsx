@@ -1,6 +1,6 @@
 
 import './NavBarCollection.css'
-import Navbar from '../NavBar/NavBar'
+import Navbar from '../../components/NavBar/NavBar'
 import './NavBarCollection.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -8,8 +8,15 @@ import { NAVBARTEMPLATEAPI } from '../../assets/assets'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer'
 import { queryClient } from '../../Context/Tanstack'
-function NavBarCollection({ setNavBar }) {
+import TargetValueChange from '../../components/TargetValueChange/TargetValueChange'
+
+import { useNavigate } from "react-router-dom";
+
+function NavBarCollection() {
     const [ActiveNavBar, setActiveNavBar] = useState('')
+    const [target, setTarget] = useState(null)
+    const [navbarItems, setNavbarItems] = useState([])
+    const Navigate = useNavigate()
     const listNavbar = [NavBarOne,
         SimpleNavbar,
         DropdownNavbar,
@@ -25,6 +32,7 @@ function NavBarCollection({ setNavBar }) {
                 console.log(response.data?.data);
                 const activeId = response.data?.data.find(item => item.checked)?._id;
                 setActiveNavBar(activeId)
+                setNavbarItems(response.data?.data)
                 return response.data?.data
             } catch (error) {
                 console.log(error.response?.data || error.message);
@@ -35,11 +43,25 @@ function NavBarCollection({ setNavBar }) {
 
     // Mutations
     const checkedmutation = useMutation({
-        mutationFn: async(NavbarId)=>{
+        mutationFn: async (NavbarId) => {
             const response = await axios.patch(`${NAVBARTEMPLATEAPI}/checked/${NavbarId}`)
             setActiveNavBar(NavbarId)
         },
         onSuccess: (result) => {
+            queryClient.invalidateQueries({ queryKey: ['NavBarTemplates'] })
+        },
+    })
+
+    // Value change Mutations
+    const updatemutation = useMutation({
+        mutationFn: async (NavbarId) => {
+            const updateNavBar= navbarItems.find(item => item._id === NavbarId)?.props
+             await axios.patch(`${NAVBARTEMPLATEAPI}/${NavbarId}`,{
+                props:updateNavBar
+            })
+        },
+        onSuccess: (result) => {
+            alert("updated")
             queryClient.invalidateQueries({ queryKey: ['NavBarTemplates'] })
         },
     })
@@ -52,14 +74,18 @@ function NavBarCollection({ setNavBar }) {
         <div className="NavBarCollection">
             <div className="CollectionList">
                 <div className="BackBtn mb-2 " onClick={() => {
-                    setNavBar(false)
+                    Navigate(-1)
                 }}><i class="fa-solid fa-chevron-left"></i> Back</div>
-                {NavBars?.map((Elem, i) => {
+                {navbarItems?.map((Elem, i) => {
 
-                    return <div className="NavbarItem">
+                    return <div key={i} className="NavbarItem" >
 
-                        <div className="navBar">
-                            <DynamicRenderer key={Elem._id} code={Elem.navbar} />
+                        <div className="navBar" onClick={(e) => {
+                            e.stopPropagation()
+                            if (target?._id == Elem._id) setTarget(null)
+                            else setTarget(Elem)
+                        }}>
+                            <DynamicRenderer key={Elem._id} code={Elem.navbar} props={Elem.props} />
                         </div>
                         <div className="checkNavbar">
                             <input onClick={(e) => {
@@ -72,6 +98,51 @@ function NavBarCollection({ setNavBar }) {
                 })}
 
             </div>
+            {
+                target &&
+                <div className="" style={{ width: "350px" }}>
+                    <button className="px-3 py-2 bg-black m-2 text-white" onClick={()=>{
+                        updatemutation.mutate(target._id)
+                    }}>SAVE</button>
+                    <TargetValueChange TargetValue={target} onChangeFunction={(key, value) => {
+                        setNavbarItems(prev => {
+                            const valuechange = prev.map(elem => {
+                                if (elem._id == target._id) {
+                                    return {
+                                        ...elem,
+                                        props: {
+                                            ...elem.props,
+                                            [key]: {
+                                                ...elem.props[key],
+                                                value: value
+                                            }
+                                        }
+                                    }
+                                } return elem
+                            })
+                            console.log(valuechange);
+                            console.log("valuechange");
+                            
+                            return valuechange
+
+                        })
+                        setTarget(prev => {
+
+                            return {
+                                ...prev,
+                                props: {
+                                    ...prev.props,
+                                    [key]: {
+                                        ...prev.props[key],
+                                        value: value
+                                    }
+                                }
+                            }
+                        })
+
+                    }} />
+                </div>
+            }
         </div>
     );
 }

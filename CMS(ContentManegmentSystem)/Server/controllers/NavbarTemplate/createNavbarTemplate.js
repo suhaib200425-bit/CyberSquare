@@ -2,14 +2,14 @@ const NavbarTemplate = require("../../models/NavbarTemplate");
 
 const createNavbarTemplate = async (req, res) => {
     try {
-        const { name, navbar, checked } = req.body;
+        const { name, navbar, props,checked } = req.body;
         if (!name || !navbar) {
             res.status(400).json({
                 success: false,
                 message: 'name And navbar Feild Is requierd',
             });
         }
-        const newNavbar = new NavbarTemplate({ name, navbar, checked: checked || false });
+        const newNavbar = new NavbarTemplate({ name, navbar, props,checked: checked || false });
         await newNavbar.save();
 
         res.status(201).json({

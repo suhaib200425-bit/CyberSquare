@@ -5,12 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import useStore from "../context/Zustand";
 
 export default function NavBarOne({
-  backgroundColor={value:'black'},
-  textColor={value:"white"},
-  btnColor={value:"white"},
+  backgroundColor={value:'white'},
+  textColor={value:"black"},
+  btnColor={value:"black"},
   hoverColor={value:"red"},
-  btnTextColor={value:"black"},
-  padding={value:"10px"}
+  btnTextColor={value:"white"}
 }) {
 
   const [open, setOpen] = useState(false);

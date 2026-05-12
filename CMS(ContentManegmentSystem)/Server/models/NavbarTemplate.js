@@ -1,9 +1,23 @@
 const mongoose = require("mongoose");
 
+
+const propseSchema = new mongoose.Schema({
+    label: { type: String, require: true },
+    type: { type: String, require: true },
+    value: { type: String, require: true },
+}, { _id: false });
+
+
+
 const NavbarTemplateSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+    },
+
+    props: {
+        type: Map,
+        of: propseSchema
     },
 
     navbar: {

@@ -9,7 +9,6 @@ import axios from "axios"
 import './DesignPage.css'
 import { AllTeplates, PAGEAPI, ReactAllTemplate, ReactStaticPage, REACTTEPLATEAPI, StaticPage } from '../../assets/assets';
 import DraggableTemplate from '../../components/DraggableTemplate/DraggableTemplate';
-import NavBarCollection from '../../components/NavBarCollection/NavBarCollection';
 import { DragDropProvider } from '@dnd-kit/react';
 import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer';
 import TargetValueChange from '../../components/TargetValueChange/TargetValueChange';
@@ -18,7 +17,6 @@ import { useNavigate } from 'react-router-dom';
 function DesignPage() {
     const [Page, setPage] = useState()
     const [ReactTemplate, setReactTemplate] = useState({})
-    const [NavBar, setNavBar] = useState(false)
     const [Target, setTarget] = useState(null)
     const { PageId } = useParams()
 
@@ -141,7 +139,7 @@ const Navigate=useNavigate()
                         <p>Sections</p>
                         <div className="sections mt-1">
                             <div className="sectiondiv" onClick={() => {
-                                setNavBar(true)
+                                Navigate('/navbars')
                             }}>
                                 <i class="fa-solid fa-arrow-pointer"></i>   
                                 <p>NavBar</p>
@@ -211,7 +209,6 @@ const Navigate=useNavigate()
                 </div>
             </DragDropProvider>
 
-            {NavBar && <NavBarCollection setNavBar={setNavBar} />}
         </div>
     )
 }

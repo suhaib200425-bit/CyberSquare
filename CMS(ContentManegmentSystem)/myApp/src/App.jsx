@@ -73,8 +73,7 @@ function App() {
 
       {
         !hideNavbarRoutes.includes(location.pathname) &&
-        data && <NavBarOne/>
-//  <DynamicRenderer code={data.navbar?.navbar} />
+        data && <DynamicRenderer code={data.navbar?.navbar} props={data?.navbar?.props} />
       }
       
       <Routes>

@@ -2,11 +2,10 @@ const NavbarTemplate = require("../../models/NavbarTemplate");
 
 const updateNavbarTemplate = async (req, res) => {
   try {
-    const { name, navbar } = req.body;
 
     const updated = await NavbarTemplate.findByIdAndUpdate(
       req.params.NavbarId,
-      { name, navbar },
+      req.body,
       { new: true }
     );
 
@@ -21,7 +20,8 @@ const updateNavbarTemplate = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message:"server error",
+      error: error.message,
     });
   }
 };

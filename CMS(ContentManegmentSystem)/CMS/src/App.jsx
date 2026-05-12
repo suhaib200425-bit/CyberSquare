@@ -17,6 +17,7 @@ import NotFound from './Page/NotFound/NotFound';
 import AuthPages from './Page/AuthPages/AuthPages';
 import Users from './Page/User/User';
 import CodeEditor from './Page/CodeEditor/CodeEditor';
+import NavBarCollection from './Page/NavBarCollection/NavBarCollection';
 function App() {
 
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<AuthPages />} />
+          <Route path="/navbars" element={<NavBarCollection />} />
           <Route path="/codeditor" element={<CodeEditor />} />
           <Route path="/pages" element={<Pages />} />
           <Route path="/post" element={<Post />} />
