@@ -35,7 +35,7 @@ function App() {
             }
           });
           SetUser(LogedeResponse.data?.user)
-          Navigate('/home')
+          // Navigate('/home')
 
         } catch (err) {
 
@@ -73,8 +73,8 @@ function App() {
 
       {
         !hideNavbarRoutes.includes(location.pathname) &&
-        data &&  <DynamicRenderer code={data.navbar?.navbar} />
-
+        data && <NavBarOne/>
+//  <DynamicRenderer code={data.navbar?.navbar} />
       }
       
       <Routes>

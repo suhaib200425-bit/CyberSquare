@@ -2,7 +2,7 @@ import React from 'react'
 import './TargetValueChange.css'
 import { useEffect } from 'react'
 import { useState } from 'react'
-function TargetValueChange({ TargetValue, setPage }) {
+function TargetValueChange({ TargetValue, setPage, onChangeFunction }) {
     const [TemplateValues, setTemplateValues] = useState([])
     useEffect(() => {
         const convertToArray = (props) => {
@@ -17,26 +17,32 @@ function TargetValueChange({ TargetValue, setPage }) {
 
     }, [TargetValue])
 
-    const HandleChangeText = (e,i) => {
+    const HandleChangeText = (e, i) => {
         const changedValue = e.target.value
         const Keyname = e.target.name
-        setPage((prev) => ({
-            ...prev,
-            sections: prev.sections.map((section,index) =>
-                index === TargetValue.index
-                    ? {
-                        ...section,
-                        props: {
-                            ...section.props,
-                            [Keyname]: {
-                                ...section.props[Keyname],
-                                value: changedValue,
+
+        if (setPage) {
+            setPage((prev) => ({
+                ...prev,
+                sections: prev.sections.map((section, index) =>
+                    index === TargetValue.index
+                        ? {
+                            ...section,
+                            props: {
+                                ...section.props,
+                                [Keyname]: {
+                                    ...section.props[Keyname],
+                                    value: changedValue,
+                                },
                             },
-                        },
-                    }
-                    : section
-            ),
-        }));
+                        }
+                        : section
+                ),
+            }));
+        } else {
+            onChangeFunction(Keyname,changedValue)
+        }
+
         setTemplateValues((prev, index) => {
             const Prevmapelement = prev.map(((elem, index) => {
                 if (index == i) {
@@ -55,7 +61,7 @@ function TargetValueChange({ TargetValue, setPage }) {
                     return <div className="ValueBox mb-2">
                         <p>{elem.label}</p>
                         <input type="text" name={elem.name} onChange={(e) => {
-                            HandleChangeText(e,i)
+                            HandleChangeText(e, i)
                         }} value={elem.value} />
                     </div>
                 }))

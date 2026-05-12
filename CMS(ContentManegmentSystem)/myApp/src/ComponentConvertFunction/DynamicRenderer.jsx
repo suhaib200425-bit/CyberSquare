@@ -123,5 +123,5 @@ export const DynamicRenderer = ({ code, props }) => {
         );
     }
 
-    return <Component {...props} />;
+    return <Component className="m-[200px]" {...props} />;
 };

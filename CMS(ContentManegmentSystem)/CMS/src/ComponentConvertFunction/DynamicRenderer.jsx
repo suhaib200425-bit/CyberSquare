@@ -5,10 +5,14 @@ import * as Babel from "@babel/standalone";
 import {
     useParams,
     useNavigate,
-    useLocation
+    useLocation,
+    Link
 } from "react-router-dom";
 
 import * as Icons from "react-icons/fa";
+import useStore from "../context/Zustand";
+
+import { BASEURL } from "../assets/assets";
 
 function getFunctionName(code) {
 
@@ -58,41 +62,47 @@ export const DynamicRenderer = ({ code, props }) => {
                 "axios",
                 "router",
                 "Icons",
+                "useStore",
+                "BASEURL",
                 `
-                const {
-                    useState,
-                    useEffect,
-                    useRef,
-                    useMemo,
-                    useCallback
-                } = React;
+    const {
+        useState,
+        useEffect,
+        useRef,
+        useMemo,
+        useCallback
+    } = React;
 
-                const {
-                    useParams,
-                    useNavigate,
-                    useLocation
-                } = router;
+    const {
+        useParams,
+        useNavigate,
+        useLocation,
+        Link
+    } = router;
 
-                const {
-                    FaUser,
-                    FaGoogle,
-                    FaLock,
-                    FaEnvelope
-                } = Icons;
+    const {
+        FaUser,
+        FaGoogle,
+        FaLock,
+        FaEnvelope
+    } = Icons;
 
-                ${compiled}
+    ${compiled}
 
-                return ${componentName};
-                `
+    return ${componentName};
+    `
             )(
                 React,
                 axios,
                 {
                     useParams,
                     useNavigate,
-                    useLocation
+                    useLocation,
+                    Link
                 },
-                Icons
+                Icons,
+                useStore,
+                BASEURL
             );
 
         } catch (err) {
@@ -114,4 +124,4 @@ export const DynamicRenderer = ({ code, props }) => {
     }
 
     return <Component {...props} />;
-};   
+};

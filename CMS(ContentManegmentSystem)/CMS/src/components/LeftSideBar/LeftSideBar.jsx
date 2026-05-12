@@ -20,6 +20,7 @@ function LeftSideBar() {
             <MenuIcon to={'/menu'} Title={'Menus'} Icon={<i class="fa-solid fa-table-list"></i>} />
             <h6 className={!ActiveLeftMenu ? 'Opacity' : ''} >System</h6>
             <MenuIcon to={'/users'} Title={'User'} Icon={<i class="fa-solid fa-user"></i>} />
+            <MenuIcon to={'/codeditor'} Title={'Editor'} Icon={<i class="fa-solid fa-code"></i>} />
             <MenuIcon Title={'Settings'} Icon={<i class="fa-solid fa-gear"></i>} />
         </div>
     )

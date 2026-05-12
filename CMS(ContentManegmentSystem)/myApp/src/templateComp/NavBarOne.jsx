@@ -4,10 +4,18 @@ import { BASEURL } from "../assets/assets";
 import { Link, useNavigate } from "react-router-dom";
 import useStore from "../context/Zustand";
 
-export default function NavBarOne() {
+export default function NavBarOne({
+  backgroundColor={value:'black'},
+  textColor={value:"white"},
+  btnColor={value:"white"},
+  hoverColor={value:"red"},
+  btnTextColor={value:"black"},
+  padding={value:"10px"}
+}) {
 
   const [open, setOpen] = useState(false);
   const [menus, setMenus] = useState([]);
+  const [hover,setHover] = useState(false)
   const { user, SetUser } = useStore()
   const Navigate = useNavigate()
   useEffect(() => {
@@ -40,6 +48,8 @@ export default function NavBarOne() {
     <>
 
       <nav
+      style={{backgroundColor:backgroundColor.value,}}
+      
         className="
                     sticky
                     top-0
@@ -49,8 +59,8 @@ export default function NavBarOne() {
                     backdrop-blur-md
                     border
                     border-white/20
-                    py-3
                     px-5
+                    py-3
                     flex
                     items-center
                     justify-between
@@ -60,7 +70,7 @@ export default function NavBarOne() {
       >
 
         {/* LOGO */}
-        <div className="font-bold text-2xl">
+        <div className="font-bold text-2xl" style={{color:textColor.value}}>
           Digitro
         </div>
 
@@ -70,6 +80,11 @@ export default function NavBarOne() {
             menus?.map((item, i) => (
 
               <Link
+
+      onMouseEnter={() => setHover(item?.title)}
+
+      onMouseLeave={() => setHover('')}
+              style={{color: hover==item?.title ? hoverColor.value : textColor.value}}
                 key={i}
                 to={item?.page?.slug}
                 className="
@@ -101,8 +116,9 @@ export default function NavBarOne() {
           {
             user ?
               <>
-                <p>{user.username}</p>
+                <p style={{color:textColor.value}}>{user.username}</p>
                 <button
+                style={{backgroundColor:btnColor.value,color:btnTextColor.value}}
                   onClick={() => {
                     localStorage.setItem("token", null)
                     SetUser(null)
@@ -141,6 +157,7 @@ export default function NavBarOne() {
 
         {/* MOBILE MENU BUTTON */}
         <div
+        style={{color:textColor.value}}
           className="
                         block
                         md:hidden

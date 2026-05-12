@@ -1,3 +1,6 @@
+const NavbarTemplate = require("../../models/NavbarTemplate");
+
+
 const deleteNavbarTemplate = async (req, res) => {
   try {
     const deleted = await NavbarTemplate.findByIdAndDelete(req.params.NavbarId);
