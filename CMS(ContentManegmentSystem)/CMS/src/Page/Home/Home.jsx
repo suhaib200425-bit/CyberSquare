@@ -8,9 +8,12 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from "axios"
 import { DASHBOARDAPI } from '../../assets/assets'
+
 function Home() {
     const [Dashboard, setDashboard] = useState([])
+
     useEffect(() => {
+        if (category) alert(category)
         const getDashboard = async () => {
             try {
 
@@ -27,8 +30,13 @@ function Home() {
         <div className='Home'>
             <Navbar />
             <div className="Content">
-                <h2 className='hed'>Dashboard</h2>
-                <p>A live overview of your content and audience.</p>
+
+
+                
+                    <h2 className='hed'>Dashboard</h2>
+                    <p>A live overview of your content and audience.</p>
+
+
                 <div className="RowItems">
                     <MainCard Title={'Total Posts'} Icon={<i class="fa-regular fa-note-sticky"></i>} Count={Dashboard?.posts} Color={''} />
                     <MainCard Title={'Total Pages'} Icon={<i class="fa-solid fa-file-lines"></i>} Count={Dashboard?.pages} Color={''} />

@@ -13,9 +13,17 @@ import ContactTree from '../ContactTree/ContactTree'
 import Auth from '../Auth/Auth'
 import AuthOne from '../AuthOne/AuthOne'
 import NavBarOne from '../NavBarOne'
+import Categories from '../Categories/Categories'
 function Demo() {
   return (
     <div className='Demo'>
+      
+      <SingleArticlePage />
+      <PostList />
+      <Categories />
+      <ImageTemplate />
+      <LatestPost />
+      <HeroSection />
       <NavBarOne />
       <AuthOne/>
       <Auth />
@@ -23,12 +31,7 @@ function Demo() {
       <ContactSection />
       <ContactDetailAndForm />
       <ImageAndContent />
-      <SingleArticlePage />
-      <PostList />
-      <HeroSection />
       <Heading />
-      <LatestPost />
-      <ImageTemplate />
 
     </div>
   )

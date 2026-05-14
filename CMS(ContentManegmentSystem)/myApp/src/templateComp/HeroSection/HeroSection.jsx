@@ -1,28 +1,66 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 function HeroSection({
-  title = "Hero Section",
-  subtitle = "We build amazing experiences",
-  image = "https://i.pinimg.com/736x/d8/af/0d/d8af0d432eebda634921924c52aa78de.jpg",
-  height="50vh",
-  titleSize="50px",
-  subtitleSize="17px",
-  aline='center'
+  title = { value: "Hero Section" },
+  titleColor = { value: "white" },
+  titleSize = { value: "50px" },
+  padding = { value: "" },
+  Mobilepadding = { value: "" },
+  subtitle = { value: "We build amazing experiences" },
+  image = { value: "https://i.pinimg.com/736x/59/68/84/59688476322cfd9946898b7865582143.jpg" },
+  imagePosition = { value: "center" },
+  height = { value: "300px" },
+  subtitleSize = { value: "17px" },
+  subtitleWidth = { value: "" },
+  subtitleMargin = { value: "10px" },
+  subtitleColor = { value: "gray" },
+  borderRadius = { value: "0px" },
+  rowAline = { value: "center" },
+  colAline = { value: "center" }
 }) {
+  const isMobile = window.innerWidth < 768;
+
+  const { category } = useSearchParams()
   return (
     <div
-      className="rounded-[10px]  w-full flex flex-col item-center justify-center p-[50px] bg-no-repeat bg-cover"
-      style={{ backgroundImage: `url(${image})`,height:height }}
+      className="  w-full  flex flex-col   p-[50px] bg-no-repeat bg-cover"
+      style={{
+        padding: window.innerWidth < 768 ? Mobilepadding.value || "0px 10px" : padding.value || "0px 100px",
+        alignItems: rowAline.value,
+        justifyContent: colAline.value,
+        borderRadius: borderRadius.value,
+        backgroundImage: `url(${image.value})`,
+        backgroundPosition: imagePosition.value,
+        height: height.value
+      }}
     >
-      <h1 className={`text-white  text-center leading-[0.8] font-bold`}
-      style={{ fontSize: titleSize }}>
-        {title}
-      </h1>
 
-      <p className="w-[100%] text-center text-gray-400 text-[20px]"
-       style={{ fontSize: subtitleSize }}>
-        {subtitle}
-      </p>
+      
+          <>
+            <h1 className={`leading-[0.8] font-bold`}
+              style={{
+                fontSize: titleSize.value,
+                color: titleColor.value || "white"
+              }}>
+              {category?category:title.value}
+            </h1>
+
+           {
+            !category&& <p className="text-[20px]"
+              style={{
+                color: subtitleColor.value,
+                margin: subtitleMargin.value,
+                width: subtitleWidth.value,
+                textAlign: rowAline.value,
+                fontSize: subtitleSize.value
+              }}>
+              {subtitle.value}
+            </p>
+           }
+          </>
+      
+
     </div>
   );
 }

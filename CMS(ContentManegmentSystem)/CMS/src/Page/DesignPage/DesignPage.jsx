@@ -174,11 +174,12 @@ const Navigate=useNavigate()
                     <div className="center">
                         {
                             Page?.sections?.map((elem, i) => {
-                                console.log(elem);
-                                console.log('elem');
                                 return <div key={i} className={Target?.index == i ? "ActiveReactTemplate" : "ReactTemplate"} onClick={() => {
                                     if (Target?.index == i) setTarget(null)
                                     else setTarget({ ...elem, index: i })
+                                
+                                console.log(elem);
+                                console.log('elem');
                                 }}>
                                     <DynamicRenderer key={elem._id} code={elem?.template} props={elem?.props} />
                                     <div className="templateManeger">

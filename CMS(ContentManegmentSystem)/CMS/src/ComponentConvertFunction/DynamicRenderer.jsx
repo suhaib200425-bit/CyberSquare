@@ -6,6 +6,7 @@ import {
     useParams,
     useNavigate,
     useLocation,
+    useSearchParams,
     Link
 } from "react-router-dom";
 
@@ -75,6 +76,7 @@ export const DynamicRenderer = ({ code, props }) => {
 
     const {
         useParams,
+        useSearchParams,
         useNavigate,
         useLocation,
         Link
@@ -96,6 +98,7 @@ export const DynamicRenderer = ({ code, props }) => {
                 axios,
                 {
                     useParams,
+                    useSearchParams,
                     useNavigate,
                     useLocation,
                     Link

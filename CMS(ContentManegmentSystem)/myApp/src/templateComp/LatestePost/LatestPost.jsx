@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react'
 // import './LatestPost.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { BASEURL } from '../../assets/assets';
 function LatestPost({
   title = { value: "Latest Articles" },
   spantitle = { value: "Explore Our " },
-  api = { value: "http://localhost:5000/api/post" },
+  api = { value: `${BASEURL}/api/post` },
+  padding ={value:""},
+  mobilePadding={value:""}
 }) {
   const [posts, setPosts] = React.useState([]);
 
-const Navigate=useNavigate()
+  const Navigate = useNavigate()
 
   React.useEffect(() => {
     const getapiPost = async () => {
@@ -23,9 +26,13 @@ const Navigate=useNavigate()
     getapiPost();
   }, [api.value]);
 
+  const isMobile = window.innerWidth < 768;
   return (
-    <div className="mt-8 mb-5 w-full">
+    <div className="mt-8 mb-5 w-full" style={{
       
+        padding:window.innerWidth < 768 ?mobilePadding.value || "0px 10px":padding.value || "0px 100px",
+    }}>
+
       {/* TITLE */}
       <h2 className="text-[20px] font-light mb-3">
         <span className="hidden md:inline">{spantitle.value}</span>
@@ -36,21 +43,23 @@ const Navigate=useNavigate()
         <div className="flex flex-col md:flex-row gap-3 w-full">
 
           {/* LEFT SIDE */}
-          <div className="w-full md:w-1/2" onClick={()=>{
+          <div className="w-full md:w-1/2" onClick={() => {
             Navigate(`/post/${posts[0]?._id}`)
           }}>
             <div
-              className="w-full min-h-[220px] md:min-h-[350px] rounded-lg bg-cover bg-center flex items-end shadow-[0_10px_20px_rgba(0,0,0,0.5)] overflow-hidden"
+              className="w-full relative h-[220px] md:h-[100%] rounded-lg bg-cover bg-center flex items-end shadow-[0_10px_20px_rgba(0,0,0,0.5)] overflow-hidden"
               style={{
-                backgroundImage:
-                  "url(https://i.pinimg.com/736x/8b/5c/79/8b5c796b2c0508fb74d4a7eeb54ca882.jpg)",
+                backgroundImage: `url(${posts[0]?.banner || "https://i.pinimg.com/736x/8b/5c/79/8b5c796b2c0508fb74d4a7eeb54ca882.jpg"} )`
               }}
             >
-              <div className="w-full p-3 md:p-5">
-                <h2 className="text-white font-semibold text-[16px] md:text-[24px] line-clamp-2">
+              <div className="w-full h-[220px] md:h-full   absolute" style={{
+                background: "linear-gradient(to top, #000000, transparent)"
+              }}></div>
+              <div className="w-full p-3 mb-5 @md:p-5 z-1">
+                <h2 className="text-white font-semibold text-[20px] @md:text-[26px] line-clamp-1">
                   {posts[0]?.title}
                 </h2>
-                <p className="text-gray-200 text-[13px] md:text-[14px] leading-tight line-clamp-3">
+                <p className="text-gray-200 text-[13px] @md:text-[14px] leading-gray-300 line-clamp-2">
                   {posts[0]?.excerpt}
                 </p>
               </div>
@@ -61,16 +70,16 @@ const Navigate=useNavigate()
           <div className="w-full md:w-1/2">
             {posts.slice(1, 4).map((elem) => (
               <div
-              onClick={()=>{
-                Navigate(`/post/${elem?._id}`)
-              }}
+                onClick={() => {
+                  Navigate(`/post/${elem?._id}`)
+                }}
                 key={elem._id}
                 className="flex gap-3 py-2 md:py-3 items-center min-h-[100px]"
               >
                 {/* IMAGE */}
                 <div className="min-w-[120px] max-w-[120px]">
                   <img
-                    src="https://i.pinimg.com/736x/b2/1d/5c/b21d5c9b2bceeb42b938f30f7151567a.jpg"
+                    src={`${elem?.banner || "https://i.pinimg.com/736x/8b/5c/79/8b5c796b2c0508fb74d4a7eeb54ca882.jpg"}`}
                     alt=""
                     className="w-full h-full object-cover rounded-lg shadow-[0_5px_10px_rgba(0,0,0,0.5)]"
                   />

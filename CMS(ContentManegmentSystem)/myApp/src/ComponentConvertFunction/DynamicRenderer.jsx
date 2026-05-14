@@ -3,7 +3,7 @@ import axios from "axios";
 import * as Babel from "@babel/standalone";
 
 import {
-    useParams,
+    useParams,useSearchParams,
     useNavigate,
     useLocation,
     Link
@@ -75,6 +75,7 @@ export const DynamicRenderer = ({ code, props }) => {
 
     const {
         useParams,
+        useSearchParams,
         useNavigate,
         useLocation,
         Link
@@ -96,6 +97,7 @@ export const DynamicRenderer = ({ code, props }) => {
                 axios,
                 {
                     useParams,
+                    useSearchParams,
                     useNavigate,
                     useLocation,
                     Link
@@ -123,5 +125,5 @@ export const DynamicRenderer = ({ code, props }) => {
         );
     }
 
-    return <Component className="m-[200px]" {...props} />;
+    return <Component className="" {...props} />;
 };
