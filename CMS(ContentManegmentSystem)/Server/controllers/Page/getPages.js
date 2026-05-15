@@ -14,7 +14,7 @@ const getPages = async (req, res) => {
 
     const pages = await Page.find()
       .select("-sections")
-      .sort({ createdAt: -1 }) // latest first
+      .sort({ updatedAt: -1 }) // latest first
       .skip(skip)
       .limit(limit);
 

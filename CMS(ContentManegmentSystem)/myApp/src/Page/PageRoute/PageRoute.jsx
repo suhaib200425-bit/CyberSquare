@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useQuery } from "@tanstack/react-query";
 import { PAGEAPI } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Loading/Loading';
 
 function PageRoute({ slug, pageId }) {
     const Navigate = useNavigate()
@@ -32,7 +33,7 @@ function PageRoute({ slug, pageId }) {
         }
     });
 
-    if (isPending) return 'Loading...'
+    if (isPending) return <Loading/>
 
     if (error) return 'An error has occurred: ' + error.message
 

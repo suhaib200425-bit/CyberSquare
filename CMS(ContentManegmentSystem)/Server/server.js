@@ -51,6 +51,7 @@ app.use("/api/menu", require('./routes/menuRoutes'));
 app.use("/api/user", require('./routes/userRouter'));
 app.use("/api/react/template", require('./routes/reactTemplateRoutes'));
 app.use("/api/navbar/template", require('./routes/navbarTemplateRoutes'));
+app.use("/api/footer/template", require('./routes/footerTemplateRoutes'));
 app.use("/api/auth/template", require('./routes/authRouters'));
 app.use("/api/visit", require('./routes/visitRouter'));
 // Default route

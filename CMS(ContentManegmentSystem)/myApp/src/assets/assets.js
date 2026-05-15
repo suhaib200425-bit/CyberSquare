@@ -13,3 +13,4 @@ export const TEMPLATEAPI = `${BASEURL}/api/template`
 export const NAVBARTEMPLATEAPI = `${BASEURL}/api/navbar/template`
 export const REACTTEPLATEAPI =`${BASEURL}/api/react/template`
 export const AUTHTEMPLATEAPI =`${BASEURL}/api/auth/template`
+export const FOOTERTEMPLATEAPI =`${BASEURL}/api/footer/template`

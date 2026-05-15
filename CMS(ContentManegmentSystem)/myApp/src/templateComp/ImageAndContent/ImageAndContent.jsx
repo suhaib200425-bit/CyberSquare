@@ -25,7 +25,7 @@ function ImageAndContent({
         <div
             className={`relative ${alineRow.value ? "md:flex" : ""} block`}
             style={{
-                padding: isMobile ? Mobilepadding.value || "0px 10px" : padding.value || "0px 100px",
+                padding: isMobile ? mobilePadding.value || "0px 10px" : padding.value || "0px 100px",
                 flexDirection: shift.value ? "row-reverse" : "row"
             }}
         >

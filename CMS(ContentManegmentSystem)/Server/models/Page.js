@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 
 const propseSchema = new mongoose.Schema({
-    label: { type: String, require: true },
-    type: { type: String, require: true },
-    value: { type: String, require: true },
+  label: { type: String, require: true },
+  type: { type: String, require: true },
+  value: { type: String, require: true },
 }, { _id: false });
 
 const SectionSchema = new mongoose.Schema({
@@ -22,11 +22,15 @@ const PageSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  slug:{
+  slug: {
     type: String,
     required: true
   },
-  status:{
+  theme: {
+    type: String,
+    default: "Defalut"
+  },
+  status: {
     type: String,
     enum: ["Draft", "Published"], // allowed values
     default: "draft",

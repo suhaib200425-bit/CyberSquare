@@ -22,6 +22,8 @@ export const NAVBARTEMPLATEAPI = `${BASEURL}/api/navbar/template`
 export const REACTTEPLATEAPI =`${BASEURL}/api/react/template`
 export const AUTHTEMPLATEAPI =`${BASEURL}/api/auth/template`
 export const DASHBOARDAPI=`${BASEURL}/api/dashboard`
+export const FOOTERTEMPLATEAPI =`${BASEURL}/api/footer/template`
+
 
 export const ProfileImage = 'https://i.pinimg.com/originals/6e/59/95/6e599501252c23bcf02658617b29c894.jpg?nii=t'
 

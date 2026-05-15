@@ -71,13 +71,16 @@
 }
 .DesignPage .right{
     transition: 0.5s;
-    width: 0px;
-    opacity: 0;
+    
+    min-width: 300px ;
+    max-width: 300px ;
+    /* opacity: 0; */
 }
 .DesignPage .rightBox{
     transition: 0.5s;
     min-width: 300px ;
-    opacity: 1;
+    max-width: 300px ;
+    /* opacity: 1; */
 }
 
 
