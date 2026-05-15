@@ -35,7 +35,7 @@ function App() {
             }
           });
           SetUser(LogedeResponse.data?.user)
-          // Navigate('/home')
+          Navigate('/home')
 
         } catch (err) {
 
@@ -45,7 +45,7 @@ function App() {
           );
         }
 
-      }, 0);
+      }, 2000);
 
       return Promise.all([
         axios.get(`${NAVBARTEMPLATEAPI}/checked`),

@@ -3,7 +3,7 @@ const Visit = require("../../models/Visit");
 
 const getPages = async (req, res) => {
   try {
-    let { page = 1, limit = 10 } = req.query;
+    let { page = 1, limit = 20 } = req.query;
 
     page = parseInt(page);
     limit = parseInt(limit);

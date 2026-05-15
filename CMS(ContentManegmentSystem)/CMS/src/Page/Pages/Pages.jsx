@@ -8,15 +8,17 @@ import axios from 'axios';
 import { PAGEAPI } from '../../assets/assets';
 import { queryClient } from '../../Context/Tanstack';
 import useStore from '../../Context/Zustand';
+import Pagination from '../../components/Pagination/Pagination';
 function Pages() {
     const [form, setForm] = useState(false)
     const [update, setUpdate] = useState(null)
+    const [page, setPage] = useState(1)
     const {SetBuilderPage}=useStore()
     const Navigate = useNavigate()
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', form],
+        queryKey: ['repoData', form,page],
         queryFn: async () => {
-            const response = await axios.get(PAGEAPI)
+            const response = await axios.get(`${PAGEAPI}?limit=6&page=${page}`)
             console.log(response.data);
 
             return response.data
@@ -128,6 +130,17 @@ function Pages() {
 
                     </table>
                 </div>
+                {/* Pagination */}
+                
+
+                {
+                    (data?.totalPages != 1) &&
+                    <Pagination currentPage={data?.currentPage} totalPages={data?.totalPages} onPageChange={(page) => {
+                        // setpage(page)
+                        console.log(page);
+                        setPage(page)
+                    }} />
+                }
             </div>
             {form && <FormPage mutation formname={'page'} setForm={setForm} update={update} />}
         </div>

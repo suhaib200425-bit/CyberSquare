@@ -6,14 +6,16 @@ import axios from 'axios';
 import { POSTAPI } from '../../assets/assets';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { queryClient } from '../../Context/Tanstack';
+import Pagination from '../../components/Pagination/Pagination';
 
 function Post() {
     const [form, setForm] = useState(false)
+    const [page,setPage] =useState(1)
     const [update, setUpdate] = useState(null)
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData',form],
+        queryKey: ['repoData', form,page],
         queryFn: async () => {
-            const response = await axios.get(POSTAPI)
+            const response = await axios.get(`${POSTAPI}?limit=6&page=${page}`)
             return response.data
         }
 
@@ -105,7 +107,7 @@ function Post() {
                                     </td>
 
                                     <td className="px-6 py-4 flex justify-end gap-3 text-gray-500">
-                                        <button className="hover:text-orange-500" onClick={()=>{
+                                        <button className="hover:text-orange-500" onClick={() => {
                                             setUpdate(post._id)
                                             setForm(true)
                                         }}>
@@ -129,33 +131,16 @@ function Post() {
                 </div>
 
                 {/* Pagination */}
+                
+
                 {
-                    data?.totalPages != 1 &&
-                    <div className="flex justify-between text-gray-500 mt-4">
-                        <h6>Showing 6 of 12 posts</h6>
-
-                        <div className="flex items-center gap-2">
-
-                            {/* Prev Button */}
-                            <button className="px-[10px] py-[5px] rounded-[5px] border border-black">
-                                Prev
-                            </button>
-
-                            {/* Page Numbers */}
-                            <div className="rounded-sm flex items-center justify-center text-white w-[35px] h-[35px] bg-red-500">1</div>
-                            <div className="rounded-sm flex items-center justify-center text-white w-[35px] h-[35px] bg-red-500">2</div>
-                            <div className="rounded-sm flex items-center justify-center text-white w-[35px] h-[35px] bg-red-500">3</div>
-
-                            {/* Next Button */}
-                            <button className="px-[10px] py-[5px] rounded-[5px] border border-black bg-blue-500 text-white">
-                                Next
-                            </button>
-
-                        </div>
-                    </div>
+                    (data?.totalPages != 1) &&
+                    <Pagination currentPage={data?.currentPage} totalPages={data?.totalPages} onPageChange={(page) => {
+                        // setpage(page)
+                        console.log(page);
+                        setPage(page)
+                    }} />
                 }
-
-
             </div>
             {form && <FormPage formname={'post'} setForm={setForm} update={update} />}
         </div>

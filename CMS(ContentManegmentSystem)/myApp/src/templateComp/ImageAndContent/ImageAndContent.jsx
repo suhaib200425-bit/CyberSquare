@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 function ImageAndContent({
     image = { value: "https://i.pinimg.com/736x/34/d0/fb/34d0fbe2843bfb28fb700210ab33b1cf.jpg" },
     title = { value: "Title" },
@@ -11,17 +12,21 @@ function ImageAndContent({
     contentRowAline = { value: "start" },
     contentColumnAline = { value: "center" },
     shift = { value: "" },
-    shiftBtn={value:""},
-    alineRow = { value: "n" }
+    shiftBtn = { value: "" },
+    alineRow = { value: "n" },
+    padding = { value: "" },
+    mobilePadding = { value: "" }
 }) {
 
-    const [shiftTemplte, setShiftTemplte] = useState(1);
+    
 
+    const isMobile = window.innerWidth < 768;
     return (
         <div
             className={`relative ${alineRow.value ? "md:flex" : ""} block`}
             style={{
-                flexDirection: shiftTemplte ? "row-reverse" : "row"
+                padding: isMobile ? Mobilepadding.value || "0px 10px" : padding.value || "0px 100px",
+                flexDirection: shift.value ? "row-reverse" : "row"
             }}
         >
 

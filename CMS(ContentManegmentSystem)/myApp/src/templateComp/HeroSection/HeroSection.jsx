@@ -26,7 +26,7 @@ function HeroSection({
     <div
       className="  w-full  flex flex-col   p-[50px] bg-no-repeat bg-cover"
       style={{
-        padding: window.innerWidth < 768 ? Mobilepadding.value || "0px 10px" : padding.value || "0px 100px",
+        padding: isMobile ? Mobilepadding.value || "0px 10px" : padding.value || "0px 100px",
         alignItems: rowAline.value,
         justifyContent: colAline.value,
         borderRadius: borderRadius.value,

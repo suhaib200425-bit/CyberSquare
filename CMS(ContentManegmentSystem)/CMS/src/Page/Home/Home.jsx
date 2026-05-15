@@ -13,7 +13,6 @@ function Home() {
     const [Dashboard, setDashboard] = useState([])
 
     useEffect(() => {
-        if (category) alert(category)
         const getDashboard = async () => {
             try {
 

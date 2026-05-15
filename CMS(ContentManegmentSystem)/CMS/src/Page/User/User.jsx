@@ -122,11 +122,14 @@ const [page,setPage]=useState(1)
 
                     </table>
                 </div>
-                <Pagination currentPage={data?.currentPage} totalPages={data?.totalPages} onPageChange={(page) => {
+                {
+                    (data?.totalPages!=1)&&
+                    <Pagination currentPage={data?.currentPage} totalPages={data?.totalPages} onPageChange={(page) => {
                     // setpage(page)
                     console.log(page);
                     setPage(page)
                 }} />
+                }
             </div>
             {form && <FormPage mutation formname={'user'} setForm={setForm} update={update} />}
         </div>

@@ -6,14 +6,16 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { CATEGORYAPI } from '../../assets/assets'
 import axios from "axios"
 import { queryClient } from '../../Context/Tanstack'
+import Pagination from '../../components/Pagination/Pagination'
 function Category() {
     const [update, setUpdate] = useState(null)
-    const Navigate=useNavigate()
-    const [form,setForm]=useState(false)
+    const Navigate = useNavigate()
+    const [form, setForm] = useState(false)
+    const [page,setPage] = useState(1)
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', form],
+        queryKey: ['repoData', form,page],
         queryFn: async () => {
-            const response = await axios.get(CATEGORYAPI)
+            const response = await axios.get(`${CATEGORYAPI}?limit=6&page=${page}`)
             console.log(response.data);
 
             return response.data
@@ -109,7 +111,7 @@ function Category() {
                                     <td className="px-6 py-4 font-medium text-gray-800">
                                         {category.title}
                                     </td>
-                                    
+
                                     <td className="px-6 py-4 text-gray-500">
                                         {category.slug}
                                     </td>
@@ -121,7 +123,7 @@ function Category() {
                                     </td>
 
                                     <td className="px-6 py-4 text-gray-600">
-                                        {category.post?category.post.length:0}
+                                        {category.post ? category.post.length : 0}
                                     </td>
 
 
@@ -145,11 +147,18 @@ function Category() {
 
                     </table>
                 </div>
-
+                {
+                    (data?.totalPages != 1) &&
+                    <Pagination currentPage={data?.currentPage} totalPages={data?.totalPages} onPageChange={(page) => {
+                        // setpage(page)
+                        console.log(page);
+                        setPage(page)
+                    }} />
+                }
 
 
             </div>
-            {form&&<FormPage formname={'category'} update={update}  setForm={setForm}/>}
+            {form && <FormPage formname={'category'} update={update} setForm={setForm} />}
         </div>
     )
 }

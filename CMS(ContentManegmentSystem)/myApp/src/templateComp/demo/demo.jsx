@@ -18,6 +18,7 @@ function Demo() {
   return (
     <div className='Demo'>
       
+      <ImageAndContent />
       <SingleArticlePage />
       <PostList />
       <Categories />
@@ -30,7 +31,6 @@ function Demo() {
       <ContactTree />
       <ContactSection />
       <ContactDetailAndForm />
-      <ImageAndContent />
       <Heading />
 
     </div>

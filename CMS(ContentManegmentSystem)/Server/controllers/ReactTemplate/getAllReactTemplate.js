@@ -10,7 +10,7 @@ const getAllReactTemplate = async (req, res) => {
 
     // data fetch
     const data = await ReactTemplate.find()
-      .sort({ createdAt: -1 }) // latest first
+      .sort({ updatedAt: -1 }) // latest first
       .skip(skip)
       .limit(limit);
 
