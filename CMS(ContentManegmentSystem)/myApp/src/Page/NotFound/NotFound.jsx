@@ -2,7 +2,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 function NotFound({error}) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 text-center">
+    <div className="flex flex-col w-full z-99 items-center justify-center h-screen bg-gray-100 text-center absolute top-0 right-0 ">
       {/* <h1 className="text-6xl font-bold text-red-500">404</h1>
       <p className="text-xl mt-4">{!error&&"Page Not Found"}</p>
       <p className="text-gray-500 mt-2">

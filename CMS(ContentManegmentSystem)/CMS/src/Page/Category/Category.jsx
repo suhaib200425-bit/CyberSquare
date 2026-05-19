@@ -15,10 +15,16 @@ function Category() {
     const { isPending, error, data } = useQuery({
         queryKey: ['repoData', form,page],
         queryFn: async () => {
-            const response = await axios.get(`${CATEGORYAPI}?limit=6&page=${page}`)
+            try{
+                const response = await axios.get(`${CATEGORYAPI}?limit=6&page=${page}`)
             console.log(response.data);
 
             return response.data
+            }catch(error){
+                console.log(error.response?.data || error.message);
+                
+                alert(error.response?.data?.message || error.message)
+            }
         }
 
     },)

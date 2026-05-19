@@ -21,7 +21,7 @@ export default function PageForm({ setFormClose, update }) {
                 })
                 console.log(response.data)
             } catch (error) {
-                console.log(error.response.data || error.message);
+                console.log(error.response?.data || error.message);
             }
         }
         if (update) getPage()

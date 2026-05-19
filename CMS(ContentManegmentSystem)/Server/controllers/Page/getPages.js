@@ -1,4 +1,5 @@
 const Page = require("../../models/Page");
+const ThemeTemplate = require("../../models/ThemeTemplate");
 const Visit = require("../../models/Visit");
 
 const getPages = async (req, res) => {
@@ -8,11 +9,15 @@ const getPages = async (req, res) => {
     page = parseInt(page);
     limit = parseInt(limit);
 
+    const template = await ThemeTemplate.findOne({ checked: true })
+if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
+        
+
     const skip = (page - 1) * limit;
 
-    const total = await Page.countDocuments();
+    const total = await Page.countDocuments({theme:template._id});
 
-    const pages = await Page.find()
+    const pages = await Page.find({theme:template._id})
       .select("-sections")
       .sort({ updatedAt: -1 }) // latest first
       .skip(skip)
@@ -49,7 +54,7 @@ const getPages = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "server Error",
-      error:err.message
+      error: err.message
     });
   }
 };

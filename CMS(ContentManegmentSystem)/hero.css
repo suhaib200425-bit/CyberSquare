@@ -1,0 +1,238 @@
+.pcp-main-hero-section{
+      width:100%;
+      min-height:100vh;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:40px 20px;
+      background:linear-gradient(
+        90deg,
+        #f5c244 0%,
+        #f7cf74 45%,
+        #f4b58c 100%
+      );
+    }
+
+    /* TOP BAR */
+
+    .pcp-version-top-bar{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      background:#d89705;
+      text-align:center;
+      color:white;
+      padding:12px;
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:2px;
+      z-index:5;
+    }
+
+    /* DOTS */
+
+    .pcp-main-hero-section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+      radial-gradient(rgba(255,255,255,0.25) 1px, transparent 1px);
+      background-size:22px 22px;
+      pointer-events:none;
+    }
+
+    /* SHAPES */
+
+    .pcp-left-circle-shape{
+      position:absolute;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.18);
+      left:-60px;
+      top:200px;
+    }
+
+    .pcp-top-right-rectangle{
+      position:absolute;
+      width:280px;
+      height:280px;
+      border-radius:40px;
+      background:#ee8f66;
+      top:90px;
+      right:120px;
+      transform:rotate(25deg);
+      opacity:0.7;
+    }
+
+    .pcp-bottom-right-card-shape{
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:30px;
+      background:#d79a2e;
+      right:180px;
+      bottom:-70px;
+      transform:rotate(-15deg);
+      opacity:0.5;
+    }
+
+    .pcp-bottom-left-small-box{
+      position:absolute;
+      width:90px;
+      height:90px;
+      border-radius:20px;
+      background:rgba(255,255,255,0.15);
+      bottom:120px;
+      left:320px;
+      transform:rotate(20deg);
+    }
+
+    /* CONTENT */
+
+    .pcp-hero-content-wrapper{
+      position:relative;
+      z-index:10;
+      max-width:760px;
+      text-align:center;
+    }
+
+    .pcp-course-badge{
+      display:inline-block;
+      background:white;
+      padding:11px 24px;
+      border-radius:50px;
+      font-size:14px;
+      margin-bottom:30px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .pcp-main-heading-title{
+      font-size:72px;
+      line-height:1.08;
+      color:#102b5c;
+      font-weight:900;
+      margin-bottom:22px;
+    }
+
+    .pcp-main-heading-highlight{
+      color:white;
+      text-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .pcp-program-description-text{
+      max-width:620px;
+      margin:auto;
+      font-size:18px;
+      line-height:1.8;
+      color:#474747;
+    }
+
+    /* BUTTONS */
+
+    .pcp-action-button-group{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+      margin-top:40px;
+    }
+
+    .pcp-enroll-now-button{
+      padding:18px 36px;
+      border:none;
+      border-radius:50px;
+      background:#102b5c;
+      color:white;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .pcp-enroll-now-button:hover{
+      transform:translateY(-4px);
+    }
+
+    .pcp-learn-more-button{
+      padding:18px 36px;
+      border:none;
+      border-radius:50px;
+      background:white;
+      color:#333;
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .pcp-learn-more-button:hover{
+      transform:translateY(-4px);
+    }
+
+    /* FEATURES */
+
+    .pcp-feature-list-wrapper{
+      margin-top:55px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .pcp-single-feature-item{
+      background:white;
+      padding:16px 24px;
+      border-radius:50px;
+      font-size:14px;
+      font-weight:600;
+      box-shadow:0 8px 18px rgba(0,0,0,0.06);
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:768px){
+
+      .pcp-main-heading-title{
+        font-size:48px;
+      }
+
+      .pcp-program-description-text{
+        font-size:16px;
+      }
+
+      .pcp-top-right-rectangle{
+        width:180px;
+        height:180px;
+        right:-40px;
+      }
+
+      .pcp-bottom-right-card-shape{
+        width:150px;
+        height:150px;
+      }
+
+    }
+
+    @media(max-width:500px){
+
+      .pcp-main-heading-title{
+        font-size:38px;
+      }
+
+      .pcp-course-badge{
+        font-size:12px;
+      }
+
+      .pcp-enroll-now-button,
+      .pcp-learn-more-button{
+        width:100%;
+      }
+
+    }

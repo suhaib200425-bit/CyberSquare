@@ -36,9 +36,6 @@
     color: white;
 }
 
-
-
-
 .formactive{
     background-color: white;
     z-index: 99;
@@ -54,6 +51,7 @@
     padding: 0;
     margin: 0;
 }
+
 .backArrow{
     
     display: flex;

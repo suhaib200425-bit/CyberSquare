@@ -7,11 +7,15 @@ import axios from "axios";
 
 function FooterOne(
     {
+        backgroundColor ={value:"black"},
+        borderRadius={value:""},
         title = { value: "Digitro" },
-        titleColor = { value: "black" },
-        menuColor = { value: "grey" },
-        hoverColor = { value: "black" },
-        btnTextColor ={value:"white"}
+        titleColor = { value: "white" },
+        contentColor = { value: "grey" },
+        hoverColor = { value: "" },
+        btnTextColor ={value:"black"},
+        padding={value:""},
+        mobilePadding={value:""}
     }
 ) {
     const [menus, setMenus] = useState([])
@@ -41,8 +45,13 @@ function FooterOne(
 
     }, []);
 
+    const isMobile = window.innerWidth < 768;
     return (
-        <footer className="w-full bg-white shadow-md rounded-[20px] px-6 md:px-16 py-10">
+        <footer className="w-full bg-white shadow-md  px-6 md:px-16 py-10" style={{
+             padding: isMobile ? mobilePadding.value || "30px 10px" : padding.value || "30px 100px",
+            backgroundColor:backgroundColor.value,
+            borderRadius:borderRadius.value
+        }}>
 
             {/* TOP */}
             <div className="flex flex-col items-center justify-center gap-6">
@@ -73,7 +82,7 @@ function FooterOne(
                                     color:
                                         hover === item?.title
                                             ? hoverColor.value
-                                            : menuColor.value
+                                            : contentColor.value
                                 }}
                             >
                                 {item?.title}
@@ -112,7 +121,7 @@ function FooterOne(
 
                 {/* COPYRIGHT */}
                 <p className="text-gray-500 text-[14px] text-center" style={{
-                    color:menuColor.value
+                    color:contentColor.value
                 }}>
                     © 2025 Your platform. All rights reserved.
                 </p>

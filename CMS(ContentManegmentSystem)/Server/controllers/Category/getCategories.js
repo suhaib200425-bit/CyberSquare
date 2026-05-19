@@ -1,4 +1,5 @@
 const Category = require("../../models/Category");
+const ThemeTemplate = require("../../models/ThemeTemplate");
 
 const getCategories = async (req, res) => {
   try {
@@ -9,9 +10,15 @@ const getCategories = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    const total = await Category.countDocuments();
 
-    const categories = await Category.find()
+    const template = await ThemeTemplate.findOne({ checked: true })
+
+    if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
+
+    const total = await Category.countDocuments({theme:template._id});
+
+    const categories = await Category.find({theme
+      :template._id})
       .sort({ createdAt: -1 }) // latest first
       .skip(skip)
       .limit(limit);
@@ -27,7 +34,8 @@ const getCategories = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: err.message
+      message: "server error",
+      error:err.message
     });
   }
 };

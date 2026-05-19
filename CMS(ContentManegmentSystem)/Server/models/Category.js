@@ -20,9 +20,15 @@ const CategorySchema = new mongoose.Schema({
     ref: "Category",
     default: null
   },
-  description:{
+  description: {
     type: String,
     default: null
+  },
+
+  theme: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TemeTemplate",
+    default: "6a0755c612155635815daaea"
   },
 
   posts: [

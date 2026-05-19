@@ -14,3 +14,40 @@ export const NAVBARTEMPLATEAPI = `${BASEURL}/api/navbar/template`
 export const REACTTEPLATEAPI =`${BASEURL}/api/react/template`
 export const AUTHTEMPLATEAPI =`${BASEURL}/api/auth/template`
 export const FOOTERTEMPLATEAPI =`${BASEURL}/api/footer/template`
+
+
+const themeModel = {
+  light: {
+    background: "#ffffff",
+    text: "#000000",
+    primary: "#2563eb",
+    secondary: "#f3f4f6",
+    border: "#e5e7eb"
+  },
+
+  dark: {
+    background: "#0f172a",
+    text: "#ffffff",
+    primary: "#3b82f6",
+    secondary: "#1e293b",
+    border: "#334155"
+  },
+
+  ocean: {
+    background: "#0f172a",
+    text: "#e0f2fe",
+    primary: "#06b6d4",
+    secondary: "#164e63",
+    border: "#155e75"
+  },
+
+  sunset: {
+    background: "#fff7ed",
+    text: "#7c2d12",
+    primary: "#f97316",
+    secondary: "#fed7aa",
+    border: "#fdba74"
+  }
+};
+
+export default themeModel;

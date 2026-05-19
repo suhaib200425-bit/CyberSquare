@@ -16,9 +16,11 @@ import NavBarOne from '../NavBarOne'
 import Categories from '../Categories/Categories'
 import FooterOne from '../footerOne/FooterOne'
 import FooterTwo from '../footerOne/FooterTwo'
+import ModernHero from '../HeroSectionOne/HeroSectionOne'
 function Demo() {
   return (
     <div className='Demo'>
+      <ModernHero />
       <FooterOne/>
       <FooterTwo/>
       <ImageAndContent />

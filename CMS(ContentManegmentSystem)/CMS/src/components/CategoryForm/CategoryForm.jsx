@@ -28,7 +28,7 @@ export default function CategoryForm({ setFormClose, update }) {
 
         const getSelectionCategory = async () => {
             try {
-                const response = await axios.get(`${CATEGORYAPI}/all/category`)
+                const response = await axios.get(`${CATEGORYAPI}/all/categoryname`)
                 setSelectionCategory(response.data.data)
                 console.log(response.data)
             } catch (error) {
@@ -38,6 +38,7 @@ export default function CategoryForm({ setFormClose, update }) {
         if (update) getUpdateCategory()
         getSelectionCategory()
     }, [])
+
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -52,7 +53,7 @@ export default function CategoryForm({ setFormClose, update }) {
             console.log(response.data);
             setFormClose(false)
         } catch (error) {
-            console.log(error.response || error.message);
+            console.log(error.response?.data || error.message);
 
         }
         console.log(form);
@@ -63,7 +64,7 @@ export default function CategoryForm({ setFormClose, update }) {
             const response = await axios.patch(`${CATEGORYAPI}/${update}`, form)
             setFormClose(false)
         } catch (error) {
-            console.log(error.response.data || error.message);
+            console.log(error.response?.data || error.message);
         }
     }
 

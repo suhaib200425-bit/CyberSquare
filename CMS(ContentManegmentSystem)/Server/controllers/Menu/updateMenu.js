@@ -1,12 +1,20 @@
 const Menu = require("../../models/Menu");
+const ThemeTemplate = require("../../models/ThemeTemplate");
 
 const updateMenu = async (req, res) => {
   try {
     const { MenuId } = req.params;
 
+    const template = await ThemeTemplate.findOne({ checked: true })
+    
+    if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
+    
     const updatedMenu = await Menu.findByIdAndUpdate(
       MenuId,
-      req.body,
+      {
+        ...req.body,
+        theme:template._id
+      },
       {
         returnDocument: "after",   // ✅ updated data return
         runValidators: true

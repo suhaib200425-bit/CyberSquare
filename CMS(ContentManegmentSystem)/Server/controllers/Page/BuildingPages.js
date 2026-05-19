@@ -3,7 +3,12 @@ const Page = require("../../models/Page");
 const BuildingPages = async (req, res) => {
     try {
 
-        const pages = await Page.find()
+        const template = await ThemeTemplate.findOne({ checked: true })
+        
+        if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
+                
+
+        const pages = await Page.find({theme:template._id})
             .select("title")
             .sort({ createdAt: -1 }) // latest first
 

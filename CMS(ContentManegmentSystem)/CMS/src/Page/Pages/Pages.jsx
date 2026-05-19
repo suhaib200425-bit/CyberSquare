@@ -18,10 +18,15 @@ function Pages() {
     const { isPending, error, data } = useQuery({
         queryKey: ['repoData', form,page],
         queryFn: async () => {
-            const response = await axios.get(`${PAGEAPI}?limit=6&page=${page}`)
+            try{
+                const response = await axios.get(`${PAGEAPI}?limit=6&page=${page}`)
             console.log(response.data);
 
             return response.data
+            }catch(error){
+                console.log(error.response?.data || error.message);
+                
+            }
         }
     },)
 

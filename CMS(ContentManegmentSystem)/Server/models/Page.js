@@ -19,23 +19,23 @@ const SectionSchema = new mongoose.Schema({
 const PageSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   slug: {
     type: String,
     required: true
   },
-  theme: {
-    type: String,
-    default: "Defalut"
-  },
   status: {
     type: String,
     enum: ["Draft", "Published"], // allowed values
-    default: "draft",
-    required: true
+    default: "Published"
   },
+  
+    theme: {
+      type: mongoose.Schema.Types.ObjectId,
+          ref: "TemeTemplate",
+      default: null
+    },
   sections: [SectionSchema]
 }, { timestamps: true });
 

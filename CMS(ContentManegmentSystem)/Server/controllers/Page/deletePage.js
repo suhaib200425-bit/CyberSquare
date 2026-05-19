@@ -5,7 +5,7 @@ const deletePage = async (req, res) => {
         const { PageId } = req.params;
 
         const deletedPage = await Page.findByIdAndDelete(PageId);
-
+        
         if (!deletedPage) {
             return res.status(404).json({ success: false, message: "Page not found" });
         }
