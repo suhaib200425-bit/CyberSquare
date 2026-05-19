@@ -1,7 +1,7 @@
 import {QueryClient} from '@tanstack/react-query'
 export const queryClient = new QueryClient()
 
-export const BASEURL ='http://10.197.255.119:5000'
+export const BASEURL ='http://10.153.189.119:5000'
 // export const BASEURL='http://localhost:5000'
 // export const BASEURL =' https://http://192.168.31.24:5000thee-slightly-dowry.ngrok-free.dev'
 export const PAGEAPI = `${BASEURL}/api/page`
