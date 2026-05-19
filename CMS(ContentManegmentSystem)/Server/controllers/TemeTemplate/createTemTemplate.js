@@ -52,7 +52,7 @@ const CreateThemeTemplatePage = async (req, res) => {
         console.log(slug);
 
 
-        const  themeId  = req.body.id
+        const themeId = req.body.id
 
         // Basic validation
         if (!title || !slug || !sections) {
@@ -91,26 +91,26 @@ const CreateThemeTemplateMenu = async (req, res) => {
         console.log(title);
         console.log(slug);
 
-        const  themeId  = req.body.id
-        const  page = req.body.pageId
+        const themeId = req.body.id
+        const page = req.body.pageId
 
-const indexes = await Menu.collection.indexes();
+        const indexes = await Menu.collection.indexes();
 
-   const titleIndex = indexes.find(
-      (i) => i.name === "title_1"
-   );
-   const slugIndex = indexes.find(
-      (i) => i.name === "slug_1"
-   );
+        const titleIndex = indexes.find(
+            (i) => i.name === "title_1"
+        );
+        const slugIndex = indexes.find(
+            (i) => i.name === "slug_1"
+        );
 
-   if (titleIndex) {
+        if (titleIndex) {
 
-      await Menu.collection.dropIndex("title_1");
-      await Menu.collection.dropIndex("slug_1");
+            await Menu.collection.dropIndex("title_1");
+            await Menu.collection.dropIndex("slug_1");
 
-      console.log("Removed title_1 index");
+            console.log("Removed title_1 index");
 
-   }
+        }
 
         const menu = await Menu.create({
             title,
@@ -144,7 +144,7 @@ const CreateThemeTemplateCategory = async (req, res) => {
 
         const { title, slug, parent, description } = req.body["category"];
 
-        const  themeId  = req.body.id
+        const themeId = req.body.id
 
         // 🔍 Required check
         if (!title || !slug) {
@@ -189,10 +189,10 @@ const CreateThemeTemplateCategory = async (req, res) => {
 const CreateThemeTemplatePost = async (req, res) => {
     try {
 
-        const  themeId  = req.body.id
+        const themeId = req.body.id
         const { categoryId } = req.body
         const { title, content, excerpt, status, banner } = req.body["post"];
-console.log(req.body);
+        console.log(req.body);
 
         // validation
         if (!title || !content || !categoryId) {
@@ -208,23 +208,23 @@ console.log(req.body);
 
         const indexes = await Post.collection.indexes();
 
-   const titleIndex = indexes.find(
-      (i) => i.name === "slug_1"
-   );
+        const titleIndex = indexes.find(
+            (i) => i.name === "slug_1"
+        );
 
-   if (titleIndex) {
+        if (titleIndex) {
 
-      await Post.collection.dropIndex("slug_1");
+            await Post.collection.dropIndex("slug_1");
 
-      console.log("Removed slug_1 index");
+            console.log("Removed slug_1 index");
 
-   }
+        }
         // create post
         const post = await Post.create({
             title,
             slug,
             banner,
-            category:categoryId,
+            category: categoryId,
             content,
             excerpt,
             status
