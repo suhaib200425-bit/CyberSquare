@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const propseSchema = new mongoose.Schema({
     label: { type: String, require: true },
     type: { type: String, require: true },
-    value: { type: String, require: true },
+    value: { type: JSON, require: true },
 }, { _id: false });
 
 
@@ -18,7 +18,11 @@ const reactTemplateSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-
+    banner: {
+        type: String,
+        required: true,
+        default: null
+    },
     props: {
         required: true,
         type: Map,

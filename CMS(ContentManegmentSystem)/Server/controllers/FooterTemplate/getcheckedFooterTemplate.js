@@ -3,7 +3,7 @@ const FooterTemplate = require("../../models/FooterTemplate");
 const getcheckedFooterTemplate = async (req, res) => {
   try {
     
-    const footer = await FooterTemplate.findOne({checked:true});
+    const footer = await FooterTemplate.findOne({checked:false});
 
     res.status(200).json({
       success: true,

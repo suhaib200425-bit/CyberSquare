@@ -164,7 +164,7 @@ const Navigate=useNavigate()
                                 // ReactAllTemplate.map(elem => <DraggableTemplate TemplateObject={elem} />)
                                 ReactTemplate?.data?.map(elem => <div className="">
                                     <hr className='mt-1' />
-                                    <div className="templatename">Name : {elem.name}</div>
+                                    <div className="templatename">Name : {elem._id}</div>
                                     <hr className='mb-1' />
                                     <DraggableTemplate TemplateObject={elem} />
                                 </div>)

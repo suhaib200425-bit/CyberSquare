@@ -3,13 +3,13 @@ const ReactTemplate = require("../../models/ReactTemplate");
 // CREATE TEMPLATE
 const createReactTemplate = async (req, res) => {
     try {
-        const { name, template,props } = req.body;
+        const { name, template,props,banner } = req.body;
 
         // validation
-        if (!name || !template || !props) {
+        if (!name || !template || !props || !banner) {
             return res.status(400).json({
                 success: false,
-                message: "Name,Props and Template are required",
+                message: "Name,Props,banner and Template are required",
             });
         }
 
@@ -17,7 +17,8 @@ const createReactTemplate = async (req, res) => {
         const newTemplate = new ReactTemplate({
             name,
             template,
-            props
+            props,
+            banner
         });
 
         await newTemplate.save();

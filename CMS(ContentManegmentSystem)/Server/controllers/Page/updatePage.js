@@ -27,7 +27,11 @@ const updatePage = async (req, res) => {
     res.json({ data: updatedPage, success: true });
 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      success:false,
+      message:error.message,
+      error: error.message
+     });
   }
 };
 

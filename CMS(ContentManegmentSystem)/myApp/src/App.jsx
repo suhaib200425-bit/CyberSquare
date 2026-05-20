@@ -38,7 +38,7 @@ function App() {
             }
           });
           SetUser(LogedeResponse.data?.user)
-          // Navigate('/home')
+          Navigate('/home')
 
         } catch (err) {
 

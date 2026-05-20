@@ -38,12 +38,13 @@ function HeroSection({
 
       
           <>
-            <h1 className={`leading-[0.8] font-bold`}
+            <h1 className={`leading-[0.8] font-bold` }
+            dangerouslySetInnerHTML={{__html:category?category:title.value}}
               style={{
                 fontSize: titleSize.value,
                 color: titleColor.value || "white"
               }}>
-              {category?category:title.value}
+              
             </h1>
 
            {

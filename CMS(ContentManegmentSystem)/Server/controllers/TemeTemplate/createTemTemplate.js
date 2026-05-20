@@ -150,6 +150,24 @@ const CreateThemeTemplateCategory = async (req, res) => {
         if (!title || !slug) {
             return res.status(400).json({ message: "Title and slug are required" });
         }
+        // get all indexes
+    const indexes = await Category.collection.indexes();
+
+    // check title_1 exists
+    const titleIndex = indexes.find(
+      (item) => item.name === "title_1"
+    );
+    const slugIndex = indexes.find(
+      (item) => item.name === "slug_1"
+    );
+
+    // remove only if exists
+    if (titleIndex) {
+      await Category.collection.dropIndex("title_1");
+    }if (slugIndex) {
+      await Category.collection.dropIndex("slug_1");
+    }
+
 
         // 🔁 Duplicate check (optional but better)
         // const existing = await Category.findOne({
@@ -161,6 +179,7 @@ const CreateThemeTemplateCategory = async (req, res) => {
         // }
 
         // 🆕 Create category
+
         const newCategory = new Category({
             title,
             slug,

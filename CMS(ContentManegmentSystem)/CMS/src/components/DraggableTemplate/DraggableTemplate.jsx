@@ -22,7 +22,7 @@ function DraggableTemplate({ TemplateObject }) {
     },[])
 
     return (
-        <div ref={ref} key={TemplateObject._id} onClick={()=>{
+        <div className='w-full ' ref={ref} key={TemplateObject._id} onClick={()=>{
             console.log(TemplateObject);
         }}>
             {

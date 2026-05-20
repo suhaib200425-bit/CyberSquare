@@ -18,9 +18,16 @@ import FooterOne from '../footerOne/FooterOne'
 import FooterTwo from '../footerOne/FooterTwo'
 import ModernHero from '../HeroSectionOne/HeroSectionOne'
 import HeroSectionTwo from '../HeroSectionTwo/HeroSection'
+import FeaturedArticlesSection from '../FeaturedArticlesSection/FeaturedArticlesSection'
+import NewsSection from '../NewsSection/NewsSection'
+import TrendingNewsSection from '../TrendingSection/TrendingSection'
 function Demo() {
   return (
     <div className='Demo'>
+      <TrendingNewsSection />
+      <NewsSection />
+      <FeaturedArticlesSection />
+      <HeroSection />
       <HeroSectionTwo />
       <ModernHero />
       <FooterOne/>
@@ -31,7 +38,6 @@ function Demo() {
       <Categories />
       <ImageTemplate />
       <LatestPost />
-      <HeroSection />
       <NavBarOne />
       <AuthOne/>
       <Auth />

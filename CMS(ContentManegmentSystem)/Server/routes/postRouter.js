@@ -9,6 +9,7 @@ const getPostById = require("../controllers/Post/getPostById");
 const updatePost = require("../controllers/Post/updatePost");
 const getPostDefault = require("../controllers/Post/getPostDefault");
 const relatedArticlesById = require("../controllers/Post/relatedArticlesById");
+const relatedCategoryById = require("../controllers/Post/relatedCategoryById");
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.get("/postid/:PostId", getPostById);
 router.delete("/:PostId", deletePost);
 router.patch("/:PostId", updatePost);
 router.get("/category/:PostId",relatedArticlesById)
+router.get("/get/by/category/:CategoryId",relatedCategoryById)
 // router.get("/", (req, res) => {
 //   res.send("TEMPLATE API is running 🚀");
 // });
