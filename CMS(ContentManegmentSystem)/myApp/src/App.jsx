@@ -1,7 +1,7 @@
 import react, { useState } from 'react'
 import { DynamicRenderer } from './ComponentConvertFunction/DynamicRenderer'
 import { useQuery } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 import PageRoute from './Page/PageRoute/PageRoute';
 import NotFound from './Page/NotFound/NotFound';
@@ -20,6 +20,8 @@ function App() {
   const Navigate = useNavigate()
   const { SetUser } = useStore()
   const [validRoutes, setValidRoutes] = useState([])
+  const pathname = window.location.pathname
+  const webname = pathname.split("/")[1]
   const { data, isPending, error } = useQuery({
     queryKey: ["MULTI_API"],
     queryFn: async () => {
@@ -49,12 +51,16 @@ function App() {
 
       // }, 2000);
 
+      console.log("webname");
+      console.log(webname);
+      console.log("webname end");
+
       return Promise.all([
-        axios.get(`${BASEURL}/api/web/kite`)
+        axios.get(`${BASEURL}/api/web/${webname}`)
       ]).then(([response]) => {
         const routes = response.data?.pages
         console.log(routes);
-        
+
         setValidRoutes(routes)
 
         return {
@@ -69,7 +75,7 @@ function App() {
 
   if (isPending) return <Loading />
 
-  if (error) return 'An error has occurred: ' + error.message
+  if (error) return < NotFound />
 
 
 
@@ -86,9 +92,9 @@ function App() {
 
         <Route path={`/demo`} element={<Demo />} />
         <Route path={`/loading`} element={<Loading />} />
-        <Route path={`/`} element={<Demo />} />
+        <Route path={`/:webname/`} element={<Demo />} />
         {
-          data && data?.auth && <Route path={`/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
+          data && data?.auth && <Route path={`/:webname/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
         }
 
 
@@ -98,7 +104,7 @@ function App() {
             const pageId = page?._id
             const slug = page?.slug
             console.log(`${slug}`);
-            return <Route key={pageId} path={`${slug}`} element={<PageRoute slug={slug} pageId={pageId} />} />
+            return <Route key={pageId} path={`/:webname${slug}`} element={<PageRoute slug={slug} pageId={pageId} />} />
           })
         }
         <Route path="*" element={<NotFound />} />
