@@ -30,12 +30,17 @@ const PageSchema = new mongoose.Schema({
     enum: ["Draft", "Published"], // allowed values
     default: "Published"
   },
-  
-    theme: {
-      type: mongoose.Schema.Types.ObjectId,
-          ref: "TemeTemplate",
-      default: null
-    },
+  auther: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    default: null
+  },
+
+  theme: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TemeTemplate",
+    default: null
+  },
   sections: [SectionSchema]
 }, { timestamps: true });
 

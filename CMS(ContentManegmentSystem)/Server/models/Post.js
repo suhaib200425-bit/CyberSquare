@@ -43,8 +43,14 @@ const PostSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true
-  }
+  },
 
+  auther: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // 👈 reference
+    required: true,
+    default:null
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Post", PostSchema);

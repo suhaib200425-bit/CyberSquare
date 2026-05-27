@@ -10,11 +10,12 @@ const updatePost = require("../controllers/Post/updatePost");
 const getPostDefault = require("../controllers/Post/getPostDefault");
 const relatedArticlesById = require("../controllers/Post/relatedArticlesById");
 const relatedCategoryById = require("../controllers/Post/relatedCategoryById");
+const authMiddleware = require("../middleware/jwt");
 
 const router = express.Router();
 
-router.post("/", createPost);
-router.get("/", getPosts);
+router.post("/", authMiddleware,createPost);
+router.get("/",authMiddleware, getPosts);
 router.get("/:slug", getPostBySlug);
 router.get("/get/default", getPostDefault);
 router.get("/postid/:PostId", getPostById);
@@ -22,6 +23,7 @@ router.delete("/:PostId", deletePost);
 router.patch("/:PostId", updatePost);
 router.get("/category/:PostId",relatedArticlesById)
 router.get("/get/by/category/:CategoryId",relatedCategoryById)
+router.get("/get/by/category/",relatedCategoryById)
 // router.get("/", (req, res) => {
 //   res.send("TEMPLATE API is running 🚀");
 // });

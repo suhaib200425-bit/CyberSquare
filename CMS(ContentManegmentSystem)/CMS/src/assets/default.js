@@ -1,7 +1,7 @@
 export const MenuAndPages = {
     "menu": {
-        "title": "Default Menu",
-        "slug": "/defaultMenu"
+        "title": "Home",
+        "slug": "/home"
     },
     "category": {
         "title": "News",
@@ -19,8 +19,8 @@ export const MenuAndPages = {
     },
     "page": {
         
-        "title": "Default Page",
-        "slug": "/defaultPage",
+        "title": "Home",
+        "slug": "/home",
         "status": "Published",
         "sections": [
             {

@@ -1,7 +1,15 @@
-import {QueryClient} from '@tanstack/react-query'
+import { QueryClient } from '@tanstack/react-query'
+import grass from '../assets/grass.png'
+import earth from '../assets/earth.png'
+import mountain from '../assets/mountain.png'
+import sky from '../assets/sky.jpeg'
+import stoneriver from '../assets/stoneriver.png'
+// import tree from '../assets/tree.jpeg'
+
 export const queryClient = new QueryClient()
 
-export const BASEURL ='http://10.197.255.119:5000'
+
+export const BASEURL ='http://10.198.16.119:5000'
 // export const BASEURL='http://localhost:5000'
 // export const BASEURL =' https://http://192.168.31.24:5000thee-slightly-dowry.ngrok-free.dev'
 export const PAGEAPI = `${BASEURL}/api/page`
@@ -11,10 +19,13 @@ export const MENUAPI = `${BASEURL}/api/menu`
 export const USERAPI = `${BASEURL}/api/user`
 export const TEMPLATEAPI = `${BASEURL}/api/template`
 export const NAVBARTEMPLATEAPI = `${BASEURL}/api/navbar/template`
-export const REACTTEPLATEAPI =`${BASEURL}/api/react/template`
-export const AUTHTEMPLATEAPI =`${BASEURL}/api/auth/template`
-export const FOOTERTEMPLATEAPI =`${BASEURL}/api/footer/template`
+export const REACTTEPLATEAPI = `${BASEURL}/api/react/template`
+export const AUTHTEMPLATEAPI = `${BASEURL}/api/auth/template`
+export const FOOTERTEMPLATEAPI = `${BASEURL}/api/footer/template`
 
+export {
+  grass, earth, mountain, stoneriver,sky
+}
 
 const themeModel = {
   light: {

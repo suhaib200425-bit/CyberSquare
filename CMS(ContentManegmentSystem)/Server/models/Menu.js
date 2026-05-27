@@ -13,16 +13,22 @@ const MenuSchema = new mongoose.Schema({
         trim: true
     },
 
+    auther: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        default: null
+    },
+
     page: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Page",
         default: null
     },
-  theme: {
-    type: mongoose.Schema.Types.ObjectId,
+    theme: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "TemeTemplate",
-    default: "6a0755c612155635815daaea"
-  },
+        default: null
+    },
 
 }, { timestamps: true });
 

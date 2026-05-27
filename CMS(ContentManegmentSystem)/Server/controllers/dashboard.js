@@ -1,18 +1,22 @@
 const Page = require("../models/Page");
 const Post = require("../models/Post");
+const ThemeTemplate = require("../models/ThemeTemplate");
 const User = require("../models/User");
 const Visit = require("../models/Visit");
+const WEB = require("../models/WEB");
 
 
 exports.dashboard = async (req, res) => {
     try {
-
+        const user = req.user
+        //ACTIVE TEMPLATE
+        const WEBACTIVE = await WEB({admin:user.id})
         // TOTAL POSTS
-        const posts = await Post.countDocuments();
+        const posts = await Post.countDocuments({ auther: WEBACTIVE.admin });
         // TOTAL PAGES
-        const pages = await Page.countDocuments();
+        const pages = await Page.countDocuments({theme:WEBACTIVE.theme,auther:WEBACTIVE.admin});
         // TOTAL USERS
-        const users = await User.countDocuments();
+        const users = await User.countDocuments({web:WEBACTIVE.admin});
         // Today start
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
@@ -111,7 +115,7 @@ exports.dashboard = async (req, res) => {
             ({ start, end, ...rest }) => rest
         );
 
-        console.log(finalData);
+        // console.log(finalData);
 
 
         // ✅ Success response

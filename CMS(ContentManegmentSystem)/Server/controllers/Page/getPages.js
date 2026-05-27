@@ -1,6 +1,7 @@
 const Page = require("../../models/Page");
 const ThemeTemplate = require("../../models/ThemeTemplate");
 const Visit = require("../../models/Visit");
+const WEB = require("../../models/WEB");
 
 const getPages = async (req, res) => {
   try {
@@ -9,15 +10,18 @@ const getPages = async (req, res) => {
     page = parseInt(page);
     limit = parseInt(limit);
 
-    const template = await ThemeTemplate.findOne({ checked: true })
-if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
-        
-
+    const activeTemaplte = await WEB.findOne({ admin: req.user.id })
+    if (!activeTemaplte) {
+      return res.status(404).json({
+        success: false,
+        message: "No active template found",
+      });
+    }
     const skip = (page - 1) * limit;
 
-    const total = await Page.countDocuments({theme:template._id});
+    const total = await Page.countDocuments({ theme: activeTemaplte.theme, auther: req.user.id });
 
-    const pages = await Page.find({theme:template._id})
+    const pages = await Page.find({ theme: activeTemaplte.theme, auther: req.user.id })
       .select("-sections")
       .sort({ updatedAt: -1 }) // latest first
       .skip(skip)
@@ -30,14 +34,15 @@ if (!template) return res.status(400).json({ success: false, message: "please Se
 
     const existingVisit = await Visit.findOne({
       ip: req.ip,
+      web: req.user.id,
       visitedAt: { $gte: oneHourAgo }
     });
 
     if (!existingVisit) {
 
       await Visit.create({
+        web: req.user?.id,
         ip: req.ip,
-        page: "/"
       });
 
     }

@@ -49,7 +49,8 @@ const userLogin = async (req, res) => {
             {
                 id: user._id,
                 email: user.email,
-                role:user.role
+                role:user.role,
+                username:user.username
             },
             process.env.JWT_SECRET,
             {
@@ -68,7 +69,8 @@ const userLogin = async (req, res) => {
 
         res.status(500).json({
             success: false,
-            message: error.message
+            message: "server error",
+            error: error.message
         });
 
     }

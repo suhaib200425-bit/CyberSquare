@@ -21,10 +21,12 @@ import HeroSectionTwo from '../HeroSectionTwo/HeroSection'
 import FeaturedArticlesSection from '../FeaturedArticlesSection/FeaturedArticlesSection'
 import NewsSection from '../NewsSection/NewsSection'
 import TrendingNewsSection from '../TrendingSection/TrendingSection'
+import HeroAnimated from '../HeroAnimated/HeroAnimated'
 function Demo() {
   return (
     <div className='Demo'>
-      <TrendingNewsSection />
+      <HeroAnimated/>
+      {/* <TrendingNewsSection />
       <NewsSection />
       <FeaturedArticlesSection />
       <HeroSection />
@@ -44,7 +46,7 @@ function Demo() {
       <ContactTree />
       <ContactSection />
       <ContactDetailAndForm />
-      <Heading />
+      <Heading /> */}
 
     </div>
   )

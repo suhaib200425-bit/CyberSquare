@@ -10,15 +10,11 @@ const relatedCategoryById = async (req, res) => {
 
         const skip = (page - 1) * limit;
 
-        const posts = await Post.find({
-            category:CategoryId
-        })
-let  
-        const total = await Post.countDocuments({
-            status: "Published",
-            category: CategoryId
-        });
 
+        let filter = { status: "Published" }
+        if (CategoryId) filter["category"] = CategoryId
+        const total = await Post.countDocuments(filter);
+        const posts = await Post.find(filter).populate("category")
         res.status(200).json({
             success: true,
             currentPage: page,

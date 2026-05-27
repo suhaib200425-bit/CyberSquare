@@ -30,7 +30,9 @@ function ThemeForm({ setForm }) {
         if (themeName.trim() == '' && bannerImage.trim() == "") return
         try {
             // THEME TEMPLATE CREATED SECTION 
-            const themeResponse = await axios.post(THEMETEMPLATEAPI, { name: themeName, banner: bannerImage })
+            const themeResponse = await axios.post(THEMETEMPLATEAPI, { name: themeName, banner: bannerImage }
+
+            )
             console.log("themeResponse");
             console.log(themeResponse.data);
             console.log("themeResponse end");
@@ -148,10 +150,10 @@ function ThemeForm({ setForm }) {
                 ])
 
             // POST TEMPLATE CREATED SECTION
-            const postResponse = await axios.post(`${THEMETEMPLATEAPI}/post`, { post: MenuAndPages["post"], categoryId: categoryResponse.data?.categoryId, id: THEMEID })
-            console.log("postResponse");
-            console.log(postResponse.data);
-            console.log("postResponse end");
+            // const postResponse = await axios.post(`${THEMETEMPLATEAPI}/post`, { post: MenuAndPages["post"], categoryId: categoryResponse.data?.categoryId, id: THEMEID })
+            // console.log("postResponse");
+            // console.log(postResponse.data);
+            // console.log("postResponse end");
 
             await new Promise((resolve) =>
                 setTimeout(resolve, 1000)
@@ -181,6 +183,7 @@ function ThemeForm({ setForm }) {
             if (THEMEID) await axios.delete(`${THEMETEMPLATEAPI}/${THEMEID}`)
             setErrorMessage(error.response?.data?.message || error.message)
             setOtherfield([])
+
         }
     }
     return (

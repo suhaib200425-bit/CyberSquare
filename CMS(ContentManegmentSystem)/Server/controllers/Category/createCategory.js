@@ -1,5 +1,6 @@
 const Category = require("../../models/Category");
 const ThemeTemplate = require("../../models/ThemeTemplate");
+const WEB = require("../../models/WEB");
 
 const createCategory = async (req, res) => {
   try {
@@ -10,23 +11,28 @@ const createCategory = async (req, res) => {
       return res.status(400).json({ message: "Title and slug are required" });
     }
 
-    const template = await ThemeTemplate.findOne({ checked: true })
-
-    if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
+    const activetemplate = await WEB.findOne({ admin: req.user.id })
+    if (!activetemplate) {
+      return res.status(404).json({
+        success: false,
+        message: "No active template found",
+      });
+    }
     const existCategoryTitle = await Category.findOne({
-      theme: template._id,
+      theme: activetemplate.theme,
+      auther: activetemplate.admin,
       title
     });
-
     if (existCategoryTitle) return res.status(400).json({ success: false, message: "Category Title already used" });
     const existCategorySlug = await Category.findOne({
-      theme: template._id,
+      theme: activetemplate.theme,
+      auther: activetemplate.admin,
       slug
     });
     if (existCategorySlug) return res.status(400).json({ success: false, message: "Category Router already used" });
 
     // 🔁 Duplicate check (optional but better)
-    
+
 
     // 🆕 Create category
     const newCategory = new Category({
@@ -34,7 +40,8 @@ const createCategory = async (req, res) => {
       slug,
       parent: parent || null,
       description,
-      theme:template._id
+      theme: activetemplate.theme,
+      auther:activetemplate.admin
     });
 
     const savedCategory = await newCategory.save();

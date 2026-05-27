@@ -1,18 +1,23 @@
 const Page = require("../../models/Page");
 const ThemeTemplate = require("../../models/ThemeTemplate");
+const WEB = require("../../models/WEB");
 
 const updatePage = async (req, res) => {
   try {
     const { PageId } = req.params;
-    const template = await ThemeTemplate.findOne({ checked: true })
-
-    if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
-
+    const activetemplate = await WEB.findOne({ admin: req.user.id })
+            if (!activetemplate) {
+                return res.status(404).json({
+                    success: false,
+                    message: "No active template found",
+                });
+            }
+    
     const updatedPage = await Page.findByIdAndUpdate(
       PageId,
       {
         ...req.body,
-        theme:template._id
+        theme:activetemplate.theme
       },
       {
         new: true,        // updated data return cheyyum

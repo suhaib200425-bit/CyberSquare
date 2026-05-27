@@ -19,6 +19,8 @@ import Users from './Page/User/User';
 import CodeEditor from './Page/CodeEditor/CodeEditor';
 import NavBarCollection from './Page/NavBarCollection/NavBarCollection';
 import Template from './Page/Template/Template';
+import Authentication from './Page/Authentication/Authentication';
+import Splash from './Page/Splash/Splash';
 function App() {
 
   const location = useLocation();
@@ -28,11 +30,13 @@ function App() {
       <div className="flex App">
        
 {
-        // location.pathname !== "/auth" &&
+        location.pathname !== "/authentication" &&
+        location.pathname !== "/" &&
          <LeftSideBar />
       }
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Splash />} />
           <Route path="/auth" element={<AuthPages />} />
           <Route path="/navbars" element={<NavBarCollection />} />
           <Route path="/codeditor" element={<CodeEditor />} />
@@ -44,6 +48,7 @@ function App() {
           <Route path="/pagebuilder/:PageId" element={<DesignPage />} />
           <Route path="/category" element={<Category />} />
           <Route path="/form/:formname" element={<FormPage />} />
+          <Route path="/authentication" element={<Authentication />} />
         <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

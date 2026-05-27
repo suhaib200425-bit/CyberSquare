@@ -12,49 +12,75 @@ import ThemeForm from '../../components/ThemeForm/ThemeForm';
 function Template() {
     const Navigate = useNavigate()
     const [form, setForm] = useState(false)
-   
+    const [active, setActive] = useState("")
 
     const { isPending, error, data } = useQuery({
-        queryKey: ['themedata',form],
+        queryKey: ['themedata', form],
         queryFn: async () => {
-            const response = await axios.get(THEMETEMPLATEAPI)
-            console.log(response.data)
+            try {
 
+                const token = localStorage.getItem('token')
+                const response = await axios.get(THEMETEMPLATEAPI, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                })
+                console.log(response.data)
+                setActive(response.data?.active)
+                return response.data?.data
+            } catch (error) {
+                alert(error.response?.data?.message || error.message)
+                console.log(error.response?.data || error.message);
 
-            return response.data?.data
+            }
+
         }
     })
 
     // Mutations
     const checkedmutation = useMutation({
         mutationFn: async (ThemeTemplateId) => {
-            try{
+            try {
+                const token = localStorage.getItem('token')
                 const response = await axios.patch(
-                `${THEMETEMPLATEAPI}/checked/${ThemeTemplateId}`
-            )
-            return response.data?.data
-            }catch(error){
+                    `${THEMETEMPLATEAPI}/checked/${ThemeTemplateId}`, {}, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+                )
+                return response.data?.data
+            } catch (error) {
                 alert(error.response?.data?.message || error.message)
+                console.log(error.response?.data || error.message);
+
             }
-            
+
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['themedata'] })
-        },
+        }
     })
 
     // Mutations
     const deletemutation = useMutation({
         mutationFn: async (ThemeTemplateId) => {
-            try{
+
+            try {
+
+                const token = localStorage.getItem('token')
                 const response = await axios.delete(
-                `${THEMETEMPLATEAPI}/${ThemeTemplateId}`
-            )
-            return response.data?.data
-            }catch(error){
+                    `${THEMETEMPLATEAPI}/${ThemeTemplateId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    }
+                }
+                )
+                return response.data?.data
+            } catch (error) {
                 alert(error.response?.data?.message || error.message)
             }
-            
+
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['themedata'] })
@@ -90,7 +116,7 @@ function Template() {
                         <div className='py-[5px] flex items-center justify-center'>
 
 
-                            <button onClick={()=>{
+                            <button onClick={() => {
                                 setForm(true)
                             }} className='w-full rounded-[5px] py-1 px-2 bg-gray-300 text-black-600 font-medium'>
                                 {"CREATE NEW TEMPLATE"}
@@ -103,7 +129,7 @@ function Template() {
                                 <div className="flex item-center justify-between px-2 py-1">
                                     <h3>{elem.name}</h3>
                                     <div className="">
-                                        <i onClick={()=>{
+                                        <i onClick={() => {
                                             deletemutation.mutate(elem._id)
                                         }} className="fa-solid fa-trash-can"></i>
                                     </div>
@@ -118,7 +144,7 @@ function Template() {
                                     <input
                                         type="radio"
                                         name='authradio'
-                                        checked={elem.checked}
+                                        checked={active.theme === elem._id}
                                         onChange={() => {
                                             checkedmutation.mutate(elem._id)
                                         }}
@@ -126,7 +152,7 @@ function Template() {
                                     />
 
                                     {
-                                        elem.checked &&
+                                       active.theme === elem._id &&
                                         <span className='text-green-600 font-medium'>
                                             SELECTED
                                         </span>
@@ -148,7 +174,7 @@ function Template() {
 
             </div>
             {
-                form && <ThemeForm setForm={setForm}  />
+                form && <ThemeForm setForm={setForm} />
             }
         </div>
     )

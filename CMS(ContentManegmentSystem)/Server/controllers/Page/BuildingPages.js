@@ -3,12 +3,15 @@ const Page = require("../../models/Page");
 const BuildingPages = async (req, res) => {
     try {
 
-        const template = await ThemeTemplate.findOne({ checked: true })
-        
-        if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
-                
+        const activetemplate = await WEB.findOne({ admin: req.user.id })
+            if (!activetemplate) {
+              return res.status(404).json({
+                success: false,
+                message: "No active template found",
+              });
+            }
 
-        const pages = await Page.find({theme:template._id})
+        const pages = await Page.find({theme:activetemplate.theme})
             .select("title")
             .sort({ createdAt: -1 }) // latest first
 

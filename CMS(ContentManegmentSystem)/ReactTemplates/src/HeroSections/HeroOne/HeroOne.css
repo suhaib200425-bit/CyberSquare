@@ -1,0 +1,105 @@
+/* Hero.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.podverse-hero {
+    padding: 0px 100px;
+  width: 100%;
+  height: 100vh;
+  background: url("https://i.pinimg.com/736x/0a/f7/74/0af7741991985e2b530c8f62135c3eea.jpg")
+    center/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 2, 2, 0.45);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.small-text {
+  font-size: 14px;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.hero-content h1 {
+  font-size: 82px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.desc {
+  margin-top: 25px;
+  max-width: 500px;
+  line-height: 1.7;
+  color: #d8d8d8;
+}
+
+.listen-btn {
+  margin-top: 35px;
+  padding: 16px 34px;
+  border: none;
+  border-radius: 999px;
+  background: white;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.listen-btn:hover {
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 992px) {
+  
+.podverse-hero {
+padding: 0px 10px;
+}
+  .small-text {
+  font-size: 15px;
+  margin-bottom: 13px;
+}
+.hero-content h1 {
+  font-size: 62px;
+  font-weight: 700;
+}
+
+.desc {
+  max-width: 500px;
+}
+
+.listen-btn {
+  margin-top: 35px;
+  padding: 16px 34px;
+  border: none;
+  border-radius: 999px;
+  background: white;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+}

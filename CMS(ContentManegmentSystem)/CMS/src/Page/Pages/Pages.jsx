@@ -13,19 +13,24 @@ function Pages() {
     const [form, setForm] = useState(false)
     const [update, setUpdate] = useState(null)
     const [page, setPage] = useState(1)
-    const {SetBuilderPage}=useStore()
+    const { SetBuilderPage } = useStore()
     const Navigate = useNavigate()
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', form,page],
+        queryKey: ['repoData', form, page],
         queryFn: async () => {
-            try{
-                const response = await axios.get(`${PAGEAPI}?limit=6&page=${page}`)
-            console.log(response.data);
+            try {
+                const token =localStorage.getItem('token')
+                const response = await axios.get(
+                    `${PAGEAPI}?limit=6&page=${page}`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })
+                console.log(response.data);
 
-            return response.data
-            }catch(error){
+                return response.data
+            } catch (error) {
                 console.log(error.response?.data || error.message);
-                
+
             }
         }
     },)
@@ -136,7 +141,7 @@ function Pages() {
                     </table>
                 </div>
                 {/* Pagination */}
-                
+
 
                 {
                     (data?.totalPages != 1) &&

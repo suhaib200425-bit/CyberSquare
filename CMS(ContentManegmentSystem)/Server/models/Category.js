@@ -28,6 +28,12 @@ const CategorySchema = new mongoose.Schema({
     ref: "TemeTemplate",
     default: "6a0755c612155635815daaea"
   },
+  
+    auther: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null
+    },
 
   posts: [
     {

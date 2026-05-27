@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { BASEURL } from "../../assets/assets";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function TrendingNewsSection({
   paddingDesktop = { value: "" },
   paddingMobile = { value: "" },
-  margin = { value: "" }
+  margin = { value: "" },
+  titleHed = { value: "Trending" },
+  titleHedSize = { value: "25px" },
+  theme = { value: "rgba(80, 14, 80, 0.87)" }
 }) {
 
   const [posts, setPosts] = useState([])
   const [categories, setCategories] = useState([])
-  const [active, setActive] = useState("All")
+  const [active, setActive] = useState("")
   useEffect(() => {
     async function getAllPageData() {
       try {
 
         const [postResponse, categoryResponse] = await Promise.all([
-          axios.get(`${BASEURL}/api/post`),
+          axios.get(`${BASEURL}/api/post/get/by/category/${active}`),
           axios.get(`${BASEURL}/api/category`)
         ]);
 
@@ -33,7 +37,7 @@ export default function TrendingNewsSection({
       }
     }
     getAllPageData()
-  }, [])
+  }, [active])
   function dateFormate(date) {
 
     const formatted = new Date(date).toLocaleDateString("en-US", {
@@ -44,6 +48,8 @@ export default function TrendingNewsSection({
 
     return formatted;
   }
+
+  const Navigate = useNavigate()
 
   const isMobile = window.innerWidth < 768;
   return (
@@ -60,39 +66,44 @@ export default function TrendingNewsSection({
 
         <div className="flex items-center gap-4 w-full">
 
-          <h2 className="text-[28px] font-bold whitespace-nowrap">
-            Trending {active}
+          <h2 className="text-[28px] font-bold whitespace-nowrap" style={{
+            fontSize: titleHedSize.value
+          }}>
+            {titleHed.value}
           </h2>
 
-          <div className="w-full h-[2px] bg-red-400"></div>
+          <div className="w-full h-[2px] bg-red-400 "
+            style={{
+              backgroundColor: theme.value
+            }}></div>
 
         </div>
 
         {/* MENU */}
 
         <div className="flex  gap-5 text-[14px] text-gray-500 font-medium">
-          <button className=" font-semibold" 
-          style={{
-            color:active=="All"&&"black"
-          }}
-          onClick={()=>{
-            setActive(prev=>{
-              return "All"
-            })
-          }}>
+          <button className=" font-semibold"
+            style={{
+              color: active == "" && "black"
+            }}
+            onClick={() => {
+              setActive(prev => {
+                return ""
+              })
+            }}>
             All
           </button>
           {
             categories?.slice(0, 7).map(category => <button
-             style={{
-            color:active==category.title &&"black"
-          }}
-            onClick={()=>{
-            setActive(prev=>{
-              if(prev==category.title) return "All"
-              return category.title
-            })
-          }} className="hover:text-black transition">
+              style={{
+                color: active == category._id && "black"
+              }}
+              onClick={() => {
+                setActive(prev => {
+                  if (prev == category.title) return ""
+                  return category._id
+                })
+              }} className="hover:text-black transition">
               {category.title}
             </button>
             )
@@ -106,12 +117,15 @@ export default function TrendingNewsSection({
       {/* CONTENT */}
 
       {
-        posts ?
+        posts && posts.length ?
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
             {/* LEFT BIG CARD */}
 
             <div
+              onClick={() => {
+                Navigate(`/post/${posts[0]._id}`)
+              }}
               className="relative rounded-[12px] overflow-hidden h-[420px] bg-cover bg-center flex items-end p-6"
               style={{
                 backgroundImage: `url(${posts[0]?.banner})`
@@ -128,7 +142,11 @@ export default function TrendingNewsSection({
 
                 <div className="flex items-center gap-3 text-[12px] mb-4 flex-wrap">
 
-                  <span className="bg-red-500 px-3 py-1 rounded-full font-medium">
+                  <span
+                    style={{
+                      backgroundColor: theme.value
+                    }}
+                    className="bg-red-500 px-3 py-1 rounded-full font-medium">
                     {posts[0]?.category?.title}
                   </span>
 
@@ -153,6 +171,10 @@ export default function TrendingNewsSection({
               {posts?.slice(1, 4).map((item) => (
 
                 <div
+
+                  onClick={() => {
+                    Navigate(`/post/${item._id}`)
+                  }}
                   key={item._id}
                   className="flex gap-4 group cursor-pointer"
                 >
@@ -175,7 +197,10 @@ export default function TrendingNewsSection({
 
                     <div className="flex items-center gap-3 text-[12px] text-gray-500 flex-wrap mb-2">
 
-                      <span className="text-red-500 font-semibold">
+                      <span className="text-red-500 font-semibold"
+                        style={{
+                          color: theme.value
+                        }}>
                         {item?.category?.title}
                       </span>
 
@@ -185,7 +210,14 @@ export default function TrendingNewsSection({
 
                     </div>
 
-                    <h3 className="text-[22px] leading-[1.3] font-bold text-black group-hover:text-red-500 transition line-clamp-2">
+                    <h3
+                      onMouseEnter={(e) => {
+                        e.target.style.color = theme.value;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.color = "";
+                      }}
+                      className="text-[22px] leading-[1.3] font-bold text-black  transition line-clamp-2">
                       {item?.title}
                     </h3>
 
@@ -198,7 +230,9 @@ export default function TrendingNewsSection({
             </div>
 
           </div>
-          : <div className="text-[30px]">LOADING......</div>
+          : <div className="text-[30px]">{
+            "LOADING...."
+          }</div>
       }
 
     </section>

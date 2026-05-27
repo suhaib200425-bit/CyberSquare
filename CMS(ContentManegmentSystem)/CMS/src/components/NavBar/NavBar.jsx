@@ -3,7 +3,7 @@ import './NavBar.css'
 import { ProfileImage } from "../../assets/assets";
 import useStore from "../../Context/Zustand";
 function Navbar() {
-  const {SetActiveLeftMenu}=useStore()
+  const {SetActiveLeftMenu,user}=useStore()
   return (
     <div className="Navbar">
 
@@ -19,7 +19,7 @@ function Navbar() {
       <div className="rightSide">
         <div className="profileimage"style={{backgroundImage:`url(${ProfileImage})`}}></div>
         <div className="ProfileName">
-          <span>Suhaib k</span>
+          <span>{user?.username}</span>
           <i class="fa-solid fa-angle-down"></i>
         </div>
       </div>

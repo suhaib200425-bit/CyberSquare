@@ -1,0 +1,60 @@
+.LoginForm{
+    width: 350px;
+    /* height: 450px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+.inputBoxField{
+    margin-top: 10px;
+    width: 90%;
+}
+.inputBoxField label{
+    color: rgba(241, 230, 230, 0.795);
+}
+.inputBoxField .field{
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    backdrop-filter: blur(20px);
+    border :1px solid white
+
+}
+
+.inputBoxField .field input:focus{
+    overflow: hidden;
+    border: none ;
+    background-color: none;
+    outline: none;
+}
+.inputBoxField .field input{
+    padding: 0px 10px;
+    height: 100%;
+    width: 100%;
+}
+.LoginForm  button{
+    width: 90%;
+    background-color: white;
+    color: black;
+margin-top: 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.LoginForm .bottomtextbtn{
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+}
+.bottomtextbtn .divider{
+    
+    width: 2px;
+    height: 100%;
+    background-color: aliceblue;
+}

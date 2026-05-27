@@ -53,6 +53,8 @@ export const DynamicRenderer = ({ code, props }) => {
             const fixedCode = code
                 .replace(/\\u003C/g, "<")
                 .replace(/\\u003E/g, ">");
+//             const cleanedCode =
+//   JSON.parse(JSON.stringify(code));
 
             const compiled = Babel.transform(fixedCode, {
                 presets: ["react"],
@@ -110,7 +112,9 @@ export const DynamicRenderer = ({ code, props }) => {
 
         } catch (err) {
 
+            console.log("err");
             console.log(err);
+            console.log("err end");
 
             return null;
         }

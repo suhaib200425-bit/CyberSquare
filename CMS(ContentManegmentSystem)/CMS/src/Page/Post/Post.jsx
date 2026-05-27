@@ -9,21 +9,34 @@ import { queryClient } from '../../Context/Tanstack';
 import Pagination from '../../components/Pagination/Pagination';
 
 function Post() {
+    const token = localStorage.getItem("token")
     const [form, setForm] = useState(false)
-    const [page,setPage] =useState(1)
+    const [page, setPage] = useState(1)
     const [update, setUpdate] = useState(null)
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', form,page],
+        queryKey: ['repoData', form, page],
         queryFn: async () => {
-            const response = await axios.get(`${POSTAPI}?limit=6&page=${page}`)
-            return response.data
+            try {
+                const response = await axios.get(`${POSTAPI}?limit=6&page=${page}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                return response.data
+            } catch (error) {
+                alert(error.response?.data?.message || error.message)
+            }
         }
 
     })
 
     const deleteMutation = useMutation({
         mutationFn: async (PostId) => {
-            await axios.delete(`${POSTAPI}/${PostId}`);
+            await axios.delete(`${POSTAPI}/${PostId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
         },
 
         onSuccess: (_, PostId) => {
@@ -32,7 +45,7 @@ function Post() {
         },
 
         onError: (error) => {
-            console.log("Delete error:", error.response?.data || error.message);
+            console.log("Delete error:", error.response?.data?.message || error.message);
         }
     });
 
@@ -131,7 +144,7 @@ function Post() {
                 </div>
 
                 {/* Pagination */}
-                
+
 
                 {
                     (data?.totalPages != 1) &&

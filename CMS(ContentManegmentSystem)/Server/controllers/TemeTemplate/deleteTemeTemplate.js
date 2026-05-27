@@ -1,3 +1,6 @@
+const Category = require("../../models/Category");
+const Menu = require("../../models/Menu");
+const Page = require("../../models/Page");
 const ThemeTemplate = require("../../models/ThemeTemplate");
 
 // DELETE USER
@@ -8,7 +11,6 @@ const deleteThemeTemplate = async (req, res) => {
         const deletedthemetemplate = await ThemeTemplate.findByIdAndDelete(
             req.params.TemeTemplateId
         );
-
         if (!deletedthemetemplate) {
 
             return res.status(404).json({
@@ -17,6 +19,17 @@ const deleteThemeTemplate = async (req, res) => {
             });
 
         }
+        await Page.deleteMany({
+            theme: req.params.TemeTemplateId,
+        });
+
+        await Category.deleteMany({
+            theme: req.params.TemeTemplateId,
+        });
+        await Menu.deleteMany({
+            theme: req.params.TemeTemplateId,
+        });
+
 
         res.status(200).json({
             success: true,

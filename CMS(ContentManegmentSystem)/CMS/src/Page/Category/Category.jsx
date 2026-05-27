@@ -11,18 +11,21 @@ function Category() {
     const [update, setUpdate] = useState(null)
     const Navigate = useNavigate()
     const [form, setForm] = useState(false)
-    const [page,setPage] = useState(1)
+    const [page, setPage] = useState(1)
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', form,page],
+        queryKey: ['repoData', form, page],
         queryFn: async () => {
-            try{
-                const response = await axios.get(`${CATEGORYAPI}?limit=6&page=${page}`)
-            console.log(response.data);
+            try {
+                const token = localStorage.getItem('token')
+                const response = await axios.get(`${CATEGORYAPI}?limit=6&page=${page}`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                console.log(response.data);
 
-            return response.data
-            }catch(error){
+                return response.data
+            } catch (error) {
                 console.log(error.response?.data || error.message);
-                
+
                 alert(error.response?.data?.message || error.message)
             }
         }
@@ -89,6 +92,7 @@ function Category() {
                     </div>
                     <button onClick={() => {
                         setForm(true)
+                        setUpdate(null)
                     }} className="p-[10px] rounded-[5px] text-white bg-[var(--back-color)] flex items-center">
                         <i className="fa-solid fa-plus"></i>
                         <span className="ml-2">New Category</span>
@@ -124,7 +128,7 @@ function Category() {
 
                                     <td className="px-6 py-4">
                                         <span className="px-6 py-4 font-medium text-gray-800">
-                                            {category.parent}
+                                            {category.theme}
                                         </span>
                                     </td>
 

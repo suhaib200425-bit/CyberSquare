@@ -13,7 +13,12 @@ export default function PageForm({ setFormClose, update }) {
     useEffect(() => {
         const getPage = async () => {
             try {
-                const response = await axios.get(`${PAGEAPI}/${update}`)
+                const token = localStorage.getItem('token')
+                const response = await axios.get(`${PAGEAPI}/${update}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 setForm({
                     title: response.data.data.title,
                     slug: response.data.data.slug,
@@ -37,7 +42,12 @@ export default function PageForm({ setFormClose, update }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(PAGEAPI, form)
+            const token = localStorage.getItem('token')
+            const response = await axios.post(PAGEAPI, form, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             console.log(response.data);
             setFormClose(false)
         } catch (error) {
@@ -50,7 +60,13 @@ export default function PageForm({ setFormClose, update }) {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.patch(`${PAGEAPI}/${update}`, form)
+            const token = localStorage.getItem('token')
+            
+            const response = await axios.patch(`${PAGEAPI}/${update}`, form,{
+                headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+            })
             setFormClose(false)
         } catch (error) {
             console.log(error.response.data || error.message);
@@ -58,7 +74,7 @@ export default function PageForm({ setFormClose, update }) {
     }
     return (
         <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-            <form className="bg-white w-[600px] rounded-lg p-6 shadow-lg" onSubmit={update?handleUpdate:handleSubmit}>
+            <form className="bg-white w-[600px] rounded-lg p-6 shadow-lg" onSubmit={update ? handleUpdate : handleSubmit}>
 
                 <h2 className="text-xl font-semibold mb-4">New Page</h2>
 
@@ -108,10 +124,10 @@ export default function PageForm({ setFormClose, update }) {
                         Cancel
                     </button>
                     <button
-                        onClick={update?handleUpdate:handleSubmit}
+                        onClick={update ? handleUpdate : handleSubmit}
                         className="px-4 py-2 bg-blue-600 text-white rounded"
                     >
-                        {update?'Update':"Save"}
+                        {update ? 'Update' : "Save"}
                     </button>
                 </div>
 

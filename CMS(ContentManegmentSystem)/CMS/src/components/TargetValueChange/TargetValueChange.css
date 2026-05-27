@@ -14,9 +14,17 @@
 }
 
 
-.TargetValueChange .ValueBox input{
+.TargetValueChange .ValueBox .textinput{
     width: 100%;
     background-color: white;
     padding: 5px 10px;
+border-radius: 5px;
+}
+
+.TargetValueChange .ValueBox .colorinput{
+    width: 30px;
+    height: 30px;
+    margin: 0px;
+    background-color: white;
 border-radius: 5px;
 }

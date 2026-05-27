@@ -3,6 +3,9 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/DB");
 const { dashboard } = require("./controllers/dashboard");
+const authMiddleware = require("./middleware/jwt");
+const path = require("path");
+
 
 // Routes import
 // const userRoutes = require("./routes/userRoutes");
@@ -40,7 +43,7 @@ app.use(express.json());
 //DB CONNECTION 
 connectDB()
 
-app.get("/api/dashboard",dashboard)
+app.get("/api/dashboard",authMiddleware,dashboard)
 
 //end points
 app.use("/api/template", require('./routes/templateRoutes'));
@@ -55,6 +58,11 @@ app.use("/api/footer/template", require('./routes/footerTemplateRoutes'));
 app.use("/api/theme/template", require('./routes/themeTemplateRoutes'));
 app.use("/api/auth/template", require('./routes/authRouters'));
 app.use("/api/visit", require('./routes/visitRouter'));
+app.use("/api/web", require('./routes/webRouters'));
+
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 // Default route
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
@@ -69,6 +77,8 @@ app.use((req, res) => {
     });
 
 });
+
+
 
 const PORT = process.env.PORT || 5000;
 

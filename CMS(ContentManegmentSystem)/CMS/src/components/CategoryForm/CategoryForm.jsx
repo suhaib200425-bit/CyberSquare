@@ -3,7 +3,7 @@ import { CATEGORYAPI } from "../../assets/assets";
 import axios from "axios"
 import { useEffect } from "react";
 export default function CategoryForm({ setFormClose, update }) {
-    const [SelectionCategory,setSelectionCategory]=useState([])
+    const [SelectionCategory, setSelectionCategory] = useState([])
     const [form, setForm] = useState({
         title: "",
         slug: '/',
@@ -13,7 +13,13 @@ export default function CategoryForm({ setFormClose, update }) {
     useEffect(() => {
         const getUpdateCategory = async () => {
             try {
-                const response = await axios.get(`${CATEGORYAPI}/${update}`)
+                const token = localStorage.getItem("token")
+                const response = await axios.get(`${CATEGORYAPI}/${update}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+
+                    },
+                })
                 setForm({
                     title: response.data.data.title,
                     slug: response.data.data.slug,
@@ -22,17 +28,24 @@ export default function CategoryForm({ setFormClose, update }) {
                 })
                 console.log(response.data)
             } catch (error) {
-                console.log(error.response.data || error.message);
+                console.log(error.response?.data || error.message);
+                alert(error.response?.data?.message || error.message);
             }
         }
 
         const getSelectionCategory = async () => {
             try {
-                const response = await axios.get(`${CATEGORYAPI}/all/categoryname`)
+                const token = localStorage.getItem('token')
+                const response = await axios.get(`${CATEGORYAPI}/all/categoryname`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 setSelectionCategory(response.data.data)
                 console.log(response.data)
             } catch (error) {
-                console.log(error.response.data || error.message);
+                alert(error.response?.data?.message || error.message);
+                console.log(error.response?.data || error.message);
             }
         }
         if (update) getUpdateCategory()
@@ -49,7 +62,13 @@ export default function CategoryForm({ setFormClose, update }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(CATEGORYAPI, form)
+            const token = localStorage.getItem('token')
+
+            const response = await axios.post(CATEGORYAPI, form, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             console.log(response.data);
             setFormClose(false)
         } catch (error) {
@@ -61,7 +80,13 @@ export default function CategoryForm({ setFormClose, update }) {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.patch(`${CATEGORYAPI}/${update}`, form)
+            const token = localStorage.getItem('token')
+
+            const response = await axios.patch(`${CATEGORYAPI}/${update}`, form, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             setFormClose(false)
         } catch (error) {
             console.log(error.response?.data || error.message);
@@ -71,9 +96,9 @@ export default function CategoryForm({ setFormClose, update }) {
 
     return (
         <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-            <form className="bg-white w-[600px] rounded-lg p-6 shadow-lg"  onSubmit={update?handleUpdate:handleSubmit}>
+            <form className="bg-white w-[600px] rounded-lg p-6 shadow-lg" onSubmit={update ? handleUpdate : handleSubmit}>
 
-                <h2 className="text-xl font-semibold mb-4">New post</h2>
+                <h2 className="text-xl font-semibold mb-4">New Category</h2>
 
                 {/* Title */}
                 <div className="mb-4">

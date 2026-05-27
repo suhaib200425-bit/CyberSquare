@@ -15,12 +15,13 @@ import TargetValueChange from '../../components/TargetValueChange/TargetValueCha
 
 import { useNavigate } from 'react-router-dom';
 function DesignPage() {
+    const token = localStorage.getItem("token")
     const [Page, setPage] = useState()
     const [ReactTemplate, setReactTemplate] = useState({})
     const [Target, setTarget] = useState(null)
     const { PageId } = useParams()
 
-const Navigate=useNavigate()
+    const Navigate = useNavigate()
     function renderTemplate(html, values) {
         let output = html;
 
@@ -37,7 +38,12 @@ const Navigate=useNavigate()
         console.log(Page);
         console.log("End Page");
         try {
-            const response = await axios.patch(`${PAGEAPI}/${PageId}`, { sections: Page?.sections })
+            
+            const response = await axios.patch(`${PAGEAPI}/${PageId}`, { sections: Page?.sections },{
+                 headers: {
+    Authorization: `Bearer ${token}`
+  }
+            })
             console.log(response.data);
             console.log('Updated');
             alert('Updated')
@@ -47,14 +53,16 @@ const Navigate=useNavigate()
             alert(error.message)
         }
     }
-
     useEffect(() => {
         Promise.all([
             axios.get(REACTTEPLATEAPI),
-            axios.get(`${PAGEAPI}/${PageId}`)
+            axios.get(`${PAGEAPI}/${PageId}`,{
+                 headers: { Authorization: `Bearer ${token}` }
+            })
         ])
             .then(([res1, res2]) => {
                 console.log('PROMISE RESPONSE');
+                
                 console.log(res2.data.data);
                 console.log(res1.data);
                 console.log('END PROMISE RESPONSE');
@@ -63,7 +71,8 @@ const Navigate=useNavigate()
                 setPage(res2.data.data);
             })
             .catch(err => {
-                console.log("Error:", err.message);
+               alert("Error:", err.response?.data?.message || err.message);
+                console.log("Error:",err.response?.data || err.message);
             });
     }, []);
 
@@ -82,8 +91,8 @@ const Navigate=useNavigate()
 
         [updated[index - 1], updated[index]] = [updated[index], updated[index - 1]];
 
-        setPage(prev=>{
-            return {...prev,sections:updated}
+        setPage(prev => {
+            return { ...prev, sections: updated }
         });
     };
 
@@ -91,14 +100,14 @@ const Navigate=useNavigate()
 
         const updated = [...Page?.sections];
 
-        if (index+1 === updated.length) return;
+        if (index + 1 === updated.length) return;
 
 
         [updated[index + 1], updated[index]] =
             [updated[index], updated[index + 1]];
 
-        setPage(prev=>{
-            return {...prev,sections:updated}
+        setPage(prev => {
+            return { ...prev, sections: updated }
         });
     };
 
@@ -132,8 +141,8 @@ const Navigate=useNavigate()
                     <div className="leftBar">
                         <div className="flex gap-2">
                             <button className="w-full py-2 rounded-[5px] bg-[#f5f5f5]">Prev</button>
-                            <button onClick={()=>{
-                                 handleSavepage()
+                            <button onClick={() => {
+                                handleSavepage()
                             }} className="w-full py-2 rounded-[5px] bg-black text-white">Save</button>
                         </div>
                         <p>Sections</p>
@@ -141,22 +150,22 @@ const Navigate=useNavigate()
                             <div className="sectiondiv" onClick={() => {
                                 Navigate('/navbars')
                             }}>
-                                <i class="fa-solid fa-arrow-pointer"></i>   
+                                <i class="fa-solid fa-arrow-pointer"></i>
                                 <p>NavBar</p>
                             </div>
                             <div className="sectiondiv" onClick={() => {
-                               alert('footer soon...')
+                                alert('footer soon...')
                             }}>
-                               <i class="fa-solid fa-shoe-prints"></i>
+                                <i class="fa-solid fa-shoe-prints"></i>
                                 <p>Footer</p>
                             </div>
                             <div className="sectiondiv" onClick={() => {
-                               Navigate('/auth')
+                                Navigate('/auth')
                             }}>
                                 <i class="fa-solid fa-unlock-keyhole"></i>
                                 <p>Authetication</p>
                             </div>
-                            
+
                         </div>
                         <p className='mt-1'>Components</p>
                         <div className="template">
@@ -177,18 +186,18 @@ const Navigate=useNavigate()
                                 return <div key={i} className={Target?.index == i ? "ActiveReactTemplate" : "ReactTemplate"} onClick={() => {
                                     if (Target?.index == i) setTarget(null)
                                     else setTarget({ ...elem, index: i })
-                                
-                                console.log(elem);
-                                console.log('elem');
+
+                                    console.log(elem);
+                                    console.log('elem');
                                 }}>
                                     <DynamicRenderer key={elem._id} code={elem?.template} props={elem?.props} />
                                     <div className="templateManeger">
                                         {!Target && Target?.index != i && <div className="icon"><i class="fa-solid fa-angle-up" style={{ color: 'green' }}
-                                        onClick={(e)=>{
-                                            e.stopPropagation()
-                                            moveUp(i)
-                                        }}></i></div>}
-                                        {!Target && Target?.index != i && <div className="icon"onClick={(e)=>{
+                                            onClick={(e) => {
+                                                e.stopPropagation()
+                                                moveUp(i)
+                                            }}></i></div>}
+                                        {!Target && Target?.index != i && <div className="icon" onClick={(e) => {
                                             e.stopPropagation()
                                             moveDown(i)
                                         }}><i class="fa-solid fa-angle-down" style={{ color: 'orange' }}></i></div>}

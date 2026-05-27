@@ -16,15 +16,14 @@ const reactTemplateSchema = new mongoose.Schema({
 
     template: {
         type: String,
-        required: true
+        // required: true
     },
     banner: {
         type: String,
-        required: true,
         default: null
     },
     props: {
-        required: true,
+        // required: true,
         type: Map,
         of: propseSchema
     }

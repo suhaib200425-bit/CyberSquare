@@ -10,17 +10,18 @@ const getPage = require("../controllers/Page/getPage");
 const deletePage = require("../controllers/Page/deletePage");
 const BuildingPages = require("../controllers/Page/BuildingPages");
 const getPageBySlug = require("../controllers/Page/getPageBySlug");
+const authMiddleware = require("../middleware/jwt");
 
 
 const router = express.Router();
 
-router.post("/", createPage);
-router.get("/",getPages)
+router.post("/",authMiddleware, createPage);
+router.get("/",authMiddleware,getPages)
 router.get("/builder",BuildingPages)
 router.get("/:PageId",getPage)
 router.get("/slug/:slug",getPageBySlug)
 router.get("/title/:PageTitle",getPage)
-router.patch("/:PageId",updatePage)
+router.patch("/:PageId",authMiddleware,updatePage)
 router.delete("/:PageId",deletePage)
 // router.get("/", (req, res) => {
 //   res.send("PAGE API is running 🚀");

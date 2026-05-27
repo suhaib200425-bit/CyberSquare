@@ -17,9 +17,7 @@ function TargetValueChange({ TargetValue, setPage, onChangeFunction }) {
 
     }, [TargetValue])
 
-    const HandleChangeText = (e, i) => {
-        const changedValue = e.target.value
-        const Keyname = e.target.name
+    const HandleChangeText = (changedValue, Keyname, i) => {
 
         if (setPage) {
             setPage((prev) => ({
@@ -40,7 +38,7 @@ function TargetValueChange({ TargetValue, setPage, onChangeFunction }) {
                 ),
             }));
         } else {
-            onChangeFunction(Keyname,changedValue)
+            onChangeFunction(Keyname, changedValue)
         }
 
         setTemplateValues((prev, index) => {
@@ -57,12 +55,62 @@ function TargetValueChange({ TargetValue, setPage, onChangeFunction }) {
     return (
         <div className='TargetValueChange'>
             {
-                TemplateValues?.map(((elem, i) => {
+                TemplateValues?.map(((elem, index) => {
                     return <div className="ValueBox mb-2">
-                        <p>{elem.label}</p>
-                        <input type="text" name={elem.name} onChange={(e) => {
-                            HandleChangeText(e, i)
-                        }} value={elem.value} />
+
+                        {
+                            elem.type == "text" && <div className=''>
+                                <p>{elem.label}</p>
+                                <input type="text" className='textinput' name={elem.name} onChange={(e) => {
+
+                                    const changedValue = e.target.value
+                                    const Keyname = e.target.name
+                                    HandleChangeText(changedValue, Keyname, index)
+
+                                }} value={elem.value} />
+                            </div>
+                        }
+                        {
+                            elem.type == "color" && <div className='flex items-center gap-3'>
+                                <p>{elem.label}</p>
+                                <input type="color" className='colorinput' name={elem.name} onChange={(e) => {
+                                        console.log(e.target.value);
+                                        
+                                    const changedValue = e.target.value
+                                    const Keyname = e.target.name
+                                    HandleChangeText(changedValue, Keyname, index)
+                                }} value={elem.value} />
+                            </div>
+                        }{
+                            elem.type == "image" && <div className=''>
+                                <p>{elem.label}</p>
+                                <img src={elem.value} width={"100%"} alt="EMPTY" />
+                                <input type="text" className='textinput' name={elem.name} onChange={(e) => {
+                                        console.log(e.target.value);
+                                        
+                                    const changedValue = e.target.value
+                                    const Keyname = e.target.name
+                                    HandleChangeText(changedValue, Keyname, index)
+                                }} value={elem.value} />
+                            </div>
+                                // : <p>{elem.type} = color text image</p>
+                        }
+                        {
+                            elem.type != "image" &&
+                            elem.type != "text" &&
+                            elem.type != "color" && <div className=''>
+                                <p>{elem.label}</p>
+                                <input type="text" className='textinput' name={elem.name} onChange={(e) => {
+                                        console.log(e.target.value);
+                                        
+                                    const changedValue = e.target.value
+                                    const Keyname = e.target.name
+                                    HandleChangeText(changedValue, Keyname, index)
+                                }} value={elem.value} />
+                            </div>
+                                // : <p>{elem.type} = color text image</p>
+                        }
+
                     </div>
                 }))
             }

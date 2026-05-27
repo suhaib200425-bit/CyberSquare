@@ -3,8 +3,12 @@ const slugify = require("slugify");
 
 const createPost = async (req, res) => {
   try {
-    const { title, category, content, excerpt, status,banner } = req.body;
-
+    const { title, category, content, excerpt, status, banner } = req.body;
+    const user = req.user
+    if (user.role != "admin") res.status(400).json({
+      success: false,
+      message: "Post Created at only admin"
+    });
     // validation
     if (!title || !category || !content) {
       return res.status(400).json({
@@ -24,7 +28,8 @@ const createPost = async (req, res) => {
       category,
       content,
       excerpt,
-      status
+      status,
+      auther:user.id
     });
 
     res.status(201).json({
@@ -47,9 +52,9 @@ const createPost = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Server error",
-      error:error.message
+      error: error.message
     });
   }
 };
 
-module.exports=createPost
+module.exports = createPost

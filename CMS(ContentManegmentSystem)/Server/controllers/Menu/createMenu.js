@@ -1,23 +1,30 @@
 const Menu = require("../../models/Menu");
-const ThemeTemplate = require("../../models/ThemeTemplate")
+const ThemeTemplate = require("../../models/ThemeTemplate");
+const WEB = require("../../models/WEB");
 const createMenu = async (req, res) => {
   try {
     const { title, slug, page } = req.body;
 
     if (!title || !slug || !page) return res.status(400).json({ success: false, message: "All field is required" });
 
-    const template = await ThemeTemplate.findOne({ checked: true })
-
-    if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
+    const activetemplate = await WEB.findOne({ admin: req.user.id })
+    if (!activetemplate) {
+      return res.status(404).json({
+        success: false,
+        message: "No active template found",
+      });
+    }
 
     const existPageTitle = await Menu.findOne({
-      theme: template._id,
+      theme: activetemplate.theme,
+      auther: activetemplate.admin,
       title
     });
 
     if (existPageTitle) return res.status(400).json({ success: false, message: "Menu Title already used" });
     const existPageSlug = await Menu.findOne({
-      theme: template._id,
+      auther: activetemplate.admin,
+      theme: activetemplate.theme,
       slug
     });
     if (existPageSlug) return res.status(400).json({ success: false, message: "Menu Router already used" });
@@ -27,7 +34,8 @@ const createMenu = async (req, res) => {
       title,
       slug,
       page: page || null,
-      theme:template._id
+      auther: activetemplate.admin,
+      theme: activetemplate.theme,
     });
 
 

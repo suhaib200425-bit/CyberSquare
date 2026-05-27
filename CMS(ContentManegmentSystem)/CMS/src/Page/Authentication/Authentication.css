@@ -1,0 +1,217 @@
+.Authentication {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.Authentication .content{
+    z-index: 0;
+    position: absolute;
+}
+
+.Authentication .content.leftBox{
+    left: 0;
+}
+.Authentication .content.rightBox{
+    right: 0;
+}
+.Authentication .content h1{
+    font-size: 50px;
+    font-weight: 800;
+    color: black;
+}
+.Authentication .content p{
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+}
+
+.Authentication .leftformBox,
+.Authentication .rightformBox{
+    z-index: 10;
+    width: 350px;
+    height: 500px;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Authentication .overlay {
+    position: absolute;
+    transform: 0.5s;
+    background: linear-gradient(90deg,
+            #7f5af0 0%,
+            #d946ef 50%,
+            #ff8906 100%);
+    top: 0;
+    left: 0;
+    /* border-radius: 20px; */
+    /* z-index: 10; */
+    width: 100%;
+    height: 100%;
+    
+    
+}
+
+.overlay.OverlayShiftRight {
+    animation: OverlayShiftLeft 1.5s ease-in-out;
+    clip-path: polygon(0% 0%,
+            70% 0%,
+            30% 100%,
+            0% 100%);
+}
+
+.overlay.OverlayShiftLeft {
+    animation: OverlayShiftRight 1.5s ease-in-out;
+    clip-path: polygon(30% 0%,
+            100% 0%,
+            100% 100%,
+            70% 100%);
+}  
+
+/* .Authentication .leftBox {
+    opacity: 0;
+    transform: translate(-10%);
+} */
+/* 
+.Authentication .rightBox {
+    
+    transform: translate(150%);
+} */
+
+.rightBoxSlidRight {
+    transform: translate(0%);
+    opacity: 1;
+    animation: rightBoxSlidRight 2s ease-in-out;
+}
+
+.rightBoxSlidLeft {
+    opacity: 0;
+    animation: rightBoxSlidLeft 2s ease-in-out;
+}
+
+.leftBoxSlidRight {
+    opacity: 0;
+    animation: leftBoxSlidLeft 2s ease-in-out;
+}
+
+.leftBoxSlidLeft {
+    transform: translate(0%);
+    opacity: 1;
+    animation: leftBoxSlidRight 2s ease-in-out;
+}
+
+@keyframes OverlayShiftLeft {
+    0% {
+z-index: 99;
+        clip-path: polygon(30% 0%,
+                100% 0%,
+                100% 100%,
+                70% 100%);
+    }
+
+    50% {
+
+z-index: 99;
+        clip-path: polygon(0% 0%,
+                100% 0%,
+                100% 100%,
+                0% 100%);
+    }
+
+    100% {
+        z-index: 0;
+        clip-path: polygon(0% 0%,
+                70% 0%,
+                30% 100%,
+                0% 100%);
+    }
+}
+
+@keyframes OverlayShiftRight {
+    0% {
+z-index: 99;
+        clip-path: polygon(0% 0%,
+                70% 0%,
+                30% 100%,
+                0% 100%);
+
+    }
+
+    50% {
+
+z-index: 99;
+        clip-path: polygon(0% 0%,
+                100% 0%,
+                100% 100%,
+                0% 100%);
+    }
+
+    100% {
+z-index: 99;
+        clip-path: polygon(30% 0%,
+                100% 0%,
+                100% 100%,
+                70% 100%);
+    }
+}
+
+@keyframes rightBoxSlidRight {
+    0% {
+        opacity: 0;
+        transform: translateX(150%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes rightBoxSlidLeft {
+    0% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(150%);
+    }
+}
+
+@keyframes leftBoxSlidRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-150%);
+
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+}
+
+@keyframes leftBoxSlidLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(0%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(-150%);
+    }
+}
+
+/* .OverlayShiftLeft {
+    animation: OverlayShiftLeft 1s ease-in-out;
+} */
+
+/* .OverlayShiftRight {
+    animation: OverlayShiftRight 1s ease-in-out;
+} */

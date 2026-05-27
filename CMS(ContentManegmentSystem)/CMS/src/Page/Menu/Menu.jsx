@@ -14,12 +14,21 @@ function Menu() {
     const {SetBuilderPage}=useStore()
     const Navigate = useNavigate()
     const { isPending, error, data } = useQuery({
+
         queryKey: ['repoData', form],
         queryFn: async () => {
-            const response = await axios.get(MENUAPI)
+            try{
+                const token = localStorage.getItem('token')
+                const response = await axios.get(MENUAPI,{
+                     headers: { Authorization: `Bearer ${token}` }
+
+                })
             console.log(response.data);
 
             return response.data
+            }catch(error){
+                alert(error.response?.data?.message || error.message)
+            }
         }
     },)
 
@@ -79,11 +88,12 @@ function Menu() {
                                 <tr key={index} className="hover:bg-gray-50 transition">
 
                                     <td className="px-6 py-4 font-medium text-gray-800">
-                                        {menu.title}
+                                        {menu?.title}
                                     </td>
 
+
                                     <td className="px-6 py-4 text-gray-500">
-                                        {menu.slug}
+                                        {menu?.slug}
                                     </td>
 
                                     <td className="px-6 py-4 text-gray-500">
@@ -111,7 +121,7 @@ function Menu() {
                     </table>
                 </div>
             </div>
-            {form && <FormPage mutation formname={'menu'} setForm={setForm} update={update} />}
+            {form && <FormPage  formname={'menu'} setForm={setForm} update={update} />}
         </div>
     )
 }

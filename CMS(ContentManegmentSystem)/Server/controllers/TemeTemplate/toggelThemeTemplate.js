@@ -1,30 +1,115 @@
-
-const ThemeTemplate = require("../../models/ThemeTemplate");
+const Category = require("../../models/Category");
+const Menu = require("../../models/Menu");
+const Page = require("../../models/Page");
+const WEB = require("../../models/WEB");
 
 const toggelThemeTemplate = async (req, res) => {
     try {
         const { TemeTemplateId } = req.params;
+        const user = req.user;
 
-        const theme = await ThemeTemplate.findById(TemeTemplateId);
-        if (!theme) {
-            return res.status(404).json({ message: "theme not found" });
+        const pages = await Page.find({ theme: TemeTemplateId, auther: null });
+        const categories = await Category.find({ theme: TemeTemplateId, auther: null });
+        const menus = await Menu.find({ theme: TemeTemplateId, auther: null });
+
+        if (
+            pages.length === 0 &&
+            categories.length === 0 &&
+            menus.length === 0
+        ) {
+            return res.status(404).json({
+                message: "Page, Menu and Category not found",
+            });
         }
-        // 🔥 ellam false aakkuka
-        await ThemeTemplate.updateMany({}, { checked: false });
 
-        // 🔥 selected one true aakkuka
-        theme.checked = true;
+        // Pages
+        for (const item of pages) {
+            const existPage = await Page.findOne({
+                title: item.title,
+                auther: user.id,
+                theme: TemeTemplateId
+            });
 
-        await theme.save();
+            if (!existPage) {
+                const data = item.toObject();
+
+                delete data._id;
+                delete data.__v;
+                delete data.createdAt;
+                delete data.updatedAt;
+
+                await Page.create({
+                    ...data,
+                    auther: user.id,
+                });
+            }
+        }
+
+        // Categories
+        for (const item of categories) {
+            const existCategory = await Category.findOne({
+                title: item.title,
+                auther: user.id,
+                theme: TemeTemplateId
+            });
+
+            if (!existCategory) {
+                const data = item.toObject();
+
+                delete data._id;
+                delete data.__v;
+                delete data.createdAt;
+                delete data.updatedAt;
+
+                await Category.create({
+                    ...data,
+                    auther: user.id,
+                });
+            }
+        }
+
+        // Menus
+        for (const item of menus) {
+
+
+            const existMenu = await Menu.findOne({
+                title: item.title,
+                theme: TemeTemplateId,
+                auther: user.id,
+            });
+            console.log("existMenu");
+            console.log(existMenu);
+            if (!existMenu) {
+                const data = item.toObject();
+
+                delete data._id;
+                delete data.__v;
+                delete data.createdAt;
+                delete data.updatedAt;
+
+                await Menu.create({
+                    ...data,
+                    auther: user.id,
+                });
+            }
+        }
+        console.log("okey");
+
+        const selected = await WEB.findOneAndUpdate(
+            { admin: user.id },
+            { theme: TemeTemplateId },
+            { new: true }
+        );
 
         res.status(200).json({
             success: true,
-            data: theme,
+            data: selected,
         });
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: error.message,
+            message: "server error",
+            error: error.message,
         });
     }
 };

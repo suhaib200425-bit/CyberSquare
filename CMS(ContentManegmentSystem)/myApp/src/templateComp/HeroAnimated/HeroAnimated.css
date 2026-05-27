@@ -1,0 +1,15 @@
+.HeroAnimated{
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+.HeroAnimated img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex: 0 0 100%;
+     width: 100%;
+    height: 100vh;
+}

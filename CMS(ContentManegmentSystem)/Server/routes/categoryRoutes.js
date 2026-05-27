@@ -7,14 +7,15 @@ const updateCategory = require("../controllers/Category/updateCategory");
 const getCategories = require("../controllers/Category/getCategories");
 const getCategoriesAndId = require("../controllers/Category/getCategoriesAndId");
 const getCategory = require("../controllers/Category/getCategory");
+const authMiddleware = require("../middleware/jwt");
 
 
 const router = express.Router();
 
-router.post("/", createCategory);
-router.get("/", getCategories);
+router.post("/",authMiddleware ,createCategory);
+router.get("/", authMiddleware,getCategories);
 router.delete("/:CategoryId",deleteCategory)
-router.patch("/:CategoryId",updateCategory)
+router.patch("/:CategoryId",authMiddleware,updateCategory)
 router.get("/:CategoryId", getCategory);
 router.get("/all/categoryname", getCategoriesAndId);
 // router.get("/", getTemplates);

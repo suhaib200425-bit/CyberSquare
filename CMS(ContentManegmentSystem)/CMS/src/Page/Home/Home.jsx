@@ -15,10 +15,15 @@ function Home() {
     useEffect(() => {
         const getDashboard = async () => {
             try {
-
-                const response = await axios.get(DASHBOARDAPI)
+                const token = localStorage.getItem('token')
+                const response = await axios.get(DASHBOARDAPI, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 setDashboard(response.data)
             } catch (err) {
+                alert(err.response?.data?.message || err.message)
                 console.log(err.response?.data || err.message);
 
             }
@@ -31,9 +36,9 @@ function Home() {
             <div className="Content">
 
 
-                
-                    <h2 className='hed'>Dashboard</h2>
-                    <p>A live overview of your content and audience.</p>
+
+                <h2 className='hed'>Dashboard</h2>
+                <p>A live overview of your content and audience.</p>
 
 
                 <div className="RowItems">

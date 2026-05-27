@@ -1,19 +1,24 @@
 const Menu = require("../../models/Menu");
 const ThemeTemplate = require("../../models/ThemeTemplate");
+const WEB = require("../../models/WEB");
 
 const updateMenu = async (req, res) => {
   try {
     const { MenuId } = req.params;
 
-    const template = await ThemeTemplate.findOne({ checked: true })
-    
-    if (!template) return res.status(400).json({ success: false, message: "please Select Template" });
-    
+   const activetemplate = await WEB.findOne({ admin: req.user.id })
+       if (!activetemplate) {
+         return res.status(404).json({
+           success: false,
+           message: "No active template found",
+         });
+       }
+
     const updatedMenu = await Menu.findByIdAndUpdate(
       MenuId,
       {
         ...req.body,
-        theme:template._id
+        theme:activetemplate.theme
       },
       {
         returnDocument: "after",   // ✅ updated data return

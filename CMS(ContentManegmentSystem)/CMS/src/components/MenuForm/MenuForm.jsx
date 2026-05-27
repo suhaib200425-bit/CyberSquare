@@ -8,12 +8,18 @@ export default function MenuForm({ setFormClose, update }) {
         slug: "/",
         page: 0,
     });
-    const [pages, setPages] = useState([])
 
+    const [pages, setPages] = useState([])
+const token = localStorage.getItem('token')
     useEffect(() => {
+        
         const getMenu = async () => {
             try {
-                const response = await axios.get(`${MENUAPI}/${update}`)
+                const response = await axios.get(`${MENUAPI}/${update}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 setForm({
                     title: response.data.data.title,
                     slug: response.data.data.slug,
@@ -26,9 +32,13 @@ export default function MenuForm({ setFormClose, update }) {
         }
         const getPage = async () => {
             try {
-                const response = await axios.get(PAGEAPI)
-console.log('getPage')
-console.log(response.data.data);
+                const response = await axios.get(PAGEAPI, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                console.log('getPage')
+                console.log(response.data.data);
 
                 setPages(response.data.data)
             } catch (error) {
@@ -49,9 +59,13 @@ console.log(response.data.data);
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(form);
-        
+
         try {
-            const response = await axios.post(MENUAPI, form)
+            const response = await axios.post(MENUAPI, form,{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             console.log(response.data);
             setFormClose(false)
         } catch (error) {
@@ -66,7 +80,11 @@ console.log(response.data.data);
         console.log(form);
 
         try {
-            const response = await axios.patch(`${MENUAPI}/${update}`, form)
+            const response = await axios.patch(`${MENUAPI}/${update}`, form,{
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             setFormClose(false)
         } catch (error) {
             console.log(error.response.data || error.message);
@@ -111,7 +129,7 @@ console.log(response.data.data);
                     >
                         <option value={0}>Page</option>
                         {
-                            pages&&pages?.map((page, i) => <option key={i} value={page._id}>{page.title}</option>)
+                            pages && pages?.map((page, i) => <option key={i} value={page._id}>{page.title}</option>)
                         }
 
                     </select>

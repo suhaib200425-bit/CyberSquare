@@ -6,9 +6,11 @@ const visitSchema = new mongoose.Schema({
     required: true
   },
 
-  page: {
-    type: String,
-    default: "/"
+  web: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // 👈 reference
+    required: true,
+    default: null
   },
 
   visitedAt: {

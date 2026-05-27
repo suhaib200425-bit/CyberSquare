@@ -6,7 +6,7 @@ import axios from 'axios';
 import PageRoute from './Page/PageRoute/PageRoute';
 import NotFound from './Page/NotFound/NotFound';
 import Demo from './templateComp/demo/demo';
-import { AUTHTEMPLATEAPI, FOOTERTEMPLATEAPI, NAVBARTEMPLATEAPI, PAGEAPI, USERAPI } from './assets/assets';
+import { AUTHTEMPLATEAPI, BASEURL, FOOTERTEMPLATEAPI, NAVBARTEMPLATEAPI, PAGEAPI, USERAPI } from './assets/assets';
 import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePage';
 import AuthOne from './templateComp/AuthOne/AuthOne';
 import Auth from './templateComp/Auth/Auth';
@@ -14,7 +14,7 @@ import useStore from './context/Zustand';
 import NavBarOne from './templateComp/NavBarOne';
 import Loading from './Page/Loading/Loading';
 function App() {
-  const hideNavbarRoutes = ["/auth", "/", "/demo", "*"];
+  const hideNavbarRoutes = ["/auth", "/demo", "*"];
 
   const location = useLocation();
   const Navigate = useNavigate()
@@ -24,49 +24,44 @@ function App() {
     queryKey: ["MULTI_API"],
     queryFn: async () => {
 
-      console.log("NAVBARTEMPLATEAPI");
-      console.log(NAVBARTEMPLATEAPI);
-      setTimeout(async () => {
 
-        try {
+      // setTimeout(async () => {
 
-          const token = localStorage.getItem("token");
+      //   try {
 
-          const LogedeResponse = await axios.get(USERAPI, {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-          SetUser(LogedeResponse.data?.user)
-          Navigate('/home')
+      //     const token = localStorage.getItem("token");
 
-        } catch (err) {
+      //     const LogedeResponse = await axios.get(USERAPI, {
+      //       headers: {
+      //         Authorization: `Bearer ${token}`
+      //       }
+      //     });
+      //     SetUser(LogedeResponse.data?.user)
+      //     // Navigate('/home')
 
-          Navigate('/auth')
-          console.log(
-            err.response?.data || err.message
-          );
-        }
+      //   } catch (err) {
 
-      }, 2000);
+      //     Navigate('/auth')
+      //     console.log(
+      //       err.response?.data || err.message
+      //     );
+      //   }
+
+      // }, 2000);
 
       return Promise.all([
-        axios.get(`${NAVBARTEMPLATEAPI}/checked`),
-        axios.get(`${PAGEAPI}`),
-        axios.get(`${AUTHTEMPLATEAPI}/checked`),
-        axios.get(`${FOOTERTEMPLATEAPI}/checked`)
-      ]).then(([navbar, pages, auth, footer]) => {
-        const routes = pages.data?.data.map(elem => elem.slug)
-        setValidRoutes(routes)
-        console.log("routes");
+        axios.get(`${BASEURL}/api/web/kite`)
+      ]).then(([response]) => {
+        const routes = response.data?.pages
         console.log(routes);
-        console.log("routes end");
+        
+        setValidRoutes(routes)
 
         return {
-          navbar: navbar.data?.data,
-          pages: pages.data?.data,
-          auth: auth.data?.data,
-          footer: footer.data?.data
+          navbar: response.data?.data?.navbar,
+          pages: response.data?.pages,
+          auth: {},
+          footer: response.data?.data?.footer
         };
       });
     }
@@ -84,13 +79,14 @@ function App() {
 
       {
         !hideNavbarRoutes.includes(location.pathname) &&
-        data && <DynamicRenderer code={data.navbar?.navbar} props={data?.navbar?.props} />
+        data && <DynamicRenderer code={data?.navbar?.navbar} props={data?.navbar?.props} />
       }
 
       <Routes>
 
         <Route path={`/demo`} element={<Demo />} />
         <Route path={`/loading`} element={<Loading />} />
+        <Route path={`/`} element={<Demo />} />
         {
           data && data?.auth && <Route path={`/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
         }
