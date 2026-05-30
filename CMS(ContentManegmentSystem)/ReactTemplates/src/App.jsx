@@ -11,14 +11,50 @@ import LatestPostsFive from './LatestPostsSection/LatestPostsFive/LatestPostsFiv
 import LatestPostThree from './LatestPostsSection/LatestPostThree/LatestPostThree'
 import LatestPostTwo from './LatestPostsSection/LatestPostTwo/LatestPostTwo'
 import PopularPostsList from './PopularList/PopularListOne'
+import PopularListTwo from './PopularList/PopularListTwo'
+import CategoriesSection from './PopularList/CategoriesSection'
+import FeaturedSection from './PopularList/FeaturedSection'
+import CategoryWise from './categoryWise/categoryWise'
+import SmallNewsCards from './categoryWise/SmallCards'
+import MustReadSection from './categoryWise/listWise'
+import MovieNewsCard from './categoryWise/Other'
+import FeaturedPosts from './categoryWise/njn'
+import NewStoriesPosts from './categoryWise/bog'
+import FashionTrendingSection from './categoryWise/njno'
+import GillionTopSection from './TopSections/GillionTopSection'
+import LatestModel from './categoryWise/newone'
+import QuickStories from './categoryWise/QuickStories'
+import PostCategory from './categoryWise/PostCategory'
 
 function App() {
 
   return (
     <div className="">
+      <p>PostCategory</p>
+      <PostCategory />
+      <p>QuickStories</p>
+      <QuickStories />
+      <p>LatestModel</p>
+      <LatestModel />
+      <p>SmallNewsCards</p>
+      <SmallNewsCards />
+      <p>MovieNewsCard</p>
+      <MovieNewsCard />
+      <p>FeaturedPosts</p>
+      <FeaturedPosts />
+      <p>FashionTrendingSection</p>
+      <FashionTrendingSection />
+      <p>NewStoriesPosts</p>
+      <NewStoriesPosts />
+      <p>categoryWise</p>
+      <CategoryWise/>
+      <hr />
+      <FeaturedSection />
+      <CategoriesSection />
+      <PopularListTwo />
+      <PopularPostsList />
       <HighlightOne />
       <LatestPostsFive />
-      <PopularPostsList />
       <HeroFour />
       <LatestPostThree />
       <LatestPostTwo />

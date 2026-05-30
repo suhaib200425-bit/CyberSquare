@@ -14,6 +14,7 @@ import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer'
 import TargetValueChange from '../../components/TargetValueChange/TargetValueChange';
 
 import { useNavigate } from 'react-router-dom';
+
 function DesignPage() {
     const token = localStorage.getItem("token")
     const [Page, setPage] = useState()

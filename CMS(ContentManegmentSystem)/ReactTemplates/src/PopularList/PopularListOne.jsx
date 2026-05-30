@@ -133,7 +133,7 @@ export default function PopularPostsList({
                 Read
               </button>
 
-              <span className="text-[12px] text-[#666]">6min</span>
+              {/* <span className="text-[12px] text-[#666]">6min</span> */}
 
               <span className="text-[12px] text-[#666]">
                 20 JAN 2022

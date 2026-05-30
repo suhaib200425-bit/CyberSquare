@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route,useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar';
 import Home from './Page/Home/Home';
 import LeftSideBar from './components/LeftSideBar/LeftSideBar';
@@ -28,12 +28,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex App">
-       
-{
-        location.pathname !== "/authentication" &&
-        location.pathname !== "/" &&
-         <LeftSideBar />
-      }
+
+        {
+          location.pathname !== "/authentication" &&
+          location.pathname !== "/" &&
+          <LeftSideBar />
+        }
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Splash />} />
@@ -49,7 +49,7 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/form/:formname" element={<FormPage />} />
           <Route path="/authentication" element={<Authentication />} />
-        <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </QueryClientProvider>
