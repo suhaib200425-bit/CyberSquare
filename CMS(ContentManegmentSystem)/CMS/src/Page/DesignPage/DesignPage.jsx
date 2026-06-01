@@ -14,11 +14,14 @@ import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer'
 import TargetValueChange from '../../components/TargetValueChange/TargetValueChange';
 
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 function DesignPage() {
     const token = localStorage.getItem("token")
     const [Page, setPage] = useState()
-    const [ReactTemplate, setReactTemplate] = useState({})
+    const [templatePage, settemplatePage] = useState()
+    const [templateLoading, settemplateLoading] = useState(false)
+    const [ReactTemplate, setReactTemplate] = useState([])
     const [Target, setTarget] = useState(null)
     const { PageId } = useParams()
 
@@ -39,11 +42,11 @@ function DesignPage() {
         console.log(Page);
         console.log("End Page");
         try {
-            
-            const response = await axios.patch(`${PAGEAPI}/${PageId}`, { sections: Page?.sections },{
-                 headers: {
-    Authorization: `Bearer ${token}`
-  }
+
+            const response = await axios.patch(`${PAGEAPI}/${PageId}`, { sections: Page?.sections }, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             console.log(response.data);
             console.log('Updated');
@@ -54,28 +57,53 @@ function DesignPage() {
             alert(error.message)
         }
     }
+
+    // const [page,setPage] = useState(1)
     useEffect(() => {
         Promise.all([
             axios.get(REACTTEPLATEAPI),
-            axios.get(`${PAGEAPI}/${PageId}`,{
-                 headers: { Authorization: `Bearer ${token}` }
+            axios.get(`${PAGEAPI}/${PageId}`, {
+                headers: { Authorization: `Bearer ${token}` }
             })
         ])
             .then(([res1, res2]) => {
                 console.log('PROMISE RESPONSE');
-                
+
                 console.log(res2.data.data);
                 console.log(res1.data);
+                settemplatePage(res1.data.page)
                 console.log('END PROMISE RESPONSE');
 
-                setReactTemplate(res1.data);
+                setReactTemplate(res1.data.data);
                 setPage(res2.data.data);
             })
             .catch(err => {
-               alert("Error:", err.response?.data?.message || err.message);
-                console.log("Error:",err.response?.data || err.message);
+                alert("Error:", err.response?.data?.message || err.message);
+                console.log("Error:", err.response?.data || err.message);
             });
     }, []);
+
+    const containerRef = useRef()
+
+    const hanbleScrollingEnd = async () => {
+        const el = containerRef.current;
+
+        const isAtBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+        // alert(!isAtBottom)
+        if (templateLoading || !isAtBottom) return
+        try {
+            settemplateLoading(true)
+            const response = await axios(`${REACTTEPLATEAPI}?page=${templatePage + 1}`)
+            console.log(response.data);
+            setReactTemplate(prev=>[...prev,...response.data.data]);
+            if(templatePage+1==response.data.page) return 
+            settemplatePage(response.data.page)
+            settemplateLoading(false)
+
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
     const deleteSectionTemplate = (deleteindex) => {
         setPage((prev) => ({
@@ -139,7 +167,7 @@ function DesignPage() {
                 mainRef.current.scrollTop = mainRef.current.scrollHeight + source.element.clientHeight;
             }}>
                 <div className='DesignPage'>
-                    <div className="leftBar">
+                    <div className="leftBar" ref={containerRef} onScroll={hanbleScrollingEnd}>
                         <div className="flex gap-2">
                             <button className="w-full py-2 rounded-[5px] bg-[#f5f5f5]">Prev</button>
                             <button onClick={() => {
@@ -169,10 +197,10 @@ function DesignPage() {
 
                         </div>
                         <p className='mt-1'>Components</p>
-                        <div className="template">
+                        <div className="template" >
                             {
                                 // ReactAllTemplate.map(elem => <DraggableTemplate TemplateObject={elem} />)
-                                ReactTemplate?.data?.map(elem => <div className="">
+                                ReactTemplate?.map(elem => <div className="">
                                     <hr className='mt-1' />
                                     <div className="templatename">Name : {elem._id}</div>
                                     <hr className='mb-1' />
