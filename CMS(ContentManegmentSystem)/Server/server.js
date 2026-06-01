@@ -25,6 +25,7 @@ const corsOptions = {
   origin: [
     "http://localhost:5174",
     "http://localhost:5173",
+    "http://localhost:5175",
     "https://cyber-square-3f3k.vercel.app",
     "https://thee-slightly-dowry.ngrok-free.dev"
   ],

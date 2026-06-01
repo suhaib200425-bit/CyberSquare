@@ -36,6 +36,9 @@ import { useEffect } from 'react'
 import ContactPage from './CODE-X/ContactPage'
 import ContactForm from './CODE-X/ContactForm'
 import ContactFormTwo from './CODE-X/ContactFormTwo'
+import ContactSection from './CODE-X/ContactSection'
+import ContactSectionTwo from './CODE-X/ContactSectionTwo'
+import DynamicDreamSection from './CODE-X/DynamicDreamSection'
 
 function App() {
 
@@ -44,6 +47,12 @@ function App() {
       const jsonString = HeroSectionImageContent.toString();
       console.log(jsonString);
     }}>
+      <p>DynamicDreamSection</p>
+      <DynamicDreamSection/>
+      <p>ContactSection</p>
+      <ContactSection />
+      <p>ContactSectionTwo</p>
+      <ContactSectionTwo />
       <p>ContactFormTwo</p>
       <ContactFormTwo />
       <p>ContactForm</p>
