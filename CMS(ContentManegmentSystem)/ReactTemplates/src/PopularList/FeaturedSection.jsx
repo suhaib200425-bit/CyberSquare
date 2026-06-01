@@ -56,7 +56,7 @@ function FeaturedSection({
             <h3 style={{
               color: contentColor.value
 
-            }} className="text-[24px] md:text-[28px] font-bold leading-[1.3] text-black">
+            }} className="text-[22px] md:text-[26px] font-bold leading-[1.3] text-black line-clamp-2">
               Half A Million Tons Of Recycling Dumped Or Incinerated Every Year,
               Shock Stats Show
             </h3>
@@ -86,7 +86,7 @@ function FeaturedSection({
                   Business
                 </button>
 
-                <h3 className="max-w-[420px] text-[23px] md:text-[28px] font-bold leading-[1.2] text-white">
+                <h3 className="max-w-[420px] text-[22px] md:text-[25px] line-clamp-3 font-bold leading-[1.2] text-white">
                   Climate Changes In The Recent Prospective Of
                   The Global Warming
                 </h3>

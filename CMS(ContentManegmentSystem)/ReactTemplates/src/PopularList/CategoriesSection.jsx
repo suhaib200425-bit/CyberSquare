@@ -10,7 +10,8 @@ function CategoriesSection({
   title = { value: "Categories" },
   desktopTitleSize = { value: "32" },
   mobileTitleSize = { value: "25" },
-  menuColor = { value: "#6646"}
+  menuColor = { value: "#6646"},
+  imageUrl={value:'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop'}
 }) {
   const [hover,setHover]=useState("")
   const isMobile = window.innerWidth < 768;
@@ -63,7 +64,7 @@ function CategoriesSection({
             <div key={item}>
               <div className="mb-1 h-[180px] overflow-hidden rounded-[14px]">
                 <img
-                  src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop"
+                  src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop"
                   alt=""
                   className="h-full w-full object-cover"
                 />
@@ -84,7 +85,7 @@ function CategoriesSection({
           !isMobile &&
            <div className="h-[90%] overflow-hidden rounded-[18px]">
           <img
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop"
+            src={imageUrl.value}
             alt=""
             className="h-full w-full object-cover"
           />

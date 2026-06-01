@@ -25,11 +25,53 @@ import GillionTopSection from './TopSections/GillionTopSection'
 import LatestModel from './categoryWise/newone'
 import QuickStories from './categoryWise/QuickStories'
 import PostCategory from './categoryWise/PostCategory'
+import AboutUsSection from './codeX'
+import Imagebox from './imagebox'
+import Quotes from './CODE-X/Quotes'
+import HeroSectionImageContent from './CODE-X/HeroSectionImageContent'
+import ContentDisplay from './CODE-X/ContentDisplay'
+import BannerSection from './CODE-X/BannerSection'
+import ContentImage from './CODE-X/ContentImage'
+import { useEffect } from 'react'
+import ContactPage from './CODE-X/ContactPage'
+import ContactForm from './CODE-X/ContactForm'
+import ContactFormTwo from './CODE-X/ContactFormTwo'
 
 function App() {
 
   return (
-    <div className="">
+    <div className="" onClick={() => {
+      const jsonString = HeroSectionImageContent.toString();
+      console.log(jsonString);
+    }}>
+      <p>ContactFormTwo</p>
+      <ContactFormTwo />
+      <p>ContactForm</p>
+      <ContactForm />
+      <p>ContactPage</p>
+      <ContactPage/>
+      <p>ContentImage</p>
+      <ContentImage />
+      <p>BANNER</p>
+      <BannerSection />
+      <p>ContentDisplay</p>
+      <ContentDisplay />
+      <p>HeroSectionImageContent</p>
+      <HeroSectionImageContent />
+      <p>Quotes</p>
+      <Quotes />
+      <p>CodeX</p>
+      <AboutUsSection />
+      {/* <p>imagebox</p> */}
+      <Imagebox />
+
+      <CategoriesSection />
+
+      <FeaturedSection />
+      <p>FeaturedPosts</p>
+      <FeaturedPosts />
+      <p>MovieNewsCard</p>
+      <MovieNewsCard />
       <p>PostCategory</p>
       <PostCategory />
       <p>QuickStories</p>
@@ -38,19 +80,13 @@ function App() {
       <LatestModel />
       <p>SmallNewsCards</p>
       <SmallNewsCards />
-      <p>MovieNewsCard</p>
-      <MovieNewsCard />
-      <p>FeaturedPosts</p>
-      <FeaturedPosts />
       <p>FashionTrendingSection</p>
       <FashionTrendingSection />
       <p>NewStoriesPosts</p>
       <NewStoriesPosts />
       <p>categoryWise</p>
-      <CategoryWise/>
+      <CategoryWise />
       <hr />
-      <FeaturedSection />
-      <CategoriesSection />
       <PopularListTwo />
       <PopularPostsList />
       <HighlightOne />

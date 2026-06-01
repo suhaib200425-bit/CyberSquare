@@ -26,6 +26,10 @@ function Demo() {
   return (
     <div className='Demo'>
       <HeroAnimated/>
+      
+      <ContactTree />
+      <ContactSection />
+      <ContactDetailAndForm />
       {/* <TrendingNewsSection />
       <NewsSection />
       <FeaturedArticlesSection />
@@ -43,9 +47,6 @@ function Demo() {
       <NavBarOne />
       <AuthOne/>
       <Auth />
-      <ContactTree />
-      <ContactSection />
-      <ContactDetailAndForm />
       <Heading /> */}
 
     </div>
