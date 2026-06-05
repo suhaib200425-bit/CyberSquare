@@ -61,9 +61,12 @@ function App() {
         console.log(routes);
 
         setValidRoutes(routes)
+        // console.log(response.data);
 
         return {
-          pages: response.data?.pages
+          pages: response.data?.pages,
+          auth: response.data?.data?.auth,
+
         };
       });
     }
@@ -79,7 +82,7 @@ function App() {
     <div className='w-full'>
 
       <Routes>
-        
+
         <Route path={`/:webname/demo`} element={<Demo />} />
         <Route path={`/loading`} element={<Loading />} />
         <Route path={`/`} element={<Demo />} />
@@ -100,7 +103,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      
+
     </div>
   )
 }

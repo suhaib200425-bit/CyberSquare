@@ -21,6 +21,11 @@ const getWebsiteByName = async (req, res) => {
         path: "theme",
       })
 
+      // AUTH POPULATE
+      .populate({
+        path: "auth",
+      })
+
       // FOOTER POPULATE
       .populate({
         path: "footer",

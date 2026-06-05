@@ -17,6 +17,12 @@ const AuthTemplateSchema = new mongoose.Schema({
         required: true
     },
 
+    auther: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // 👈 reference
+        default: null
+    },
+    
     props: {
         required: true,
         type: Map,

@@ -11,18 +11,40 @@ function AuthPages() {
     const { isPending, error, data } = useQuery({
         queryKey: ['authdata'],
         queryFn: async () => {
-            const response = await axios.get(AUTHTEMPLATEAPI)
-            console.log(response.data);
+            try {
+                const token = localStorage.getItem("token")
+                const response = await axios.get(AUTHTEMPLATEAPI, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                console.log(response.data);
+                return response.data
+            } catch (error) {
+                console.log(error.response?.data || error.message);
 
-            return response.data?.data
+            }
         }
     },)
 
     // Mutations
     const checkedmutation = useMutation({
         mutationFn: async (AuthTemplateId) => {
-            const response = await axios.patch(`${AUTHTEMPLATEAPI}/checked/${AuthTemplateId}`)
-            return response.data?.data
+            try {
+                // alert("working")
+                const token = localStorage.getItem("token")
+
+                const response = await axios.patch(`${AUTHTEMPLATEAPI}/checked/${AuthTemplateId}`, {},{
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+
+                return response.data
+            } catch (error) {
+                alert("working")
+                console.log(error.response?.data || error.message);
+            }
         },
         onSuccess: (result) => {
             queryClient.invalidateQueries({ queryKey: ['authdata'] })
@@ -40,16 +62,16 @@ function AuthPages() {
             <p className='subtitle'>slected any one</p>
             <div className="AuthPages">
                 {
-                    data?.map(elem => (
+                    data?.data?.map(elem => (
                         <div className="AuthPage">
                             <img src={elem?.imageModel} alt="" srcset="" />
                             <div className="">
-                                <input type="radio" name='authradio' checked={elem.checked} onClick={() => {
+                                <input type="radio" name='authradio' checked={elem._id == data?.active?.auth?._id} onClick={() => {
                                     checkedmutation.mutate(elem._id)
                                 }} />
-                                {elem.checked && <span>SELECTED</span>}
+                                {elem._id == data?.active?.auth?._id && <span>SELECTED</span>}
                                 <button className="view" onClick={() => {
-                                    setAuthpage(elem)
+                                    // setAuthpage(elem)
                                 }}>view</button>
                             </div >
 

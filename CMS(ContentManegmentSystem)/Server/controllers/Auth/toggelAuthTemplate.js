@@ -1,24 +1,19 @@
 const AuthTemplate = require("../../models/AuthTemplate");
+const WEB = require("../../models/WEB");
 
 const toggelAuthTemplate = async (req, res) => {
     try {
         const { AuthTemplateId } = req.params;
-
-        const auth = await AuthTemplate.findById(AuthTemplateId);
-        if (!auth) {
-            return res.status(404).json({ message: "authTemplate not found" });
+        const admin = req.user
+        let website = await WEB.findOne({ admin: admin.id, auth: AuthTemplateId }).populate("auth")
+        if (!website) {
+            website = await WEB.findOneAndUpdate({ admin: admin.id }, { auth: AuthTemplateId }, { new: true }).populate("auth")
         }
-        // 🔥 ellam false aakkuka
-        await AuthTemplate.updateMany({}, { checked: false });
 
-        // 🔥 selected one true aakkuka
-        auth.checked = true;
-
-        await auth.save();
 
         res.status(200).json({
             success: true,
-            data: auth,
+            data: website,
         });
     } catch (error) {
         res.status(500).json({

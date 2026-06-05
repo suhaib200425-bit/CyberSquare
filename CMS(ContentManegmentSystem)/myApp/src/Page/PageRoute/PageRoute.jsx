@@ -26,7 +26,6 @@ function PageRoute({ slug, pageId }) {
                     navbar: response.data?.data?.navbar,
                     navbarProps: response.data?.data?.navbarProps,
                     pages: response.data?.pages,
-                    auth: {},
                     footer: response.data?.data?.footer
                 };
             }).catch(error=>{
