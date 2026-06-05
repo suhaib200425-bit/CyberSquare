@@ -46,6 +46,7 @@ function App() {
           <Route path="/users" element={<Users />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/pagebuilder/:PageId" element={<DesignPage />} />
+          <Route path="/pagebuilder" element={<DesignPage />} />
           <Route path="/category" element={<Category />} />
           <Route path="/form/:formname" element={<FormPage />} />
           <Route path="/authentication" element={<Authentication />} />

@@ -53,7 +53,20 @@
 
 body {
   margin: 0;
-  background-color: white;
+  background-color: #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #09090b;
+  }
+}
+
+.article-excerpt {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 /* #root {

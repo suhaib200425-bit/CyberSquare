@@ -32,7 +32,7 @@ const token = localStorage.getItem('token')
         }
         const getPage = async () => {
             try {
-                const response = await axios.get(PAGEAPI, {
+                const response = await axios.get(`${PAGEAPI}/get/allpages`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -42,7 +42,7 @@ const token = localStorage.getItem('token')
 
                 setPages(response.data.data)
             } catch (error) {
-                console.log(error.response.data || error.message);
+                console.log(error.response?.data || error.message);
             }
         }
         if (update) getMenu()

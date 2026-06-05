@@ -13,13 +13,17 @@ const reactTemplateSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-
     template: {
         type: String,
         // required: true
     },
     banner: {
         type: String,
+        default: null
+    },
+    pageRef: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PageCategory", // 👈 reference
         default: null
     },
     props: {

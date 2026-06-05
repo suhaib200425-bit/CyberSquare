@@ -59,8 +59,13 @@ export default function PostForm({ setFormClose, update }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
+            const token = localStorage.getItem('token')
             console.log(form);
-            const response = await axios.post(POSTAPI, form)
+            const response = await axios.post(POSTAPI, form,{
+                headers:{
+                        Authorization: `Bearer ${token}`,
+                }
+            })
             setFormClose(false)
         } catch (error) {
             console.log(error.response.data || error.message);

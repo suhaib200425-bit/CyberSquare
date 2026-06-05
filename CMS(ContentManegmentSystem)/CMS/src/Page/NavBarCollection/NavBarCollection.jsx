@@ -28,11 +28,18 @@ function NavBarCollection() {
         queryKey: ['NavBarTemplates'],
         queryFn: async () => {
             try {
-                const response = await axios.get(NAVBARTEMPLATEAPI)
+                const token = localStorage.getItem("token")
+                const response = await axios.get(NAVBARTEMPLATEAPI, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
                 console.log(response.data?.data);
                 const activeId = response.data?.data.find(item => item.checked)?._id;
-                setActiveNavBar(activeId)
+                setActiveNavBar(response.data?.active)
                 setNavbarItems(response.data?.data)
+                console.log(response.data);
+
                 return response.data?.data
             } catch (error) {
                 console.log(error.response?.data || error.message);
@@ -44,25 +51,52 @@ function NavBarCollection() {
     // Mutations
     const checkedmutation = useMutation({
         mutationFn: async (NavbarId) => {
-            const response = await axios.patch(`${NAVBARTEMPLATEAPI}/checked/${NavbarId}`)
-            setActiveNavBar(NavbarId)
+            const token = localStorage.getItem("token")
+            const response = await axios.patch(`${NAVBARTEMPLATEAPI}/checked/${NavbarId}`, {}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+
+            console.log("result");
+            console.log(response.data);
+            console.log("result end");
+            setActiveNavBar(response.data?.data)
+
         },
         onSuccess: (result) => {
+
             queryClient.invalidateQueries({ queryKey: ['NavBarTemplates'] })
+        },
+
+        onError: (error) => {
+            console.log("onError called:");
+            console.log(error.response?.data || error.message);
+
         },
     })
 
     // Value change Mutations
     const updatemutation = useMutation({
         mutationFn: async (NavbarId) => {
-            const updateNavBar= navbarItems.find(item => item._id === NavbarId)?.props
-             await axios.patch(`${NAVBARTEMPLATEAPI}/${NavbarId}`,{
-                props:updateNavBar
+            const token = localStorage.getItem('token')
+            const updateNavBar = navbarItems.find(item => item._id === NavbarId)?.props
+            await axios.patch(`${NAVBARTEMPLATEAPI}/${NavbarId}`, {
+                props: updateNavBar
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
             })
         },
         onSuccess: (result) => {
             alert("updated")
             queryClient.invalidateQueries({ queryKey: ['NavBarTemplates'] })
+        },
+        onError: (error) => {
+
+            console.log("onError called:");
+            console.log(error.response?.data || error.message);
         },
     })
 
@@ -83,15 +117,21 @@ function NavBarCollection() {
                         <div className="navBar" onClick={(e) => {
                             e.stopPropagation()
                             if (target?._id == Elem._id) setTarget(null)
-                            else setTarget(Elem)
+                            else {
+                                if (Elem._id == ActiveNavBar.navbar._id) {
+                                    console.log(Elem);
+                                    const changeProps = { ...Elem, props: ActiveNavBar.navbarProps }
+                                    setTarget(changeProps)
+                                } else setTarget(Elem)
+                            }
                         }}>
-                            <DynamicRenderer key={Elem._id} code={Elem.navbar} props={Elem.props} />
+                            <DynamicRenderer key={Elem._id} code={Elem.navbar} props={Elem._id === ActiveNavBar.navbar._id ? ActiveNavBar.navbarProps : Elem.props} />
                         </div>
                         <div className="checkNavbar">
                             <input onClick={(e) => {
                                 checkedmutation.mutate(Elem._id)
                             }} type="radio" name="navbar" id="" v
-                                checked={Elem._id === ActiveNavBar} style={{ color: 'green' }} />
+                                checked={Elem._id === ActiveNavBar.navbar._id} style={{ color: 'green' }} />
 
                         </div>
                     </div>;
@@ -101,7 +141,7 @@ function NavBarCollection() {
             {
                 target &&
                 <div className="" style={{ width: "350px" }}>
-                    <button className="px-3 py-2 bg-black m-2 text-white" onClick={()=>{
+                    <button className="px-3 py-2 bg-black m-2 text-white" onClick={() => {
                         updatemutation.mutate(target._id)
                     }}>SAVE</button>
                     <TargetValueChange TargetValue={target} onChangeFunction={(key, value) => {
@@ -122,7 +162,7 @@ function NavBarCollection() {
                             })
                             console.log(valuechange);
                             console.log("valuechange");
-                            
+
                             return valuechange
 
                         })

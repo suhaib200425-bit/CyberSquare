@@ -7,6 +7,7 @@ const deleteMenu = require("../controllers/Menu/deleteMenu");
 const updateMenu = require("../controllers/Menu/updateMenu");
 const getMenuById = require("../controllers/Menu/getMenuById");
 const authMiddleware = require("../middleware/jwt");
+const getMenuswithOutToken = require("../controllers/Menu/getMenuswithOutToken");
 const router = express.Router();
 
 router.post("/",authMiddleware, createMenu);
@@ -17,5 +18,7 @@ router.patch("/:MenuId",authMiddleware, updateMenu);
 // router.get("/", (req, res) => {
 //   res.send("TEMPLATE API is running 🚀");
 // });
+router.get("/get/Menus",getMenuswithOutToken);
+
 
 module.exports= router;

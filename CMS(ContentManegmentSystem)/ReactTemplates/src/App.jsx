@@ -39,16 +39,25 @@ import ContactFormTwo from './CODE-X/ContactFormTwo'
 import ContactSection from './CODE-X/ContactSection'
 import ContactSectionTwo from './CODE-X/ContactSectionTwo'
 import DynamicDreamSection from './CODE-X/DynamicDreamSection'
+import DynamicVisionSection from './CODE-X/DynamicVisionSection'
+import SingleArticlePage from './SingleArticlePage/SingleArticlePage'
+import ArticlesPage from './ArticleListingPage/ArticlesPage'
 
 function App() {
 
   return (
     <div className="" onClick={() => {
-      const jsonString = HeroSectionImageContent.toString();
-      console.log(jsonString);
+      // const jsonString = HeroSectionImageContent.toString();
+      console.log("jsonString");
     }}>
+      <p>ArticlesPage</p>
+      <ArticlesPage />
+      <p>SingleArticlePage</p>
+      <SingleArticlePage />
+      <p>DynamicVisionSection</p>
+      <DynamicVisionSection />
       <p>DynamicDreamSection</p>
-      <DynamicDreamSection/>
+      <DynamicDreamSection />
       <p>ContactSection</p>
       <ContactSection />
       <p>ContactSectionTwo</p>
@@ -58,7 +67,7 @@ function App() {
       <p>ContactForm</p>
       <ContactForm />
       <p>ContactPage</p>
-      <ContactPage/>
+      <ContactPage />
       <p>ContentImage</p>
       <ContentImage />
       <p>BANNER</p>

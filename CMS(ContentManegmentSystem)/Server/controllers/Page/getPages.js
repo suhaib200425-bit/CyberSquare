@@ -19,9 +19,9 @@ const getPages = async (req, res) => {
     }
     const skip = (page - 1) * limit;
 
-    const total = await Page.countDocuments({ theme: activeTemaplte.theme, auther: req.user.id });
+    const total = await Page.countDocuments({ theme: activeTemaplte.theme, auther: req.user.id,status:"Published" });
 
-    const pages = await Page.find({ theme: activeTemaplte.theme, auther: req.user.id })
+    const pages = await Page.find({ theme: activeTemaplte.theme, auther: req.user.id,status:"Published" })
       .select("-sections")
       .sort({ updatedAt: -1 }) // latest first
       .skip(skip)

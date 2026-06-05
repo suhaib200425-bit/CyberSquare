@@ -22,13 +22,16 @@ import FeaturedArticlesSection from '../FeaturedArticlesSection/FeaturedArticles
 import NewsSection from '../NewsSection/NewsSection'
 import TrendingNewsSection from '../TrendingSection/TrendingSection'
 import HeroAnimated from '../HeroAnimated/HeroAnimated'
+import NavBarTwo from '../NavBarOne'
 function Demo() {
   return (
     <div className='Demo'>
+      <NavBarTwo />
       <HeroAnimated/>
       
       <ContactTree />
       <ContactSection />
+      <SingleArticlePage />
       <ContactDetailAndForm />
       {/* <TrendingNewsSection />
       <NewsSection />
@@ -39,7 +42,6 @@ function Demo() {
       <FooterOne/>
       <FooterTwo/>
       <ImageAndContent />
-      <SingleArticlePage />
       <PostList />
       <Categories />
       <ImageTemplate />

@@ -14,14 +14,13 @@ import useStore from './context/Zustand';
 import NavBarOne from './templateComp/NavBarOne';
 import Loading from './Page/Loading/Loading';
 function App() {
-  const hideNavbarRoutes = ["/auth", "/demo", "*"];
-
   const location = useLocation();
   const Navigate = useNavigate()
   const { SetUser } = useStore()
   const [validRoutes, setValidRoutes] = useState([])
   const pathname = window.location.pathname
   const webname = pathname.split("/")[1]
+
   const { data, isPending, error } = useQuery({
     queryKey: ["MULTI_API"],
     queryFn: async () => {
@@ -64,10 +63,7 @@ function App() {
         setValidRoutes(routes)
 
         return {
-          navbar: response.data?.data?.navbar,
-          pages: response.data?.pages,
-          auth: {},
-          footer: response.data?.data?.footer
+          pages: response.data?.pages
         };
       });
     }
@@ -82,17 +78,11 @@ function App() {
   return (
     <div className='w-full'>
 
-
-      {
-        !hideNavbarRoutes.includes(location.pathname) &&
-        data && <DynamicRenderer code={data?.navbar?.navbar} props={data?.navbar?.props} />
-      }
-
       <Routes>
-
-        <Route path={`/demo`} element={<Demo />} />
+        
+        <Route path={`/:webname/demo`} element={<Demo />} />
         <Route path={`/loading`} element={<Loading />} />
-        <Route path={`/:webname/`} element={<Demo />} />
+        <Route path={`/`} element={<Demo />} />
         {
           data && data?.auth && <Route path={`/:webname/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
         }
@@ -110,10 +100,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {
-        !hideNavbarRoutes.includes(location.pathname) &&
-        data && <DynamicRenderer code={data.footer?.footer} props={data?.footer?.props} />
-      }
+      
     </div>
   )
 }

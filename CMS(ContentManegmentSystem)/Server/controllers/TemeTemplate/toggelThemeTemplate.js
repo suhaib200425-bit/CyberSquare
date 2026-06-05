@@ -29,19 +29,27 @@ const toggelThemeTemplate = async (req, res) => {
                 auther: user.id,
                 theme: TemeTemplateId
             });
+            const data = item.toObject();
+
+            delete data._id;
+            delete data.__v;
+            delete data.createdAt;
+            delete data.updatedAt;
 
             if (!existPage) {
-                const data = item.toObject();
-
-                delete data._id;
-                delete data.__v;
-                delete data.createdAt;
-                delete data.updatedAt;
-
                 await Page.create({
                     ...data,
                     auther: user.id,
                 });
+            } else {
+                await Page.findByIdAndUpdate(
+                    existPage._id, {
+                    sections: item.sections
+                }, {
+                    new: true,          // updated document return cheyyum
+                    runValidators: true
+                }
+                );
             }
         }
 

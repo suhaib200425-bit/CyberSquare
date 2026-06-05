@@ -1,5 +1,12 @@
 const mongoose = require("mongoose");
 
+const propseSchema = new mongoose.Schema({
+    label: { type: String, require: true },
+    type: { type: String, require: true },
+    value: { type: String, require: true },
+}, { _id: false });
+
+
 const WebSchema = new mongoose.Schema({
     admin: {
         type: mongoose.Schema.Types.ObjectId,
@@ -10,7 +17,7 @@ const WebSchema = new mongoose.Schema({
     website: {
         type: String,
         required: true,
-        unique:true,
+        unique: true,
         lowercase: true,
         trim: true
     },
@@ -21,19 +28,30 @@ const WebSchema = new mongoose.Schema({
         required: true,
         default: "69f2fdfb99b3015839dc090c"
     },
+    navbarProps: {
+        type: Map,
+        of: propseSchema
+    },
 
     theme: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "TemeTemplate", // 👈 reference
         required: true,
-        default: "6a0755c612155635815daaea"
+        default: null
+    },
+
+    auth: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "AuthTemplate", // 👈 reference
+        required: true,
+        default: null
     },
 
     footer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "FooterTemplate", // 👈 reference
         required: true,
-        default: "6a06fac82a55d0533fe65cea"
+        default: null
     }
 });
 

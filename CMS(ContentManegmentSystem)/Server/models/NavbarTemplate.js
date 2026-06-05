@@ -14,8 +14,13 @@ const NavbarTemplateSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    auther: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // 👈 reference
+        default: null
+    },
 
-    props: {
+    navbarProps: {
         type: Map,
         of: propseSchema
     },
@@ -25,9 +30,9 @@ const NavbarTemplateSchema = new mongoose.Schema({
         required: true
     },
 
-    checked:{
-        type:Boolean,
-        default:false
+    checked: {
+        type: Boolean,
+        default: false
     }
 }, { timestamps: true });
 

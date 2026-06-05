@@ -8,6 +8,7 @@ const getCategories = require("../controllers/Category/getCategories");
 const getCategoriesAndId = require("../controllers/Category/getCategoriesAndId");
 const getCategory = require("../controllers/Category/getCategory");
 const authMiddleware = require("../middleware/jwt");
+const getCategoryByWebsite = require("../controllers/Category/getCategoryByWebsite");
 
 
 const router = express.Router();
@@ -18,6 +19,7 @@ router.delete("/:CategoryId",deleteCategory)
 router.patch("/:CategoryId",authMiddleware,updateCategory)
 router.get("/:CategoryId", getCategory);
 router.get("/all/categoryname", getCategoriesAndId);
+router.get("/get/published", getCategoryByWebsite);
 // router.get("/", getTemplates);
 // router.get("/", (req, res) => {
 //   res.send("Category API is running 🚀");

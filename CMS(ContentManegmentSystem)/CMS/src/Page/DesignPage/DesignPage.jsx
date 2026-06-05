@@ -15,13 +15,17 @@ import TargetValueChange from '../../components/TargetValueChange/TargetValueCha
 
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
+import DropdownMenu from '../../components/Dropdown/Dropdown';
 
 function DesignPage() {
     const token = localStorage.getItem("token")
     const [Page, setPage] = useState()
+    const [activeMenu, setactiveMenu] = useState({})
+
     const [templatePage, settemplatePage] = useState()
     const [templateLoading, settemplateLoading] = useState(false)
     const [ReactTemplate, setReactTemplate] = useState([])
+    const [PageMenus, setPageMenus] = useState([])
     const [Target, setTarget] = useState(null)
     const { PageId } = useParams()
 
@@ -43,7 +47,7 @@ function DesignPage() {
         console.log("End Page");
         try {
 
-            const response = await axios.patch(`${PAGEAPI}/${PageId}`, { sections: Page?.sections }, {
+            const response = await axios.patch(`${PAGEAPI}/${activeMenu._id}`, { sections: Page?.sections }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -61,27 +65,49 @@ function DesignPage() {
     // const [page,setPage] = useState(1)
     useEffect(() => {
         Promise.all([
-            axios.get(REACTTEPLATEAPI),
-            axios.get(`${PAGEAPI}/${PageId}`, {
+            axios.get(REACTTEPLATEAPI, {
+                headers: { Authorization: `Bearer ${token}` }
+            }),
+            axios.get(`${PAGEAPI}/${PageId || "get/mainpage"}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
         ])
-            .then(([res1, res2]) => {
+            .then(([templates, pages]) => {
                 console.log('PROMISE RESPONSE');
 
-                console.log(res2.data.data);
-                console.log(res1.data);
-                settemplatePage(res1.data.page)
+                console.log(pages.data.data);
+                console.log(templates.data);
+                settemplatePage(templates.data.page)
                 console.log('END PROMISE RESPONSE');
-
-                setReactTemplate(res1.data.data);
-                setPage(res2.data.data);
+                setactiveMenu({ title: pages.data?.data?.title, _id: pages.data?.data?._id })
+                setReactTemplate(templates.data.data);
+                setPage(pages.data?.data);
+                setPageMenus(pages.data?.pages)
             })
             .catch(err => {
                 alert("Error:", err.response?.data?.message || err.message);
                 console.log("Error:", err.response?.data || err.message);
             });
     }, []);
+
+    useEffect(() => {
+        Promise.all([
+            axios.get(`${PAGEAPI}/${ activeMenu._id|| "get/mainpage"}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        ])
+            .then(([pages]) => {
+                console.log('PROMISE RESPONSE');
+
+                console.log(pages.data.data);
+                console.log('END PROMISE RESPONSE');
+                setPage(pages.data?.data);
+            })
+            .catch(err => {
+                alert("Error:", err.response.data?.message || err.message);
+                console.log("Error:", err.response?.data || err.message);
+            });
+    }, [activeMenu])
 
     const containerRef = useRef()
 
@@ -95,8 +121,8 @@ function DesignPage() {
             settemplateLoading(true)
             const response = await axios(`${REACTTEPLATEAPI}?page=${templatePage + 1}`)
             console.log(response.data);
-            setReactTemplate(prev=>[...prev,...response.data.data]);
-            if(templatePage+1==response.data.page) return 
+            setReactTemplate(prev => [...prev, ...response.data.data]);
+            if (templatePage + 1 == response.data.page) return
             settemplatePage(response.data.page)
             settemplateLoading(false)
 
@@ -168,6 +194,7 @@ function DesignPage() {
             }}>
                 <div className='DesignPage'>
                     <div className="leftBar" ref={containerRef} onScroll={hanbleScrollingEnd}>
+                        <DropdownMenu activeMenu={activeMenu} setactiveMenu={setactiveMenu} PageMenus={PageMenus} />
                         <div className="flex gap-2">
                             <button className="w-full py-2 rounded-[5px] bg-[#f5f5f5]">Prev</button>
                             <button onClick={() => {

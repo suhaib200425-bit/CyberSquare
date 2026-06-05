@@ -1,27 +1,39 @@
 const NavbarTemplate = require("../../models/NavbarTemplate");
+const WEB = require("../../models/WEB");
 
 const updateNavbarTemplate = async (req, res) => {
   try {
-
-    const updated = await NavbarTemplate.findByIdAndUpdate(
-      req.params.NavbarId,
-      req.body,
-      { new: true }
+    const admin = req.user;
+const {NavbarId} = req.params
+    const updatedweb = await WEB.findOneAndUpdate(
+      { admin: admin.id },
+      { navbarProps: req.body.props },
+      { new: true, runValidators: true }
     );
-
-    if (!updated) {
-      return res.status(404).json({ message: "Navbar not found" });
+     if (!updatedweb) {
+      return res.status(404).json({
+        success: false,
+        message: "Website not found"
+      });
     }
+    
+    const updateNavbar= await NavbarTemplate.findByIdAndUpdate(
+      NavbarId,
+      req.body,
+      {new:true}
+    )
+
+   
 
     res.status(200).json({
       success: true,
-      data: updated,
+      data: updateNavbar,
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
-      message:"server error",
-      error: error.message,
+      message: error.message,
     });
   }
 };

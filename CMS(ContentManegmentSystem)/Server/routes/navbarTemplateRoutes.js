@@ -7,13 +7,14 @@ const updateNavbarTemplate = require("../controllers/NavbarTemplate/updateNavbar
 const deleteNavbarTemplate = require("../controllers/NavbarTemplate/deleteNavbarTemplate");
 const toggelNavbarTemplate = require("../controllers/NavbarTemplate/toggelNavbarTemplate");
 const getCheckedNavbarTemplate = require("../controllers/NavbarTemplate/getcheckedNavbarTemplate");
+const authMiddleware = require("../middleware/jwt");
 
-router.post("/", createNavbarTemplate);
-router.get("/", getallNavbarTemplate);
-router.patch("/checked/:NavbarId",toggelNavbarTemplate)
-router.get("/checked",getCheckedNavbarTemplate)
+router.post("/",authMiddleware, createNavbarTemplate);
+router.get("/", authMiddleware,getallNavbarTemplate);
+router.patch("/checked/:NavbarId",authMiddleware,toggelNavbarTemplate)
+router.get("/checked",authMiddleware,getCheckedNavbarTemplate)
 // router.get("/:id", getNavbarById);
-router.patch("/:NavbarId", updateNavbarTemplate);
+router.patch("/:NavbarId", authMiddleware,updateNavbarTemplate);
 router.delete("/:NavbarId", deleteNavbarTemplate);
 
 module.exports = router;

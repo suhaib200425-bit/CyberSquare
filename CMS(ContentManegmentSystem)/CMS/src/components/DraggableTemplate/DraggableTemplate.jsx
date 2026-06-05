@@ -13,14 +13,14 @@ function DraggableTemplate({ TemplateObject }) {
         data: TemplateObject
     });
 
-    useEffect(()=>{
-        console.log('DraggableTemplate');
-        console.log({
-        id: TemplateObject._id,  
-        data: TemplateObject
-    });
+    // useEffect(()=>{
+    //     console.log('DraggableTemplate');
+    //     console.log({
+    //     id: TemplateObject._id,  
+    //     data: TemplateObject
+    // });
         
-    },[])
+    // },[])
 
     return (
         <div className='w-full ' ref={ref} key={TemplateObject._id} onClick={()=>{

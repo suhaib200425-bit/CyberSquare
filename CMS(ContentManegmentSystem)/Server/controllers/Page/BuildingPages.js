@@ -11,7 +11,7 @@ const BuildingPages = async (req, res) => {
               });
             }
 
-        const pages = await Page.find({theme:activetemplate.theme})
+        const pages = await Page.find({theme:activetemplate.theme,auther:activetemplate.admin})
             .select("title")
             .sort({ createdAt: -1 }) // latest first
 

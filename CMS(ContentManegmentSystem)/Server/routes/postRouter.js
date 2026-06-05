@@ -11,6 +11,7 @@ const getPostDefault = require("../controllers/Post/getPostDefault");
 const relatedArticlesById = require("../controllers/Post/relatedArticlesById");
 const relatedCategoryById = require("../controllers/Post/relatedCategoryById");
 const authMiddleware = require("../middleware/jwt");
+const getPostPublished = require("../controllers/Post/PublishedPost");
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.post("/", authMiddleware,createPost);
 router.get("/",authMiddleware, getPosts);
 router.get("/:slug", getPostBySlug);
 router.get("/get/default", getPostDefault);
+router.get("/get/published", getPostPublished);
 router.get("/postid/:PostId", getPostById);
 router.delete("/:PostId", deletePost);
 router.patch("/:PostId", updatePost);
