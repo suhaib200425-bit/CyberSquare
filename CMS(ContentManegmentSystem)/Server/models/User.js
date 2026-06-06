@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
 
     web: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User", // 👈 reference
+        ref: "WEB", // 👈 reference
         default: null
     },
 

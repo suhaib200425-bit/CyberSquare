@@ -4,7 +4,6 @@ const express =require("express") ;
 const createTemplate = require("../controllers/Template/createTemplate");
 const getTemplates = require("../controllers/Template/getTemplates");
 const { SentOtp, verifyOtp } = require("../controllers/User/otpSent");
-const { loginUser } = require("../controllers/User/LoginUser");
 const { checkLoged } = require("../controllers/User/checkLoged");
 const authMiddleware = require("../middleware/jwt");
 const userRegister = require("../controllers/User/userRegister");
@@ -12,6 +11,9 @@ const userLogin = require("../controllers/User/userLogin");
 const getAllUsers = require("../controllers/User/getAllUsers");
 const { getUserById } = require("../controllers/User/getUserById");
 const updateUser = require("../controllers/User/updateUser");
+const { isAuthenticated } = require("../controllers/User/isAuthenticated");
+const { sendRegistrationOTP, verifyRegistrationOTP } = require("../controllers/User/registerNewUser");
+const { logedUser } = require("../controllers/User/logedUser");
 
 
 const router = express.Router();
@@ -28,5 +30,9 @@ router.patch("/update/:UserId",updateUser)
 // router.get("/", (req, res) => {
 //   res.send("TEMPLATE API is running 🚀");
 // });
+router.get("/:website/authenticated",authMiddleware,isAuthenticated)
+router.post("/:website/sent-register-otp",sendRegistrationOTP)
+router.post("/:website/verify-register-otp",verifyRegistrationOTP)
+router.post("/:website/loged-user",logedUser)
 
 module.exports= router;

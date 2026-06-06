@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer';
 import axios from 'axios';
 import { useQuery } from "@tanstack/react-query";
@@ -11,6 +11,29 @@ function PageRoute({ slug, pageId }) {
     const hideNavbarRoutes = ["/auth", "/demo", `/${webname}/`, "*"];
 
     const Navigate = useNavigate()
+
+    useEffect(() => {
+        async function isAuthenticated() {
+            try {
+                const token = localStorage.getItem('token')
+                const response = await axios(`${BASEURL}/api/user/${webname}/authenticated`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    })
+if(slug=="/") Navigate(`/${webname}/home`)
+                console.log(response.data);
+
+            } catch (error) {
+                alert(error.response?.data?.message || error.message)
+                Navigate(`/${webname}/auth`)
+                console.log(error.response?.data || error.message);
+            }
+        }
+        isAuthenticated()
+    }, [slug])
+
     const { data, isPending, error } = useQuery({
 
         queryKey: ["PageBySLug", pageId],
@@ -25,12 +48,11 @@ function PageRoute({ slug, pageId }) {
                     activePage: page.data?.data,
                     navbar: response.data?.data?.navbar,
                     navbarProps: response.data?.data?.navbarProps,
-                    pages: response.data?.pages,
                     footer: response.data?.data?.footer
                 };
-            }).catch(error=>{
+            }).catch(error => {
                 console.log(error.response?.data || error.message);
-                
+
             });
 
 

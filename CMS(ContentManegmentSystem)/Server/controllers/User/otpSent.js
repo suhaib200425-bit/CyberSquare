@@ -33,6 +33,7 @@ exports.SentOtp = async (req, res) => {
             attempts: 0
         });
 
+
         await transporter.sendMail({
             from: process.env.EMAIL,
             to: email,

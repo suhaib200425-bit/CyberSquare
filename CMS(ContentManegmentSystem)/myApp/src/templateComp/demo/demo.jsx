@@ -26,9 +26,10 @@ import NavBarTwo from '../NavBarOne'
 function Demo() {
   return (
     <div className='Demo'>
+      <Auth />
+
       <NavBarTwo />
       <HeroAnimated/>
-      
       <ContactTree />
       <ContactSection />
       <SingleArticlePage />
