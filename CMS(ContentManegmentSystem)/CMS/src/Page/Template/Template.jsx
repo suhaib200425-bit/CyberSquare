@@ -62,12 +62,10 @@ function Template() {
         }
     })
 
-    // Mutations
+    // MUTATIONS
     const deletemutation = useMutation({
         mutationFn: async (ThemeTemplateId) => {
-
             try {
-
                 const token = localStorage.getItem('token')
                 const response = await axios.delete(
                     `${THEMETEMPLATEAPI}/${ThemeTemplateId}`, {
@@ -80,7 +78,6 @@ function Template() {
             } catch (error) {
                 alert(error.response?.data?.message || error.message)
             }
-
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['themedata'] })
@@ -152,7 +149,7 @@ function Template() {
                                     />
 
                                     {
-                                       active.theme === elem._id &&
+                                        active.theme === elem._id &&
                                         <span className='text-green-600 font-medium'>
                                             SELECTED
                                         </span>

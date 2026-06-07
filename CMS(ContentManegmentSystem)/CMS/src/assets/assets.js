@@ -1,5 +1,5 @@
 // export const BASEURL = 'http://localhost:5000'
-export const BASEURL ='http://172.17.16.119:5000'
+export const BASEURL ='http://192.168.32.119:5000'
 // export const BASEURL ='https://thee-slightly-dowry.ngrok-free.dev'
 import authone from '../assets/auth1.jpg' 
 import authtwo from '../assets/auth2.jpg' 

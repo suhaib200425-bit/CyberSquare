@@ -43,7 +43,7 @@ function Auth({
             } catch (err) {
                 setLoading(false)
                 console.error(err.response?.data);
-                alert(err.response?.data || err.message);
+                alert(err.response?.data?.message || err.message);
             }
         } else {
             setLoading(true)
@@ -60,9 +60,9 @@ function Auth({
                 setLoading(false)
 
             } catch (err) {
+                alert(err.response?.data?.message || err.message);
                 setLoading(false)
                 console.error(err.response?.data);
-                alert(err.response?.data?.message || err.message);
             }
         }
     };
@@ -101,6 +101,8 @@ function Auth({
             })
             alert(response.data?.message)
             console.log(response.data);
+                setForm({ lname: '', fname: '', email: '', password: '' });
+
             setLoading(false)
             setIsRegister(false)
 

@@ -6,19 +6,17 @@ const WEB = require("../../models/WEB");
 const toggelThemeTemplate = async (req, res) => {
     try {
         const { TemeTemplateId } = req.params;
-        const user = req.user;
+        const admin = req.user;
 
         const pages = await Page.find({ theme: TemeTemplateId, auther: null });
-        const categories = await Category.find({ theme: TemeTemplateId, auther: null });
         const menus = await Menu.find({ theme: TemeTemplateId, auther: null });
 
         if (
             pages.length === 0 &&
-            categories.length === 0 &&
             menus.length === 0
         ) {
             return res.status(404).json({
-                message: "Page, Menu and Category not found",
+                message: "Page and Menu not found",
             });
         }
 
@@ -26,7 +24,7 @@ const toggelThemeTemplate = async (req, res) => {
         for (const item of pages) {
             const existPage = await Page.findOne({
                 title: item.title,
-                auther: user.id,
+                auther: admin.id,
                 theme: TemeTemplateId
             });
             const data = item.toObject();
@@ -39,40 +37,17 @@ const toggelThemeTemplate = async (req, res) => {
             if (!existPage) {
                 await Page.create({
                     ...data,
-                    auther: user.id,
+                    auther: admin.id,
                 });
             } else {
                 await Page.findByIdAndUpdate(
                     existPage._id, {
-                    sections: item.sections
+                    sections: data.sections
                 }, {
                     new: true,          // updated document return cheyyum
                     runValidators: true
                 }
                 );
-            }
-        }
-
-        // Categories
-        for (const item of categories) {
-            const existCategory = await Category.findOne({
-                title: item.title,
-                auther: user.id,
-                theme: TemeTemplateId
-            });
-
-            if (!existCategory) {
-                const data = item.toObject();
-
-                delete data._id;
-                delete data.__v;
-                delete data.createdAt;
-                delete data.updatedAt;
-
-                await Category.create({
-                    ...data,
-                    auther: user.id,
-                });
             }
         }
 
@@ -83,7 +58,7 @@ const toggelThemeTemplate = async (req, res) => {
             const existMenu = await Menu.findOne({
                 title: item.title,
                 theme: TemeTemplateId,
-                auther: user.id,
+                auther: admin.id,
             });
             console.log("existMenu");
             console.log(existMenu);
@@ -97,14 +72,14 @@ const toggelThemeTemplate = async (req, res) => {
 
                 await Menu.create({
                     ...data,
-                    auther: user.id,
+                    auther: admin.id,
                 });
             }
         }
         console.log("okey");
 
         const selected = await WEB.findOneAndUpdate(
-            { admin: user.id },
+            { admin: admin.id },
             { theme: TemeTemplateId },
             { new: true }
         );
