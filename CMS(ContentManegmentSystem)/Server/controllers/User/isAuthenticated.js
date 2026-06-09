@@ -12,7 +12,8 @@ exports.isAuthenticated = async (req, res) => {
         if (!web) return res.status(400).json({ message: "WebPage is not found" });
 
         // 🔍 Check user exists
-        const user = await User.findOne({ email, web: web._id });
+        const user = await User.findOne({ email, web: web._id }).populate("web");
+        
         if (!user) {
             return res.status(400).json({ message: "User not found" });
         }
@@ -20,6 +21,7 @@ exports.isAuthenticated = async (req, res) => {
         // ✅ Success response
         res.json({
             message: "User Logede successful",
+            user
         });
     } catch (err) {
         res.status(500).json({ message: "Server error", error: err.message });

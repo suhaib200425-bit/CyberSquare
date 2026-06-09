@@ -6,7 +6,12 @@ const getPageById = async (req, res) => {
         const { PageId } = req.params
         console.log(req.params);
         const page = await Page.findById(PageId)
-
+        if (!page) {
+            return res.status(400).json({
+                success: false,
+                message: "page is not found"
+            });
+        }
         res.status(200).json({
             success: true,
             data: page
@@ -20,4 +25,4 @@ const getPageById = async (req, res) => {
     }
 }
 
-module.exports =getPageById
+module.exports = getPageById

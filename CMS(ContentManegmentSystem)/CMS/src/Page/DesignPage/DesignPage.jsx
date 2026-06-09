@@ -190,7 +190,8 @@ function DesignPage() {
                 //     return [...prev, exactcode]
                 // })
                 // console.log(source.element.clientHeight);
-                mainRef.current.scrollTop = mainRef.current.scrollHeight + source.element.clientHeight;
+
+                // mainRef.current.scrollTop = mainRef.current.scrollHeight + source.element.clientHeight;
             }}>
                 <div className='DesignPage'>
                     <div className="leftBar" ref={containerRef} onScroll={hanbleScrollingEnd}>

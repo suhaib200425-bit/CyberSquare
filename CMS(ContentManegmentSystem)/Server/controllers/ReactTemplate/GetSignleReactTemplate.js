@@ -1,8 +1,10 @@
-exports.getTemplate = async (req, res) => {
+const ReactTemplate = require("../../models/ReactTemplate");
+
+exports.getSingleTemplate = async (req, res) => {
   try {
     const { ReactTemplateId } = req.params;
 
-    const template = await ReactTemplate.findById(id);
+    const template = await ReactTemplate.findById(ReactTemplateId);
 
     if (!template) {
       return res.status(404).json({

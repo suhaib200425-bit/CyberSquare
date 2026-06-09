@@ -1,9 +1,12 @@
+
+
+import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from "react";
 import axios from "axios";
 import * as Babel from "@babel/standalone";
 
 import {
-    useParams,useSearchParams,
+    useParams, useSearchParams,
     useNavigate,
     useLocation,
     Link
@@ -80,6 +83,7 @@ export const DynamicRenderer = ({ code, props }) => {
         useLocation,
         Link
     } = router;
+
 
     const {
         FaUser,

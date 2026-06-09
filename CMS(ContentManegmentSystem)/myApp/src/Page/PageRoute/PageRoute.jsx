@@ -22,8 +22,11 @@ function PageRoute({ slug, pageId }) {
                             Authorization: `Bearer ${token}`,
                         },
                     })
-if(slug=="/") Navigate(`/${webname}/home`)
                 console.log(response.data);
+
+                if (webname == response.data?.user?.web?.website && slug == "/") {
+                    Navigate(`/${webname}/home`)
+                }
 
             } catch (error) {
                 alert(error.response?.data?.message || error.message)

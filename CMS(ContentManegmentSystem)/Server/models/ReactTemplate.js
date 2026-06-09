@@ -4,7 +4,11 @@ const mongoose = require("mongoose");
 const propseSchema = new mongoose.Schema({
     label: { type: String, require: true },
     type: { type: String, require: true },
-    value: { type: JSON, require: true },
+    value: { type:  mongoose.Schema.Types.Mixed, require: true },
+    options: {
+        type: [mongoose.Schema.Types.Mixed],
+        default: []
+    }
 }, { _id: false });
 
 

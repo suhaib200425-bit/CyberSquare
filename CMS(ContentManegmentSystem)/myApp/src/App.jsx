@@ -13,6 +13,7 @@ import Auth from './templateComp/Auth/Auth';
 import useStore from './context/Zustand';
 import NavBarOne from './templateComp/NavBarOne';
 import Loading from './Page/Loading/Loading';
+import Main from './Page/Templates/main';
 function App() {
   const location = useLocation();
   const Navigate = useNavigate()
@@ -84,6 +85,7 @@ function App() {
       <Routes>
 
         <Route path={`/:webname/demo`} element={<Demo />} />
+        <Route path={`/:webname/main`} element={<Main />} />
         <Route path={`/loading`} element={<Loading />} />
         <Route path={`/`} element={<Demo />} />
         {

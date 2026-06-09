@@ -1,12 +1,14 @@
+
+
+import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from "react";
 import axios from "axios";
 import * as Babel from "@babel/standalone";
 
 import {
-    useParams,
+    useParams, useSearchParams,
     useNavigate,
     useLocation,
-    useSearchParams,
     Link
 } from "react-router-dom";
 
@@ -53,8 +55,6 @@ export const DynamicRenderer = ({ code, props }) => {
             const fixedCode = code
                 .replace(/\\u003C/g, "<")
                 .replace(/\\u003E/g, ">");
-//             const cleanedCode =
-//   JSON.parse(JSON.stringify(code));
 
             const compiled = Babel.transform(fixedCode, {
                 presets: ["react"],
@@ -67,6 +67,7 @@ export const DynamicRenderer = ({ code, props }) => {
                 "Icons",
                 "useStore",
                 "BASEURL",
+                "reactQuery",
                 `
     const {
         useState,
@@ -83,6 +84,10 @@ export const DynamicRenderer = ({ code, props }) => {
         useLocation,
         Link
     } = router;
+
+    const {
+        useQuery,
+    } = reactQuery
 
     const {
         FaUser,
@@ -107,14 +112,16 @@ export const DynamicRenderer = ({ code, props }) => {
                 },
                 Icons,
                 useStore,
-                BASEURL
+                BASEURL,
+                {
+                    useQuery,
+
+                }
             );
 
         } catch (err) {
 
-            console.log("err");
             console.log(err);
-            console.log("err end");
 
             return null;
         }
@@ -130,5 +137,5 @@ export const DynamicRenderer = ({ code, props }) => {
         );
     }
 
-    return <Component {...props} />;
+    return <Component className="" {...props} />;
 };

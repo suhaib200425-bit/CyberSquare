@@ -131,11 +131,11 @@ app.get("/api/quick/change", async (req, res) => {
         });
       }
     }
+
     res.status(201).json({
       success: true,
       message: "Complted"
     })
-
 
   } catch (error) {
     res.status(500).json({
