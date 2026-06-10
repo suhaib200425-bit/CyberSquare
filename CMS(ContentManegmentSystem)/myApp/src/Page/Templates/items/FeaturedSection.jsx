@@ -33,7 +33,7 @@ function FeaturedSection({
     useEffect(() => {
         async function GetPosts() {
             Promise.all([
-                axios.get(`${BASEURL}/api/post/kite${api.value}?limit=3`)
+                axios.get(`${BASEURL}/api/post/${webname}${api.value}?limit=3`)
             ]).then(([response]) => {
                 setData({ posts: response.data?.posts })
             }).catch(error => {

@@ -13,6 +13,7 @@ const relatedCategoryById = require("../controllers/Post/relatedCategoryById");
 const authMiddleware = require("../middleware/jwt");
 const getPostPublished = require("../controllers/Post/PublishedPost");
 const getLatestPosts = require("../controllers/Post/newOnes/getLatestPosts");
+const getPopularPosts = require("../controllers/Post/newOnes/getPopularPosts");
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ router.get("/get/by/category/",relatedCategoryById)
 //   res.send("TEMPLATE API is running 🚀");
 // });
 router.get("/:website/latest-posts",getLatestPosts );
-router.get("/:website/popular-posts",getLatestPosts );
+router.get("/:website/popular-posts",getPopularPosts );
 
 
 module.exports= router;

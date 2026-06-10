@@ -1,4 +1,5 @@
 
+const Category = require("../../models/Category");
 const Post = require("../../models/Post");
 
 const updatePost = async (req, res) => {
@@ -13,16 +14,25 @@ const updatePost = async (req, res) => {
         runValidators: true // schema validation apply cheyyum
       }
     );
+    await Category.findByIdAndUpdate(
+      updatedPost.category,
+      {
+        $addToSet: {
+          posts: updatedPost._id
+        }
+      },
+      { new: true }
+    );
 
     if (!updatedPost) {
-      return res.status(404).json({ success:false,message: "Post not found" });
+      return res.status(404).json({ success: false, message: "Post not found" });
     }
 
-    res.json({data:updatedPost,success:true});
+    res.json({ data: updatedPost, success: true });
 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-module.exports =updatePost
+module.exports = updatePost

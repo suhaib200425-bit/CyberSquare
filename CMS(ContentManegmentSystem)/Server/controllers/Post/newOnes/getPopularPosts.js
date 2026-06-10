@@ -1,7 +1,7 @@
 const WEB = require("../../../models/WEB");
 const Post = require("../../../models/Post");
 
-const getLatestPosts = async (req, res) => {
+const getPopularPosts = async (req, res) => {
     try {
         const { website } = req.params;
         const { limit } = req.query ;
@@ -12,7 +12,7 @@ const getLatestPosts = async (req, res) => {
         });
         const posts = await Post.find({ auther: web.admin })
             .populate("category", "title")
-            .sort({ createdAt: 1 })
+            .sort({ createdAt: -1 })
             .limit(limit || 1);
 
         if (!posts) {
@@ -40,4 +40,4 @@ const getLatestPosts = async (req, res) => {
     }
 };
 
-module.exports = getLatestPosts
+module.exports = getPopularPosts

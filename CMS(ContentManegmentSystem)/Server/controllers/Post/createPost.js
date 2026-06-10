@@ -1,3 +1,4 @@
+const Category = require("../../models/Category");
 const Post = require("../../models/Post");
 const slugify = require("slugify");
 
@@ -29,8 +30,18 @@ const createPost = async (req, res) => {
       content,
       excerpt,
       status,
-      auther:user.id
+      auther: user.id
     });
+
+    await Category.findByIdAndUpdate(
+      post.category,
+      {
+        $addToSet: {
+          posts: post._id
+        }
+      },
+      { new: true }
+    );
 
     res.status(201).json({
       success: true,
