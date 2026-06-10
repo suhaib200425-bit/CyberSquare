@@ -13,7 +13,8 @@ import Auth from './templateComp/Auth/Auth';
 import useStore from './context/Zustand';
 import NavBarOne from './templateComp/NavBarOne';
 import Loading from './Page/Loading/Loading';
-import Main from './Page/Templates/main';
+import Main from './Page/Templates/main'; 
+
 function App() {
   const location = useLocation();
   const Navigate = useNavigate()
@@ -25,31 +26,6 @@ function App() {
   const { data, isPending, error } = useQuery({
     queryKey: ["MULTI_API",webname],
     queryFn: async () => {
-
-
-      // setTimeout(async () => {
-
-      //   try {
-
-      //     const token = localStorage.getItem("token");
-
-      //     const LogedeResponse = await axios.get(USERAPI, {
-      //       headers: {
-      //         Authorization: `Bearer ${token}`
-      //       }
-      //     });
-      //     SetUser(LogedeResponse.data?.user)
-      //     // Navigate('/home')
-
-      //   } catch (err) {
-
-      //     Navigate('/auth')
-      //     console.log(
-      //       err.response?.data || err.message
-      //     );
-      //   }
-
-      // }, 2000);
 
       console.log("webname");
       console.log(webname);

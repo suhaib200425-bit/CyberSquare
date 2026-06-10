@@ -161,7 +161,7 @@ function PostsCategory({
                         </div>
 
                         <div className="space-y-3">
-                            {data?.categories?.map((category, index) => (
+                            {data?.categories.slice(0,4).map((category, index) => (
                                 <button
                                     key={index}
                                     style={{ backgroundColor: colors[index] }}
