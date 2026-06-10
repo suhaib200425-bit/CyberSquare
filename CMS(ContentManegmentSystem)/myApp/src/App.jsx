@@ -23,7 +23,7 @@ function App() {
   const webname = pathname.split("/")[1]
 
   const { data, isPending, error } = useQuery({
-    queryKey: ["MULTI_API"],
+    queryKey: ["MULTI_API",webname],
     queryFn: async () => {
 
 
