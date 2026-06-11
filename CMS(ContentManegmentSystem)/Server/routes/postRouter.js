@@ -33,6 +33,7 @@ router.get("/get/by/category/",relatedCategoryById)
 // });
 router.get("/:website/latest-posts",getLatestPosts );
 router.get("/:website/popular-posts",getPopularPosts );
+router.get("/:website/top-category-posts",getPopularPosts );
 
 
 module.exports= router;

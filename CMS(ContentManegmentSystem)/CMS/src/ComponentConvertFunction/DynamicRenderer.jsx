@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from "react";
 import axios from "axios";
 import * as Babel from "@babel/standalone";
-
+import { jsxDEV } from "react/jsx-dev-runtime";
 import {
     useParams, useSearchParams,
     useNavigate,
@@ -57,11 +57,14 @@ export const DynamicRenderer = ({ code, props }) => {
                 .replace(/\\u003E/g, ">");
 
             const compiled = Babel.transform(fixedCode, {
-                presets: ["react"],
+                presets: [
+                    ["react", { runtime: "classic" }]
+                ]
             }).code;
-
+// console.log(compiled);
             return new Function(
                 "React",
+                "jsxDEV",
                 "axios",
                 "router",
                 "Icons",
@@ -69,6 +72,8 @@ export const DynamicRenderer = ({ code, props }) => {
                 "BASEURL",
                 "reactQuery",
                 `
+                const _jsxDEV = jsxDEV;
+
     const {
         useState,
         useEffect,
@@ -103,6 +108,7 @@ export const DynamicRenderer = ({ code, props }) => {
             )(
                 React,
                 axios,
+                 jsxDEV,
                 {
                     useParams,
                     useSearchParams,

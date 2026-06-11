@@ -13,7 +13,7 @@ import Auth from './templateComp/Auth/Auth';
 import useStore from './context/Zustand';
 import NavBarOne from './templateComp/NavBarOne';
 import Loading from './Page/Loading/Loading';
-import Main from './Page/Templates/main'; 
+import MainTeamplates from './Page/Templates/MainTeamplates';
 
 function App() {
   const location = useLocation();
@@ -61,9 +61,9 @@ function App() {
       <Routes>
 
         <Route path={`/:webname/demo`} element={<Demo />} />
-        <Route path={`/:webname/main`} element={<Main />} />
+        <Route path={`/:webname/main`} element={<MainTeamplates />} />
         <Route path={`/loading`} element={<Loading />} />
-        <Route path={`/`} element={<Demo />} />
+        {/* <Route path={`/`} element={<Demo />} /> */}
         {
           data && data?.auth && <Route path={`/:webname/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
         }

@@ -4,7 +4,7 @@ import Loading from "../../Loading/Loading";
 import NotFound from "../../NotFound/NotFound";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 function FeaturedSection({
     desktopPadding = { value: "" },
     mobilePadding = { value: "" },
@@ -154,3 +154,4 @@ function FeaturedSection({
 }
 
 export default FeaturedSection;
+

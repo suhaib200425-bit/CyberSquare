@@ -45,8 +45,8 @@ export const DynamicRenderer = ({ code, props }) => {
     const Component = useMemo(() => {
 
         try {
-
-            const componentName = getFunctionName(code);
+const fixCurrentCode = JSON.parse(code)
+            const componentName = getFunctionName(fixCurrentCode);
 
             if (!componentName) {
                 throw new Error("Component name not found");

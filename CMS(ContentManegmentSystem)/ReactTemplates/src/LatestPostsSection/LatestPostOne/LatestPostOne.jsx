@@ -31,7 +31,7 @@ function LatestPostOne({
     {
       id: 3,
       image:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1200&auto=format&fit=crop",
       title: "A simple background photo is forcing Android users to reset phones",
       category: "MOBILE",
       date: "18 June 2026",
