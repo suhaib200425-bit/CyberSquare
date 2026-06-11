@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from "react";
 import axios from "axios";
 import * as Babel from "@babel/standalone";
-
+import { jsxDEV } from "react/jsx-dev-runtime";
 import {
     useParams, useSearchParams,
     useNavigate,
@@ -45,8 +45,8 @@ export const DynamicRenderer = ({ code, props }) => {
     const Component = useMemo(() => {
 
         try {
-const fixCurrentCode = JSON.parse(code)
-            const componentName = getFunctionName(fixCurrentCode);
+
+            const componentName = getFunctionName(code);
 
             if (!componentName) {
                 throw new Error("Component name not found");
@@ -57,17 +57,23 @@ const fixCurrentCode = JSON.parse(code)
                 .replace(/\\u003E/g, ">");
 
             const compiled = Babel.transform(fixedCode, {
-                presets: ["react"],
+                presets: [
+                    ["react", { runtime: "classic" }]
+                ]
             }).code;
-
+// console.log(compiled);
             return new Function(
                 "React",
+                "jsxDEV",
                 "axios",
                 "router",
                 "Icons",
                 "useStore",
                 "BASEURL",
+                "reactQuery",
                 `
+                const _jsxDEV = jsxDEV;
+
     const {
         useState,
         useEffect,
@@ -84,6 +90,9 @@ const fixCurrentCode = JSON.parse(code)
         Link
     } = router;
 
+    const {
+        useQuery,
+    } = reactQuery
 
     const {
         FaUser,
@@ -99,6 +108,7 @@ const fixCurrentCode = JSON.parse(code)
             )(
                 React,
                 axios,
+                 jsxDEV,
                 {
                     useParams,
                     useSearchParams,
@@ -108,7 +118,11 @@ const fixCurrentCode = JSON.parse(code)
                 },
                 Icons,
                 useStore,
-                BASEURL
+                BASEURL,
+                {
+                    useQuery,
+
+                }
             );
 
         } catch (err) {
