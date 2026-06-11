@@ -5,10 +5,15 @@ import PostsCategory from './items/PostsCategory'
 import CategoryWisePopular from './items/CategoryWisePopular'
 import LatestPostOne from './items/LatestPostOne'
 import FunctionBtnConverter from './FunctionBtnConverter'
+import AuthOne from './AuthenticationForms/AuthOne'
 
 function MainTeamplates() {
   return (
     <div>
+      {/* AUTH SECTION  */}
+      <FunctionBtnConverter fn={AuthOne} />
+      <AuthOne />
+      {/* OTHER SECTIONS */}
       <FunctionBtnConverter fn={LatestPostOne} />
       <LatestPostOne />
 
@@ -17,10 +22,10 @@ function MainTeamplates() {
 
       <FunctionBtnConverter fn={PostsCategory} />
       <PostsCategory />
-      
+
       <FunctionBtnConverter fn={FashionTrendingSection} />
       <FashionTrendingSection />
-      
+
       <FunctionBtnConverter fn={FeaturedSection} />
       <FeaturedSection />
     </div>

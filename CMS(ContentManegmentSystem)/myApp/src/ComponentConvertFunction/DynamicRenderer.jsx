@@ -107,8 +107,8 @@ export const DynamicRenderer = ({ code, props }) => {
     `
             )(
                 React,
-                axios,
                  jsxDEV,
+                axios,
                 {
                     useParams,
                     useSearchParams,
