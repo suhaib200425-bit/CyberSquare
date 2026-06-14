@@ -57,6 +57,8 @@ export const DynamicRenderer = ({ code, props }) => {
             const fixedCode = code
                 .replace(/\\u003C/g, "<")
                 .replace(/\\u003E/g, ">");
+            console.log(fixedCode);
+
 
             const compiled = Babel.transform(fixedCode, {
                 presets: [
@@ -64,7 +66,10 @@ export const DynamicRenderer = ({ code, props }) => {
                 ],
                 envName: "production"
             }).code;
-            // console.log(compiled);
+            console.log(compiled);
+
+            const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
+
             return new Function(
                 "React",
                 "ReactJSXRuntime",
@@ -102,6 +107,7 @@ export const DynamicRenderer = ({ code, props }) => {
     const _jsxDEV = jsxDEV;
     const _jsxFileName = "DynamicComponent.jsx";
 
+
     const {
         useState,
         useEffect,
@@ -110,11 +116,12 @@ export const DynamicRenderer = ({ code, props }) => {
         useCallback
     } = React;
 
-    ${compiled}
+    ${convertedString}
 
     return ${componentName};
 `
             )(
+
                 React,
                 ReactJSXRuntime,
                 ReactJSXDevRuntime,

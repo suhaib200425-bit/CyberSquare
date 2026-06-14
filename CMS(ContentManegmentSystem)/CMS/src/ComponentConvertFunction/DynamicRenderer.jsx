@@ -4,8 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from "react";
 import axios from "axios";
 import * as Babel from "@babel/standalone";
-import { jsxDEV } from "react/jsx-dev-runtime";
 import * as ReactJSXRuntime from "react/jsx-runtime";
+import * as ReactJSXDevRuntime from "react/jsx-dev-runtime";
+
 import {
     useParams, useSearchParams,
     useNavigate,
@@ -56,17 +57,23 @@ export const DynamicRenderer = ({ code, props }) => {
             const fixedCode = code
                 .replace(/\\u003C/g, "<")
                 .replace(/\\u003E/g, ">");
+            console.log(fixedCode);
+
 
             const compiled = Babel.transform(fixedCode, {
                 presets: [
                     ["react", { runtime: "classic" }]
-                ]
+                ],
+                envName: "production"
             }).code;
-            // console.log(compiled);
+            console.log(compiled);
+
+            const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
+
             return new Function(
                 "React",
                 "ReactJSXRuntime",
-                "jsxDEV",
+                "ReactJSXDevRuntime",
                 "axios",
                 "router",
                 "Icons",
@@ -74,17 +81,6 @@ export const DynamicRenderer = ({ code, props }) => {
                 "BASEURL",
                 "reactQuery",
                 `
-                 const _jsxDEV = jsxDEV;
-                const { jsx, jsxs, Fragment } = ReactJSXRuntime;
-    const _jsxFileName = "DynamicComponent.jsx";
-
-    const {
-        useState,
-        useEffect,
-        useRef,
-        useMemo,
-        useCallback
-    } = React;
 
     const {
         useParams,
@@ -105,14 +101,30 @@ export const DynamicRenderer = ({ code, props }) => {
         FaEnvelope
     } = Icons;
 
-    ${compiled}
+    const { jsx, jsxs, Fragment } = ReactJSXRuntime;
+    const { jsxDEV } = ReactJSXDevRuntime;
+
+    const _jsxDEV = jsxDEV;
+    const _jsxFileName = "DynamicComponent.jsx";
+
+
+    const {
+        useState,
+        useEffect,
+        useRef,
+        useMemo,
+        useCallback
+    } = React;
+
+    ${convertedString}
 
     return ${componentName};
-    `
+`
             )(
+
                 React,
                 ReactJSXRuntime,
-                jsxDEV,
+                ReactJSXDevRuntime,
                 axios,
                 {
                     useParams,
@@ -125,8 +137,7 @@ export const DynamicRenderer = ({ code, props }) => {
                 useStore,
                 BASEURL,
                 {
-                    useQuery,
-
+                    useQuery
                 }
             );
 
