@@ -61,20 +61,21 @@ export const DynamicRenderer = ({ code, props }) => {
             const compiled = Babel.transform(fixedCode, {
                 presets: [
                     ["react", { runtime: "classic" }]
-                ]
+                ],
+                envName: "production"
             }).code;
             // console.log(compiled);
             return new Function(
-    "React",
-    "ReactJSXRuntime",
-    "ReactJSXDevRuntime",
-    "axios",
-    "router",
-    "Icons",
-    "useStore",
-    "BASEURL",
-    "reactQuery",
-    `
+                "React",
+                "ReactJSXRuntime",
+                "ReactJSXDevRuntime",
+                "axios",
+                "router",
+                "Icons",
+                "useStore",
+                "BASEURL",
+                "reactQuery",
+                `
 
     const {
         useParams,
@@ -113,25 +114,25 @@ export const DynamicRenderer = ({ code, props }) => {
 
     return ${componentName};
 `
-)(
-    React,
-    ReactJSXRuntime,
-    ReactJSXDevRuntime,
-    axios,
-    {
-        useParams,
-        useSearchParams,
-        useNavigate,
-        useLocation,
-        Link
-    },
-    Icons,
-    useStore,
-    BASEURL,
-    {
-        useQuery
-    }
-);
+            )(
+                React,
+                ReactJSXRuntime,
+                ReactJSXDevRuntime,
+                axios,
+                {
+                    useParams,
+                    useSearchParams,
+                    useNavigate,
+                    useLocation,
+                    Link
+                },
+                Icons,
+                useStore,
+                BASEURL,
+                {
+                    useQuery
+                }
+            );
 
         } catch (err) {
 
