@@ -61,6 +61,7 @@ export const DynamicRenderer = ({ code, props }) => {
                     ["react", { runtime: "classic" }]
                 ]
             }).code;
+            console.log(compiled);
 // console.log(compiled);
             return new Function(
                 "React",

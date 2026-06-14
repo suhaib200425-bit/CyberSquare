@@ -19,6 +19,9 @@ import { ResponsiveNewsLayoutSingle } from './CODE-X/ResponsiveNewsLayoutSingle'
 function MainTeamplates() {
   return (
     <div>
+      <FunctionBtnConverter fn={LatestPostTwo} />
+      <LatestPostTwo />
+
       <FunctionBtnConverter fn={ResponsiveNewsLayoutSingle} />
       <ResponsiveNewsLayoutSingle />
 
@@ -40,8 +43,7 @@ function MainTeamplates() {
       <FunctionBtnConverter fn={LatestPostsThree} />
       <LatestPostsThree />
 
-      <FunctionBtnConverter fn={LatestPostTwo} />
-      <LatestPostTwo />
+      
 
       <FunctionBtnConverter fn={SelectedPostsLists} />
       <SelectedPostsLists />

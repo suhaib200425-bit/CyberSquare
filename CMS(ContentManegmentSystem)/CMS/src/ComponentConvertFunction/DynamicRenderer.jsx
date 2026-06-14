@@ -58,10 +58,12 @@ export const DynamicRenderer = ({ code, props }) => {
 
             const compiled = Babel.transform(fixedCode, {
                 presets: [
-                    ["react", { runtime: "classic" }]
+                    ["react", {
+                        runtime: "automatic"
+                    }]
                 ]
             }).code;
-// console.log(compiled);
+            // console.log(compiled);
             return new Function(
                 "React",
                 "jsxDEV",
@@ -108,7 +110,7 @@ export const DynamicRenderer = ({ code, props }) => {
     `
             )(
                 React,
-                 jsxDEV,
+                jsxDEV,
                 axios,
                 {
                     useParams,
