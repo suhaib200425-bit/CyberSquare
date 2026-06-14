@@ -6,10 +6,45 @@ import CategoryWisePopular from './items/CategoryWisePopular'
 import LatestPostOne from './items/LatestPostOne'
 import FunctionBtnConverter from './FunctionBtnConverter'
 import AuthOne from './AuthenticationForms/AuthOne'
+import SelectedPostsLists from './items/SelectedPostsLists'
+import LatestPostTwo from './items/LatestPostTwo'
+import LatestPostsThree from './items/LatestPostThree'
+import SectionPostListTwo from './items/SectionPostListTwo'
+import SmallPostsList from './items/SmallPostsList'
+import SelectedPostListThree from './items/SelectedPostListThree'
+import SmallPostsListTwo from './items/SmallPostsListTwo'
+import SinglePostCard from './items/SinglePostCard'
+import { ResponsiveNewsLayoutSingle } from './CODE-X/ResponsiveNewsLayoutSingle'
 
 function MainTeamplates() {
   return (
     <div>
+      <FunctionBtnConverter fn={ResponsiveNewsLayoutSingle} />
+      <ResponsiveNewsLayoutSingle />
+
+      <FunctionBtnConverter fn={SinglePostCard} />
+      <SinglePostCard />
+
+      <FunctionBtnConverter fn={SmallPostsListTwo} />
+      <SmallPostsListTwo />
+
+      <FunctionBtnConverter fn={SelectedPostListThree} />
+      <SelectedPostListThree />
+
+      <FunctionBtnConverter fn={SmallPostsList} />
+      <SmallPostsList />
+
+      <FunctionBtnConverter fn={SectionPostListTwo} />
+      <SectionPostListTwo />
+
+      <FunctionBtnConverter fn={LatestPostsThree} />
+      <LatestPostsThree />
+
+      <FunctionBtnConverter fn={LatestPostTwo} />
+      <LatestPostTwo />
+
+      <FunctionBtnConverter fn={SelectedPostsLists} />
+      <SelectedPostsLists />
       {/* AUTH SECTION  */}
       <FunctionBtnConverter fn={AuthOne} />
       <AuthOne />

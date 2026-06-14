@@ -13,6 +13,7 @@ const relatedCategoryById = require("../controllers/Post/relatedCategoryById");
 const authMiddleware = require("../middleware/jwt");
 const getPostPublished = require("../controllers/Post/PublishedPost");
 const getLatestPosts = require("../controllers/Post/newOnes/getLatestPosts");
+const getSinglePopularPost = require("../controllers/Post/newOnes/getSignglePopularPost");
 const getPopularPosts = require("../controllers/Post/newOnes/getPopularPosts");
 
 const router = express.Router();
@@ -33,7 +34,9 @@ router.get("/get/by/category/",relatedCategoryById)
 // });
 router.get("/:website/latest-posts",getLatestPosts );
 router.get("/:website/popular-posts",getPopularPosts );
-router.get("/:website/top-category-posts",getPopularPosts );
+router.get("/:website/single-latest-post",getSinglePopularPost );
+router.get("/:website//single-popular-post",getSinglePopularPost );
+router.get("/:website/top-category-post",getSinglePopularPost );
 
 
 module.exports= router;

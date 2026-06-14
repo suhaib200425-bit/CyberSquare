@@ -72,7 +72,8 @@ export const DynamicRenderer = ({ code, props }) => {
                 "BASEURL",
                 "reactQuery",
                 `
-                const _jsxDEV = jsxDEV;
+                 const _jsxDEV = jsxDEV;
+    const _jsxFileName = "DynamicComponent.jsx";
 
     const {
         useState,

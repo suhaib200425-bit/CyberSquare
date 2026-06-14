@@ -42,6 +42,7 @@ import DynamicDreamSection from './CODE-X/DynamicDreamSection'
 import DynamicVisionSection from './CODE-X/DynamicVisionSection'
 import SingleArticlePage from './SingleArticlePage/SingleArticlePage'
 import ArticlesPage from './ArticleListingPage/ArticlesPage'
+import { ResponsiveNewsLayoutSingle } from './REATTEMPLATE-CODEX/GeneratedResponsiveNewsLayout'
 
 function App() {
 
@@ -50,6 +51,8 @@ function App() {
       // const jsonString = HeroSectionImageContent.toString();
       console.log("jsonString");
     }}>
+      <p>ResponsiveNewsLayoutSingle</p>
+      <ResponsiveNewsLayoutSingle />
       <p>ArticlesPage</p>
       <ArticlesPage />
       <p>SingleArticlePage</p>

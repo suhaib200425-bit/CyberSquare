@@ -5,8 +5,8 @@ const createReactTemplate = require("../controllers/ReactTemplate/createReactTem
 const getAllReactTemplate = require("../controllers/ReactTemplate/getAllReactTemplate");
 const deleteReactTemplate = require("../controllers/ReactTemplate/deleteReactTemplate");
 const updateReactTemplate = require("../controllers/ReactTemplate/updateReactTemplate");
+const getSingleTemplate = require("../controllers/ReactTemplate/GetSignleReactTemplate")
 const upload = require("../middleware/multer");
-const { getSingleTemplate } = require("../controllers/ReactTemplate/GetSignleReactTemplate");
 
 
 const router = express.Router();

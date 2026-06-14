@@ -1,6 +1,6 @@
 const ReactTemplate = require("../../models/ReactTemplate");
 
-exports.getSingleTemplate = async (req, res) => {
+ getSingleTemplate = async (req, res) => {
   try {
     const { ReactTemplateId } = req.params;
 
@@ -24,3 +24,5 @@ exports.getSingleTemplate = async (req, res) => {
     });
   }
 };
+
+module.exports =  getSingleTemplate;
