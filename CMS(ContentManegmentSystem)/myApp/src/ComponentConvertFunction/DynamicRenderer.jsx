@@ -4,8 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from "react";
 import axios from "axios";
 import * as Babel from "@babel/standalone";
-import { jsxDEV } from "react/jsx-dev-runtime";
 import * as ReactJSXRuntime from "react/jsx-runtime";
+import * as ReactJSXDevRuntime from "react/jsx-dev-runtime";
+
 import {
     useParams, useSearchParams,
     useNavigate,
@@ -64,27 +65,16 @@ export const DynamicRenderer = ({ code, props }) => {
             }).code;
             // console.log(compiled);
             return new Function(
-                "React",
-                "ReactJSXRuntime",
-                "jsxDEV",
-                "axios",
-                "router",
-                "Icons",
-                "useStore",
-                "BASEURL",
-                "reactQuery",
-                `
-                 const _jsxDEV = jsxDEV;
-                const { jsx, jsxs, Fragment } = ReactJSXRuntime;
-    const _jsxFileName = "DynamicComponent.jsx";
-
-    const {
-        useState,
-        useEffect,
-        useRef,
-        useMemo,
-        useCallback
-    } = React;
+    "React",
+    "ReactJSXRuntime",
+    "ReactJSXDevRuntime",
+    "axios",
+    "router",
+    "Icons",
+    "useStore",
+    "BASEURL",
+    "reactQuery",
+    `
 
     const {
         useParams,
@@ -105,30 +95,43 @@ export const DynamicRenderer = ({ code, props }) => {
         FaEnvelope
     } = Icons;
 
+    const { jsx, jsxs, Fragment } = ReactJSXRuntime;
+    const { jsxDEV } = ReactJSXDevRuntime;
+
+    const _jsxDEV = jsxDEV;
+    const _jsxFileName = "DynamicComponent.jsx";
+
+    const {
+        useState,
+        useEffect,
+        useRef,
+        useMemo,
+        useCallback
+    } = React;
+
     ${compiled}
 
     return ${componentName};
-    `
-            )(
-                React,
-                ReactJSXRuntime,
-                jsxDEV,
-                axios,
-                {
-                    useParams,
-                    useSearchParams,
-                    useNavigate,
-                    useLocation,
-                    Link
-                },
-                Icons,
-                useStore,
-                BASEURL,
-                {
-                    useQuery,
-
-                }
-            );
+`
+)(
+    React,
+    ReactJSXRuntime,
+    ReactJSXDevRuntime,
+    axios,
+    {
+        useParams,
+        useSearchParams,
+        useNavigate,
+        useLocation,
+        Link
+    },
+    Icons,
+    useStore,
+    BASEURL,
+    {
+        useQuery
+    }
+);
 
         } catch (err) {
 
