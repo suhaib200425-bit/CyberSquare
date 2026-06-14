@@ -4,7 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useMemo } from "react";
 import axios from "axios";
 import * as Babel from "@babel/standalone";
-import { jsxDEV } from "react/jsx-dev-runtime";
+// import { jsxDEV } from "react/jsx-dev-runtime";
+import * as ReactJSXRuntime from "react/jsx-runtime";
 import {
     useParams, useSearchParams,
     useNavigate,
@@ -58,15 +59,13 @@ export const DynamicRenderer = ({ code, props }) => {
 
             const compiled = Babel.transform(fixedCode, {
                 presets: [
-                    ["react", {
-                        runtime: "automatic"
-                    }]
+                    ["react", { runtime: "classic" }]
                 ]
             }).code;
-            // console.log(compiled);
+// console.log(compiled);
             return new Function(
                 "React",
-                "jsxDEV",
+                "ReactJSXRuntime",
                 "axios",
                 "router",
                 "Icons",
@@ -74,7 +73,8 @@ export const DynamicRenderer = ({ code, props }) => {
                 "BASEURL",
                 "reactQuery",
                 `
-                 const _jsxDEV = jsxDEV;
+                //  const _jsxDEV = jsxDEV;
+                const { jsx, jsxs, Fragment } = ReactJSXRuntime;
     const _jsxFileName = "DynamicComponent.jsx";
 
     const {
@@ -110,7 +110,7 @@ export const DynamicRenderer = ({ code, props }) => {
     `
             )(
                 React,
-                jsxDEV,
+                 ReactJSXRuntime,
                 axios,
                 {
                     useParams,
