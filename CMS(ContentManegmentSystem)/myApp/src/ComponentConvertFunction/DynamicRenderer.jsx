@@ -105,8 +105,7 @@ export const DynamicRenderer = ({ code, props }) => {
     const { jsxDEV } = ReactJSXDevRuntime;
 
     const _jsxDEV = jsxDEV;
-    const _jsxFileName = "DynamicComponent.jsx";
-
+    const _jsxFileName = ${componentName};
 
     const {
         useState,
@@ -116,7 +115,7 @@ export const DynamicRenderer = ({ code, props }) => {
         useCallback
     } = React;
 
-    ${convertedString}
+    ${fixedCode}
 
     return ${componentName};
 `
