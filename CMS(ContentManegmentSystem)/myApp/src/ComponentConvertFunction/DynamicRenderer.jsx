@@ -18,8 +18,11 @@ import * as Icons from "react-icons/fa";
 import useStore from "../context/Zustand";
 
 import { BASEURL } from "../assets/assets";
+import { useState } from 'react';
+
 
 function getFunctionName(code) {
+    //Error Type
 
     // function Test() {}
     const functionMatch = code.match(
@@ -43,6 +46,7 @@ function getFunctionName(code) {
 }
 
 export const DynamicRenderer = ({ code, props }) => {
+    const [ERROR,setERROR]=useState('')
 
     const Component = useMemo(() => {
 
@@ -52,36 +56,39 @@ export const DynamicRenderer = ({ code, props }) => {
 
             if (!componentName) {
                 throw new Error("Component name not found");
+                setERROR("Component name not found")
             }
 
             const fixedCode = code
-    console.log("fixedCode");
-    console.log(fixedCode);
 
 
-    const compiled = Babel.transform(fixedCode, {
-        presets: [
-            ["react", { runtime: "classic" }]
-        ],
-        envName: "production"
-    }).code;
+            const compiled = Babel.transform(fixedCode, {
+                presets: [
+                    ["react", { runtime: "classic" }]
+                ],
+                envName: "production"
+            }).code;
 
-    console.log("compiled");
-    console.log(compiled);
 
-    // const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
+            if (compiled.includes("_jsxDEV")) {
+                throw new Error("_JSX DEV Founded");
+                setERROR("_JSX DEV  found")
 
-    return new Function(
-        "React",
-        "ReactJSXRuntime",
-        "ReactJSXDevRuntime",
-        "axios",
-        "router",
-        "Icons",
-        "useStore",
-        "BASEURL",
-        "reactQuery",
-        `
+
+            }
+            // const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
+
+            return new Function(
+                "React",
+                "ReactJSXRuntime",
+                "ReactJSXDevRuntime",
+                "axios",
+                "router",
+                "Icons",
+                "useStore",
+                "BASEURL",
+                "reactQuery",
+                `
 
     const {
         useParams,
@@ -116,48 +123,49 @@ export const DynamicRenderer = ({ code, props }) => {
         useCallback
     } = React;
 
-    ${fixedCode}
+    ${compiled}
 
     return ${componentName};
 `
-    )(
+            )(
 
-        React,
-        ReactJSXRuntime,
-        ReactJSXDevRuntime,
-        axios,
-        {
-            useParams,
-            useSearchParams,
-            useNavigate,
-            useLocation,
-            Link
-        },
-        Icons,
-        useStore,
-        BASEURL,
-        {
-            useQuery
+                React,
+                ReactJSXRuntime,
+                ReactJSXDevRuntime,
+                axios,
+                {
+                    useParams,
+                    useSearchParams,
+                    useNavigate,
+                    useLocation,
+                    Link
+                },
+                Icons,
+                useStore,
+                BASEURL,
+                {
+                    useQuery
+                }
+            );
+
+        } catch (err) {
+
+            console.log(err);
+            return null;
         }
-    );
-
-} catch (err) {
-
-    console.log(err);
-
-    return null;
-}
 
     }, [code]);
 
-if (!Component) {
+    if (!Component) {
 
-    return (
-        <div className="text-red-500 p-4">
-            Error rendering component
-        </div>
-    );
-}
+        return (
+            <div className="text-red-500 p-4">
+                Error rendering component
+                <br />
+                {ERROR}
+            </div>
+        );
+    }
 
-return <Component className="" {...props} />;
+    return <Component className="" {...props} />;
 };

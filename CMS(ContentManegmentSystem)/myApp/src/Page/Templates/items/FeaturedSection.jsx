@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BASEURL } from "../../../assets/assets";
+import axios from "axios"
 import Loading from "../../Loading/Loading";
 import NotFound from "../../NotFound/NotFound";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios"
 import { useEffect, useRef, useState } from "react";
 function FeaturedSection({
     desktopPadding = { value: "" },

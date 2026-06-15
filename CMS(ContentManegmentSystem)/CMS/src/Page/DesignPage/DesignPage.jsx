@@ -258,9 +258,10 @@ function DesignPage() {
                                             e.stopPropagation()
                                             moveDown(i)
                                         }}><i class="fa-solid fa-angle-down" style={{ color: 'orange' }}></i></div>}
-                                        <div className="icon" onClick={() => {
-                                            deleteSectionTemplate(i)
+                                        <div className="icon" onClick={(e) => {
                                             setTarget(null)
+                                            e.stopPropagation()
+                                            deleteSectionTemplate(i)
                                         }}><i class="fa-solid fa-trash-can" style={{ color: 'red' }}></i></div>
                                     </div>
                                 </div>

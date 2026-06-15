@@ -1,406 +1,418 @@
-import { useEffect } from "react";
-import { useState } from "react";
 
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { BASEURL } from "../../../assets/assets";
+import axios from "axios"
 export function ResponsiveNewsLayoutSingle({
-  //  = responsiveNewsLayoutStyleConfig,
-  pageBackgroundColor= {
+  api = {
+    value: "/popular-posts", type: "option", options: [
+      {
+        name: "Latest Posts",
+        api: `/latest-posts`
+      }, {
+        name: "Popular Posts",
+        api: "/popular-posts"
+      }
+    ]
+  },
+  pageBackgroundColor = {
     label: 'Page Background Color',
     type: 'color',
     value: '#ffffff',
     options: [],
   },
-  desktopPadding= {
+  desktopPadding = {
     label: 'Desktop Padding',
     type: 'text',
     value: '0px 100px',
     options: [],
   },
-  mobilePadding= {
+  mobilePadding = {
     label: 'Mobile Padding',
     type: 'text',
     value: '0px 10px',
     options: [],
   },
-  containerMaxWidth= {
+  containerMaxWidth = {
     label: 'Container Max Width',
     type: 'text',
     value: '1320px',
     options: [],
   },
-  desktopColumnTemplate= {
+  desktopColumnTemplate = {
     label: 'Desktop Column Template',
     type: 'text',
     value: 'minmax(0, 2fr) minmax(320px, 0.95fr)',
     options: [],
   },
-  tabletColumnTemplate= {
+  tabletColumnTemplate = {
     label: 'Tablet Column Template',
     type: 'text',
     value: '1fr',
     options: [],
   },
-  categoryDesktopTemplate= {
+  categoryDesktopTemplate = {
     label: 'Category Desktop Template',
     type: 'text',
     value: 'minmax(300px, 0.82fr) minmax(0, 1.08fr)',
     options: [],
   },
-  categoryMobileTemplate= {
+  categoryMobileTemplate = {
     label: 'Category Mobile Template',
     type: 'text',
     value: '1fr',
     options: [],
   },
-  desktopMainGap= {
+  desktopMainGap = {
     label: 'Desktop Main Gap',
     type: 'text',
     value: '38px',
     options: [],
   },
-  mobileMainGap= {
+  mobileMainGap = {
     label: 'Mobile Main Gap',
     type: 'text',
     value: '34px',
     options: [],
   },
-  sectionTitleColor= {
+  sectionTitleColor = {
     label: 'Section Title Color',
     type: 'color',
     value: '#171717',
     options: [],
   },
-  sectionTitleFontSizeDesktop= {
+  sectionTitleFontSizeDesktop = {
     label: 'Section Title Font Size Desktop',
     type: 'text',
     value: '34px',
     options: [],
   },
-  sectionTitleFontSizeMobile= {
+  sectionTitleFontSizeMobile = {
     label: 'Section Title Font Size Mobile',
     type: 'text',
     value: '28px',
     options: [],
   },
-  sectionTitleFontWeight= {
+  sectionTitleFontWeight = {
     label: 'Section Title Font Weight',
     type: 'text',
     value: '800',
     options: [],
   },
-  headingUnderlineColor= {
+  headingUnderlineColor = {
     label: 'Heading Underline Color',
     type: 'color',
     value: '#dedede',
     options: [],
   },
-  headingUnderlineAccentColor= {
+  headingUnderlineAccentColor = {
     label: 'Heading Underline Accent Color',
     type: 'color',
     value: '#c65045',
     options: [],
   },
-  headingUnderlineHeight= {
+  headingUnderlineHeight = {
     label: 'Heading Underline Height',
     type: 'text',
     value: '2px',
     options: [],
   },
-  headingUnderlineAccentWidth= {
+  headingUnderlineAccentWidth = {
     label: 'Heading Underline Accent Width',
     type: 'text',
     value: '118px',
     options: [],
   },
-  headingBottomMargin= {
+  headingBottomMargin = {
     label: 'Heading Bottom Margin',
     type: 'text',
     value: '42px',
     options: [],
   },
-  tabsGap= {
+  tabsGap = {
     label: 'Tabs Gap',
     type: 'text',
     value: '30px',
     options: [],
   },
-  tabTextColor= {
+  tabTextColor = {
     label: 'Tab Text Color',
     type: 'color',
     value: '#2f2f2f',
     options: [],
   },
-  tabActiveTextColor= {
+  tabActiveTextColor = {
     label: 'Tab Active Text Color',
     type: 'color',
     value: '#b45a4d',
     options: [],
   },
-  tabFontSize= {
+  tabFontSize = {
     label: 'Tab Font Size',
     type: 'text',
     value: '13px',
     options: [],
   },
-  tabFontWeight= {
+  tabFontWeight = {
     label: 'Tab Font Weight',
     type: 'text',
     value: '700',
     options: [],
   },
-  featuredCardHeightDesktop= {
+  featuredCardHeightDesktop = {
     label: 'Featured Card Height Desktop',
     type: 'text',
     value: '615px',
     options: [],
   },
-  featuredCardHeightMobile= {
+  featuredCardHeightMobile = {
     label: 'Featured Card Height Mobile',
     type: 'text',
     value: '420px',
     options: [],
   },
-  popularHeroHeightDesktop= {
+  popularHeroHeightDesktop = {
     label: 'Popular Hero Height Desktop',
     type: 'text',
     value: '250px',
     options: [],
   },
-  popularHeroHeightMobile= {
+  popularHeroHeightMobile = {
     label: 'Popular Hero Height Mobile',
     type: 'text',
     value: '310px',
     options: [],
   },
-  cardRadius= {
+  cardRadius = {
     label: 'Card Radius',
     type: 'text',
     value: '4px',
     options: [],
   },
-  imageObjectFit= {
+  imageObjectFit = {
     label: 'Image Object Fit',
     type: 'select',
     value: 'cover',
     options: ['cover', 'contain'],
   },
-  overlayBackground= {
+  overlayBackground = {
     label: 'Overlay Background',
     type: 'color',
     value: 'rgba(0,0,0,0.58)',
     options: [],
   },
-  overlayGradient= {
+  overlayGradient = {
     label: 'Overlay Gradient',
     type: 'text',
     value: 'linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.86) 100%)',
     options: [],
   },
-  overlayPaddingDesktop= {
+  overlayPaddingDesktop = {
     label: 'Overlay Padding Desktop',
     type: 'text',
     value: '28px',
     options: [],
   },
-  overlayPaddingMobile= {
+  overlayPaddingMobile = {
     label: 'Overlay Padding Mobile',
     type: 'text',
     value: '20px',
     options: [],
   },
-  badgeBackgroundColor= {
+  badgeBackgroundColor = {
     label: 'Badge Background Color',
     type: 'color',
     value: '#2b1717',
     options: [],
   },
-  badgeTextColor= {
+  badgeTextColor = {
     label: 'Badge Text Color',
     type: 'color',
     value: '#ffffff',
     options: [],
   },
-  badgeFontSize= {
+  badgeFontSize = {
     label: 'Badge Font Size',
     type: 'text',
     value: '11px',
     options: [],
   },
-  badgePadding= {
+  badgePadding = {
     label: 'Badge Padding',
     type: 'text',
     value: '5px 15px',
     options: [],
   },
-  badgeRadius= {
+  badgeRadius = {
     label: 'Badge Radius',
     type: 'text',
     value: '10px',
     options: [],
   },
-  badgeGap= {
+  badgeGap = {
     label: 'Badge Gap',
     type: 'text',
     value: '8px',
     options: [],
   },
-  titleColor= {
+  titleColor = {
     label: 'Title Color',
     type: 'color',
     value: '#151515',
     options: [],
   },
-  overlayTitleColor= {
+  overlayTitleColor = {
     label: 'Overlay Title Color',
     type: 'color',
     value: '#ffffff',
     options: [],
   },
-  featuredTitleFontSizeDesktop= {
+  featuredTitleFontSizeDesktop = {
     label: 'Featured Title Font Size Desktop',
     type: 'text',
     value: '25px',
     options: [],
   },
-  featuredTitleFontSizeMobile= {
+  featuredTitleFontSizeMobile = {
     label: 'Featured Title Font Size Mobile',
     type: 'text',
     value: '21px',
     options: [],
   },
-  articleTitleFontSizeDesktop= {
+  articleTitleFontSizeDesktop = {
     label: 'Article Title Font Size Desktop',
     type: 'text',
     value: '20px',
     options: [],
   },
-  articleTitleFontSizeMobile= {
+  articleTitleFontSizeMobile = {
     label: 'Article Title Font Size Mobile',
     type: 'text',
     value: '18px',
     options: [],
   },
-  popularTitleFontSize= {
+  popularTitleFontSize = {
     label: 'Popular Title Font Size',
     type: 'text',
     value: '18px',
     options: [],
   },
-  titleFontWeight= {
+  titleFontWeight = {
     label: 'Title Font Weight',
     type: 'text',
     value: '800',
     options: [],
   },
-  titleLineHeight= {
+  titleLineHeight = {
     label: 'Title Line Height',
     type: 'text',
     value: '1.32',
     options: [],
   },
-  metaTextColor= {
+  metaTextColor = {
     label: 'Meta Text Color',
     type: 'color',
     value: '#8a8a8a',
     options: [],
   },
-  overlayMetaTextColor= {
+  overlayMetaTextColor = {
     label: 'Overlay Meta Text Color',
     type: 'color',
     value: '#d8d8d8',
     options: [],
   },
-  metaFontSize= {
+  metaFontSize = {
     label: 'Meta Font Size',
     type: 'text',
     value: '13px',
     options: [],
   },
-  metaFontWeight= {
+  metaFontWeight = {
     label: 'Meta Font Weight',
     type: 'text',
     value: '600',
     options: [],
   },
-  iconSize= {
+  iconSize = {
     label: 'Icon Size',
     type: 'text',
     value: '15px',
     options: [],
   },
-  articleImageWidthDesktop= {
+  articleImageWidthDesktop = {
     label: 'Article Image Width Desktop',
     type: 'text',
     value: '190px',
     options: [],
   },
-  articleImageWidthMobile= {
+  articleImageWidthMobile = {
     label: 'Article Image Width Mobile',
     type: 'text',
     value: '112px',
     options: [],
   },
-  articleImageHeightDesktop= {
+  articleImageHeightDesktop = {
     label: 'Article Image Height Desktop',
     type: 'text',
     value: '190px',
     options: [],
   },
-  articleImageHeightMobile= {
+  articleImageHeightMobile = {
     label: 'Article Image Height Mobile',
     type: 'text',
     value: '112px',
     options: [],
   },
-  articleRowGapDesktop= {
+  articleRowGapDesktop = {
     label: 'Article Row Gap Desktop',
     type: 'text',
     value: '16px',
     options: [],
   },
-  articleRowGapMobile= {
+  articleRowGapMobile = {
     label: 'Article Row Gap Mobile',
     type: 'text',
     value: '14px',
     options: [],
   },
-  articleStackGap= {
+  articleStackGap = {
     label: 'Article Stack Gap',
     type: 'text',
     value: '22px',
     options: [],
   },
-  popularListGap= {
+  popularListGap = {
     label: 'Popular List Gap',
     type: 'text',
     value: '18px',
     options: [],
   },
-  popularThumbWidth= {
+  popularThumbWidth = {
     label: 'Popular Thumb Width',
     type: 'text',
     value: '112px',
     options: [],
   },
-  popularThumbHeight= {
+  popularThumbHeight = {
     label: 'Popular Thumb Height',
     type: 'text',
     value: '92px',
     options: [],
   },
-  fontFamily= {
+  fontFamily = {
     label: 'Font Family',
     type: 'text',
     value:
       'Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif',
     options: [],
   },
-  categoriesHeading= {
+  categoriesHeading = {
     label: 'Categories Heading',
     type: 'text',
     value: 'Categories',
     options: [],
   },
-  popularHeading= {
+  popularHeading = {
     label: 'Popular Heading',
     type: 'text',
     value: 'Popular News',
@@ -409,64 +421,64 @@ export function ResponsiveNewsLayoutSingle({
 }) {
 
   const topCategories = [
-    { title: "AUCTION NEWS" },
-    { title: "ARTICLES" },
-    { title: "STORIEs" }
+    { title: 'AUCTION NEWS',navigate:true },
+    { title: 'ARTICLES' },
+    { title: 'STORIEs' }
   ]
 
   const topCategoriesPosts = [
     {
       _id: 1,
-      createdAt: "2024-12-26T10:30:00.000Z",
+      createdAt: '2024-12-26T10:30:00.000Z',
       banner:
-        "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?q=80&w=1200&auto=format&fit=crop",
-      title: "Top 20 Gaming Smartphone Under 50k Best Selling",
-      category: { title: "Gaming" },
+        'https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?q=80&w=1200&auto=format&fit=crop',
+      title: 'Top 20 Gaming Smartphone Under 50k Best Selling',
+      category: { title: 'Gaming' },
       navigate: true
     },
     {
       _id: 2,
-      createdAt: "2024-12-26T10:30:00.000Z",
+      createdAt: '2024-12-26T10:30:00.000Z',
       banner:
-        "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
-      title: "Top 20 Gaming Smartphone Under 50k Best Selling",
-      category: { title: "Gaming" },
+        'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',
+      title: 'Top 20 Gaming Smartphone Under 50k Best Selling',
+      category: { title: 'Gaming' },
       navigate: true
     },
     {
       _id: 3,
-      createdAt: "2024-12-26T10:30:00.000Z",
+      createdAt: '2024-12-26T10:30:00.000Z',
       banner:
-        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop",
-      title: "Top 20 Gaming Smartphone Under 50k Best Selling",
-      category: { title: "Gaming" },
+        'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop',
+      title: 'Top 20 Gaming Smartphone Under 50k Best Selling',
+      category: { title: 'Gaming' },
       navigate: true
     },
     {
       _id: 4,
-      createdAt: "2024-12-26T10:30:00.000Z",
+      createdAt: '2024-12-26T10:30:00.000Z',
       banner:
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop",
-      title: "Top 20 Gaming Smartphone Under 50k Best Selling",
-      category: { title: "Gaming" },
+        'https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1200&auto=format&fit=crop',
+      title: 'Top 20 Gaming Smartphone Under 50k Best Selling',
+      category: { title: 'Gaming' },
       navigate: true
     },
     {
       _id: 5,
-      createdAt: "2024-12-26T10:30:00.000Z",
+      createdAt: '2024-12-26T10:30:00.000Z',
       banner:
-        "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1200&auto=format&fit=crop",
-      title: "Top 20 Gaming Smartphone Under 50k Best Selling",
-      category: { title: "Gaming" },
+        'https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=1200&auto=format&fit=crop',
+      title: 'Top 20 Gaming Smartphone Under 50k Best Selling',
+      category: { title: 'Gaming' },
       navigate: true
     },
     {
       _id: 6,
-      createdAt: "2024-12-26T10:30:00.000Z",
+      createdAt: '2024-12-26T10:30:00.000Z',
       banner:
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop",
-      title: "Top 20 Gaming Smartphone Under 50k Best Selling",
-      category: { title: "Gaming" },
+        'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop',
+      title: 'Top 20 Gaming Smartphone Under 50k Best Selling',
+      category: { title: 'Gaming' },
       navigate: true
     },
 
@@ -478,10 +490,10 @@ export function ResponsiveNewsLayoutSingle({
   const [isTablet, setIsTablet] = useState(false)
 
   function dateFormat(date) {
-    const formattedDate = new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     });
     return formattedDate
   }
@@ -492,6 +504,35 @@ export function ResponsiveNewsLayoutSingle({
     topPopularPosts: topCategoriesPosts,
 
   })
+
+  const { webname } = useParams()
+  const Navigate = useNavigate()
+  useEffect(() => {
+    async function GetPosts() {
+      Promise.all([
+        axios.get(`${BASEURL}/api/category/${webname}/top-post-categories?limit=5`),
+        axios.get(`${BASEURL}/api/post/${webname}/top-category-posts?limit=5`),
+        axios.get(`${BASEURL}/api/post/${webname}${api.value}?limit=5`)
+        
+      ]).then(([topcategoryResponse,topCategoryPostsResponse,otherPostResponse]) => {
+        console.log("ResponsiveNewsLayoutSingle");
+        console.log(topcategoryResponse.data);
+        console.log(topCategoryPostsResponse.data);
+        console.log(otherPostResponse.data);
+        setData( {
+            topCategories: [...topcategoryResponse.data.categories],
+            topCategoriesPosts: [...topCategoryPostsResponse.data?.posts, ...topCategoriesPosts],
+            topPopularPosts: [...otherPostResponse.data?.posts, ...topCategoriesPosts],
+          }
+        )
+      }).catch(error => {
+        console.log(" ERROR ResponsiveNewsLayoutSingle");
+
+        console.log(error.response?.data || error.message);
+      });
+    }
+    GetPosts()
+  }, [webname, api.value])
 
   useEffect(() => {
     const updateViewport = () => {
@@ -505,7 +546,11 @@ export function ResponsiveNewsLayoutSingle({
 
   return (
     <section
-      className="w-full"
+      onClick={() => {
+        console.log(data);
+      }
+      }
+      className='w-full'
       style={{
         backgroundColor: pageBackgroundColor.value,
         padding: isMobile ? mobilePadding.value : desktopPadding.value,
@@ -513,7 +558,7 @@ export function ResponsiveNewsLayoutSingle({
       }}
     >
       <div
-        className="mx-auto w-full"
+        className='mx-auto w-full'
         style={{
           maxWidth: containerMaxWidth.value,
           display: 'grid',
@@ -523,16 +568,16 @@ export function ResponsiveNewsLayoutSingle({
           gap: isMobile ? mobileMainGap.value : desktopMainGap.value,
         }}
       >
-        <div className="w-full">
+        <div className='w-full'>
           <div
-            className="flex w-full flex-col md:flex-row md:items-center md:justify-between"
+            className='flex w-full flex-col md:flex-row md:items-center md:justify-between'
             style={{
               gap: isMobile
                 ? articleRowGapMobile.value
                 : articleRowGapDesktop.value,
             }}
           >
-            <div className="w-full">
+            <div className='w-full'>
               <h2
                 style={{
                   color: sectionTitleColor.value,
@@ -568,7 +613,7 @@ export function ResponsiveNewsLayoutSingle({
               </div>
             </div>
             <div
-              className="flex items-center gap-2 md:justify-end"
+              className='flex items-center gap-2 md:justify-end'
               style={{
                 gap: tabsGap.value,
                 marginTop: isMobile ? badgeGap.value : '0px',
@@ -576,7 +621,7 @@ export function ResponsiveNewsLayoutSingle({
             >
               <button
                 key={`jiji`}
-                type="button"
+                type='button'
                 className='whitespace-nowrap'
                 style={{
                   appearance: 'none',
@@ -595,10 +640,10 @@ export function ResponsiveNewsLayoutSingle({
               >
                 All
               </button>
-              {data.topCategories.map((tab, index) => (
+              {data.topCategories.slice(0,3).map((tab, index) => (
                 <button
                   key={`${index}`}
-                  type="button"
+                  type='button'
                   className='whitespace-nowrap'
                   style={{
                     appearance: 'none',
@@ -640,7 +685,7 @@ export function ResponsiveNewsLayoutSingle({
             >
               <img
                 src={data?.topCategoriesPosts[0]?.banner}
-                alt={data?.topCategoriesPosts[0]?.category?.title || "error"}
+                alt={data?.topCategoriesPosts[0]?.category?.title || 'error'}
                 style={{
                   position: 'absolute',
                   inset: 0,
@@ -668,7 +713,7 @@ export function ResponsiveNewsLayoutSingle({
                     : overlayPaddingDesktop.value,
                 }}
               >
-                <div className="flex flex-wrap" style={{ gap: badgeGap.value }}>
+                <div className='flex flex-wrap' style={{ gap: badgeGap.value }}>
 
                   <span
                     style={{
@@ -700,7 +745,7 @@ export function ResponsiveNewsLayoutSingle({
 
                   </h3>
                   <div
-                    className="flex flex-wrap items-center"
+                    className='flex flex-wrap items-center'
                     style={{
                       gap: tabsGap.value,
                       marginTop: badgeGap.value,
@@ -708,7 +753,7 @@ export function ResponsiveNewsLayoutSingle({
                   >
 
                     <span
-                      className="inline-flex items-center"
+                      className='inline-flex items-center'
                       style={{
                         gap: badgeGap.value,
                         color: overlayMetaTextColor.value,
@@ -725,11 +770,11 @@ export function ResponsiveNewsLayoutSingle({
               </div>
             </article>
 
-            <div className="flex flex-col" style={{ gap: articleStackGap.value }}>
-              {data?.topCategoriesPosts?.slice(1,4).map((post, index) => (
+            <div className='flex flex-col' style={{ gap: articleStackGap.value }}>
+              {data?.topCategoriesPosts?.slice(1, 4).map((post, index) => (
                 <article
                   key={`${post?.title}-${index}`}
-                  className="flex"
+                  className='flex'
                   style={{
                     gap: isMobile
                       ? articleRowGapMobile.value
@@ -751,21 +796,21 @@ export function ResponsiveNewsLayoutSingle({
                       flex: '0 0 auto',
                     }}
                   />
-                  <div className="flex min-w-0 flex-col justify-center">
-                    <div className="flex flex-wrap" style={{ gap: badgeGap.value }}>
-                      
-                        <span
-                          style={{
-                            backgroundColor: badgeBackgroundColor.value,
-                            borderRadius: badgeRadius.value,
-                            color: badgeTextColor.value,
-                            fontSize: badgeFontSize.value,
-                            fontWeight: tabFontWeight.value,
-                            padding: badgePadding.value,
-                          }}
-                        >
-                          {post?.category?.title}
-                        </span>
+                  <div className='flex min-w-0 flex-col justify-center'>
+                    <div className='flex flex-wrap' style={{ gap: badgeGap.value }}>
+
+                      <span
+                        style={{
+                          backgroundColor: badgeBackgroundColor.value,
+                          borderRadius: badgeRadius.value,
+                          color: badgeTextColor.value,
+                          fontSize: badgeFontSize.value,
+                          fontWeight: tabFontWeight.value,
+                          padding: badgePadding.value,
+                        }}
+                      >
+                        {post?.category?.title}
+                      </span>
                     </div>
                     <h3
                       className='line-clamp-3'
@@ -782,38 +827,38 @@ export function ResponsiveNewsLayoutSingle({
                       {post?.title}
                     </h3>
                     <div
-                      className="flex flex-wrap items-center"
+                      className='flex flex-wrap items-center'
                       style={{
                         gap: tabsGap.value,
                         marginTop: badgeGap.value,
                       }}
                     >
-                        <span
-                          className="inline-flex items-center"
+                      <span
+                        className='inline-flex items-center'
+                        style={{
+                          gap: badgeGap.value,
+                          color: metaTextColor.value,
+                          fontSize: metaFontSize.value,
+                          fontWeight: metaFontWeight.value,
+                        }}
+                      >
+                        <svg
+                          viewBox='0 0 24 24'
+                          fill='none'
                           style={{
-                            gap: badgeGap.value,
-                            color: metaTextColor.value,
-                            fontSize: metaFontSize.value,
-                            fontWeight: metaFontWeight.value,
+                            width: iconSize.value,
+                            height: iconSize.value,
                           }}
                         >
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            style={{
-                              width: iconSize.value,
-                              height: iconSize.value,
-                            }}
-                          >
-                            <path
-                              d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          {dateFormat(post?.createdAt)}
-                        </span>
+                          <path
+                            d='M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0'
+                            stroke='currentColor'
+                            strokeWidth='2'
+                            strokeLinecap='round'
+                          />
+                        </svg>
+                        {dateFormat(post?.createdAt)}
+                      </span>
                     </div>
                   </div>
                 </article>
@@ -822,7 +867,7 @@ export function ResponsiveNewsLayoutSingle({
           </div>
         </div>
 
-        <aside className="w-full">
+        <aside className='w-full'>
           <h2
             style={{
               color: sectionTitleColor.value,
@@ -898,20 +943,20 @@ export function ResponsiveNewsLayoutSingle({
                   : overlayPaddingDesktop.value,
               }}
             >
-              <div className="flex flex-wrap" style={{ gap: badgeGap.value }}>
-             
-                  <span
-                    style={{
-                      backgroundColor: badgeBackgroundColor.value,
-                      borderRadius: badgeRadius.value,
-                      color: badgeTextColor.value,
-                      fontSize: badgeFontSize.value,
-                      fontWeight: tabFontWeight.value,
-                      padding: badgePadding.value,
-                    }}
-                  >
-                    {data?.topPopularPosts[0]?.category?.title}
-                  </span>
+              <div className='flex flex-wrap' style={{ gap: badgeGap.value }}>
+
+                <span
+                  style={{
+                    backgroundColor: badgeBackgroundColor.value,
+                    borderRadius: badgeRadius.value,
+                    color: badgeTextColor.value,
+                    fontSize: badgeFontSize.value,
+                    fontWeight: tabFontWeight.value,
+                    padding: badgePadding.value,
+                  }}
+                >
+                  {data?.topPopularPosts[0]?.category?.title}
+                </span>
               </div>
               <div>
                 <h3
@@ -926,37 +971,37 @@ export function ResponsiveNewsLayoutSingle({
                   {data?.topPopularPosts[0]?.title}
                 </h3>
                 <div
-                  className="flex flex-wrap items-center"
+                  className='flex flex-wrap items-center'
                   style={{ gap: tabsGap.value, marginTop: badgeGap.value }}
                 >
-                    <span
-                      className="inline-flex items-center"
-                      style={{
-                        gap: badgeGap.value,
-                        color: overlayMetaTextColor.value,
-                        fontSize: metaFontSize.value,
-                        fontWeight: metaFontWeight.value,
-                      }}
-                    >
-                      <span className='lowercase' >@{data?.topPopularPosts[0]?.category?.title}</span> /
-                      {dateFormat(data?.topPopularPosts[0]?.createdAt)}
-                    </span>
+                  <span
+                    className='inline-flex items-center'
+                    style={{
+                      gap: badgeGap.value,
+                      color: overlayMetaTextColor.value,
+                      fontSize: metaFontSize.value,
+                      fontWeight: metaFontWeight.value,
+                    }}
+                  >
+                    <span className='lowercase' >@{data?.topPopularPosts[0]?.category?.title}</span> /
+                    {dateFormat(data?.topPopularPosts[0]?.createdAt)}
+                  </span>
                 </div>
               </div>
             </div>
           </article>
 
           <div
-            className="flex flex-col"
+            className='flex flex-col'
             style={{
               gap: popularListGap.value,
               marginTop: popularListGap.value,
             }}
           >
-            {data?.topPopularPosts?.slice(1,4).map((post, index) => (
+            {data?.topPopularPosts?.slice(1, 4).map((post, index) => (
               <article
                 key={`${post?.title}-${index}`}
-                className="flex"
+                className='flex'
                 style={{ gap: articleRowGapDesktop.value }}
               >
                 <img
@@ -970,7 +1015,7 @@ export function ResponsiveNewsLayoutSingle({
                     flex: '0 0 auto',
                   }}
                 />
-                <div className="flex min-w-0 flex-col justify-center">
+                <div className='flex min-w-0 flex-col justify-center'>
                   <h3
                     style={{
                       color: titleColor.value,
@@ -983,7 +1028,7 @@ export function ResponsiveNewsLayoutSingle({
                     {post?.title}
                   </h3>
                   <span
-                    className="inline-flex items-center"
+                    className='inline-flex items-center'
                     style={{
                       gap: badgeGap.value,
                       color: metaTextColor.value,
@@ -993,18 +1038,18 @@ export function ResponsiveNewsLayoutSingle({
                     }}
                   >
                     <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
+                      viewBox='0 0 24 24'
+                      fill='none'
                       style={{
                         width: iconSize.value,
                         height: iconSize.value,
                       }}
                     >
                       <path
-                        d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
+                        d='M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                        strokeLinecap='round'
                       />
                     </svg>
                     {dateFormat(post?.createdAt)}

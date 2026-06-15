@@ -34,8 +34,9 @@ router.get("/get/by/category/",relatedCategoryById)
 // });
 router.get("/:website/latest-posts",getLatestPosts );
 router.get("/:website/popular-posts",getPopularPosts );
+router.get("/:website/top-category-posts",getPopularPosts );
 router.get("/:website/single-latest-post",getSinglePopularPost );
-router.get("/:website//single-popular-post",getSinglePopularPost );
+router.get("/:website/single-popular-post",getSinglePopularPost );
 router.get("/:website/top-category-post",getSinglePopularPost );
 
 
