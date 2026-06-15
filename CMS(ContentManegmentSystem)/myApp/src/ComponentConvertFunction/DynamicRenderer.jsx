@@ -55,6 +55,7 @@ export const DynamicRenderer = ({ code, props }) => {
             }
 
             const fixedCode = code
+                .replace(/_jsxDEV/g, "React.createElement")
                 .replace(/\\u003C/g, "<")
                 .replace(/\\u003E/g, ">");
             console.log(fixedCode);
