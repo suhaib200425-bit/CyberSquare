@@ -55,33 +55,30 @@ export const DynamicRenderer = ({ code, props }) => {
             }
 
             const fixedCode = code
-                .replace(/_jsxDEV/g, "React.createElement")
-                .replace(/\\u003C/g, "<")
-                .replace(/\\u003E/g, ">");
-            console.log(fixedCode);
+    console.log(fixedCode);
 
 
-            // const compiled = Babel.transform(fixedCode, {
-            //     presets: [
-            //         ["react", { runtime: "classic" }]
-            //     ],
-            //     envName: "production"
-            // }).code;
-            // console.log(compiled);
+    // const compiled = Babel.transform(fixedCode, {
+    //     presets: [
+    //         ["react", { runtime: "classic" }]
+    //     ],
+    //     envName: "production"
+    // }).code;
+    // console.log(compiled);
 
-            // const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
+    // const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
 
-            return new Function(
-                "React",
-                "ReactJSXRuntime",
-                "ReactJSXDevRuntime",
-                "axios",
-                "router",
-                "Icons",
-                "useStore",
-                "BASEURL",
-                "reactQuery",
-                `
+    return new Function(
+        "React",
+        "ReactJSXRuntime",
+        "ReactJSXDevRuntime",
+        "axios",
+        "router",
+        "Icons",
+        "useStore",
+        "BASEURL",
+        "reactQuery",
+        `
 
     const {
         useParams,
@@ -120,44 +117,44 @@ export const DynamicRenderer = ({ code, props }) => {
 
     return ${componentName};
 `
-            )(
+    )(
 
-                React,
-                ReactJSXRuntime,
-                ReactJSXDevRuntime,
-                axios,
-                {
-                    useParams,
-                    useSearchParams,
-                    useNavigate,
-                    useLocation,
-                    Link
-                },
-                Icons,
-                useStore,
-                BASEURL,
-                {
-                    useQuery
-                }
-            );
-
-        } catch (err) {
-
-            console.log(err);
-
-            return null;
+        React,
+        ReactJSXRuntime,
+        ReactJSXDevRuntime,
+        axios,
+        {
+            useParams,
+            useSearchParams,
+            useNavigate,
+            useLocation,
+            Link
+        },
+        Icons,
+        useStore,
+        BASEURL,
+        {
+            useQuery
         }
+    );
+
+} catch (err) {
+
+    console.log(err);
+
+    return null;
+}
 
     }, [code]);
 
-    if (!Component) {
+if (!Component) {
 
-        return (
-            <div className="text-red-500 p-4">
-                Error rendering component
-            </div>
-        );
-    }
+    return (
+        <div className="text-red-500 p-4">
+            Error rendering component
+        </div>
+    );
+}
 
-    return <Component className="" {...props} />;
+return <Component className="" {...props} />;
 };
