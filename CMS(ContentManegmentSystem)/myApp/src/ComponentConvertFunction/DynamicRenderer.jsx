@@ -55,16 +55,19 @@ export const DynamicRenderer = ({ code, props }) => {
             }
 
             const fixedCode = code
+    console.log("fixedCode");
     console.log(fixedCode);
 
 
-    // const compiled = Babel.transform(fixedCode, {
-    //     presets: [
-    //         ["react", { runtime: "classic" }]
-    //     ],
-    //     envName: "production"
-    // }).code;
-    // console.log(compiled);
+    const compiled = Babel.transform(fixedCode, {
+        presets: [
+            ["react", { runtime: "classic" }]
+        ],
+        envName: "production"
+    }).code;
+
+    console.log("compiled");
+    console.log(compiled);
 
     // const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
 

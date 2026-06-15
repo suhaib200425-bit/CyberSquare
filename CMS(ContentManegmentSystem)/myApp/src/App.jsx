@@ -24,7 +24,7 @@ function App() {
   const webname = pathname.split("/")[1]
 
   const { data, isPending, error } = useQuery({
-    queryKey: ["MULTI_API",webname],
+    queryKey: ["MULTI_API", webname],
     queryFn: async () => {
 
       console.log("webname");
@@ -58,31 +58,30 @@ function App() {
   return (
     <div className='w-full'>
 
-      <Routes>
-
+      < Routes >
         <Route path={`/:webname/demo`} element={<Demo />} />
         <Route path={`/:webname/main`} element={<MainTeamplates />} />
         <Route path={`/loading`} element={<Loading />} />
-        {/* <Route path={`/`} element={<Demo />} /> */}
+        {/* <Route path={`/`} element={<Demo />} /> */ }
         {
-          data && data?.auth && <Route path={`/:webname/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
+            data && data?.auth && <Route path={`/:webname/auth`} element={< DynamicRenderer code={data?.auth.template} props={data?.auth.props} />} />
         }
 
 
-        {
-          data && data?.pages?.map(page => {
+      {
+        data && data?.pages?.map(page => {
 
-            const pageId = page?._id
-            const slug = page?.slug
-            console.log(`${slug}`);
-            return <Route key={pageId} path={`/:webname${slug}`} element={<PageRoute slug={slug} pageId={pageId} />} />
-          })
-        }
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          const pageId = page?._id
+          const slug = page?.slug
+          console.log(`${slug}`);
+          return <Route key={pageId} path={`/:webname${slug}`} element={<PageRoute slug={slug} pageId={pageId} />} />
+        })
+      }
+      <Route path="*" element={<NotFound />} />
+    </Routes>
 
 
-    </div>
+    </div >
   )
 }
 
