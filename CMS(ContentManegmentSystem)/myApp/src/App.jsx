@@ -7,13 +7,14 @@ import PageRoute from './Page/PageRoute/PageRoute';
 import NotFound from './Page/NotFound/NotFound';
 import Demo from './templateComp/demo/demo';
 import { AUTHTEMPLATEAPI, BASEURL, FOOTERTEMPLATEAPI, NAVBARTEMPLATEAPI, PAGEAPI, USERAPI } from './assets/assets';
-import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePage';
+// import SingleArticlePage from './templateComp/SingleArticlePage/SingleArticlePage';
 import AuthOne from './templateComp/AuthOne/AuthOne';
 import Auth from './templateComp/Auth/Auth';
 import useStore from './context/Zustand';
 import NavBarOne from './templateComp/NavBarOne';
 import Loading from './Page/Loading/Loading';
 import MainTeamplates from './Page/Templates/MainTeamplates';
+import SinglePostOne from './Page/Templates/SinglePostTemplates/SinglePostOne';
 
 function App() {
   const location = useLocation();
@@ -61,6 +62,7 @@ function App() {
       < Routes >
         <Route path={`/:webname/demo`} element={<Demo />} />
         <Route path={`/:webname/main`} element={<MainTeamplates />} />
+        <Route path={`/:webname/main/:PostId`} element={<SinglePostOne />} />
         <Route path={`/loading`} element={<Loading />} />
         {/* <Route path={`/`} element={<Demo />} /> */ }
         {

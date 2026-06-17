@@ -1,12 +1,21 @@
+const PageCategory = require("../../models/PageCategory");
 const ReactTemplate = require("../../models/ReactTemplate");
 
 const updateReactTemplate = async (req, res) => {
   try {
     const { ReactTemplateId } = req.params;
+    const { pageRefName } = req.query
+
+    let existingRefPage = await PageCategory.findOne({ title: pageRefName })
+    if (!existingRefPage)
+      existingRefPage = await PageCategory.create({ title: pageRefName })
 
     const updatedTemplate = await ReactTemplate.findByIdAndUpdate(
-      ReactTemplateId,
-      req.body,
+        ReactTemplateId,
+      {
+        ...req.body,
+        pageRef:existingRefPage._id
+      },
       { new: true, runValidators: true }
     );
 

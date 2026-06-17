@@ -15,6 +15,9 @@ const getPostPublished = require("../controllers/Post/PublishedPost");
 const getLatestPosts = require("../controllers/Post/newOnes/getLatestPosts");
 const getSinglePopularPost = require("../controllers/Post/newOnes/getSignglePopularPost");
 const getPopularPosts = require("../controllers/Post/newOnes/getPopularPosts");
+const getPopularCategoryPostsAndHotPosts = require("../controllers/Post/newOnes/getPopularCategoryPostsAndHotPosts");
+const getSingleCategoryPosts = require("../controllers/Post/newOnes/getSingleCategoryPosts");
+const getSinglePost = require("../controllers/Post/newOnes/getSinglePost");
 
 const router = express.Router();
 
@@ -38,6 +41,9 @@ router.get("/:website/top-category-posts",getPopularPosts );
 router.get("/:website/single-latest-post",getSinglePopularPost );
 router.get("/:website/single-popular-post",getSinglePopularPost );
 router.get("/:website/top-category-post",getSinglePopularPost );
+router.get("/:website/popular-category-posts-and-hot-post",getPopularCategoryPostsAndHotPosts );
+router.get("/:website/single-category-posts",getSingleCategoryPosts );
+router.get("/:website/single-post/:PostId", getSinglePost );
 
 
 module.exports= router;

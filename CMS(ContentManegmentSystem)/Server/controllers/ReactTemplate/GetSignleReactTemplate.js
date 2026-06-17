@@ -4,7 +4,7 @@ const ReactTemplate = require("../../models/ReactTemplate");
   try {
     const { ReactTemplateId } = req.params;
 
-    const template = await ReactTemplate.findById(ReactTemplateId);
+    const template = await ReactTemplate.findById(ReactTemplateId).populate("pageRef","title");
 
     if (!template) {
       return res.status(404).json({
@@ -20,7 +20,8 @@ const ReactTemplate = require("../../models/ReactTemplate");
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message:"server error",
+      error: error.message,
     });
   }
 };

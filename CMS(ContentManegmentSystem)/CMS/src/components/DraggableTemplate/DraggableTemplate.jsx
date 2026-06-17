@@ -5,22 +5,12 @@ import { BASEURL } from '../../assets/assets';
 
 
 function DraggableTemplate({ TemplateObject }) {
-
     const [Template, setTemplate] = useState(null)
 
     const { ref } = useDraggable({
         id: TemplateObject._id,   // MUST
         data: TemplateObject
     });
-
-    // useEffect(()=>{
-    //     console.log('DraggableTemplate');
-    //     console.log({
-    //     id: TemplateObject._id,  
-    //     data: TemplateObject
-    // });
-        
-    // },[])
 
     return (
         <div className='w-full ' ref={ref} key={TemplateObject._id} onClick={()=>{

@@ -8,7 +8,7 @@ import stoneriver from '../assets/stoneriver.png'
 
 export const queryClient = new QueryClient()
 
-export const BASEURL ='http://172.24.161.119:5000'
+export const BASEURL ='http://10.62.107.119:5000'
 
 // export const BASEURL='http://localhost:5000'
 // export const BASEURL =' https://http://192.168.31.24:5000thee-slightly-dowry.ngrok-free.dev'

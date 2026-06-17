@@ -43,6 +43,8 @@ import DynamicVisionSection from './CODE-X/DynamicVisionSection'
 import SingleArticlePage from './SingleArticlePage/SingleArticlePage'
 import ArticlesPage from './ArticleListingPage/ArticlesPage'
 import { ResponsiveNewsLayoutSingle } from './REATTEMPLATE-CODEX/GeneratedResponsiveNewsLayout'
+import { NewsEditorialTemplateSingleFunction } from './REATTEMPLATE-CODEX/NewsEditorialTemplate'
+import { LifestyleGridMonolithic } from './REATTEMPLATE-CODEX/LifestyleGridMonolithic'
 
 function App() {
 
@@ -51,6 +53,11 @@ function App() {
       // const jsonString = HeroSectionImageContent.toString();
       console.log("jsonString");
     }}>
+      <p>LifestyleGridMonolithic</p>
+      <LifestyleGridMonolithic />
+      
+      <p>NewsEditorialTemplateSingleFunction</p>
+      <NewsEditorialTemplateSingleFunction />
       <p>ResponsiveNewsLayoutSingle</p>
       <ResponsiveNewsLayoutSingle />
       <p>ArticlesPage</p>

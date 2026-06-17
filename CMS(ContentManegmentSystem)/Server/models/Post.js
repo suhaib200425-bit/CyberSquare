@@ -49,7 +49,7 @@ const PostSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", // 👈 reference
     required: true,
-    default:"6a142e593eb37919cede09b4"
+    defalut:null
   }
 }, { timestamps: true });
 

@@ -18,11 +18,14 @@ const createCategory = async (req, res) => {
         message: "No active template found",
       });
     }
+
+    // 🔁 Duplicate check (optional but better)
     const existCategoryTitle = await Category.findOne({
       theme: activetemplate.theme,
       auther: activetemplate.admin,
       title
     });
+    
     if (existCategoryTitle) return res.status(400).json({ success: false, message: "Category Title already used" });
     const existCategorySlug = await Category.findOne({
       theme: activetemplate.theme,
@@ -30,8 +33,6 @@ const createCategory = async (req, res) => {
       slug
     });
     if (existCategorySlug) return res.status(400).json({ success: false, message: "Category Router already used" });
-
-    // 🔁 Duplicate check (optional but better)
 
 
     // 🆕 Create category
@@ -41,7 +42,7 @@ const createCategory = async (req, res) => {
       parent: parent || null,
       description,
       theme: activetemplate.theme,
-      auther:activetemplate.admin
+      auther: activetemplate.admin
     });
 
     const savedCategory = await newCategory.save();

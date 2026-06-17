@@ -7,16 +7,11 @@ const createReactTemplate = async (req, res) => {
   try {
 
     const { name, template, props, pageRef } = req.body;
+    const {pageRefName} = req.query
 
-    // if (!req.file) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "File required",
-    //   });
-    // }
-    let existingRefPage = await PageCategory.findOne({ pageRef })
+    let existingRefPage = await PageCategory.findOne({ title:pageRefName })
     if (!existingRefPage)
-      existingRefPage = await PageCategory.create({ pageRef })
+      existingRefPage = await PageCategory.create({ title:pageRefName })
 
     if (!name || !template) {
       return res.status(400).json({

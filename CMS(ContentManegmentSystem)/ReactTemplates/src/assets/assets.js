@@ -7,7 +7,7 @@ import stoneriver from '../assets/stoneriver.png'
 // import tree from '../assets/tree.jpeg'
 
 
-export const BASEURL ='http://172.20.8.119:5000'
+export const BASEURL ='http://10.62.107.119:5000'
 
 // export const BASEURL='http://localhost:5000'
 // export const PAGEAPI = `${BASEURL}/api/page`

@@ -15,10 +15,18 @@ import SelectedPostListThree from './items/SelectedPostListThree'
 import SmallPostsListTwo from './items/SmallPostsListTwo'
 import SinglePostCard from './items/SinglePostCard'
 import { ResponsiveNewsLayoutSingle } from './CODE-X/ResponsiveNewsLayoutSingle'
+import { NewsEditorialTemplateSingleFunction } from './CODE-X/NewsEditorialTemplateSingleFunction'
+import { LifestyleGridMonolithic } from './CODE-X/LifestyleGridMonolithic'
 
 function MainTeamplates() {
   return (
     <div>
+<FunctionBtnConverter fn={LifestyleGridMonolithic} />
+<LifestyleGridMonolithic />
+
+<FunctionBtnConverter fn={NewsEditorialTemplateSingleFunction} />
+<NewsEditorialTemplateSingleFunction />
+
       <FunctionBtnConverter fn={LatestPostTwo} />
       <LatestPostTwo />
 
