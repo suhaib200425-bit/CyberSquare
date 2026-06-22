@@ -1,6 +1,7 @@
 .main-auth-container{
     padding: 20px;
     width: 100%;
+    background-color: var(--TEXT-COLOR);
 }
 .main-auth-container .title{
     font-size: 24px;

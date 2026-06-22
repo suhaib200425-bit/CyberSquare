@@ -10,13 +10,13 @@ exports.dashboard = async (req, res) => {
     try {
         const user = req.user
         //ACTIVE TEMPLATE
-        const WEBACTIVE = await WEB({admin:user.id})
+        const WEBACTIVE = await WEB.findOne({ admin: user.id })
         // TOTAL POSTS
         const posts = await Post.countDocuments({ auther: WEBACTIVE.admin });
         // TOTAL PAGES
-        const pages = await Page.countDocuments({theme:WEBACTIVE.theme,auther:WEBACTIVE.admin});
+        const pages = await Page.countDocuments({ theme: WEBACTIVE.theme, auther: WEBACTIVE.admin });
         // TOTAL USERS
-        const users = await User.countDocuments({web:WEBACTIVE.admin});
+        const users = await User.countDocuments({ web: WEBACTIVE._id });
         // Today start
         const startOfDay = new Date();
         startOfDay.setHours(0, 0, 0, 0);
@@ -27,6 +27,7 @@ exports.dashboard = async (req, res) => {
 
         // Total visits today
         const totalVisitors = await Visit.countDocuments({
+            web: WEBACTIVE._id,
             visitedAt: {
                 $gte: startOfDay,
                 $lte: endOfDay
@@ -54,9 +55,18 @@ exports.dashboard = async (req, res) => {
 
         // Get visits between range
         const visits = await Visit.find({
+            web: WEBACTIVE._id,
             visitedAt: {
                 $gte: startTime,
                 $lte: endTime
+            }
+        });
+        //Delete All visites in 24hr ago
+        const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+        await Visit.deleteMany({
+            visitedAt: {
+                $lt: oneDayAgo
             }
         });
 

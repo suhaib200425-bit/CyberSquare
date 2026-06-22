@@ -6,16 +6,14 @@ const updateReactTemplate = async (req, res) => {
     const { ReactTemplateId } = req.params;
     const { pageRefName } = req.query
 
-    let existingRefPage = await PageCategory.findOne({ title: pageRefName })
-    if (!existingRefPage)
+    let existingRefPage = await PageCategory.findOne({ title: pageRefName || '' })
+    if (!existingRefPage && pageRefName)
       existingRefPage = await PageCategory.create({ title: pageRefName })
-
+    let filter = {...req.body}
+    if (existingRefPage) filter = { ...req.body, pageRef: existingRefPage._id }
     const updatedTemplate = await ReactTemplate.findByIdAndUpdate(
-        ReactTemplateId,
-      {
-        ...req.body,
-        pageRef:existingRefPage._id
-      },
+      ReactTemplateId,
+      filter,
       { new: true, runValidators: true }
     );
 

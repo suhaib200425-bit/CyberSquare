@@ -17,10 +17,14 @@ import SinglePostCard from './items/SinglePostCard'
 import { ResponsiveNewsLayoutSingle } from './CODE-X/ResponsiveNewsLayoutSingle'
 import { NewsEditorialTemplateSingleFunction } from './CODE-X/NewsEditorialTemplateSingleFunction'
 import { LifestyleGridMonolithic } from './CODE-X/LifestyleGridMonolithic'
+import HeroSection from './HeroSections/HeroSection'
 
 function MainTeamplates() {
   return (
     <div>
+      <FunctionBtnConverter fn={HeroSection} />
+      <HeroSection />
+
 <FunctionBtnConverter fn={LifestyleGridMonolithic} />
 <LifestyleGridMonolithic />
 

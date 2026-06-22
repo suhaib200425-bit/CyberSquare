@@ -13,7 +13,7 @@ function Category() {
     const [form, setForm] = useState(false)
     const [page, setPage] = useState(1)
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', form, page],
+        queryKey: ['CategoriesData', form, page],
         queryFn: async () => {
             try {
                 const token = localStorage.getItem('token')
@@ -78,7 +78,7 @@ function Category() {
 
     ]
     return (
-        <div className='w-full'>
+        <div className='w-full bg-[var(--BG-COLOR)] text-[var(--TEXT-COLOR)]'>
             <Navbar />
 
             {/* Content */}
@@ -87,13 +87,13 @@ function Category() {
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-[20px] font-bold">Category</h2>
+                        <h2 className="text-[25px] font-bold">Category</h2>
                         <p>Organize your posts into topical groups.</p>
                     </div>
                     <button onClick={() => {
                         setForm(true)
                         setUpdate(null)
-                    }} className="p-[10px] rounded-[5px] text-white bg-[var(--back-color)] flex items-center">
+                    }} className="bg-[var(--ROW-COLOR)]  text-[var(--TEXT-COLOR)]'  p-[10px] rounded-[5px]  flex items-center">
                         <i className="fa-solid fa-plus"></i>
                         <span className="ml-2">New Category</span>
                     </button>
@@ -104,8 +104,8 @@ function Category() {
                 <div className="mt-10 bg-white rounded-[5px] shadow overflow-hidden">
                     <table className="w-full text-left">
 
-                        <thead className="bg-gray-50 border-b">
-                            <tr className="text-gray-600 text-sm">
+                        <thead className="bg-[var(--ROW-COLOR)] border-b  text-[var(--TEXT-COLOR)] p-3">
+                            <tr className=" text-sm">
                                 <th className="px-6 py-3">Name</th>
                                 <th className="px-6 py-3">Slug</th>
                                 <th className="px-6 py-3">Parent</th>
@@ -114,30 +114,30 @@ function Category() {
                             </tr>
                         </thead>
 
-                        <tbody className="divide-y">
+                        <tbody className="divide-y divide-[var(--BG-S-COLOR)]">
                             {data?.data?.map((category, index) => (
-                                <tr key={index} className="hover:bg-gray-50 transition">
+                                <tr key={index} className="bg-[var(--BG-COLOR)] text-[var(--TEXT-COLOR)] hover:bg-[var(--ROW-COLOR)] transition">
 
-                                    <td className="px-6 py-4 font-medium text-gray-800">
+                                    <td className="px-6 py-4 font-medium ">
                                         {category.title}
                                     </td>
 
-                                    <td className="px-6 py-4 text-gray-500">
+                                    <td className="px-6 py-4 text-[var(--BG-S-COLOR)]">
                                         {category.slug}
                                     </td>
 
                                     <td className="px-6 py-4">
-                                        <span className="px-6 py-4 font-medium text-gray-800">
+                                        <span className="px-6 py-4 font-medium ">
                                             {category.theme}
                                         </span>
                                     </td>
 
-                                    <td className="px-6 py-4 text-gray-600">
+                                    <td className="px-6 py-4 ">
                                         {category.post ? category.post.length : 0}
                                     </td>
 
 
-                                    <td className="px-6 py-4 flex justify-end gap-3 text-gray-500">
+                                    <td className="px-6 py-4 flex justify-end gap-3 ">
                                         <button className="hover:text-orange-500" onClick={() => {
                                             setUpdate(category._id)
                                             setForm(true)

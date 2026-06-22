@@ -10,7 +10,8 @@ function ThemeForm({ setForm }) {
     const inputRef = useRef()
     const imageRef = useRef()
     const [themeName, setThemeName] = useState('')
-    const [bannerImage, setBannerImage] = useState('')
+    const [videoFile, setVideoFile] = useState(null);
+
     const [errorMessage, setErrorMessage] = useState('')
     const [Otherfield, setOtherfield] = useState([])
 
@@ -30,8 +31,13 @@ function ThemeForm({ setForm }) {
         if (themeName.trim() == '' && bannerImage.trim() == "") return
         try {
             // THEME TEMPLATE CREATED SECTION 
-            const themeResponse = await axios.post(THEMETEMPLATEAPI, { name: themeName, banner: bannerImage }
+            const formData = new FormData();
 
+            formData.append("name", themeName);
+            formData.append("banner", videoFile);
+            const themeResponse = await axios.post(
+                THEMETEMPLATEAPI,
+                formData
             )
             console.log("themeResponse");
             console.log(themeResponse.data);
@@ -52,7 +58,6 @@ function ThemeForm({ setForm }) {
                     status: false
                 }])
             inputRef.current.disabled = true;
-            imageRef.current.disabled = true;
 
             // PAGE TEMPLATE CREATED SECTION 
             setOtherfield(
@@ -179,25 +184,49 @@ function ThemeForm({ setForm }) {
             );
             setForm(false)
         } catch (error) {
+            console.log("#####################################");
             console.log(error.response?.data || error.message);
+            console.log("#####################################");
+            
             if (THEMEID) await axios.delete(`${THEMETEMPLATEAPI}/${THEMEID}`)
             setErrorMessage(error.response?.data?.message || error.message)
             setOtherfield([])
 
+            imageRef.current.disabled = false;
         }
     }
+
+    const handleVideoChange = (e) => {
+
+        const file = e.target.files[0];
+        setVideoFile(file);
+
+        console.log(file); // selected video file
+    };
     return (
         <div className='ThemeForm'>
             <form action="" onSubmit={handleSubmit}>
                 <h1>Create New Theme Template</h1>
                 {/* <p>mdkll dlsmdlkml lklsd</p> */}
                 {/* <span className='m-[5px 10px] text-gray-700'>Banner Image</span> */}
-                <div className="inputbox">
+                <div className="">
+                    <hr />
+                    <div className="">
+                        <input
+                            // hidden
+                            type="file"
+                            accept="video/*"
+                            onChange={handleVideoChange}
+                        />
 
-                    <input onChange={(e) => {
-                        setBannerImage(e.target.value)
-                    }} required ref={imageRef} type="text" className='w-full' placeholder='Banner URL' />
+
+                        {/* <video width="400" controls>
+  <source src="video.mp4" type="video/mp4">
+</video> */}
+
+                    </div>
                 </div>
+                <hr />
                 <span className='m-[5px 10px] text-gray-700'>Template Name</span>
 
                 <div className="inputbox">

@@ -8,12 +8,13 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import axios from "axios"
 import { DASHBOARDAPI } from '../../assets/assets'
+import { useQuery } from '@tanstack/react-query'
 
 function Home() {
     const [Dashboard, setDashboard] = useState([])
-
-    useEffect(() => {
-        const getDashboard = async () => {
+    const { isPending, error, data } = useQuery({
+        queryKey: ['DashbordData'],
+        queryFn: async () => {
             try {
                 const token = localStorage.getItem('token')
                 const response = await axios.get(DASHBOARDAPI, {
@@ -21,15 +22,29 @@ function Home() {
                         Authorization: `Bearer ${token}`,
                     },
                 })
-                setDashboard(response.data)
-            } catch (err) {
-                alert(err.response?.data?.message || err.message)
-                console.log(err.response?.data || err.message);
+                setDashboard(response.data) 
+
+                // const delay=(ms) => {
+                //     return new Promise((resolve) => {
+                //         setTimeout(resolve, ms);
+                //     });
+                // }
+                // await delay(4000)  //4s
+                return response.data
+            } catch (error) {
+                console.log(error.response?.data || error.message);
 
             }
         }
-        getDashboard()
-    }, [])
+    },)
+
+
+
+    if (isPending) return 'Loading...'
+
+    if (error) return 'An error has occurred: ' + error.message
+
+
     return (
         <div className='Home'>
             <Navbar />
@@ -40,16 +55,15 @@ function Home() {
                 <h2 className='hed'>Dashboard</h2>
                 <p>A live overview of your content and audience.</p>
 
-
                 <div className="RowItems">
-                    <MainCard Title={'Total Posts'} Icon={<i class="fa-regular fa-note-sticky"></i>} Count={Dashboard?.posts} Color={''} />
-                    <MainCard Title={'Total Pages'} Icon={<i class="fa-solid fa-file-lines"></i>} Count={Dashboard?.pages} Color={''} />
-                    <MainCard Title={'Total Users'} Icon={<i class="fa-solid fa-people-group"></i>} Count={Dashboard?.users} Color={''} />
-                    <MainCard Title={'Visitors today'} Icon={<i class="fa-solid fa-eye"></i>} Count={Dashboard?.totalVisitors} Color={''} />
+                    <LinerGraph GraphData={data?.data} />
+                    <LatestArticles />
                 </div>
                 <div className="RowItems">
-                    <LinerGraph GraphData={Dashboard?.data} />
-                    <LatestArticles />
+                    <MainCard Title={'Total Posts'} Icon={<i class="fa-regular fa-note-sticky"></i>} Count={data?.posts} Color={''} />
+                    <MainCard Title={'Total Pages'} Icon={<i class="fa-solid fa-file-lines"></i>} Count={data?.pages} Color={''} />
+                    <MainCard Title={'Total Users'} Icon={<i class="fa-solid fa-people-group"></i>} Count={data?.users} Color={''} />
+                    <MainCard Title={'Visitors today'} Icon={<i class="fa-solid fa-eye"></i>} Count={data?.totalVisitors} Color={''} />
                 </div>
             </div>
         </div>

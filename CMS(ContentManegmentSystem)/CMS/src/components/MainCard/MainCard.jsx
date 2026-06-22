@@ -4,10 +4,10 @@ function MainCard({ Title, Icon, Count, Color }) {
     return (
         <div className='MainCard'>
             <div className="">
-                <p>{Title}</p>
-                <h2 className='Count'>{Count}</h2>
+                <p className='text-[20px]'>{Title}</p>
+                <h2 className='Count text-center w-full'>{Count}</h2>
             </div>
-            <div className="">
+            <div className="flex items-center">
                 {Icon}
             </div>
         </div>

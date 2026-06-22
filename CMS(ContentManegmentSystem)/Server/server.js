@@ -63,11 +63,11 @@ app.use("/api/theme/template", require('./routes/themeTemplateRoutes'));
 app.use("/api/auth/template", require('./routes/authRouters'));
 app.use("/api/visit", require('./routes/visitRouter'));
 app.use("/api/web", require('./routes/webRouters'));
-
+app.use("/api/section", require('./routes/pageCategoryRoutes'));
 
 app.get("/api/quick/change", async (req, res) => {
   try {
-    const web = await WEB.findOne({ website: "kite" })
+    const web = await WEB.findOne({ website: "cyber" })
     const pages = await Page.find({ theme: web.theme, auther: web.admin });
     const menus = await Menu.find({ theme: web.theme, auther: web.admin }).populate("page", "title");
 
@@ -121,12 +121,109 @@ app.get("/api/quick/change", async (req, res) => {
       delete data.__v;
       delete data.createdAt;
       delete data.updatedAt;
+        const menupage = await Page.findOne({ title: item.page?.title, auther: null })
 
       if (!existMenu) {
-        const menupage = await Page.findOne({ title: item.page?.title, auther: null })
         await Menu.create({
           ...data,
           auther: null,
+          page: menupage._id
+        });
+
+      } else {
+        await Menu.findByIdAndUpdate(
+          existMenu._id, {
+          page: menupage._id
+
+        }, {
+          new: true,          // updated document return cheyyum
+          runValidators: true
+        }
+        );
+      }
+    }
+
+    res.status(201).json({
+      success: true,
+      message: "Complted"
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+      errorMessage: error.message,
+      error
+    });
+  }
+});
+
+app.get("/api/them/to/theme", async (req, res) => {
+  try {
+    const web = await WEB.findOne({ website: "kite" })
+    const pages = await Page.find({ theme: web.theme, auther: web.admin });
+    const menus = await Menu.find({ theme: web.theme, auther: web.admin }).populate("page", "title");
+    const THEMEID = "6a3254233e3240409aa264a5"
+    // Pages
+    for (const item of pages) {
+      const existPage = await Page.findOne({
+        title: item.title,
+        auther: null,
+        theme: web.theme
+      });
+      const data = item.toObject();
+
+      delete data._id;
+      delete data.__v;
+      delete data.createdAt;
+      delete data.updatedAt;
+
+      if (!existPage) {
+        await Page.create({
+          ...data,
+          auther: null,
+          theme: THEMEID
+        });
+      } else {
+        await Page.findByIdAndUpdate(
+          existPage._id, {
+          sections: data.sections,
+          auther: null,
+          theme: THEMEID
+        }, {
+          new: true,          // updated document return cheyyum
+          runValidators: true
+        }
+        );
+      }
+
+
+    }
+
+    // Menus
+    for (const item of menus) {
+
+      const existMenu = await Menu.findOne({
+        title: item.title,
+        auther: null,
+        theme: web.theme
+      });
+      console.log("existMenu");
+      console.log(existMenu);
+
+      const data = item.toObject();
+
+      delete data._id;
+      delete data.__v;
+      delete data.createdAt;
+      delete data.updatedAt;
+
+      if (!existMenu) {
+        const menupage = await Page.findOne({ title: item.page?.title, auther: null, theme: THEMEID })
+        await Menu.create({
+          ...data,
+          auther: null,
+          theme: THEMEID,
           page: menupage._id
         });
       }
@@ -146,7 +243,6 @@ app.get("/api/quick/change", async (req, res) => {
     });
   }
 });
-
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

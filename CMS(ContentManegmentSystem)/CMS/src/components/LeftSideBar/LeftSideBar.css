@@ -4,7 +4,7 @@
     top: 0;
     width: 60px;
     padding: 10px;
-    background-color: rgb(2, 3, 12);
+    background-color: var( --ROW-COLOR);
     height: 100vh;
     color: var(--desable-text);
     font-size: 17px;

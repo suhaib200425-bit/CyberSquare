@@ -74,9 +74,10 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
       <button
         disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
-        className="px-4 py-2 border border-gray-300 rounded-md bg-white disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-4 py-2 border border-[var(--BG-COLOR)]-300 rounded-md bg-white disabled:opacity-50 disabled:cursor-not-allowed"
       >
         Next
+        
       </button>
     </div>
   );

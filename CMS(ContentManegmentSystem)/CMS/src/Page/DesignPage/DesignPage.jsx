@@ -7,7 +7,7 @@ import axios from "axios"
 // import NavBarOne from '../../../../myApp/src/templateComp/NavBarOne';
 // import { DynamicRenderer } from './StringReder';
 import './DesignPage.css'
-import { AllTeplates, PAGEAPI, ReactAllTemplate, ReactStaticPage, REACTTEPLATEAPI, StaticPage } from '../../assets/assets';
+import { AllTeplates, BASEURL, PAGEAPI, ReactAllTemplate, ReactStaticPage, REACTTEPLATEAPI, StaticPage } from '../../assets/assets';
 import DraggableTemplate from '../../components/DraggableTemplate/DraggableTemplate';
 import { DragDropProvider } from '@dnd-kit/react';
 import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer';
@@ -21,6 +21,9 @@ function DesignPage() {
     const token = localStorage.getItem("token")
     const [Page, setPage] = useState()
     const [activeMenu, setactiveMenu] = useState({})
+    const [activeSection, setactiveSection] = useState({})
+
+    const [sections, setSections] = useState([])
 
     const [templatePage, settemplatePage] = useState()
     const [templateLoading, settemplateLoading] = useState(false)
@@ -65,34 +68,36 @@ function DesignPage() {
     // const [page,setPage] = useState(1)
     useEffect(() => {
         Promise.all([
-            axios.get(REACTTEPLATEAPI, {
+            axios.get(`${REACTTEPLATEAPI}/sort-by-section-id?section=${activeSection?._id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             }),
             axios.get(`${PAGEAPI}/${PageId || "get/mainpage"}`, {
                 headers: { Authorization: `Bearer ${token}` }
+            }),
+            axios.get(`${BASEURL}/api/section`, {
+                headers: { Authorization: `Bearer ${token}` }
             })
         ])
-            .then(([templates, pages]) => {
+            .then(([templates, pages, section]) => {
                 console.log('PROMISE RESPONSE');
 
                 console.log(pages.data.data);
                 console.log(templates.data);
                 settemplatePage(templates.data.page)
                 console.log('END PROMISE RESPONSE');
-                setactiveMenu({ title: pages.data?.data?.title, _id: pages.data?.data?._id })
                 setReactTemplate(templates.data.data);
-                setPage(pages.data?.data);
-                setPageMenus(pages.data?.pages)
+                setactiveMenu({ title: pages.data?.data?.title, _id: pages.data?.data?._id })
+                setSections(section.data?.section)
             })
             .catch(err => {
                 alert("Error:", err.response?.data?.message || err.message);
                 console.log("Error:", err.response?.data || err.message);
             });
-    }, []);
+    }, [activeSection]);
 
     useEffect(() => {
         Promise.all([
-            axios.get(`${PAGEAPI}/${ activeMenu._id|| "get/mainpage"}`, {
+            axios.get(`${PAGEAPI}/${activeMenu._id || "get/mainpage"}`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
         ])
@@ -101,7 +106,9 @@ function DesignPage() {
 
                 console.log(pages.data.data);
                 console.log('END PROMISE RESPONSE');
+                setPageMenus(pages.data?.pages)
                 setPage(pages.data?.data);
+
             })
             .catch(err => {
                 alert("Error:", err.response.data?.message || err.message);
@@ -195,15 +202,14 @@ function DesignPage() {
             }}>
                 <div className='DesignPage'>
                     <div className="leftBar" ref={containerRef} onScroll={hanbleScrollingEnd}>
-                        <DropdownMenu activeMenu={activeMenu} setactiveMenu={setactiveMenu} PageMenus={PageMenus} />
+                        <DropdownMenu full activeMenu={activeMenu} setactiveMenu={setactiveMenu} PageMenus={PageMenus} />
                         <div className="flex gap-2">
-                            <button className="w-full py-2 rounded-[5px] bg-[#f5f5f5]">Prev</button>
+                            <button className="w-full py-2 rounded-[5px] text-[--BUTTON-TEXT-COLOR] bg-[#f5f5f5]">Prev</button>
                             <button onClick={() => {
                                 handleSavepage()
-                            }} className="w-full py-2 rounded-[5px] bg-black text-white">Save</button>
+                            }} className="w-full py-2 rounded-[5px] bg-[var(--BUTTON-BG-COLOR)] text-[var(--BUTTON-TEXT-COLOR)]">Save</button>
                         </div>
-                        <p>Sections</p>
-                        <div className="sections mt-1">
+                        <div className="sections mt-3">
                             <div className="sectiondiv" onClick={() => {
                                 Navigate('/navbars')
                             }}>
@@ -224,20 +230,43 @@ function DesignPage() {
                             </div>
 
                         </div>
-                        <p className='mt-1'>Components</p>
+
+                        {/* <p className='mt-1'>Components</p> */}
+                        <hr className='mt-2 mb-2' />
+                        <div className="sections-template mt-3">
+                            {
+                                sections?.map(section => (
+                                    <div className="cursor-pointer py-[10px] rounded-[10px] flex text-center items-center justify-center bg-[var(--ROW-COLOR)]" onClick={() => {
+                                        if(section._id != activeSection._id){
+                                            setactiveSection(section)
+                                        }else{
+                                            setactiveSection({})
+                                        }
+                                    }}>
+                                        <p>{section?.title}</p>
+                                    </div>
+                                ))
+                            }
+
+
+                        </div>
+                        <hr className='mt-2 mb-2' />
                         <div className="template" >
                             {
                                 // ReactAllTemplate.map(elem => <DraggableTemplate TemplateObject={elem} />)
-                                ReactTemplate?.map(elem => <div className="">
-                                    <hr className='mt-1' />
-                                    <div className="templatename">Name : {elem._id}</div>
-                                    <hr className='mb-1' />
+                                ReactTemplate?.map(elem => <div className="p-0">
+                                    {/* <hr className='mt-1' /> */}
+                                    <div className="templatename ps-2">
+                                        {elem.name}
+                                        {/* <br /> {elem._id} */}
+                                    </div>
+                                    {/* <hr className='mb-1' /> */}
                                     <DraggableTemplate TemplateObject={elem} />
                                 </div>)
                             }
                         </div>
                     </div>
-                    <div className="center">
+                    <div className="center p-5 ">
                         {
                             Page?.sections?.map((elem, i) => {
                                 return <div key={i} className={Target?.index == i ? "ActiveReactTemplate" : "ReactTemplate"} onClick={() => {
@@ -248,7 +277,7 @@ function DesignPage() {
                                     console.log('elem');
                                 }}>
                                     <DynamicRenderer key={elem._id} code={elem?.template} props={elem?.props} />
-                                    <div className="templateManeger">
+                                    <div className="templateManeger z-11">
                                         {!Target && Target?.index != i && <div className="icon"><i class="fa-solid fa-angle-up" style={{ color: 'green' }}
                                             onClick={(e) => {
                                                 e.stopPropagation()

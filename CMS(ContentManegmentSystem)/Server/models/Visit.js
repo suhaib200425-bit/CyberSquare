@@ -1,14 +1,16 @@
 const mongoose = require("mongoose");
 
 const visitSchema = new mongoose.Schema({
-  ip: {
-    type: String,
-    required: true
+  visiter: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // 👈 reference
+    required: true,
+    default: null
   },
 
   web: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", // 👈 reference
+    ref: "WEB", // 👈 reference
     required: true,
     default: null
   },

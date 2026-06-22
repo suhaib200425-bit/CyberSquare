@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../../models/User"); // adjust path
 const WEB = require("../../models/WEB");
+const Visit = require("../../models/Visit");
 
 exports.logedUser = async (req, res) => {
     try {
@@ -9,12 +10,12 @@ exports.logedUser = async (req, res) => {
         const { website } = req.params
 
         // identify the site
-        const web = await WEB.findOne({website})
+        const web = await WEB.findOne({ website })
         // 🔍 Check user exists
-        const user = await User.findOne({ email,web:web._id });
+        const user = await User.findOne({ email, web: web._id });
         console.log(user);
         if (!user) return res.status(400).json({ message: "User not found" });
-        
+
 
         // 🔐 Check if verified (important if using OTP)
         // if (!user.isVerified) {
@@ -33,6 +34,21 @@ exports.logedUser = async (req, res) => {
             process.env.JWT_SECRET, // ⚠️ move to .env
             { expiresIn: "1d" }
         );
+
+        const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+        
+        const existingVisit = await Visit.findOne({
+            visiter: user._id,
+            web: web._id,
+            visitedAt: { $gte: oneHourAgo }
+        });
+
+        if (!existingVisit) {
+            await Visit.create({
+                visiter: user._id,
+                web: web._id,
+            });
+        }
 
         // ✅ Success response
         res.json({

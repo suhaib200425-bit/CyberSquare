@@ -9,7 +9,8 @@
     font-size: 21px;
     font-weight: 500;
     width: 100%;
-    background-color: var(--hover-color);
+    background-color: rgb(24, 24, 29);
+
     backdrop-filter: blur(50px);
     z-index: 99;
     height: 50px;

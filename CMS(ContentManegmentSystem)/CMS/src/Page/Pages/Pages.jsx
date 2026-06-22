@@ -16,7 +16,7 @@ function Pages() {
     const { SetBuilderPage } = useStore()
     const Navigate = useNavigate()
     const { isPending, error, data } = useQuery({
-        queryKey: ['repoData', form, page],
+        queryKey: ['PagesData', form, page],
         queryFn: async () => {
             try {
                 const token =localStorage.getItem('token')
@@ -30,7 +30,6 @@ function Pages() {
                 return response.data
             } catch (error) {
                 console.log(error.response?.data || error.message);
-
             }
         }
     },)
@@ -62,10 +61,10 @@ function Pages() {
             <div className="Content">
                 <div className="ContentHed">
                     <div className="">
-                        <h2 className='hed'>Pages</h2>
+                        <h1 className='hed'>Pages</h1>
                         <p>Static pages like About, Contact, Pricing.</p>
                     </div>
-                    <button onClick={() => {
+                    <button className='bg-[var(--ROW-COLOR)]  text-[var(--TEXT-COLOR)]' onClick={() => {
                         setForm(true)
                         setUpdate(null)
                     }}>
@@ -73,11 +72,11 @@ function Pages() {
                         <span className='ms-2'>New Page</span>
                     </button>
                 </div>
-                <div className="mt-10 bg-white rounded-[5px] shadow overflow-hidden">
+                <div className="mt-10 bg-[var(--BG-COLOR)] rounded-[5px] shadow overflow-hidden">
                     <table className="w-full text-left">
 
-                        <thead className="bg-gray-50 border-b">
-                            <tr className="text-gray-600 text-sm">
+                        <thead className="bg-[var(--ROW-COLOR)] border-b h-[50px]">
+                            <tr className="text-[var(--TEXT-COLOR)] text-sm">
 
                                 <th className="px-6 py-3">Title</th>
                                 <th className="px-6 py-3">Slug</th>
@@ -87,15 +86,15 @@ function Pages() {
                             </tr>
                         </thead>
 
-                        <tbody className="divide-y">
+                        <tbody className="divide-y divide-[var(--BG-S-COLOR)]">
                             {data?.data?.map((page, index) => (
-                                <tr key={index} className="hover:bg-gray-50 transition">
+                                <tr key={index} className="hover:bg-[var(--ROW-COLOR)] transition">
 
-                                    <td className="px-6 py-4 font-medium text-gray-800">
+                                    <td className="px-6 py-4 font-medium text-[var(--TEXT-COLOR)]">
                                         {page.title}
                                     </td>
 
-                                    <td className="px-6 py-4 text-gray-500">
+                                    <td className="px-6 py-4 text-[var(--BG-S-COLOR)]">
                                         {page.slug}
                                     </td>
 
@@ -103,18 +102,18 @@ function Pages() {
                                         <span
                                             className={`text-xs px-3 py-1 rounded-full ${page.status === "published"
                                                 ? "bg-blue-100 text-blue-600"
-                                                : "bg-gray-200 text-gray-600"
+                                                : "bg-[var(--BG-S-COLOR)]-200 text-[var(--BG-S-COLOR)]-600"
                                                 }`}
                                         >
                                             {page.status}
                                         </span>
                                     </td>
 
-                                    <td className="px-6 py-4 text-gray-500">
+                                    <td className="px-6 py-4 text-[var(--BG-S-COLOR)]-500">
                                         {page.updatedAt.split("T")[0]}
                                     </td>
 
-                                    <td className="px-6 py-4 flex justify-end gap-3 text-gray-500">
+                                    <td className="px-6 py-4 flex justify-end gap-3 text-[var(--BG-S-COLOR)]-500">
                                         <button className="hover:text-orange-500" onClick={() => {
                                             setUpdate(page._id)
                                             setForm(true)

@@ -2,7 +2,8 @@
     width: 100%;
     height: 100vh;
     transition: 0.6s;
-    background-color: var(--hover-color);
+    background-color: var(--BG-COLOR);
+    color: var(--TEXT-COLOR);
     overflow: scroll;
     overflow-x: hidden;
 }
@@ -12,7 +13,7 @@
 }
 
 .Post .Content .hed {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 700;
 }
 
@@ -31,5 +32,4 @@
     padding: 10px;
     border-radius: 5px;
     color: white;
-    background-color: var(--back-color);
 }

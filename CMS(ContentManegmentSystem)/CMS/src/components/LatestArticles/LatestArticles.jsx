@@ -25,9 +25,10 @@ const ListArticle=[
   },
   {
     "id": 5,
-    "title": "Typography for Long-Form Reading",
-    "views": 1980
-  }
+    "title": "Building Drag-and-Drop Page Builders",
+    "views": 2845
+  },
+  
 ]
 function LatestArticles() {
   return (
@@ -42,7 +43,7 @@ function LatestArticles() {
                     <div className="counterBox">{i+1}</div>
                     <div className="ArticleDetails">
                         <span className='truncate w-full m-0'>{elem.title}</span> <br />
-                        <span className='text-[10px] m-0 '></span>
+                        {/* <span className='text-[13px] m-0 '> Lorem ipsum dolor sit,  </span> */}
                     </div>
                 </div>
             ))}

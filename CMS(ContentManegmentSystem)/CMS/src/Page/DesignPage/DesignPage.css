@@ -4,6 +4,8 @@
     width: 100%;
     height: calc(100vh - 50px);
     overflow: hidden;
+    background-color: var(--BG-COLOR);
+    color: var(--TEXT-COLOR);
 }
 .DesignPage .leftBar{
     position: relative;
@@ -20,7 +22,7 @@
     display: flex;
     overflow-x: scroll;
     overflow-y: hidden;
-    scrollbar-width: thin;
+    scrollbar-width: none;
     gap: 5px;
     align-items: center;
 }
@@ -32,7 +34,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    border: 1px solid var(--BUTTON-BG-COLOR);
     border-radius: 6px;
 }
 .DesignPage .center{
@@ -81,6 +83,11 @@
     min-width: 300px ;
     max-width: 300px ;
     /* opacity: 1; */
+}
+.DesignPage .sections-template{
+    display: grid;
+    gap: 2PX;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 

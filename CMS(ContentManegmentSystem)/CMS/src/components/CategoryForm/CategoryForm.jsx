@@ -95,21 +95,21 @@ export default function CategoryForm({ setFormClose, update }) {
 
 
     return (
-        <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-            <form className="bg-white w-[600px] rounded-lg p-6 shadow-lg" onSubmit={update ? handleUpdate : handleSubmit}>
+        <div className="z-99 fixed inset-0 bg-black/40 flex justify-center items-center">
+            <form className="bg-[var(--BG-COLOR)] text-[var(--TEXT-COLOR)] w-[600px] rounded-lg p-6 shadow-lg" onSubmit={update ? handleUpdate : handleSubmit}>
 
                 <h2 className="text-xl font-semibold mb-4">New Category</h2>
 
                 {/* Title */}
                 <div className="mb-4">
-                    <label className="block mb-1 font-medium">Title</label>
+                    <label className="block mb-1  font-medium">Title</label>
                     <input
                         type="text"
                         name="title"
                         value={form.title}
                         onChange={handleChange}
                         required
-                        className="w-full border p-2 rounded focus:outline-blue-500"
+                        className="w-full border p-2 border-[var(--BG-S-COLOR)] rounded-[6px] focus:outline-[var(--BG-COLOR)]"
                     />
                 </div>
                 {/*PARENT*/}
@@ -121,7 +121,7 @@ export default function CategoryForm({ setFormClose, update }) {
                             name="parent"
                             value={form.parent}
                             onChange={handleChange}
-                            className="w-full border p-2 rounded"
+                            className="w-full border border-[var(--BG-S-COLOR)] p-2 rounded"
                         >
                             <option value={0}>Parent</option>
                             <option>Published</option>
@@ -136,7 +136,7 @@ export default function CategoryForm({ setFormClose, update }) {
                             name="slug"
                             value={form.slug}
                             onChange={handleChange}
-                            className="w-full border p-2 rounded focus:outline-blue-500"
+                            className="w-full border border-[var(--BG-S-COLOR)] p-2 rounded focus:outline-[var(--BG-COLOR)]"
                         />
                     </div>
                 </div>
@@ -148,7 +148,7 @@ export default function CategoryForm({ setFormClose, update }) {
                         name="description"
                         value={form.description}
                         onChange={handleChange}
-                        className="w-full border p-2 rounded h-[80px]"
+                        className="w-full border border-[var(--BG-S-COLOR)] p-2 rounded h-[80px]"
                     />
                 </div>
 

@@ -4,11 +4,13 @@ import { Editor } from '@tinymce/tinymce-react';
 export default function EditorContainer({ EditorContainerValue,content }) {
   return (
     <Editor
+  
       onEditorChange={EditorContainerValue }
       value={content}
       apiKey='693r6zybzk9jtueznh5o45r0uegaae1qv8j2zj9ycqlidd7s'
       init={{
 
+  skin: "oxide-dark",
         height: 500,
         menubar: true,
         plugins: [

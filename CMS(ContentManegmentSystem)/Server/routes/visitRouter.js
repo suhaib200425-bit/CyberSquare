@@ -2,13 +2,17 @@
 
 const express = require("express");
 const Visit = require("../models/Visit");
+const authMiddleware = require("../middleware/jwt");
+const WEB = require("../models/WEB");
 
 const router = express.Router();
 
 
-router.get("/hourly-visits", async (req, res) => {
+router.get("/hourly-visits",authMiddleware,async (req, res) => {
 
   try {
+const user =req.user
+console.log(user);
 
     // Today start & end
     const startOfDay = new Date();
@@ -17,8 +21,12 @@ router.get("/hourly-visits", async (req, res) => {
     const endOfDay = new Date();
     endOfDay.setHours(23, 59, 59, 999);
 
+    //Get WebSite Id
+    const web = WEB.findOne({admin:user.id})
+
     // Get today's visits
     const visits = await Visit.find({
+      web:web._id,
       visitedAt: {
         $gte: startOfDay,
         $lte: endOfDay

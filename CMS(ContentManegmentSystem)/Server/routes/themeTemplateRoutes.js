@@ -11,10 +11,12 @@ const deleteThemeTemplate = require("../controllers/TemeTemplate/deleteTemeTempl
 const toggelFooterTemplate = require("../controllers/FooterTemplate/toggelFooterTemplate");
 const toggelThemeTemplate = require("../controllers/TemeTemplate/toggelThemeTemplate");
 const authMiddleware = require("../middleware/jwt");
+const upload = require("../middleware/multer");
+const { CreateNewThem } = require("../controllers/TemeTemplate/adminControllers/CreateNewThem");
 
 const router = express.Router();
 
-router.post("/", CreateThemTemplate);
+router.post("/", upload.single("banner"),CreateNewThem);
 router.post("/page", CreateThemeTemplatePage);
 router.post("/menu", CreateThemeTemplateMenu);
 router.post("/category", CreateThemeTemplateCategory);

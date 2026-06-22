@@ -7,8 +7,8 @@ const getSingleCategoryPosts = async (req, res) => {
     const { website } = req.params;
     const { categoryname, limit } = req.query;
     const filterObj = {}
-    if (categoryname)
-      filterObj.title = categoryname
+    // if (categoryname)
+    // filterObj.title = categoryname
     const web = await WEB.findOne({ website });
     if (!web) {
       return res.status(404).json({
@@ -17,9 +17,12 @@ const getSingleCategoryPosts = async (req, res) => {
       });
     }
     filterObj.auther = web.admin
+    console.log("filterObj");
+    console.log(filterObj);
+
 
     const categoryItem = await Category
-    .findOne(filterObj)
+      .findOne({  })
       .sort({ createdAt: -1 });
 
     if (!categoryItem) {
@@ -33,8 +36,8 @@ const getSingleCategoryPosts = async (req, res) => {
       auther: web.admin,
       category: categoryItem._id
     })
-            .select("-content -updatedAt -__v")
-      .populate("category","title slug")
+      .select("-content -updatedAt -__v")
+      .populate("category", "title slug")
       .sort({ createdAt: -1 })
       .limit(Number(limit) || 6);
 

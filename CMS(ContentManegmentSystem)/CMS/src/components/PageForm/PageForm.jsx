@@ -74,9 +74,9 @@ export default function PageForm({ setFormClose, update }) {
     }
     return (
         <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-            <form className="bg-white w-[600px] rounded-lg p-6 shadow-lg" onSubmit={update ? handleUpdate : handleSubmit}>
+            <form className="bg-[var(--BG-COLOR)] text-[var(--TEXT-COLOR)] w-[600px] rounded-lg p-6 shadow-lg" onSubmit={update ? handleUpdate : handleSubmit}>
 
-                <h2 className="text-xl font-semibold mb-4">New Page</h2>
+                <h2 className="text-[22px] text-center font-semibold mb-4">New Page</h2>
 
                 {/* Title */}
                 <div className="mb-4">
@@ -86,7 +86,7 @@ export default function PageForm({ setFormClose, update }) {
                         name="title"
                         value={form.title}
                         onChange={handleChange}
-                        className="w-full border p-2 rounded focus:outline-blue-500"
+                        className="w-full border border-[var(--BG-S-COLOR)] p-2 rounded-[5px] focus:outline-[var(--BG-S-COLOR)]"
                     />
                 </div>
                 {/* Slug */}
@@ -97,37 +97,25 @@ export default function PageForm({ setFormClose, update }) {
                         name="slug"
                         value={form.slug}
                         onChange={handleChange}
-                        className="w-full border p-2 rounded focus:outline-blue-500"
+                        className="w-full border border-[var(--BG-S-COLOR)] p-2 rounded-[5px] focus:outline-[var(--BG-COLOR)]"
                     />
                 </div>
 
-                <div className="w-1/2">
-                    <label className="block mb-1 font-medium">Status</label>
-                    <select
-                        name="status"
-                        value={form.status}
-                        onChange={handleChange}
-                        className="w-full border p-2 rounded"
-                    >
-                        <option>Draft</option>
-                        <option>Published</option>
-                    </select>
-                </div>
-
-
                 {/* Buttons */}
-                <div className="flex justify-end gap-3">
-                    <button className="px-4 py-2 border rounded" onClick={(e) => {
+                <div className="flex justify-between gap-3">
+                 
+                    <button
+                        onClick={update ? handleUpdate : handleSubmit}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-[5px]"
+                    >
+                        {update ? 'Update' : "Save"}
+                    </button>
+
+                       <button className="px-4 py-2  rounded-[5px]" onClick={(e) => {
                         e.preventDefault()
                         setFormClose(false)
                     }}>
                         Cancel
-                    </button>
-                    <button
-                        onClick={update ? handleUpdate : handleSubmit}
-                        className="px-4 py-2 bg-blue-600 text-white rounded"
-                    >
-                        {update ? 'Update' : "Save"}
                     </button>
                 </div>
 

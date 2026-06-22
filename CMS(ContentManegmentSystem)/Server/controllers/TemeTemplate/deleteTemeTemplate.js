@@ -3,6 +3,8 @@ const Menu = require("../../models/Menu");
 const Page = require("../../models/Page");
 const ThemeTemplate = require("../../models/ThemeTemplate");
 
+const fs = require("fs");
+const path = require("path");
 // DELETE USER
 const deleteThemeTemplate = async (req, res) => {
 
@@ -11,6 +13,18 @@ const deleteThemeTemplate = async (req, res) => {
         const deletedthemetemplate = await ThemeTemplate.findByIdAndDelete(
             req.params.TemeTemplateId
         );
+
+
+const filePath = path.join(__dirname,"..","..", deletedthemetemplate?.banner);
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error("Delete failed:", err);
+                return;
+            }
+
+            console.log("File deleted successfully");
+        });
+
         if (!deletedthemetemplate) {
 
             return res.status(404).json({
@@ -23,17 +37,14 @@ const deleteThemeTemplate = async (req, res) => {
             theme: req.params.TemeTemplateId,
         });
 
-        await Category.deleteMany({
-            theme: req.params.TemeTemplateId,
-        });
         await Menu.deleteMany({
             theme: req.params.TemeTemplateId,
         });
 
-
         res.status(200).json({
             success: true,
-            message: "User deleted successfully"
+            message: "Theme deleted successfully",
+            deletedthemetemplate
         });
 
     } catch (error) {

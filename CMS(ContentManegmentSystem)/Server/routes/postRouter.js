@@ -18,12 +18,14 @@ const getPopularPosts = require("../controllers/Post/newOnes/getPopularPosts");
 const getPopularCategoryPostsAndHotPosts = require("../controllers/Post/newOnes/getPopularCategoryPostsAndHotPosts");
 const getSingleCategoryPosts = require("../controllers/Post/newOnes/getSingleCategoryPosts");
 const getSinglePost = require("../controllers/Post/newOnes/getSinglePost");
+const getPostsByStatus = require("../controllers/Post/AdminControllers/getPostsByStatus");
+const getSearchPostsByQuery = require("../controllers/Post/AdminControllers/getSearchPostsByQuery");
 
 const router = express.Router();
 
 router.post("/", authMiddleware,createPost);
 router.get("/",authMiddleware, getPosts);
-router.get("/:slug", getPostBySlug);
+// router.get("/:slug", getPostBySlug);
 router.get("/get/default", getPostDefault);
 router.get("/get/published", getPostPublished);
 router.get("/postid/:PostId", getPostById);
@@ -44,6 +46,10 @@ router.get("/:website/top-category-post",getSinglePopularPost );
 router.get("/:website/popular-category-posts-and-hot-post",getPopularCategoryPostsAndHotPosts );
 router.get("/:website/single-category-posts",getSingleCategoryPosts );
 router.get("/:website/single-post/:PostId", getSinglePost );
+//BACKEND
+router.get("/posts-by-status",authMiddleware,getPostsByStatus );
+router.get("/search-posts-by-query",authMiddleware,getSearchPostsByQuery );
+
 
 
 module.exports= router;

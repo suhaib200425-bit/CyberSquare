@@ -57,7 +57,7 @@ function AuthPages() {
     if (error) return 'An error has occurred: ' + error.message
 
     return (
-        <div className='main-auth-container'>
+        <div className='main-auth-container bg-[var(--TEXT-COLOR)]'>
             <h2 className='title'>Authentication Pages</h2>
             <p className='subtitle'>slected any one</p>
             <div className="AuthPages">

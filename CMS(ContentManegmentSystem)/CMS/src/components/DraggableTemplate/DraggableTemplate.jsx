@@ -13,10 +13,10 @@ function DraggableTemplate({ TemplateObject }) {
     });
 
     return (
-        <div className='w-full ' ref={ref} key={TemplateObject._id} onClick={()=>{
+        <div className='w-full p-2' ref={ref} key={TemplateObject._id} onClick={()=>{
             console.log(`${BASEURL}${TemplateObject?.banner}`);
         }}>
-            <img width={"100%"} src={`${BASEURL}${TemplateObject?.banner}`} alt={TemplateObject.name} srcset="" />
+            <img className='rounded-[5px]' width={"100%"} src={`${BASEURL}${TemplateObject?.banner}`} alt={TemplateObject.name} srcset="" />
             {/* {
                 <DynamicRenderer key={TemplateObject._id} code={TemplateObject.template}  props={TemplateObject?.props} />
             } */}

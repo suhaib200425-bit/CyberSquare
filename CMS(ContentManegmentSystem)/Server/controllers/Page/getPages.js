@@ -27,25 +27,6 @@ const getPages = async (req, res) => {
       .skip(skip)
       .limit(limit);
 
-    //visits
-    const oneHourAgo = new Date(
-      Date.now() - 60 * 60 * 1000
-    );
-
-    const existingVisit = await Visit.findOne({
-      ip: req.ip,
-      web: req.user.id,
-      visitedAt: { $gte: oneHourAgo }
-    });
-
-    if (!existingVisit) {
-
-      await Visit.create({
-        web: req.user?.id,
-        ip: req.ip,
-      });
-
-    }
 
     res.status(200).json({
       success: true,

@@ -3,6 +3,7 @@ import './Template.css'
 import { AUTHTEMPLATEAPI, BASEURL, THEMETEMPLATEAPI } from '../../assets/assets'
 import { useQuery, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import ReactPlayer from "react-player";
 import { DynamicRenderer } from '../../ComponentConvertFunction/DynamicRenderer';
 import { queryClient } from '../../Context/Tanstack';
 import TargetValueChange from '../../components/TargetValueChange/TargetValueChange';
@@ -104,6 +105,7 @@ function Template() {
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3'>
                     <div key={'create'} className='w-full cursor-pointer'>
                         <h3>{" x "}</h3>
+
                         <img
                             src={'https://i.pinimg.com/736x/13/1b/a0/131ba0a64bc08977226dd9447e033c47.jpg'}
                             alt=""
@@ -131,11 +133,35 @@ function Template() {
                                         }} className="fa-solid fa-trash-can"></i>
                                     </div>
                                 </div>
-                                <img
+                                <video
+
+                                    muted
+                                    playsInline
+                                    preload="metadata"
+                                    onMouseEnter={(e) => {
+                                        e.target.play();
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.target.pause();
+                                        e.target.currentTime = 0;
+                                    }}
+                                    style={{
+                                        borderRadius: '10px',
+                                        width: "100%",
+                                        height: "200px",
+                                        objectFit: "cover"
+                                    }} >
+                                    <source
+                                        style={{ height: "100%" }}
+                                        src={`${BASEURL}${elem.banner}`}
+                                        type="video/mp4"
+                                    />
+                                </video>
+                                {/*<img
                                     src={elem?.banner || 'https://i.pinimg.com/736x/4b/30/db/4b30dbe65f8ea7ff9f1318f6f89cb676.jpg'}
                                     alt=""
                                     className='w-full h-[200px] rounded-[10px] object-cover'
-                                />
+                                />*/}
 
                                 <div className='py-[5px] flex items-center justify-between'>
                                     <input

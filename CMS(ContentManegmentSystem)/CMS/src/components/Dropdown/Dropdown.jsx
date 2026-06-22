@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-export default function DropdownMenu({ PageMenus, setactiveMenu, activeMenu }) {
+export default function DropdownMenu({ Height,PageMenus, setactiveMenu, activeMenu }) {
     const [open, setOpen] = useState(false);
     const [menu, setMenu] = useState();
 
@@ -14,6 +14,9 @@ export default function DropdownMenu({ PageMenus, setactiveMenu, activeMenu }) {
     return (
         <div className="relative inline-block mb-2">
             <button
+            style={{
+                height:Height
+            }}
                 onClick={() => {
 
                     console.log(PageMenus);
@@ -33,7 +36,10 @@ export default function DropdownMenu({ PageMenus, setactiveMenu, activeMenu }) {
                         PageMenus?.map(elem => {
                             if (activeMenu.title == elem.title) return
                             return <span
-                                onClick={() => { setactiveMenu(elem) }}
+                                onClick={() => { 
+                                    setactiveMenu(elem)
+                                    setOpen(false)
+                                 }}
                                 className="block px-4 py-3 text-black hover:bg-black hover:text-white transition-colors"
                             >
                                 {elem.title}

@@ -8,7 +8,7 @@ const createCategory = async (req, res) => {
 
     // 🔍 Required check
     if (!title || !slug) {
-      return res.status(400).json({ message: "Title and slug are required" });
+      return res.status(400).json({ message: "Title and Slug are required" });
     }
 
     const activetemplate = await WEB.findOne({ admin: req.user.id })
