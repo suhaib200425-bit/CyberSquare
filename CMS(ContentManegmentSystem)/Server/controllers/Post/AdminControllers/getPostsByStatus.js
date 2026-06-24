@@ -22,12 +22,12 @@ const getPostsByStatus = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const total = await Post.countDocuments({
-      auther: req.user.id,
+      auther: activeTemaplte.admin,
       status: state
     });
 
     const posts = await Post.find({
-      auther: req.user.id,
+      auther: activeTemaplte.admin,
       status: state
     })
       .populate("category", "title")

@@ -247,8 +247,6 @@ function DesignPage() {
                                     </div>
                                 ))
                             }
-
-
                         </div>
                         <hr className='mt-2 mb-2' />
                         <div className="template" >

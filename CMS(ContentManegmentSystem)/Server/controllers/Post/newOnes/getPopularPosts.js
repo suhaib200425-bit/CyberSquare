@@ -10,7 +10,7 @@ const getPopularPosts = async (req, res) => {
             success: false,
             message: "website not found"
         });
-        const posts = await Post.find({ auther: web.admin })
+        const posts = await Post.find({ auther: web.admin,status:"Published" })
             .populate("category", "title")
             .sort({ createdAt: -1 })
             .limit(limit || 1);

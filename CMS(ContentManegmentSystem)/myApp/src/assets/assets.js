@@ -4,11 +4,12 @@ import earth from '../assets/earth.png'
 import mountain from '../assets/mountain.png'
 import sky from '../assets/sky.jpeg'
 import stoneriver from '../assets/stoneriver.png'
+import animatedVideo from '../assets/animation.mp4'
 // import tree from '../assets/tree.jpeg'
 
 export const queryClient = new QueryClient()
 
-export const BASEURL ='http://10.18.148.119:5000'
+export const BASEURL ='http://10.227.7.119:5000'
 
 // export const BASEURL='http://localhost:5000'
 // export const BASEURL =' https://http://192.168.31.24:5000thee-slightly-dowry.ngrok-free.dev'
@@ -23,8 +24,12 @@ export const REACTTEPLATEAPI = `${BASEURL}/api/react/template`
 export const AUTHTEMPLATEAPI = `${BASEURL}/api/auth/template`
 export const FOOTERTEMPLATEAPI = `${BASEURL}/api/footer/template`
 
+
 export {
   grass, earth, mountain, stoneriver,sky
+}
+export {
+  animatedVideo
 }
 
 const themeModel = {

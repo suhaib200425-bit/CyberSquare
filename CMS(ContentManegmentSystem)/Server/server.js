@@ -65,6 +65,9 @@ app.use("/api/visit", require('./routes/visitRouter'));
 app.use("/api/web", require('./routes/webRouters'));
 app.use("/api/section", require('./routes/pageCategoryRoutes'));
 
+app.use("/api/hero/section", require('./routes/OtherRoutes/heroSectionRouters'));
+
+
 app.get("/api/quick/change", async (req, res) => {
   try {
     const web = await WEB.findOne({ website: "cyber" })
