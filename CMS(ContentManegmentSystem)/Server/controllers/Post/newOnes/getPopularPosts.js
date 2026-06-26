@@ -12,6 +12,7 @@ const getPopularPosts = async (req, res) => {
         });
         const posts = await Post.find({ auther: web.admin,status:"Published" })
             .populate("category", "title")
+            .select("-content -auther -updatedAt -__v")
             .sort({ createdAt: -1 })
             .limit(limit || 1);
 

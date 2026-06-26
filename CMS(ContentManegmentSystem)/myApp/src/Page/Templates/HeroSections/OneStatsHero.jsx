@@ -4,10 +4,26 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const OneStatsHero = ({
-    heading = { value: "Empowering Creators Worldwide" },
-    description = { value: "Join a growing ecosystem of writers, thinkers, and readers sharing their insights every single day." },
-    buttonText = { value: "Explore Pltform" },
+    heading = { 
+        label:"Main Title",
+        type:"textArea",
+        value: "Empowering Creators Worldwide" 
+    },
+    description = { 
+        type:"textArea",
+        label:"Description",
+        value: "Join a growing ecosystem of writers, thinkers, and readers sharing their insights every single day." },
+    buttonText = { 
+        value: "Explore Pltform", 
+        label:"Button text",
+        type:"text"
+    },
     burronRoute = { value: "burronRoute" },
+    burronColor = { 
+        label:"Button Color",
+        type:"color",
+        value: "red"
+     },
     // Color configuration props
     themeColor = {
         label: "Theme Color",

@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { animatedVideo } from '../../../assets/assets';
 
 // Simulated CMS Fields as props with default fallbacks
 const HeroVideo = ({
-  videoUrl = animatedVideo,
-  title = " there, future of web design",
-  subtitle = "Crafting high-performance user experiences with React, Tailwind CSS, and fluid motion tracking.",
-  buttonText = "Get Started Today"
+  desktopPadding={
+type:"text",
+label:"Desktop Padding",
+value:"20px 100px"
+  },
+  mobilePadding={
+type:"text",
+label:"Mobile Padding",
+value:"20px 10px"
+  },
+  videoUrl = {
+    type:"video",
+    label:"Backgroun Video",
+    value:animatedVideo
+  },
+  title = {
+    type:"textArea",
+    label:"Main Title",
+    value:"There, future of web design"
+  },
+  subtitle = {
+    type:"textArea",
+    label:"Sub Title",
+    value:"Crafting high-performance user experiences with React, Tailwind CSS, and fluid motion tracking."
+  },
+  buttonText = {
+    type:"textArea",
+    label:"Button Name",
+    value:"Get Started Today"
+  }
 }) => {
   
   // Framer Motion Animation Variants for the staggered slide-up effect
@@ -34,8 +60,11 @@ const HeroVideo = ({
     },
   };
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
+    <section style={{
+      padding:isMobile?mobilePadding.value:desktopPadding.value
+    }} className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center">
       
       {/* 1. Background Video & Overlay */}
       <div className="absolute inset-0 w-full h-full z-0">
@@ -45,7 +74,7 @@ const HeroVideo = ({
           loop
           muted
           playsInline
-          src={videoUrl}
+          src={videoUrl.value}
         />
         {/* Dark overlay to ensure text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent md:bg-black/40" />
@@ -64,7 +93,7 @@ const HeroVideo = ({
             variants={itemVariants}
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight"
           >
-            {title}
+            {title.value}
           </motion.h1>
 
           {/* Subtitle (CMS Field) */}
@@ -72,7 +101,7 @@ const HeroVideo = ({
             variants={itemVariants}
             className="text-lg sm:text-xl text-gray-200 font-light max-w-xl"
           >
-            {subtitle}
+            {subtitle.value}
           </motion.p>
 
           {/* Button / CTA (CMS Field) */}
@@ -81,7 +110,7 @@ const HeroVideo = ({
               {/* Button hover effect background expansion */}
               <span className="absolute inset-0 w-full h-full bg-black scale-0 rounded-full transition-transform duration-300 ease-out group-hover:scale-100 -z-10" />
               
-              {buttonText}
+              {buttonText.value}
               <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
             </button>
           </motion.div>

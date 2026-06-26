@@ -31,10 +31,111 @@ import CenteredHero from './HeroSections/CenteredHero'
 import SplitScreenHero from './HeroSections/SplitScreenHero'
 import SearchHero from './HeroSections/SearchHero'
 import OneStatsHero from './HeroSections/OneStatsHero'
+import FeaturedHeroSection from './Featured/FeaturedHeroSection'
+import { BentoGridLayout } from './Featured/BentoGridLayout'
+import { MagazineStyleLayout } from './Featured/MagazineStyleLayout'
+import { MasonryLayout } from './Featured/MasonryLayout'
+import { CarouselLayout } from './Featured/CarouselLayout '
+import { TimelineLayout } from './Featured/TimelineLayout'
+import { HorizontalNewsCards } from './Featured/HorizontalNewsCards'
+import { PremiumSaaSLayout } from './Featured/PremiumSaaSLayout'
+import { SplitScreenLayout } from './Featured/SplitScreenLayout'
+// import { UltimateCMSDashboardLayout } from './Featured/UltimateCMSDashboardLayout.JSX'
+import { NetflixLayout } from './Featured/NetflixLayout'
+import { AppleLaunchLayout } from './Featured/AppleLaunchLayout'
+import { InfiniteScrollLayout } from './Featured/InfiniteScrollLayout'
+import { NewspaperLayout } from './Featured/NewspaperLayout'
+import { CardStackLayout } from './Featured/CardStackLayout'
+import { StoryTimelineLayout } from './Featured/StoryTimelineLayout'
+import { HexagonGridLayout } from './Featured/HexagonGridLayout'
+import { FloatingIslandsLayout } from './Featured/FloatingIslandsLayout'
+import { KnowledgeGraphLayout } from './Featured/KnowledgeGraphLayout'
+import { Perspective3DLayout } from './Featured/Perspective3DLayout'
+import Stack from './Stack'
 
 function MainTeamplates() {
   return (
     <div>
+      <p>CardStackLayout</p>
+      <CardStackLayout />
+      <p>Perspective3DLayout</p>
+      <Perspective3DLayout />
+      {/* <p>KnowledgeGraphLayout</p>
+      <KnowledgeGraphLayout /> */}
+      <p>FloatingIslandsLayout</p>
+      <FloatingIslandsLayout />
+      <p>HexagonGridLayout</p>
+      <HexagonGridLayout />
+      <p>StoryTimelineLayout</p>
+      <StoryTimelineLayout />
+      <p>NewspaperLayout</p>
+      <NewspaperLayout />
+
+      <p>InfiniteScrollLayout</p>
+      <InfiniteScrollLayout />
+
+      <p>AppleLaunchLayout</p>
+      <AppleLaunchLayout />
+
+      <p>NetflixLayout</p>
+      <NetflixLayout />
+
+      <p>UltimateCMSDashboardLayout</p>
+      {/* <UltimateCMSDashboardLayout /> */}
+
+      <p>SplitScreenLayout</p>
+      <SplitScreenLayout />
+
+      <p>HorizontalNewsCards</p>
+      <HorizontalNewsCards />
+
+      <p>PremiumSaaSLayout</p>
+      <PremiumSaaSLayout />
+
+      <p>TimelineLayout</p>
+      <TimelineLayout />
+
+      <p>CarouselLayout</p>
+      <CarouselLayout />
+
+      <p>MasonryLayout</p>
+      <MasonryLayout />
+
+      <p>MagazineStyleLayout</p>
+      <MagazineStyleLayout />
+      
+      <p>MagazineStyleLayout</p>
+      <MagazineStyleLayout />
+      
+      <p>BentoGridLayout</p>
+      <BentoGridLayout />
+
+
+      <FunctionBtnConverter fn={FeaturedHeroSection} />
+      <p>FeaturedHeroSection</p>
+      <FeaturedHeroSection />
+
+      
+      <FunctionBtnConverter fn={FeaturedHeroSection} />
+      <p>FeaturedHeroSection</p>
+      <FeaturedHeroSection />
+
+          <FunctionBtnConverter fn={HeroBanner} />
+          <p>HeroBanner</p>
+      <HeroBanner />
+
+       <FunctionBtnConverter fn={FullscreenHero} />
+       <p>FullscreenHero</p>
+      <FullscreenHero />
+      
+      <FunctionBtnConverter fn={HeroVideo} />
+      <p>HeroVideo</p>
+      <HeroVideo />
+
+      <FunctionBtnConverter fn={SplitHero} />
+      <p>SplitHero</p>
+      <SplitHero />
+
       
   <FunctionBtnConverter fn={ParallaxHero} />
   <p>ParallaxHero</p>
@@ -78,15 +179,10 @@ function MainTeamplates() {
 
 
 
-<FunctionBtnConverter fn={SplitHero} />
-      <SplitHero />
-      <FunctionBtnConverter fn={HeroVideo} />
-      <HeroVideo />
-      <FunctionBtnConverter fn={FullscreenHero} />
-      <FullscreenHero />
 
-      <FunctionBtnConverter fn={HeroBanner} />
-      <HeroBanner />
+     
+
+  
 
       <FunctionBtnConverter fn={HeroSection} />
       <HeroSection />

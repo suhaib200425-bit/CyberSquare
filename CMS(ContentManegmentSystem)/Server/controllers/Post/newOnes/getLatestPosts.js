@@ -12,6 +12,7 @@ const getLatestPosts = async (req, res) => {
         });
         const posts = await Post.find({ auther: web.admin })
             .populate("category", "title")
+            .select("-content -auther -updatedAt -__v")
             .sort({ createdAt: 1 })
             .limit(limit || 1);
 

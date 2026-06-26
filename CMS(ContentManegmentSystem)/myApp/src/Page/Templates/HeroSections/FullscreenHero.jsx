@@ -2,7 +2,44 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
-const FullscreenHero = () => {
+const FullscreenHero = ({
+  badge = {
+    label: "Badge",
+    type: "text",
+    value: "Next Generation Experience"
+  },
+  mainTitle = {
+    value: "Unleash Absolute",
+    type: "textArea",
+    label: "Main Title"
+  },
+  title = {
+    label: "Title",
+    value: "Digital Power",
+    type: "textArea",
+  },
+  subTitle = {
+    label: "Description ",
+    type: "textArea",
+    value: "Immerse yourself in a seamless ecosystem engineered for scale, performance, and breathtaking fidelity. Built for creators who demand perfection."
+  },
+  primaryText = {
+    value: "Explore Ecosystem",
+    type: "text",
+    label: "Main Title"
+  },
+  secondaryText = {
+    value: "Watch Showcase",
+    type: "text",
+    label: "Main Title"
+  },
+  imageUrl={
+label:"Image Selected",
+type:"image",
+value:"https://i.pinimg.com/736x/2f/86/68/2f8668931e25695072b451fa6dda64ca.jpg"
+  }
+
+}) => {
   // Container variant to stagger the text fade-up animations
   const contentContainerVariants = {
     hidden: { opacity: 0 },
@@ -37,17 +74,17 @@ const FullscreenHero = () => {
 
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black text-white">
-      
+
       {/* 1. Fullscreen Background Image with Zoom Effect */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 w-full h-full select-none pointer-events-none"
         variants={bgZoomVariants}
         initial="hidden"
         animate="visible"
       >
-        <img 
-          src="https://i.pinimg.com/1200x/65/2f/05/652f0585487ba77425fce2b81f53007e.jpg" 
-          alt="Hero Background" 
+        <img
+          src={imageUrl.value}
+          alt="Hero Background"
           className="w-full h-full object-cover"
         />
       </motion.div>
@@ -56,14 +93,14 @@ const FullscreenHero = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/70 z-10" />
 
       {/* 3. Center Aligned Content */}
-      <motion.div 
+      <motion.div
         className="relative max-w-4xl mx-auto px-6 text-center z-20 flex flex-col items-center space-y-6"
         variants={contentContainerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* Badge / Tag */}
-        <motion.div 
+        <motion.div
           variants={fadeUpVariants}
           className="flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-1.5 rounded-full text-sm font-medium tracking-wide text-indigo-200"
         >
@@ -72,18 +109,18 @@ const FullscreenHero = () => {
         </motion.div>
 
         {/* Main Title */}
-        <motion.h1 
+        <motion.h1
           variants={fadeUpVariants}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight uppercase leading-[1.1]"
         >
-          Unleash Absolute <br />
+          {mainTitle.value} <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
-            Digital Power
+            {title.value}
           </span>
         </motion.h1>
 
         {/* Description */}
-        <motion.p 
+        <motion.p
           variants={fadeUpVariants}
           className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl font-light leading-relaxed drop-shadow"
         >
@@ -91,16 +128,23 @@ const FullscreenHero = () => {
         </motion.p>
 
         {/* CTAs */}
-        <motion.div 
+        <motion.div
           variants={fadeUpVariants}
           className="pt-4 flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
         >
-          <button className="px-8 py-4 rounded-full font-semibold bg-white text-black hover:bg-slate-200 active:scale-98 transition-all duration-200 shadow-xl shadow-white/10">
-            Explore Ecosystem
-          </button>
-          <button className="px-8 py-4 rounded-full font-semibold bg-transparent border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm active:scale-98 transition-all duration-200">
-            Watch Showcase
-          </button>
+          {
+            primaryText.value &&
+            <button className="px-8 py-4 rounded-full font-semibold bg-white text-black hover:bg-slate-200 active:scale-98 transition-all duration-200 shadow-xl shadow-white/10">
+              {primaryText.value}
+            </button>
+          }
+          {
+            secondaryText.value &&
+            <button className="px-8 py-4 rounded-full font-semibold bg-transparent border border-white/30 text-white hover:bg-white/10 backdrop-blur-sm active:scale-98 transition-all duration-200">
+              {secondaryText.value}
+            </button>
+          }
+
         </motion.div>
       </motion.div>
 

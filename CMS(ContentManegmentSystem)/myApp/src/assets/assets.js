@@ -9,7 +9,7 @@ import animatedVideo from '../assets/animation.mp4'
 
 export const queryClient = new QueryClient()
 
-export const BASEURL ='http://10.227.7.119:5000'
+export const BASEURL ='http://10.179.84.119:5000'
 
 // export const BASEURL='http://localhost:5000'
 // export const BASEURL =' https://http://192.168.31.24:5000thee-slightly-dowry.ngrok-free.dev'

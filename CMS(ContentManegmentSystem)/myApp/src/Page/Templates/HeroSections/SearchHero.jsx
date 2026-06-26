@@ -45,11 +45,7 @@ const SearchHero = ({
     // Example trending tags
     const popularTags = [{ title: 'Tech' }, { title: 'Design' }, { title: 'AI' }, { title: 'Business' }, { title: 'Lifestyle' }];
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        console.log('Searching for:', searchQuery);
-        // Add your search routing or API call logic here
-    };
+  
 
     const handleTagClick = (tag) => {
         setSearchQuery(tag);

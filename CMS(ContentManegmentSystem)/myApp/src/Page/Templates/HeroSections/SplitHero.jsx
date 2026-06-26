@@ -3,15 +3,37 @@ import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 
 const SplitHero = ({
-    title = "Design systems built for scale.",
-    subtitle = "We engineer modular frontend architecture that bridges the gap between clean code and striking visual design.",
-    ctaText = "Explore Our Work",
+    title = {
+        label: "Main Title",
+        type: "textArea",
+        value: "Design systems built for scale."
+    },
+    subtitle = {
+        label: "Sub Title",
+        type: "textArea",
+        value: "We engineer modular frontend architecture that bridges the gap between clean code and striking visual design."
+    },
+    ctaText = {
+        label: "Cta Text",
+        type: "text",
+        value: "Explore Our Work"
+    },
     // 3 distinct high-quality images for the gallery layout
-    images = [
-        "https://i.pinimg.com/1200x/0e/43/47/0e4347a06ab119bcabca9328f5335be6.jpg", // Main large
-        "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=400&q=80", // Top right small
-        "https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&w=400&q=80"  // Bottom small
-    ]
+    imagesOne = {
+        label: "First Image",
+        type: "image",
+        value: "https://i.pinimg.com/1200x/0e/43/47/0e4347a06ab119bcabca9328f5335be6.jpg"
+    },
+    imagesTwo = {
+        type: "image",
+        label: "Secound Image",
+        value: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=400&q=80"
+    },
+    imagesThree = {
+        type: "image",
+        label: "Third Image",
+        value: "https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&w=400&q=80"
+    }
 }) => {
     const containerRef = useRef(null);
 
@@ -92,22 +114,26 @@ const SplitHero = ({
                         variants={textSlideUpVariants}
                         className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-slate-100"
                     >
-                        {title}
+                        {title.value}
                     </motion.h1>
 
                     <motion.p
                         variants={textSlideUpVariants}
                         className="text-lg text-slate-400 font-normal leading-relaxed max-w-lg"
                     >
-                        {subtitle}
+                        {subtitle.value}
                     </motion.p>
 
-                    <motion.div variants={textSlideUpVariants} className="pt-4">
-                        <button className="group flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-medium px-8 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0">
-                            {ctaText}
-                            <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </button>
-                    </motion.div>
+                    {
+                        ctaText.value &&
+                        <motion.div variants={textSlideUpVariants} className="pt-4">
+                            <button className="group flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-medium px-8 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0">
+                                {ctaText.value}
+                                <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            </button>
+                        </motion.div>
+                    }
+
                 </motion.div>
 
                 {/* RIGHT COLUMN: Parallax Image Gallery */}
@@ -127,7 +153,7 @@ const SplitHero = ({
                             className="top-10 left-20  w-[320px] h-[230px] absolute overflow-hidden rounded-2xl shadow-2xl border border-white/10 group bg-slate-900"
                         >
                             <img
-                                src={images[0]}
+                                src={imagesOne.value}
                                 alt="Main showcase"
                                 className="w-full h-full  object-cover transition-transform duration-700"
                             />
@@ -142,7 +168,7 @@ const SplitHero = ({
                             className="top-50 left-[-50px] md:left-[65%]  w-[220px] h-[150px] absolute overflow-hidden rounded-2xl shadow-2xl border border-white/10 group bg-slate-900 z-10"
                         >
                             <img
-                                src={images[1]}
+                                src={imagesTwo.value}
                                 alt="Gallery accent bottom"
                                 className="w-full h-full object-cover transition-transform duration-700"
                             />
@@ -157,7 +183,7 @@ const SplitHero = ({
                             className="top-80 left-40  w-[320px] h-[230px] absolute overflow-hidden rounded-2xl shadow-2xl border border-white/10 group bg-slate-900 z-10"
                         >
                             <img
-                                src={images[2]}
+                                src={imagesThree.value}
                                 alt="Gallery accent bottom"
                                 className="w-full h-full object-cover transition-transform duration-700"
                             />
