@@ -7,6 +7,8 @@ import * as Babel from "@babel/standalone";
 import * as ReactJSXRuntime from "react/jsx-runtime";
 import * as ReactJSXDevRuntime from "react/jsx-dev-runtime";
 
+import { motion } from "framer-motion";
+
 import {
     useParams, useSearchParams,
     useNavigate,
@@ -88,6 +90,7 @@ export const DynamicRenderer = ({ code, props }) => {
                 "useStore",
                 "BASEURL",
                 "reactQuery",
+                "motionAnimation",
                 `
 
     const {
@@ -101,6 +104,10 @@ export const DynamicRenderer = ({ code, props }) => {
     const {
         useQuery,
     } = reactQuery
+
+    const {
+    motion,
+    } = motionAnimation
 
     const {
         FaUser,
@@ -145,6 +152,8 @@ export const DynamicRenderer = ({ code, props }) => {
                 BASEURL,
                 {
                     useQuery
+                },{
+                    motion
                 }
             );
 

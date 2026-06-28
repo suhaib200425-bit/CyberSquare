@@ -7,6 +7,8 @@ import * as Babel from "@babel/standalone";
 import * as ReactJSXRuntime from "react/jsx-runtime";
 import * as ReactJSXDevRuntime from "react/jsx-dev-runtime";
 
+import { motion } from "framer-motion";
+
 import {
     useParams, useSearchParams,
     useNavigate,
@@ -18,8 +20,11 @@ import * as Icons from "react-icons/fa";
 import useStore from "../context/Zustand";
 
 import { BASEURL } from "../assets/assets";
+import { useState } from 'react';
+
 
 function getFunctionName(code) {
+    //Error Type
 
     // function Test() {}
     const functionMatch = code.match(
@@ -43,6 +48,7 @@ function getFunctionName(code) {
 }
 
 export const DynamicRenderer = ({ code, props }) => {
+    const [ERROR,setERROR]=useState('')
 
     const Component = useMemo(() => {
 
@@ -52,12 +58,10 @@ export const DynamicRenderer = ({ code, props }) => {
 
             if (!componentName) {
                 throw new Error("Component name not found");
+                setERROR("Component name not found")
             }
 
             const fixedCode = code
-                .replace(/\\u003C/g, "<")
-                .replace(/\\u003E/g, ">");
-            console.log(fixedCode);
 
 
             const compiled = Babel.transform(fixedCode, {
@@ -66,9 +70,15 @@ export const DynamicRenderer = ({ code, props }) => {
                 ],
                 envName: "production"
             }).code;
-            console.log(compiled);
 
-            const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
+
+            if (compiled.includes("_jsxDEV")) {
+                throw new Error("_JSX DEV Founded");
+                setERROR("_JSX DEV  found")
+
+
+            }
+            // const convertedString=fixedCode.includes("_jsxDEV")?fixedCode:compiled
 
             return new Function(
                 "React",
@@ -80,6 +90,7 @@ export const DynamicRenderer = ({ code, props }) => {
                 "useStore",
                 "BASEURL",
                 "reactQuery",
+                "motionAnimation",
                 `
 
     const {
@@ -95,6 +106,10 @@ export const DynamicRenderer = ({ code, props }) => {
     } = reactQuery
 
     const {
+    motion,
+    } = motionAnimation
+
+    const {
         FaUser,
         FaGoogle,
         FaLock,
@@ -105,8 +120,7 @@ export const DynamicRenderer = ({ code, props }) => {
     const { jsxDEV } = ReactJSXDevRuntime;
 
     const _jsxDEV = jsxDEV;
-    const _jsxFileName = "DynamicComponent.jsx";
-
+    const _jsxFileName = ${componentName};
 
     const {
         useState,
@@ -116,7 +130,7 @@ export const DynamicRenderer = ({ code, props }) => {
         useCallback
     } = React;
 
-    ${convertedString}
+    ${compiled}
 
     return ${componentName};
 `
@@ -138,13 +152,14 @@ export const DynamicRenderer = ({ code, props }) => {
                 BASEURL,
                 {
                     useQuery
+                },{
+                    motion
                 }
             );
 
         } catch (err) {
 
             console.log(err);
-
             return null;
         }
 
@@ -155,6 +170,8 @@ export const DynamicRenderer = ({ code, props }) => {
         return (
             <div className="text-red-500 p-4">
                 Error rendering component
+                <br />
+                {ERROR}
             </div>
         );
     }

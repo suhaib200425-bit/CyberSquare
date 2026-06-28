@@ -1,16 +1,16 @@
 // export const BASEURL = 'http://localhost:5000'
-export const BASEURL ='http://10.179.84.119:5000'
+export const BASEURL = 'http://10.182.218.119:5000'
 // export const BASEURL ='https://thee-slightly-dowry.ngrok-free.dev'
-import authone from '../assets/auth1.jpg' 
-import authtwo from '../assets/auth2.jpg' 
+import authone from '../assets/auth1.jpg'
+import authtwo from '../assets/auth2.jpg'
 export const ALLAUTHPAGES = [
-        {
-            "pageImage": authone
-            
-        }, {
-            "pageImage": authtwo
-        }
-    ]
+  {
+    "pageImage": authone
+
+  }, {
+    "pageImage": authtwo
+  }
+]
 
 export const PAGEAPI = `${BASEURL}/api/page`
 export const USERAPI = `${BASEURL}/api/user`
@@ -19,11 +19,11 @@ export const POSTAPI = `${BASEURL}/api/post`
 export const MENUAPI = `${BASEURL}/api/menu`
 export const TEMPLATEAPI = `${BASEURL}/api/template`
 export const NAVBARTEMPLATEAPI = `${BASEURL}/api/navbar/template`
-export const REACTTEPLATEAPI =`${BASEURL}/api/react/template`
-export const AUTHTEMPLATEAPI =`${BASEURL}/api/auth/template`
-export const DASHBOARDAPI=`${BASEURL}/api/dashboard`
-export const FOOTERTEMPLATEAPI =`${BASEURL}/api/footer/template`
-export const THEMETEMPLATEAPI =`${BASEURL}/api/theme/template`
+export const REACTTEPLATEAPI = `${BASEURL}/api/react/template`
+export const AUTHTEMPLATEAPI = `${BASEURL}/api/auth/template`
+export const DASHBOARDAPI = `${BASEURL}/api/dashboard`
+export const FOOTERTEMPLATEAPI = `${BASEURL}/api/footer/template`
+export const THEMETEMPLATEAPI = `${BASEURL}/api/theme/template`
 
 
 export const ProfileImage = 'https://i.pinimg.com/originals/6e/59/95/6e599501252c23bcf02658617b29c894.jpg?nii=t'
@@ -45,45 +45,45 @@ export const StaticPage = {
 export const ReactStaticPage = {
   "title": "Home Page",
   "sections": [{
-            "_id": "69f4299142be6e68c701d482",
-            "name": "HeroSection",
-            "template":"function HeroSection({ title = 'Hero Section', subtitle = 'We build amazing experiences', image = 'https://i.pinimg.com/736x/d8/af/0d/d8af0d432eebda634921924c52aa78de.jpg', height = 'maxContent', titleSize = '50px', subtitleSize = '17px' }) { return (\<div className='rounded-[10px] w-full flex flex-col items-center justify-center p-[50px] bg-no-repeat bg-cover' style={{ backgroundImage: 'url(' + image.value + ')', height: height.value }}\> \<h1 className='text-white text-center leading-[0.8] font-bold' style={{ fontSize: titleSize.value }}\>{title.value}\</h1\> \<p className='w-[80%] text-center text-gray-400 text-[20px]' style={{ fontSize: subtitleSize.value }}\>{subtitle.value}\</p\> \</div\> ); }",
-            "props": {
-                "title": {
-                    "label": "Title",
-                    "type": "text",
-                    "value": "Hero Section"
-                },
-                "subtitle": {
-                    "label": "Subtitle",
-                    "type": "textarea",
-                    "value": "We build amazing experiences"
-                },
-                "image": {
-                    "label": "Background Image",
-                    "type": "text",
-                    "value": "https://i.pinimg.com/736x/d8/af/0d/d8af0d432eebda634921924c52aa78de.jpg"
-                },
-                "height": {
-                    "label": "Section Height",
-                    "type": "text",
-                    "value": "maxContent"
-                },
-                "titleSize": {
-                    "label": "Title Font Size",
-                    "type": "text",
-                    "value": "30px"
-                },
-                "subtitleSize": {
-                    "label": "Subtitle Font Size",
-                    "type": "text",
-                    "value": "15px"
-                }
-            },
-            "createdAt": "2026-05-01T04:18:25.645Z",
-            "updatedAt": "2026-05-01T04:41:08.825Z",
-            "__v": 0
-        }]
+    "_id": "69f4299142be6e68c701d482",
+    "name": "HeroSection",
+    "template": "function HeroSection({ title = 'Hero Section', subtitle = 'We build amazing experiences', image = 'https://i.pinimg.com/736x/d8/af/0d/d8af0d432eebda634921924c52aa78de.jpg', height = 'maxContent', titleSize = '50px', subtitleSize = '17px' }) { return (\<div className='rounded-[10px] w-full flex flex-col items-center justify-center p-[50px] bg-no-repeat bg-cover' style={{ backgroundImage: 'url(' + image.value + ')', height: height.value }}\> \<h1 className='text-white text-center leading-[0.8] font-bold' style={{ fontSize: titleSize.value }}\>{title.value}\</h1\> \<p className='w-[80%] text-center text-gray-400 text-[20px]' style={{ fontSize: subtitleSize.value }}\>{subtitle.value}\</p\> \</div\> ); }",
+    "props": {
+      "title": {
+        "label": "Title",
+        "type": "text",
+        "value": "Hero Section"
+      },
+      "subtitle": {
+        "label": "Subtitle",
+        "type": "textarea",
+        "value": "We build amazing experiences"
+      },
+      "image": {
+        "label": "Background Image",
+        "type": "text",
+        "value": "https://i.pinimg.com/736x/d8/af/0d/d8af0d432eebda634921924c52aa78de.jpg"
+      },
+      "height": {
+        "label": "Section Height",
+        "type": "text",
+        "value": "maxContent"
+      },
+      "titleSize": {
+        "label": "Title Font Size",
+        "type": "text",
+        "value": "30px"
+      },
+      "subtitleSize": {
+        "label": "Subtitle Font Size",
+        "type": "text",
+        "value": "15px"
+      }
+    },
+    "createdAt": "2026-05-01T04:18:25.645Z",
+    "updatedAt": "2026-05-01T04:41:08.825Z",
+    "__v": 0
+  }]
 
 
 }

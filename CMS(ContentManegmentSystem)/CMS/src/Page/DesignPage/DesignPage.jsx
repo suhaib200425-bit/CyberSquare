@@ -264,7 +264,7 @@ function DesignPage() {
                             }
                         </div>
                     </div>
-                    <div className="center p-5 ">
+                    <div className="center p-5 w-full overflow-hidden">
                         {
                             Page?.sections?.map((elem, i) => {
                                 return <div key={i} className={Target?.index == i ? "ActiveReactTemplate" : "ReactTemplate"} onClick={() => {

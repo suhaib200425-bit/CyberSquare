@@ -56,35 +56,46 @@ import Stack from './Stack'
 function MainTeamplates() {
   return (
     <div>
-      <p>CardStackLayout</p>
-      <CardStackLayout />
-      <p>Perspective3DLayout</p>
-      <Perspective3DLayout />
-      {/* <p>KnowledgeGraphLayout</p>
-      <KnowledgeGraphLayout /> */}
-      <p>FloatingIslandsLayout</p>
-      <FloatingIslandsLayout />
-      <p>HexagonGridLayout</p>
-      <HexagonGridLayout />
-      <p>StoryTimelineLayout</p>
-      <StoryTimelineLayout />
-      <p>NewspaperLayout</p>
-      <NewspaperLayout />
-
-      <p>InfiniteScrollLayout</p>
-      <InfiniteScrollLayout />
-
+      
+      <p>SplitScreenLayout</p>
+      <SplitScreenLayout />
+      
+      <p>NetflixLayout</p>
+      <NetflixLayout />
+      
       <p>AppleLaunchLayout</p>
       <AppleLaunchLayout />
 
-      <p>NetflixLayout</p>
-      <NetflixLayout />
+      <p>InfiniteScrollLayout</p>
+      <InfiniteScrollLayout />
+      
+      <p>StoryTimelineLayout</p>
+      <StoryTimelineLayout />
+      
+      <p>HexagonGridLayout</p>
+      <HexagonGridLayout />
+{/*       
+      <p>Perspective3DLayout</p>
+      <Perspective3DLayout /> */}
+      
+      {/* <p>FloatingIslandsLayout</p>
+      <FloatingIslandsLayout /> */}
+      
+      {/* <p>KnowledgeGraphLayout</p>
+      <KnowledgeGraphLayout /> */}
+
+      
+      {/* <p>NewspaperLayout</p>
+      <NewspaperLayout /> */}
+
+      <p>CardStackLayout</p>
+      <CardStackLayout />
+
+
 
       <p>UltimateCMSDashboardLayout</p>
       {/* <UltimateCMSDashboardLayout /> */}
 
-      <p>SplitScreenLayout</p>
-      <SplitScreenLayout />
 
       <p>HorizontalNewsCards</p>
       <HorizontalNewsCards />
